@@ -1,0 +1,4 @@
+Release Notes
+=============
+
+- Initial release with no code, just hopes and dreams
