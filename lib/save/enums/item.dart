@@ -160,7 +160,7 @@ enum AwakeningEquip implements Item {
       AwakeningEquip.values.firstWhere((AwakeningEquip e) => e.id == id);
 
   @override
-  Iterable<int> toBytes(Endian endianness) => id.toU16(endianness);
+  Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
 }
 
 /// The sub equipment a character can equip three of
@@ -333,7 +333,7 @@ enum SubEquip implements Item {
       SubEquip.values.firstWhere((SubEquip e) => e.id == id);
 
   @override
-  Iterable<int> toBytes(Endian endianness) => id.toU16(endianness);
+  Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
 }
 
 /// A material that can be found in the dungeons
@@ -434,7 +434,7 @@ enum Material implements Item {
       Material.values.firstWhere((Material e) => e.prettyName == prettyName);
 
   @override
-  Iterable<int> toBytes(Endian endianness) => id.toU16(endianness);
+  Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
 }
 
 /// A break item that can be either crafted or found in the dungeons
@@ -540,7 +540,7 @@ enum BreakItem implements Item {
       BreakItem.values.firstWhere((BreakItem e) => e.id == id);
 
   @override
-  Iterable<int> toBytes(Endian endianness) => id.toU16(endianness);
+  Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
 }
 
 /// A special item that has important uses throughout the game
@@ -623,5 +623,5 @@ enum SpecialItem implements Item {
   );
 
   @override
-  Iterable<int> toBytes(Endian endianness) => id.toU16(endianness);
+  Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
 }
