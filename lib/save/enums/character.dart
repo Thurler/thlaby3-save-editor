@@ -17,6 +17,12 @@ enum Character {
     <Mastery>[],
     <Personality>[],
     <UniqueSkillData>[],
+  ),
+  renko(
+    'Renko',
+    <Mastery>[],
+    <Personality>[],
+    <UniqueSkillData>[],
   );
 
   /// The filename to use when reading character portraits

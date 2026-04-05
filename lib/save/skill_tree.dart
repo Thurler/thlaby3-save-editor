@@ -1,3 +1,4 @@
+import 'package:tfields/extensions.dart';
 import 'package:thlaby3_save_editor/save/enums/character.dart';
 import 'package:thlaby3_save_editor/save/enums/skill.dart';
 
@@ -32,10 +33,14 @@ class SkillNode {
   /// Additional requirements to learn the skill, as imposed by the skill tree
   final List<Skill> additionalRequirements;
 
-  const SkillNode({
+  /// Whether the skill in this node has been learned or not
+  bool isLearned;
+
+  SkillNode({
     required this.skill,
     required this.levelGate,
     required this.column,
+    this.isLearned = false,
     this.additionalRequirements = const <Skill>[],
   }) :
     assert(column >= 0, 'Column must not be negative'),
@@ -43,6 +48,14 @@ class SkillNode {
       column < SkillTree.columnCount,
       'Column value must not exceed ${SkillTree.columnCount}',
     );
+
+  /// Copy this node's data from another node
+  SkillNode.from(SkillNode other) :
+    skill = other.skill,
+    levelGate = other.levelGate,
+    column = other.column,
+    additionalRequirements = other.additionalRequirements,
+    isLearned = other.isLearned;
 
   /// The complete requirements for this skill node, adding the skill's base
   /// requirements with the additional requirements imposed by the tree
@@ -64,14 +77,18 @@ class SkillTree {
   static const int columnCount = 12;
 
   /// The set of skill nodes in this tree
-  final Set<SkillNode> skills = <SkillNode>{};
+  final Set<SkillNode> _skills = <SkillNode>{};
+
+  /// A getter that returns the skills set as an [Iterable], so that callers can
+  /// iterate on the [SkillNode]s but not alter the contents of the set struct
+  Iterable<SkillNode> get skills => _skills;
 
   /// Creates a representation of a character's unique skill tree
   SkillTree.uniqueTree(Character character) {
     // Simply add all unique skills with the character-specific level gates and
     // column data
     for (UniqueSkillData data in character.uniqueSkills) {
-      skills.add(
+      _skills.add(
         SkillNode(
           skill: data.skill,
           levelGate: data.levelGate,
@@ -85,7 +102,7 @@ class SkillTree {
   SkillTree.trainingTree(Character character) {
     // Add all common stat skills
     for (StatSkill skill in StatSkill.values) {
-      skills.add(
+      _skills.add(
         SkillNode(
           skill: skill,
           levelGate: skill.levelGate,
@@ -104,7 +121,7 @@ class SkillTree {
           index: masteryIndex,
           level: skill.level,
         )];
-        skills.add(
+        _skills.add(
           SkillNode(
             skill: skill,
             levelGate: skill.levelGate(maxLevel),
@@ -130,7 +147,7 @@ class SkillTree {
           index: personalityIndex,
           level: skill.level,
         )];
-        skills.add(
+        _skills.add(
           SkillNode(
             skill: skill,
             levelGate: skill.levelGate(maxLevel),
@@ -148,7 +165,7 @@ class SkillTree {
     // Add all body and mind skills, with their mastery/personality dependencies
     for (BodySkill skill in BodySkill.values) {
       ContextLevelTuple? extra = skill.masteryRequirement;
-      skills.add(
+      _skills.add(
         SkillNode(
           skill: skill,
           levelGate: skill.levelGate,
@@ -162,7 +179,7 @@ class SkillTree {
     }
     for (MindSkill skill in MindSkill.values) {
       ContextLevelTuple? extra = skill.personalityRequirement;
-      skills.add(
+      _skills.add(
         SkillNode(
           skill: skill,
           levelGate: skill.levelGate,
@@ -175,4 +192,11 @@ class SkillTree {
       );
     }
   }
+
+  /// Returns the appropriate [SkillNode] that occupies a given level gate and
+  /// column, or null if that position is empty
+  SkillNode? findNodeByPosition(LevelGate levelGate, int column) =>
+      _skills.firstWhereOrNull(
+    (SkillNode node) => node.levelGate == levelGate && node.column == column,
+  );
 }
