@@ -4,12 +4,13 @@ import 'package:tfields/extensions.dart';
 /// An abstract representing the common attributes found among all item types
 sealed class Item {
   /// The internal ID the game assigns to this item
-  final int id;
+  int get id;
+
+  /// The index this item occupies in the list of its enumeration
+  int get index;
 
   /// The string used in-game to identify this item
-  final String prettyName;
-
-  const Item(this.id, this.prettyName);
+  String get prettyName;
 
   /// Convert the internal ID to an unsigned 16bit bytes representation
   Iterable<int> toBytes(Endian endianness);
