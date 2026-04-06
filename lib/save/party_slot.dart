@@ -11,11 +11,8 @@ class PartySlot {
   /// Initialize the slot without a character
   PartySlot.empty();
 
-  /// Initialize the slot with a character based on a byte value
-  PartySlot.fromBytes(Endian endianness, Uint8List bytes, int offset) :
-    character = Character.values.elementAt(
-      bytes.getU32(endianness, offset: offset) - 1,
-    );
+  /// Initialize the slot with a specific character
+  PartySlot.withCharacter(Character this.character);
 
   /// Copy the data from a different instance of [PartySlot]
   PartySlot.from(PartySlot other) : character = other.character;

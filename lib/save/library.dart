@@ -45,13 +45,11 @@ class LibraryData {
     mnd = bytes.getU32(endianness, offset: offset + 16),
     spd = bytes.getU32(endianness, offset: offset + 20);
 
-  /// Return the 4-byte bytes representation of the library stats
-  Iterable<int> toBytes(Endian endianness) => <int>[
-    ...hp.toU32(endianness),
-    ...atk.toU32(endianness),
-    ...def.toU32(endianness),
-    ...mag.toU32(endianness),
-    ...mnd.toU32(endianness),
-    ...spd.toU32(endianness),
-  ];
+  /// Patch the 4-byte bytes representation of the library stats
+  void patchBytes(Endian endianness, Uint8List bytes, int offset) {
+    for (int i = 0; i < 6; i++) {
+      int statOffset = offset + (i * 4);
+      bytes.setRange(statOffset, statOffset + 4, getData(i).toU32(endianness));
+    }
+  }
 }

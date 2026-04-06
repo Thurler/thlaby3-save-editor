@@ -102,27 +102,27 @@ class CharacterData {
       ),
     );
 
-  /// Return the bytes representation of the character data
-  Iterable<int> toBytes(Endian endianness) {
-    Iterable<int> bytes = <int>[];
-    bytes = bytes.followedBy(level.toU32(endianness));
-    bytes = bytes.followedBy(maxLevel.toU32(endianness));
-    bytes = bytes.followedBy(experience.toU64(endianness));
-    bytes = bytes.followedBy(libraryLevels.toBytes(endianness));
-    bytes = bytes.followedBy(levelBonus.toBytes(endianness));
-    bytes = bytes.followedBy(shrineItems.toBytes(endianness));
-    bytes = bytes.followedBy(skills.toBytes(endianness));
-    bytes = bytes.followedBy(unusedUniqueSkillPoints.toU32(endianness));
-    bytes = bytes.followedBy(unusedTrainingSkillPoints.toU32(endianness));
-    bytes = bytes.followedBy(bp.toU32(endianness));
-    bytes = bytes.followedBy(mainEquipLevel.toU32(endianness));
-    for (SubEquip equip in subEquips) {
-      bytes = bytes.followedBy(equip.toBytes(endianness));
+  /// Patch the bytes representation of the character data
+  void patchBytes(Endian endianness, Uint8List bytes) {
+    bytes.setRange(0x0, 0x4, level.toU32(endianness));
+    bytes.setRange(0x4, 0x8, maxLevel.toU32(endianness));
+    bytes.setRange(0x8, 0x10, experience.toU64(endianness));
+    libraryLevels.patchBytes(endianness, bytes, 0x10);
+    levelBonus.patchBytes(endianness, bytes, 0x48);
+    shrineItems.patchBytes(endianness, bytes, 0x60);
+    skills.patchBytes(endianness, bytes, 0x8c);
+    bytes.setRange(0x86c, 0x870, unusedUniqueSkillPoints.toU32(endianness));
+    bytes.setRange(0x870, 0x874, unusedTrainingSkillPoints.toU32(endianness));
+    bytes.setRange(0x874, 0x878, bp.toU32(endianness));
+    bytes.setRange(0x878, 0x87c, mainEquipLevel.toU32(endianness));
+    for ((int, SubEquip) indexedEquip in subEquips.indexed) {
+      int offset = 0x87c + (indexedEquip.$1 * 4);
+      bytes.setRange(offset, offset + 4, indexedEquip.$2.toBytes(endianness));
     }
-    for (AwakeningEquip equip in mainEquips) {
-      bytes = bytes.followedBy(equip.toBytes(endianness));
+    for ((int, AwakeningEquip) indexedEquip in mainEquips.indexed) {
+      int offset = 0x894 + (indexedEquip.$1 * 4);
+      bytes.setRange(offset, offset + 4, indexedEquip.$2.toBytes(endianness));
     }
-    return bytes;
   }
 
   @override

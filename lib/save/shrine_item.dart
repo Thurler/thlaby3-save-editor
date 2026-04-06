@@ -44,7 +44,7 @@ class ShrineItemData {
   final int bp;
 
   /// Get the data according to the stat index
-  int getStatData(int index) =>
+  int getData(int index) =>
       <int>[hp, mp, tp, atk, def, mag, mnd, spd, acc, eva, skill, bp][index];
 
   ShrineItemData({
@@ -77,19 +77,11 @@ class ShrineItemData {
     skill = bytes.getU32(endianness, offset: offset + 40),
     bp = bytes.getU32(endianness, offset: offset + 44);
 
-  /// Return the 4-byte bytes representation of the shrine item data
-  Iterable<int> toBytes(Endian endianness) => <int>[
-    ...hp.toU32(endianness),
-    ...mp.toU32(endianness),
-    ...tp.toU32(endianness),
-    ...atk.toU32(endianness),
-    ...def.toU32(endianness),
-    ...mag.toU32(endianness),
-    ...mnd.toU32(endianness),
-    ...spd.toU32(endianness),
-    ...acc.toU32(endianness),
-    ...eva.toU32(endianness),
-    ...skill.toU32(endianness),
-    ...bp.toU32(endianness),
-  ];
+  /// Patches the 4-byte bytes representation of the shrine item data
+  void patchBytes(Endian endianness, Uint8List bytes, int offset) {
+    for (int i = 0; i < 12; i++) {
+      int statOffset = offset + (i * 4);
+      bytes.setRange(statOffset, statOffset + 4, getData(i).toU32(endianness));
+    }
+  }
 }

@@ -63,27 +63,28 @@ class SkillData {
     }
   }
 
-  /// Return the 4-byte bytes representation of the skill tree data
-  Uint8List toBytes(Endian endianness) {
-    // Initialize twice the byte size since we have two skill trees
-    Uint8List result = Uint8List(2 * skillTreeByteSize);
-    // For each unique skill in the unique skill tree, we add the bytes refering
-    // to the skill position
+  /// Patch the 4-byte bytes representation of the skill tree data
+  void patchBytes(Endian endianness, Uint8List bytes, int offset) {
+    // For each unique skill in the unique skill tree, we patch the bytes
+    // refering to the skill position
     for (SkillNode node in uniqueSkillTree.skills) {
       int value = node.isLearned ? 1 : 0;
-      int offset = (node.levelGate.index + 1) * node.column * 4;
-      result.setRange(offset, offset + 4, value.toU32(endianness));
+      int skillOffset = (node.levelGate.index + 1) * node.column * 4;
+      bytes.setRange(
+        offset + skillOffset,
+        offset + skillOffset + 4,
+        value.toU32(endianness),
+      );
     }
     // Do the same for the training skill tree, using the appropriate offset
     for (SkillNode node in trainingSkillTree.skills) {
       int value = node.isLearned ? 1 : 0;
-      int offset = (node.levelGate.index + 1) * node.column * 4;
-      result.setRange(
-        skillTreeByteSize + offset,
-        skillTreeByteSize + offset + 4,
+      int skillOffset = (node.levelGate.index + 1) * node.column * 4;
+      bytes.setRange(
+        offset + skillTreeByteSize + skillOffset,
+        offset + skillTreeByteSize + skillOffset + 4,
         value.toU32(endianness),
       );
     }
-    return result;
   }
 }
