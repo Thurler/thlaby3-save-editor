@@ -67,10 +67,10 @@ jobs:
         run: flutter build windows --release
 
       - name: Archive Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: thlaby3-save-editor-windows
-          path: build/windows/runner/Release/*
+          path: build/windows/x64/runner/release/*
 
   build-linux:
     name: Linux Native Build
@@ -102,7 +102,7 @@ jobs:
         run: flutter build linux --release
 
       - name: Archive Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: thlaby3-save-editor-linux
           path: build/linux/x64/release/bundle/*
