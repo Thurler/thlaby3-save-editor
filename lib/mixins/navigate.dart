@@ -12,7 +12,10 @@ import 'package:tfields/settings.dart';
 import 'package:thlaby3_save_editor/views/menu.dart';
 //import 'package:thlaby2_save_editor/views/party_data.dart';
 
+/// A mixin that allows [StatefulWidget]s to navigate to other views in the
+/// application, that centralizes value returning and logging logic
 mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
+  /// The function that handles the proper navigation and value return logic
   Future<U?> _navigate<U>(StatefulWidget target, String name) async {
     NavigatorState state = Navigator.of(context);
     await log(TLogLevel.debug, 'Opening $name widget');
@@ -26,6 +29,7 @@ mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
     return result;
   }
 
+  /// Navigate to the app settings view
   Future<void> navigateToSettings() => _navigate(
     const TCommonSettingsWidget(
       title: 'Touhou Labyrinth Tri Save Editor - Settings',
@@ -33,6 +37,7 @@ mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
     'settings',
   );
 
+  /// Navigate to the main menu that assumes a save file has been loaded already
   Future<void> navigateToMainMenu() =>
       _navigate(const MenuWidget(), 'main menu');
 
