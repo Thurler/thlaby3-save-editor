@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:io';
-//import 'dart:typed_data';
-//import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tfields/extensions.dart';
 import 'package:tfields/logging.dart';
 import 'package:tfields/settings.dart';
 import 'package:tfields/theme.dart';
 import 'package:tfields/update_check.dart';
 import 'package:tfields/widgets.dart';
 import 'package:thlaby3_save_editor/mixins/navigate.dart';
-//import 'package:thlaby2_save_editor/save.dart';
+import 'package:thlaby3_save_editor/save.dart';
 import 'package:thlaby3_save_editor/views/main.dart';
-//import 'package:thlaby2_save_editor/widgets/character_roster.dart';
+import 'package:thlaby3_save_editor/widgets/character_roster.dart';
 import 'package:thlaby3_save_editor/widgets/exception.dart';
 
 class MenuWidget extends StatefulWidget {
@@ -24,7 +24,7 @@ class MenuWidget extends StatefulWidget {
 
 class MenuState extends State<MenuWidget>
     with
-        //SaveEditor,
+        SaveEditor,
         TLoggable,
         TSettingsJsonReader<TCommonSettings>,
         TCommonSettingsDeserializer,
@@ -34,33 +34,35 @@ class MenuState extends State<MenuWidget>
         Navigatable<MenuWidget> {
   Future<void> _handleFileSystemException(FileSystemException e) {
     return showException(
-      'An error occured when exporting the file!',
+      'An error occured when exporting the save file!',
       logMessage: 'FileSystem Exception when exporting file: ${e.message}',
-      body: 'Make sure your user has permission to write the file in the '
-          'folder you chose.',
+      body: 'Make sure your user has permission to write in the directory you '
+          'chose.',
     );
   }
 
   Future<void> _exportSaveFile() async {
     await log(TLogLevel.debug, 'Export Save File called');
-    //String? result = await FilePicker.platform.saveFile(
-    //  dialogTitle: 'Please select where to save the files:',
-    //  fileName: 'steam.dat',
-    //);
-    //if (result == null) {
-    //  await log(TLogLevel.debug, 'No file selected');
-    //  return;
-    //}
-    await log(TLogLevel.debug, 'Exporting save file');
+    String? result = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: 'Select the directory to export the save file to',
+      lockParentWindow: true,
+    );
+    if (result == null) {
+      await log(TLogLevel.debug, 'No directory selected');
+      return;
+    }
     try {
-      //File rawFile = File(result);
-      //Uint8List contents = saveFile.exportSteam();
-      await logFlush();
-      //await rawFile.writeAsBytes(contents);
+      await log(TLogLevel.info, 'Exporting save file');
+      // Make sure we remove trailing slashes
+      if (result.last == '/' || result.last == r'\') {
+        result = result.substring(0, result.length - 1);
+      }
+      await log(TLogLevel.debug, 'Directory selected: $result');
+      await saveFile.export(result);
     } on FileSystemException catch (e) {
       await _handleFileSystemException(e);
       return;
-    } on Exception catch (e, s) {
+    } catch (e, s) {
       await showUnexpectedException(e, s, body: ExceptionWidget.dialogBody);
       return;
     }
@@ -98,9 +100,11 @@ class MenuState extends State<MenuWidget>
   @override
   Future<void> navigateToSettings() async {
     await super.navigateToSettings();
+    // Make sure to reload settings after navigating
     setState(() {
       readSettings();
     });
+    // And once again check for updates, in case the option was just enabled
     if (settings.checkUpdates) {
       unawaited(checkForUpdates(MainWidget.version));
     }
@@ -109,7 +113,7 @@ class MenuState extends State<MenuWidget>
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    //await CharacterRoster.precachePortraits(context);
+    await CharacterRoster.precachePortraits(context);
     if (settings.checkUpdates) {
       unawaited(checkForUpdates(MainWidget.version));
     }
