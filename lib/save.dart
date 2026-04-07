@@ -211,7 +211,7 @@ class SaveFile with TLoggable {
   /// [baseDir] directory
   static Future<SaveFile> fromSaveDir(String baseDir) async {
     SaveFile saveFile = SaveFile();
-    saveFile.logBuffer(TLogLevel.debug, '=== SAVE FILE READING BEGIN ===');
+    await saveFile.log(TLogLevel.debug, '=== SAVE FILE READING BEGIN ===');
     // Read PGD file with general game data
     Uint8List generalBytes =
         await _readSaveFile(baseDir, _SaveFileType.pgd, saveFile.log);
@@ -355,7 +355,7 @@ class SaveFile with TLoggable {
   /// Logs a string debug representation of the save file, in a high level
   /// format for troubleshooting data parsing logic
   Future<void> _dumpHighLevelData() async {
-    logBuffer(TLogLevel.debug, '=== SAVE FILE DUMP START ===');
+    await log(TLogLevel.debug, '=== SAVE FILE DUMP START ===');
     logBuffer(TLogLevel.debug, '> Party Data');
     for (PartySlot slot in partyData) {
       logBuffer(TLogLevel.debug, slot);
@@ -522,11 +522,11 @@ class SaveFile with TLoggable {
     // Patch the raw bytes with the new data
     _patchRawBytes();
     // And then export all files into the target directory
-    logBuffer(TLogLevel.debug, '=== SAVE FILE EXPORT START ===');
+    await log(TLogLevel.debug, '=== SAVE FILE EXPORT START ===');
     for (MapEntry<String, Uint8List> entry in _rawBytes.entries) {
       String filename = '$baseDir/${entry.key}';
       // Debug log the whole bytes array before writing it
-      logBuffer(TLogLevel.debug, '${entry.key}: ${entry.value}');
+      await log(TLogLevel.debug, '${entry.key}: ${entry.value}');
       await File(filename).writeAsBytes(entry.value);
     }
     await log(TLogLevel.debug, '=== SAVE FILE EXPORT END ===');
