@@ -199,4 +199,11 @@ class SkillTree {
       _skills.firstWhereOrNull(
     (SkillNode node) => node.levelGate == levelGate && node.column == column,
   );
+
+  @override
+  String toString() => skills.where(
+    (SkillNode node) => node.isLearned,
+  ).map(
+    (SkillNode node) => '- ${node.skill.prettyName}',
+  ).join('\n');
 }

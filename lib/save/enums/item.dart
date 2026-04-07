@@ -1,5 +1,12 @@
 import 'dart:typed_data';
 import 'package:tfields/extensions.dart';
+import 'package:thlaby3_save_editor/save.dart';
+
+const int totalItemCount = SubEquip.totalSlots +
+    Material.totalSlots +
+    BreakItem.totalSlots +
+    SpecialItem.totalSlots +
+    AwakeningEquip.totalSlots;
 
 /// An abstract representing the common attributes found among all item types
 sealed class Item {
@@ -157,8 +164,14 @@ enum AwakeningEquip implements Item {
   );
 
   /// Find the awakening equip by its id
-  factory AwakeningEquip.fromId(int id) =>
-      AwakeningEquip.values.firstWhere((AwakeningEquip e) => e.id == id);
+  factory AwakeningEquip.fromId(int id) {
+    return AwakeningEquip.values.firstWhereOrNull(
+      (AwakeningEquip e) => e.id == id,
+    ) ?? (throw SaveFileParseException(
+      userMessage: 'Invalid awakening item equipped',
+      logMessage: 'Item ID $id detected instantiated AwakeningEquip',
+    ));
+  }
 
   @override
   Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);
@@ -330,8 +343,14 @@ enum SubEquip implements Item {
       SubEquip.values.firstWhere((SubEquip e) => e.prettyName == prettyName);
 
   /// Find the sub equip by its id
-  factory SubEquip.fromId(int id) =>
-      SubEquip.values.firstWhere((SubEquip e) => e.id == id);
+  factory SubEquip.fromId(int id) {
+    return SubEquip.values.firstWhereOrNull(
+      (SubEquip e) => e.id == id,
+    ) ?? (throw SaveFileParseException(
+      userMessage: 'Invalid sub item equipped',
+      logMessage: 'Item ID $id detected instantiated SubEquip',
+    ));
+  }
 
   @override
   Iterable<int> toBytes(Endian endianness) => id.toU32(endianness);

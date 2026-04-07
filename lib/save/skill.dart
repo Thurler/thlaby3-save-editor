@@ -87,4 +87,8 @@ class SkillData {
       );
     }
   }
+
+  @override
+  String toString() => 'Unique skills learned:\n$uniqueSkillTree\n'
+      'Training skills learned:\n$trainingSkillTree';
 }

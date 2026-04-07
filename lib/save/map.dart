@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:thlaby3_save_editor/save/enums/dungeon.dart';
@@ -71,63 +70,4 @@ class FloorFileName {
   @override
   String toString() => '${dungeon.id.toString().padLeft(2, '0')}'
       '${floor.toString().padLeft(2, '0')}_OD.txt';
-}
-
-/// The collection of all [FloorData] objects represented by the OD files in a
-/// save file. Will relate the available filenames to the corresponding data
-class MapData {
-  /// How many dungeon IDs the game (and save file) are aware of
-  static const int dungeonCount = 10;
-
-  /// How many floor IDs the game (and save file) are aware of
-  static const int floorCount = 5;
-
-  /// An internal Map to keep track of how [FloorData] instances relate to the
-  /// available filenames in the save data directory
-  final Map<FloorFileName, FloorData> _floorDataMap =
-      <FloorFileName, FloorData>{};
-
-  /// Construct a [MapData] from the files available in [baseDir]. Because
-  /// reading files is an asynchronous operation, this must be a static function
-  /// and not a constructor
-  static Future<MapData> fromFiles(String baseDir) async {
-    MapData mapData = MapData();
-    // Iterate on every dungeon available
-    for (Dungeon dungeon in Dungeon.values) {
-      // Iterate on every floor available in that dungeon
-      for (int i = 1; i <= dungeon.floorCount; i++) {
-        FloorFileName filename = FloorFileName(dungeon, i);
-        // Make sure we got a valid filename, just in case logic fails
-        if (!filename.isUsed) {
-          mapData[filename] = FloorData.empty();
-          continue;
-        }
-        // Read the bytes for that floor and instantiate a FloorData
-        mapData[filename] = FloorData.fromBytes(
-          await File('$baseDir/$filename').readAsBytes(),
-        );
-      }
-    }
-    return mapData;
-  }
-
-  /// Export the [FloorData] stored as bytes in files corresponding to the
-  /// dungeons
-  Future<void> toFiles(String baseDir) async {
-    // Iterate on every dungeon and floor the save file has, regardless of if it
-    // is a valid floor or not - we must match the files the game expects
-    for (int i = 1; i <= dungeonCount; i++) {
-      for (int j = 1; j <= floorCount; j++) {
-        FloorFileName filename = FloorFileName(Dungeon.values[i - 1], j);
-        await File('$baseDir/$filename').writeAsBytes(this[filename].toBytes());
-      }
-    }
-  }
-
-  FloorData operator [](FloorFileName filename) =>
-      // Make sure we fallback to an empty grid if we access an invalid filename
-      _floorDataMap[filename] ?? FloorData.empty();
-
-  void operator []=(FloorFileName filename, FloorData data) =>
-      _floorDataMap[filename] = data;
 }

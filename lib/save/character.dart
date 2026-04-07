@@ -126,5 +126,17 @@ class CharacterData {
   }
 
   @override
-  String toString() => character.name;
+  String toString() => '''
+> ${character.name}
+Lv: $level / Max: $maxLevel
+EXP: $experience / BP: $bp
+Unused points: $unusedUniqueSkillPoints / $unusedTrainingSkillPoints
+$libraryLevels
+$levelBonus
+$shrineItems
+Main equip level: $mainEquipLevel
+Sub equips: ${subEquips.map((SubEquip equip) => equip.prettyName).join(' / ')}
+Awakenings: ${mainEquips.map((AwakeningEquip equip) => equip.prettyName).join(' / ')}
+$skills
+''';
 }

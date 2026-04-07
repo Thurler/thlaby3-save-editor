@@ -84,4 +84,8 @@ class ShrineItemData {
       bytes.setRange(statOffset, statOffset + 4, getData(i).toU32(endianness));
     }
   }
+
+  @override
+  String toString() => 'Shrine items: '
+      '${List<int>.generate(12, (int i) => getData(i)).join(' / ')}';
 }

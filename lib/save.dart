@@ -11,6 +11,86 @@ import 'package:thlaby3_save_editor/save/item_slot.dart';
 import 'package:thlaby3_save_editor/save/map.dart';
 import 'package:thlaby3_save_editor/save/party_slot.dart';
 
+/// A common interface for exceptions regarding save data parsing
+abstract interface class SaveException implements Exception {
+  /// The message that is displayed to the user
+  String get userMessage;
+
+  /// The message that is logged
+  String get logMessage;
+}
+
+/// An exception that signifies invalid file format was encountered while
+/// reading the files in the save data
+class SaveFileFormatException implements SaveException {
+  /// The number of expected bytes
+  final int expected;
+
+  /// The actual number of bytes encountered
+  final int actual;
+
+  /// The affected filename
+  final String filename;
+
+  const SaveFileFormatException({
+    required this.filename,
+    required this.actual,
+    required this.expected,
+  });
+
+  @override
+  String get userMessage => 'Invalid save file format';
+
+  @override
+  String get logMessage => toString();
+
+  @override
+  String toString() => 'SaveFileFormatException: expected $expected bytes in '
+      'file $filename, but found $actual';
+}
+
+/// An exception that signifies invalid data was encountered while parsing save
+/// data
+class SaveFileParseException implements SaveException {
+  @override
+  final String userMessage;
+
+  @override
+  final String logMessage;
+
+  const SaveFileParseException({
+    required this.userMessage,
+    required this.logMessage,
+  });
+
+  @override
+  String toString() => 'SaveFileParseException: $logMessage';
+}
+
+/// An enumertion of save file data file types, containing validation data for
+/// each of the file types
+enum _SaveFileType {
+  od(null, FloorData.gridSize * FloorData.gridSize),
+  c(null, 0xbdc),
+  eef('EEF.txt', totalItemCount + 1),
+  eeh('EEH.txt', (SubEquip.totalSlots + 1) * 4),
+  een('EEN.txt', (totalItemCount + 1) * 4),
+  evf('EVF.txt', 30000 * 4),
+  pgd('PGD.txt', 0x7537),
+  pko('PKO.txt', 10000 * 4),
+  shd('SHD.txt', 0);
+
+  /// The hardcoded filename for this file type - can be null if there are
+  /// variables that go into the filename, e.g.: a character's index
+  final String? fixedFilename;
+
+  /// The expected file size - reading a file with a different number of bytes
+  /// will result in an error
+  final int expectedSize;
+
+  const _SaveFileType(this.fixedFilename, this.expectedSize);
+}
+
 /// A data instance of a save file, with both a high-level and a bytes-level
 /// representation of the in-game data
 class SaveFile with TLoggable {
@@ -58,12 +138,6 @@ class SaveFile with TLoggable {
   /// The party slots data from the PGD file
   final List<PartySlot> partyData = <PartySlot>[];
 
-  /// Internal flag for the [loadedWithErrors] getter
-  bool _loadedWithErrors = false;
-
-  /// Whether the save file loading encountered logic errors
-  bool get loadedWithErrors => _loadedWithErrors;
-
   /// Logic to initialize item slots data based on the flags, level and amount
   /// raw data read from the EE files
   ///
@@ -110,27 +184,62 @@ class SaveFile with TLoggable {
     }
   }
 
+  /// A helper function to read a save data's file and handle exceptions, making
+  /// sure to check for raw data validity
+  static Future<Uint8List> _readSaveFile(
+    String baseDir,
+    _SaveFileType fileType,
+    Future<void> Function(TLogLevel level, dynamic message) logFunction, {
+    String? filename,
+  }) async {
+    String filenameToUse = filename ?? fileType.fixedFilename ?? '';
+    Uint8List bytes = await File('$baseDir/$filenameToUse').readAsBytes();
+    // Make sure we have the right amount of bytes to read
+    if (bytes.length != fileType.expectedSize) {
+      throw SaveFileFormatException(
+        filename: filenameToUse,
+        expected: fileType.expectedSize,
+        actual: bytes.length,
+      );
+    }
+    // Debug log the whole bytes array
+    await logFunction(TLogLevel.debug, '$filenameToUse: $bytes');
+    return bytes;
+  }
+
   /// Initialize a [SaveFile] instance from the save file contents in the
   /// [baseDir] directory
   static Future<SaveFile> fromSaveDir(String baseDir) async {
     SaveFile saveFile = SaveFile();
+    saveFile.logBuffer(TLogLevel.debug, '=== SAVE FILE READING BEGIN ===');
     // Read PGD file with general game data
-    Uint8List generalBytes = await File('$baseDir/PGD.txt').readAsBytes();
+    Uint8List generalBytes =
+        await _readSaveFile(baseDir, _SaveFileType.pgd, saveFile.log);
     saveFile._rawBytes['PGD.txt'] = generalBytes;
     // Read the party configuration from the general data
     for (int i = 0; i < partySlotCount; i++) {
       int characterIndex =
           generalBytes.getU32(Endian.big, offset: 0x190 + (i * 4));
-      saveFile.partyData.add(
-        characterIndex > 0
-          ? PartySlot.withCharacter(Character.values[characterIndex - 1])
-          : PartySlot.empty(),
-      );
+      if (characterIndex > Character.values.length) {
+        throw SaveFileParseException(
+          userMessage: 'Invalid character in party',
+          logMessage: 'Character index $characterIndex read at position $i',
+        );
+      }
+      PartySlot slot = characterIndex > 0
+        ? PartySlot.withCharacter(Character.values[characterIndex - 1])
+        : PartySlot.empty();
+      saveFile.partyData.add(slot);
     }
     // Read C files with character data for known indexes
     for (Character character in Character.values) {
       String filename = 'C${character.index.toString().padLeft(3, '0')}.txt';
-      Uint8List bytes = await File('$baseDir/$filename}').readAsBytes();
+      Uint8List bytes = await _readSaveFile(
+        baseDir,
+        _SaveFileType.c,
+        saveFile.log,
+        filename: filename,
+      );
       // Save raw bytes and initialize character data from them
       saveFile._rawBytes[filename] = bytes;
       saveFile.characterData.add(
@@ -156,16 +265,24 @@ class SaveFile with TLoggable {
     for (int i = 1; i <= dungeonCount; i++) {
       for (int j = 1; j <= floorCount; j++) {
         FloorFileName filename = FloorFileName(Dungeon.values[i - 1], j);
-        Uint8List bytes = await File('$baseDir/$filename').readAsBytes();
+        Uint8List bytes = await _readSaveFile(
+          baseDir,
+          _SaveFileType.od,
+          saveFile.log,
+          filename: filename.toString(),
+        );
         // Save raw bytes and initialize floor data from them
         saveFile._rawBytes[filename.toString()] = bytes;
         saveFile.mapData[filename] = FloorData.fromBytes(bytes);
       }
     }
     // Read EE files with item data
-    Uint8List itemFlagBytes = await File('$baseDir/EEF.txt').readAsBytes();
-    Uint8List itemLevelBytes = await File('$baseDir/EEH.txt').readAsBytes();
-    Uint8List itemAmountBytes = await File('$baseDir/EEN.txt').readAsBytes();
+    Uint8List itemFlagBytes =
+        await _readSaveFile(baseDir, _SaveFileType.eef, saveFile.log);
+    Uint8List itemLevelBytes =
+        await _readSaveFile(baseDir, _SaveFileType.eeh, saveFile.log);
+    Uint8List itemAmountBytes =
+        await _readSaveFile(baseDir, _SaveFileType.een, saveFile.log);
     saveFile._rawBytes['EEF.txt'] = itemFlagBytes;
     saveFile._rawBytes['EEH.txt'] = itemLevelBytes;
     saveFile._rawBytes['EEN.txt'] = itemAmountBytes;
@@ -218,15 +335,59 @@ class SaveFile with TLoggable {
       slots: saveFile.mainInventoryData,
     );
     // Read EVF file with event flag data
-    Uint8List eventBytes = await File('$baseDir/EVF.txt').readAsBytes();
+    Uint8List eventBytes =
+        await _readSaveFile(baseDir, _SaveFileType.evf, saveFile.log);
     saveFile._rawBytes['EVF.txt'] = eventBytes;
     // Read PKO file with bestiary kill data
-    Uint8List bestiaryBytes = await File('$baseDir/PKO.txt').readAsBytes();
+    Uint8List bestiaryBytes =
+        await _readSaveFile(baseDir, _SaveFileType.pko, saveFile.log);
     saveFile._rawBytes['PKO.txt'] = bestiaryBytes;
     // Read SHD file with summary data
-    Uint8List summaryBytes = await File('$baseDir/SHD.txt').readAsBytes();
+    Uint8List summaryBytes =
+        await _readSaveFile(baseDir, _SaveFileType.shd, saveFile.log);
     saveFile._rawBytes['SHD.txt'] = summaryBytes;
+    await saveFile.log(TLogLevel.debug, '=== SAVE FILE READING END ===');
+    // Dump the debug log data and flush logs
+    await saveFile._dumpHighLevelData();
     return saveFile;
+  }
+
+  /// Logs a string debug representation of the save file, in a high level
+  /// format for troubleshooting data parsing logic
+  Future<void> _dumpHighLevelData() async {
+    logBuffer(TLogLevel.debug, '=== SAVE FILE DUMP START ===');
+    logBuffer(TLogLevel.debug, '> Party Data');
+    for (PartySlot slot in partyData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    logBuffer(TLogLevel.debug, '> Character Unlock Flags');
+    for (CharacterUnlockFlag flag in characterUnlockData) {
+      logBuffer(TLogLevel.debug, flag);
+    }
+    logBuffer(TLogLevel.debug, '> Awakening Items');
+    for (ItemSlot<AwakeningEquip> slot in mainInventoryData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    logBuffer(TLogLevel.debug, '> Sub Equip Items');
+    for (ItemSlot<SubEquip> slot in subInventoryData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    logBuffer(TLogLevel.debug, '> Materials');
+    for (ItemSlot<Material> slot in materialInventoryData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    logBuffer(TLogLevel.debug, '> Break Items');
+    for (ItemSlot<BreakItem> slot in breakInventoryData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    logBuffer(TLogLevel.debug, '> Special Items');
+    for (ItemSlot<SpecialItem> slot in specialInventoryData) {
+      logBuffer(TLogLevel.debug, slot);
+    }
+    for (CharacterData character in characterData) {
+      logBuffer(TLogLevel.debug, character);
+    }
+    await log(TLogLevel.debug, '=== SAVE FILE DUMP END ===');
   }
 
   /// Logic to patch item slots data back into the flags, level and amount bytes
@@ -356,13 +517,19 @@ class SaveFile with TLoggable {
 
   /// Exports the save data into a directory at [baseDir]
   Future<void> export(String baseDir) async {
+    // Dump the debug log data and flush logs
+    await _dumpHighLevelData();
     // Patch the raw bytes with the new data
     _patchRawBytes();
     // And then export all files into the target directory
+    logBuffer(TLogLevel.debug, '=== SAVE FILE EXPORT START ===');
     for (MapEntry<String, Uint8List> entry in _rawBytes.entries) {
       String filename = '$baseDir/${entry.key}';
+      // Debug log the whole bytes array before writing it
+      logBuffer(TLogLevel.debug, '${entry.key}: ${entry.value}');
       await File(filename).writeAsBytes(entry.value);
     }
+    await log(TLogLevel.debug, '=== SAVE FILE EXPORT END ===');
   }
 }
 

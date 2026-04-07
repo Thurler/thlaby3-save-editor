@@ -52,4 +52,8 @@ class LibraryData {
       bytes.setRange(statOffset, statOffset + 4, getData(i).toU32(endianness));
     }
   }
+
+  @override
+  String toString() => 'Library levels: '
+      '${List<int>.generate(6, (int i) => getData(i)).join(' / ')}';
 }
