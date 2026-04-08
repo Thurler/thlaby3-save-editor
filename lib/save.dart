@@ -111,6 +111,9 @@ class SaveFile with TLoggable {
   /// when they are exported
   final Map<String, Uint8List> _rawBytes = <String, Uint8List>{};
 
+  /// The set of filenames that are associated with a save file
+  Iterable<String> get filenames => _rawBytes.keys;
+
   /// The map data associated with the OD files
   final Map<FloorFileName, FloorData> mapData = <FloorFileName, FloorData>{};
 

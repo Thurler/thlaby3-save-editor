@@ -52,12 +52,29 @@ class MenuState extends State<MenuWidget>
       return;
     }
     try {
-      await log(TLogLevel.info, 'Exporting save file');
       // Make sure we remove trailing slashes
       if (result.last == '/' || result.last == r'\') {
         result = result.substring(0, result.length - 1);
       }
+      await log(TLogLevel.info, 'Exporting save file');
       await log(TLogLevel.debug, 'Directory selected: $result');
+      // Check if the target directory already has a save file to warn user
+      bool targetHasSave = saveFile.filenames.any(
+        (String filename) => File('$result/$filename').existsSync(),
+      );
+      if (targetHasSave) {
+        bool overwriteConfirm = await showConfirmation(
+          'A save file already exists in the chosen directory. Are you sure '
+          'you want to overwrite the files there?',
+          confirmText: 'Yes, overwrite files',
+          cancelText: 'No, cancel',
+        );
+        if (!overwriteConfirm) {
+          await log(TLogLevel.info, 'Exporting canceled, overwrite denied');
+          return;
+        }
+        await log(TLogLevel.info, 'Overwriting save file at export location');
+      }
       await saveFile.export(result);
     } on FileSystemException catch (e) {
       await _handleFileSystemException(e);
