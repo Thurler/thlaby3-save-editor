@@ -604,27 +604,7 @@ enum SpecialItem implements Item {
   slot37(37, 'special37'),
   slot38(38, 'special38'),
   slot39(39, 'special39'),
-  slot40(40, 'special40'),
-  slot41(41, 'special41'),
-  slot42(42, 'special42'),
-  slot43(43, 'special43'),
-  slot44(44, 'special44'),
-  slot45(45, 'special45'),
-  slot46(46, 'special46'),
-  slot47(47, 'special47'),
-  slot48(48, 'special48'),
-  slot49(49, 'special49'),
-  slot50(50, 'special50'),
-  slot51(51, 'special51'),
-  slot52(52, 'special52'),
-  slot53(53, 'special53'),
-  slot54(54, 'special54'),
-  slot55(55, 'special55'),
-  slot56(56, 'special56'),
-  slot57(57, 'special57'),
-  slot58(58, 'special58'),
-  slot59(59, 'special59'),
-  slot60(60, 'special60');
+  slot40(40, 'special40');
 
   /// How many slots the save file reserves for this item type
   static const int totalSlots = 200;
