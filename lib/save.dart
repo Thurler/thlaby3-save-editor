@@ -74,13 +74,13 @@ class SaveFileParseException implements SaveException {
 enum _SaveFileType {
   od(null, FloorData.gridSize * FloorData.gridSize),
   c(null, 0xbdc),
-  eef('EEF.txt', totalItemCount + 1),
-  eeh('EEH.txt', (SubEquip.totalSlots + 1) * 4),
-  een('EEN.txt', (totalItemCount + 1) * 4),
-  evf('EVF.txt', 30000 * 4),
-  pgd('PGD.txt', 0x7537),
-  pko('PKO.txt', 10000 * 4),
-  shd('SHD.txt', 0);
+  eef('EEF01.ngd', totalItemCount + 1),
+  eeh('EEH01.ngd', (SubEquip.totalSlots + 1) * 4),
+  een('EEN01.ngd', (totalItemCount + 1) * 4),
+  evf('EVF01.ngd', 30000 * 4),
+  pgd('PGD01.ngd', 0x7538),
+  pko('PKO01.ngd', 10000 * 4),
+  shd('SHD01.ngd', 0xb5);
 
   /// The hardcoded filename for this file type - can be null if there are
   /// variables that go into the filename, e.g.: a character's index
@@ -217,7 +217,7 @@ class SaveFile with TLoggable {
     // Read PGD file with general game data
     Uint8List generalBytes =
         await _readSaveFile(baseDir, _SaveFileType.pgd, saveFile.log);
-    saveFile._rawBytes['PGD.txt'] = generalBytes;
+    saveFile._rawBytes['PGD01.ngd'] = generalBytes;
     // Read the party configuration from the general data
     for (int i = 0; i < partySlotCount; i++) {
       int characterIndex =
@@ -235,7 +235,7 @@ class SaveFile with TLoggable {
     }
     // Read C files with character data for known indexes
     for (Character character in Character.values) {
-      String filename = 'C${character.index.toString().padLeft(3, '0')}.txt';
+      String filename = 'C${character.filename}.ngd';
       Uint8List bytes = await _readSaveFile(
         baseDir,
         _SaveFileType.c,
@@ -285,9 +285,9 @@ class SaveFile with TLoggable {
         await _readSaveFile(baseDir, _SaveFileType.eeh, saveFile.log);
     Uint8List itemAmountBytes =
         await _readSaveFile(baseDir, _SaveFileType.een, saveFile.log);
-    saveFile._rawBytes['EEF.txt'] = itemFlagBytes;
-    saveFile._rawBytes['EEH.txt'] = itemLevelBytes;
-    saveFile._rawBytes['EEN.txt'] = itemAmountBytes;
+    saveFile._rawBytes['EEF01.ngd'] = itemFlagBytes;
+    saveFile._rawBytes['EEH01.ngd'] = itemLevelBytes;
+    saveFile._rawBytes['EEN01.ngd'] = itemAmountBytes;
     // Iterate on items to initialize their data
     int itemOffset = 0;
     _initializeItemData<SubEquip>(
@@ -339,15 +339,15 @@ class SaveFile with TLoggable {
     // Read EVF file with event flag data
     Uint8List eventBytes =
         await _readSaveFile(baseDir, _SaveFileType.evf, saveFile.log);
-    saveFile._rawBytes['EVF.txt'] = eventBytes;
+    saveFile._rawBytes['EVF01.ngd'] = eventBytes;
     // Read PKO file with bestiary kill data
     Uint8List bestiaryBytes =
         await _readSaveFile(baseDir, _SaveFileType.pko, saveFile.log);
-    saveFile._rawBytes['PKO.txt'] = bestiaryBytes;
+    saveFile._rawBytes['PKO01.ngd'] = bestiaryBytes;
     // Read SHD file with summary data
     Uint8List summaryBytes =
         await _readSaveFile(baseDir, _SaveFileType.shd, saveFile.log);
-    saveFile._rawBytes['SHD.txt'] = summaryBytes;
+    saveFile._rawBytes['SHD01.ngd'] = summaryBytes;
     await saveFile.log(TLogLevel.debug, '=== SAVE FILE READING END ===');
     // Dump the debug log data and flush logs
     await saveFile._dumpHighLevelData();
@@ -422,8 +422,8 @@ class SaveFile with TLoggable {
   /// Patch the high-level data in the class back into [_rawBytes]
   void _patchRawBytes() {
     // Patch the SHD file with summary data based on other data
-    Uint8List summaryBytes = _rawBytes['SHD.txt']!;
-    Uint8List generalBytes = _rawBytes['PGD.txt']!;
+    Uint8List summaryBytes = _rawBytes['SHD01.ngd']!;
+    Uint8List generalBytes = _rawBytes['PGD01.ngd']!;
     // Patch the party configuration into the general data
     for (int i = 0; i < partySlotCount; i++) {
       Iterable<int> value = partyData[i].toBytes(Endian.big);
@@ -436,7 +436,7 @@ class SaveFile with TLoggable {
     // keeping track of how many are unlocked
     int allyCount = 0;
     for (Character character in Character.values) {
-      String filename = 'C${character.index.toString().padLeft(3, '0')}.txt';
+      String filename = 'C${character.filename}.ngd';
       Uint8List characterBytes = _rawBytes[filename]!;
       characterData[character.index].patchBytes(Endian.big, characterBytes);
       // Also patch the character unlock flag data in the general bytes
@@ -451,27 +451,27 @@ class SaveFile with TLoggable {
     // The number of allies just adds the unlocked flags
     summaryBytes.setRange(0xd, 0x11, allyCount.toU32(Endian.big));
     // The average party level is computed from the 12 characters in the party
-    int levelSum = partyData.map(
-      (PartySlot slot) => slot.character,
-    ).nonNulls.map(
-      (Character character) => characterData[character.index],
-    ).fold(0, (int total, CharacterData character) => total + character.level);
+    int levelSum = characterData.fold(
+      0,
+      (int total, CharacterData character) => total + character.level,
+    );
     // The average divides by 12, unless less than 12 characters have been
     // unlocked
-    int averageLevel =
-        levelSum ~/ (allyCount < partySlotCount ? allyCount : partySlotCount);
+    int averageLevel = levelSum ~/ allyCount;
     summaryBytes.setRange(0x9, 0xd, averageLevel.toU32(Endian.big));
     // Patch the OD files with map data for known indexes
     for (int i = 1; i <= dungeonCount; i++) {
       for (int j = 1; j <= floorCount; j++) {
         FloorFileName filename = FloorFileName(Dungeon.values[i - 1], j);
-        _rawBytes[filename.toString()] = mapData[filename]!.toBytes();
+        if (filename.isUsed) {
+          _rawBytes[filename.toString()] = mapData[filename]!.toBytes();
+        }
       }
     }
     // Patch the EE files with item data
-    Uint8List itemFlagBytes = _rawBytes['EEF.txt']!;
-    Uint8List itemLevelBytes = _rawBytes['EEH.txt']!;
-    Uint8List itemAmountBytes = _rawBytes['EEN.txt']!;
+    Uint8List itemFlagBytes = _rawBytes['EEF01.ngd']!;
+    Uint8List itemLevelBytes = _rawBytes['EEH01.ngd']!;
+    Uint8List itemAmountBytes = _rawBytes['EEN01.ngd']!;
     // Iterate on items to patch their data to the bytes
     int itemOffset = 0;
     _patchItemData<SubEquip>(

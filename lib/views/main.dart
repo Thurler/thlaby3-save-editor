@@ -65,7 +65,7 @@ class MainState extends State<MainWidget>
       logMessage: 'FileSystem Exception when loading files: ${e.message}',
       body: 'Make sure your user has permission to read the directory you '
           'chose, and that it is a valid save file directory.\n\nIt should '
-          'contain files like "C001.dat" and "0101_OD.txt" inside the '
+          'contain files like "C001.ngd" and "0101_OD.txt" inside the '
           '"SaveData" folder in your local game files.',
     );
   }
@@ -75,7 +75,7 @@ class MainState extends State<MainWidget>
       'The selected files are invalid!',
       logMessage: e.logMessage,
       body: 'Make sure you chose a valid save file directory. It should '
-          'contain files like "C001.dat" and "0101_OD.txt" inside the '
+          'contain files like "C001.ngd" and "0101_OD.txt" inside the '
           '"SaveData" folder in your local game files.\n\n${e.userMessage}',
     );
   }
