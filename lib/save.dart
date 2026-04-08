@@ -450,8 +450,11 @@ class SaveFile with TLoggable {
     }
     // The number of allies just adds the unlocked flags
     summaryBytes.setRange(0xd, 0x11, allyCount.toU32(Endian.big));
-    // The average party level is computed from the 12 characters in the party
-    int levelSum = characterData.fold(
+    // The average party level is computed from all recruited characters
+    int levelSum = characterData.where(
+      (CharacterData data) =>
+          characterUnlockData[data.character.index].isUnlocked,
+    ).fold(
       0,
       (int total, CharacterData character) => total + character.level,
     );
