@@ -70,4 +70,13 @@ class FloorFileName {
   @override
   String toString() => '${dungeon.id.toString().padLeft(2, '0')}'
       '${floor.toString().padLeft(2, '0')}_OD.txt';
+
+  @override
+  bool operator ==(Object other) =>
+      other is FloorFileName &&
+      dungeon == other.dungeon &&
+      floor == other.floor;
+
+  @override
+  int get hashCode => Object.hash(dungeon, floor);
 }
