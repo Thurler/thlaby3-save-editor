@@ -69,20 +69,22 @@ class SkillData {
     // refering to the skill position
     for (SkillNode node in uniqueSkillTree.skills) {
       int value = node.isLearned ? 1 : 0;
-      int skillOffset = (node.levelGate.index + 1) * node.column * 4;
+      int skillOffset =
+          (node.levelGate.index + 1) * SkillTree.columnCount + node.column;
       bytes.setRange(
-        offset + skillOffset,
-        offset + skillOffset + 4,
+        offset + (skillOffset * 4),
+        offset + (skillOffset * 4) + 4,
         value.toU32(endianness),
       );
     }
     // Do the same for the training skill tree, using the appropriate offset
     for (SkillNode node in trainingSkillTree.skills) {
       int value = node.isLearned ? 1 : 0;
-      int skillOffset = (node.levelGate.index + 1) * node.column * 4;
+      int skillOffset =
+          (node.levelGate.index + 1) * SkillTree.columnCount + node.column;
       bytes.setRange(
-        offset + skillTreeByteSize + skillOffset,
-        offset + skillTreeByteSize + skillOffset + 4,
+        offset + skillTreeByteSize + (skillOffset * 4),
+        offset + skillTreeByteSize + (skillOffset * 4) + 4,
         value.toU32(endianness),
       );
     }
