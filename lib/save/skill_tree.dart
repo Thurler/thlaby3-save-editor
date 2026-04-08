@@ -124,8 +124,8 @@ class SkillTree {
         _skills.add(
           SkillNode(
             skill: skill,
-            levelGate: skill.levelGate(maxLevel),
-            column: skill.column(maxLevel),
+            levelGate: skill.levelGate(masteryIndex),
+            column: skill.column(masteryIndex),
             // Add the additional requirements based on the [MasterySkill] extra
             // requirements map
             additionalRequirements: <Skill>[
@@ -150,8 +150,8 @@ class SkillTree {
         _skills.add(
           SkillNode(
             skill: skill,
-            levelGate: skill.levelGate(maxLevel),
-            column: skill.column(maxLevel),
+            levelGate: skill.levelGate(personalityIndex),
+            column: skill.column(personalityIndex),
             // Add the additional requirements based on the [PersonalitySkill]
             // extra requirements map
             additionalRequirements: <Skill>[
