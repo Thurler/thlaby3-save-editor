@@ -13,20 +13,18 @@ typedef UniqueSkillData = ({
 /// attributes
 enum Character {
   reimu(
-    'Reimu',
     <Mastery>[],
     <Personality>[],
     <UniqueSkillData>[],
   ),
   renko(
-    'Renko',
     <Mastery>[],
     <Personality>[],
     <UniqueSkillData>[],
   );
 
   /// The filename to use when reading character portraits
-  final String filename;
+  String get filename => (index + 1).toString().padLeft(3, '0');
 
   /// The unique skills in this character's unique skill tree
   final List<UniqueSkillData> uniqueSkills;
@@ -38,7 +36,6 @@ enum Character {
   final List<Personality> personalities;
 
   const Character(
-    this.filename,
     this.masteries,
     this.personalities,
     this.uniqueSkills,

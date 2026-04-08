@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tfields/widgets.dart';
 
-/// A widget that displays the S version of a character's portrait, applying a
-/// grayscale filter automtically when that character is identified as locked
+/// A widget that displays the Rect version of a character's portrait, applying
+/// a grayscale filter automtically when that character is identified as locked
 class CharacterBox extends StatelessWidget {
   /// The identity matrix's red channel vector
   static const List<double> identityR = <double>[1, 0, 0, 0, 0];
@@ -33,7 +33,7 @@ class CharacterBox extends StatelessWidget {
   ///
   /// Used both by this widget and by precache calls
   static Image imageFromName(String filename) =>
-      Image.asset('img/character/${filename}_S.png', fit: BoxFit.contain);
+      Image.asset('img/characterRect/RectL_$filename.png', fit: BoxFit.contain);
 
   /// The title to display above the character portrait, usually the character's
   /// name

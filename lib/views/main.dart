@@ -129,7 +129,7 @@ class MainState extends State<MainWidget>
       settingsLink: navigateToSettings,
       themeToggleCallback: Provider.of<TThemeProvider>(context).changeTheme,
       children: <Widget>[
-        Image.asset('img/title.png'),
+        Image.asset('img/titleEN.png'),
         const Text('Version ${MainWidget.version}'),
         if (settings.checkUpdates)
           TUpdateStatus(
