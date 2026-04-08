@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tfields/logging.dart';
 import 'package:tfields/settings.dart';
-//import 'package:thlaby2_save_editor/save/enums/character.dart';
-//import 'package:thlaby2_save_editor/save/enums/item.dart';
-//import 'package:thlaby2_save_editor/views/character_data.dart';
-//import 'package:thlaby2_save_editor/views/character_edit.dart';
-//import 'package:thlaby2_save_editor/views/character_select.dart';
-//import 'package:thlaby2_save_editor/views/character_unlock.dart';
-//import 'package:thlaby2_save_editor/views/item_data.dart';
-//import 'package:thlaby2_save_editor/views/item_select.dart';
+import 'package:thlaby3_save_editor/views/character_data.dart';
+import 'package:thlaby3_save_editor/views/character_unlock.dart';
 import 'package:thlaby3_save_editor/views/menu.dart';
-//import 'package:thlaby2_save_editor/views/party_data.dart';
 
 /// A mixin that allows [StatefulWidget]s to navigate to other views in the
 /// application, that centralizes value returning and logging logic
@@ -41,11 +34,13 @@ mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
   Future<void> navigateToMainMenu() =>
       _navigate(const MenuWidget(), 'main menu');
 
-  //Future<void> navigateToCharacterData() =>
-  //    _navigate(const CharacterDataWidget(), 'character data');
+  /// Navigate to the view that manages character data and unlock data
+  Future<void> navigateToCharacterData() =>
+      _navigate(const CharacterDataWidget(), 'character data');
 
-  //Future<void> navigateToCharacterUnlock() =>
-  //    _navigate(const CharacterUnlockWidget(), 'character unlock edit');
+  /// Navigate to the view that manages character unlock flags
+  Future<void> navigateToCharacterUnlock() =>
+      _navigate(const CharacterUnlockWidget(), 'character unlock edit');
 
   //Future<void> navigateToCharacterEdit(Character character) => _navigate(
   //  CharacterEditWidget(character: character),

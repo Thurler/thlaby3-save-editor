@@ -32,8 +32,11 @@ class CharacterBox extends StatelessWidget {
   /// A helper function to return the [Image] instance associated with an asset
   ///
   /// Used both by this widget and by precache calls
-  static Image imageFromName(String filename) =>
-      Image.asset('img/characterRect/RectL_$filename.png', fit: BoxFit.contain);
+  static Image imageFromName(String filename) => Image.asset(
+    'img/characterRect/RectL_$filename.png',
+    fit: BoxFit.none,
+    alignment: AlignmentGeometry.topCenter,
+  );
 
   /// The title to display above the character portrait, usually the character's
   /// name
@@ -81,19 +84,23 @@ class CharacterBox extends StatelessWidget {
             if (titleAppend != null) titleAppend!,
           ],
         ),
-        DecoratedBox(
-          position: DecorationPosition.foreground,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: isHighlighted ? 4 : 1,
-              color: isHighlighted
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onSurface.withAlpha(127),
+        SizedBox(
+          width: 100,
+          height: 240,
+          child: DecoratedBox(
+            position: DecorationPosition.foreground,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: isHighlighted ? 4 : 1,
+                color: isHighlighted
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSurface.withAlpha(127),
+              ),
             ),
-          ),
-          child: ColorFiltered(
-            colorFilter: unlocked ? identity : greyscale,
-            child: CharacterBox.imageFromName(filename),
+            child: ColorFiltered(
+              colorFilter: unlocked ? identity : greyscale,
+              child: CharacterBox.imageFromName(filename),
+            ),
           ),
         ),
       ],
@@ -144,10 +151,10 @@ class CharacterBoxHover extends StatefulWidget with THoverWidget {
   }) : hoverEnabled = hoverEnabled && (unlocked || interactWhenLocked);
 
   @override
-  State<StatefulWidget> createState() => CharacterBoxState();
+  State<StatefulWidget> createState() => _CharacterBoxState();
 }
 
-class CharacterBoxState extends State<CharacterBoxHover>
+class _CharacterBoxState extends State<CharacterBoxHover>
     with THoverState<CharacterBoxHover> {
   @override
   Widget buildChild(BuildContext context) {

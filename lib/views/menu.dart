@@ -170,6 +170,7 @@ class MenuState extends State<MenuWidget>
                   usesMaxWidth: true,
                   text: 'Character Data',
                   icon: const TIcon(icon: Icons.person),
+                  onPressed: navigateToCharacterData,
                 ),
               ),
               TGridItem(
