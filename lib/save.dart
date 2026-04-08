@@ -56,15 +56,17 @@ class SaveFileParseException implements SaveException {
   final String userMessage;
 
   @override
-  final String logMessage;
+  String get logMessage => toString();
+
+  final String _logMessage;
 
   const SaveFileParseException({
     required this.userMessage,
-    required this.logMessage,
-  });
+    required String logMessage,
+  }) : _logMessage = logMessage;
 
   @override
-  String toString() => 'SaveFileParseException: $logMessage';
+  String toString() => 'SaveFileParseException: $_logMessage';
 }
 
 /// An enumertion of save file data file types, containing validation data for
