@@ -15,32 +15,31 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
   - Hopes and dreams
 - Version 0.1.0
   - Edit character unlock flags
+  - Edit which characters are in the party
   - Logging for debugging purposes
   - Automatic update checking
 - Version 0.2.0
-  - Edit which characters are in the party
-- Version 0.3.0
   - Edit some character parameters
     - Level, EXP, BP
     - Library points
     - Level bonuses
     - Shrine item investments
-- Version 0.4.0
+- Version 0.3.0
   - Edit more character parameters
     - Learned skills
-- Version 0.5.0
+- Version 0.4.0
   - Edit inventory unlock flags and amount
   - Edit more character parameters
     - Equipment
-- Version 0.6.0
+- Version 0.5.0
   - Edit general data (money amount, play time, enemy kills, etc)
-- Version 0.7.0
+- Version 0.6.0
   - Edit achievement data
-- Version 0.8.0
+- Version 0.7.0
   - Edit map data
-- Version 0.9.0
+- Version 0.8.0
   - Edit bestiary data
-- Version 0.10.0
+- Version 0.9.0
   - Edit event flags (dungeon events, story events, etc)
 - Version 1.0.0
   - Multi-language support
