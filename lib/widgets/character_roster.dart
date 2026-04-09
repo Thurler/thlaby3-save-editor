@@ -3,7 +3,7 @@ import 'package:tfields/extensions.dart';
 import 'package:tfields/widgets.dart';
 import 'package:thlaby3_save_editor/save/character_unlock.dart';
 import 'package:thlaby3_save_editor/save/enums/character.dart';
-import 'package:thlaby3_save_editor/widgets/character_box.dart';
+import 'package:thlaby3_save_editor/widgets/character_rect.dart';
 
 /// A widget that renders the entire roster in a [TGridRow], automatically
 /// resizing how many characters are drawn per line based on the screen width
@@ -20,7 +20,7 @@ class CharacterRoster extends StatelessWidget {
   final bool interactWhenLocked;
 
   /// A callback to notify the parent widget of when the inner
-  /// [CharacterBoxHover] widget's state has changed
+  /// [CharacterRectHover] widget's state has changed
   final void Function() stateUpdateCallback;
 
   const CharacterRoster({
@@ -39,7 +39,7 @@ class CharacterRoster extends StatelessWidget {
   static Future<void> precachePortraits(BuildContext context) async {
     for (Character character in Character.values) {
       await precacheImage(
-        CharacterBox.imageFromName(character.filename).image,
+        CharacterRect.imageFromName(character.filename).image,
         context,
       );
     }
@@ -56,7 +56,7 @@ class CharacterRoster extends StatelessWidget {
       uhdFlexLimit: 12,
       children: Character.values.map(
         (Character character) => TGridItem(
-          child: CharacterBoxHover(
+          child: CharacterRectHover(
             title: character.name.upperCaseFirstChar(),
             filename: character.filename,
             unlocked: unlockFlags[character.index].isUnlocked,

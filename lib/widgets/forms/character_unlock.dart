@@ -3,7 +3,7 @@ import 'package:tfields/extensions.dart';
 import 'package:tfields/logging.dart';
 import 'package:tfields/widgets.dart';
 import 'package:thlaby3_save_editor/save/character_unlock.dart';
-import 'package:thlaby3_save_editor/widgets/character_box.dart';
+import 'package:thlaby3_save_editor/widgets/character_rect.dart';
 
 /// The key associated to a [CharacterUnlockForm]
 typedef CharacterUnlockFormKey = GlobalKey<CharacterUnlockFormState>;
@@ -65,7 +65,7 @@ class CharacterUnlockFormState
   @override
   Widget buildChild(BuildContext context) {
     bool isUnlocked = value?.isUnlocked ?? false;
-    return CharacterBox(
+    return CharacterRect(
       title: title.upperCaseFirstChar(),
       titleAppend: Row(
         mainAxisSize: MainAxisSize.min,

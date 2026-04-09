@@ -178,6 +178,7 @@ class MenuState extends State<MenuWidget>
                   usesMaxWidth: true,
                   text: 'Party Data',
                   icon: const TIcon(icon: Icons.groups),
+                  onPressed: navigateToPartyEdit,
                 ),
               ),
               TGridItem(

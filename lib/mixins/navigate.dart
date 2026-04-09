@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tfields/logging.dart';
 import 'package:tfields/settings.dart';
+import 'package:thlaby3_save_editor/save/enums/character.dart';
 import 'package:thlaby3_save_editor/views/character_data.dart';
+import 'package:thlaby3_save_editor/views/character_select.dart';
 import 'package:thlaby3_save_editor/views/character_unlock.dart';
 import 'package:thlaby3_save_editor/views/menu.dart';
+import 'package:thlaby3_save_editor/views/party_data.dart';
 
 /// A mixin that allows [StatefulWidget]s to navigate to other views in the
 /// application, that centralizes value returning and logging logic
@@ -42,24 +45,27 @@ mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
   Future<void> navigateToCharacterUnlock() =>
       _navigate(const CharacterUnlockWidget(), 'character unlock edit');
 
+  /// Navigate to the view that manages characters in the party
+  Future<void> navigateToPartyEdit() =>
+      _navigate(const PartyDataWidget(), 'party data edit');
+
+  /// Navigate to the view that displays the roster and lets you choose
+  /// unlocked character
+  Future<Character?> navigateToCharacterSelect() async {
+    Character? selected = await _navigate(
+      const CharacterSelectWidget(),
+      'character select',
+    );
+    if (selected != null) {
+      await log(TLogLevel.debug, 'Chosen character: ${selected.name}');
+    }
+    return selected;
+  }
+
   //Future<void> navigateToCharacterEdit(Character character) => _navigate(
   //  CharacterEditWidget(character: character),
   //  'character data edit',
   //);
-
-  //Future<Character?> navigateToCharacterSelect() async {
-  //  Character? selected = await _navigate(
-  //    const CharacterSelectWidget(),
-  //    'character select',
-  //  );
-  //  if (selected != null) {
-  //    await log(TLogLevel.debug, 'Chosen character: ${selected.name}');
-  //  }
-  //  return selected;
-  //}
-
-  //Future<void> navigateToPartyEdit() =>
-  //    _navigate(const PartyDataWidget(), 'party data edit');
 
   //Future<void> navigateToItemEdit() =>
   //    _navigate(const ItemDataWidget(), 'item data edit');
