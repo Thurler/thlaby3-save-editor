@@ -1,4 +1,3 @@
-
 # Touhou Labyrinth Tri Save Editor
 
 This repository provides a save editor for Touhou Labyrinth Tri, capable of editing many of the event flags and character stats in your save file, among other things. Unlike editing a raw hex file, which would require computing the correct offsets and hexadecimal convertions, this program aims to provide an intuitive interface for each piece of data in the save file:
