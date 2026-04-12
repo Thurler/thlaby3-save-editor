@@ -11,7 +11,7 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
 
 ## Features and Roadmap
 
-- Current release (0.0.0)
+- Current release (0.0.0 aka none)
   - Hopes and dreams
 - Version 0.1.0
   - Edit character unlock flags
