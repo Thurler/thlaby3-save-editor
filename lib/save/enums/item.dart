@@ -2,6 +2,8 @@ import 'dart:typed_data';
 import 'package:tfields/extensions.dart';
 import 'package:thlaby3_save_editor/save.dart';
 
+/// A constant value indicating the total amount of item slots the save file can
+/// address, adding up the slot count for each item type
 const int totalItemCount = SubEquip.totalSlots +
     Material.totalSlots +
     BreakItem.totalSlots +

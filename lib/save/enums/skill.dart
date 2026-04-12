@@ -187,7 +187,11 @@ enum MindSkill with _FixedPositionSkill {
   }) : assert(cost > 0, 'Skill cost must be at least 1');
 }
 
+/// A tuple defining a context for mastery and personality skills
 typedef ContextLevelTuple = ({int index, int level});
+
+/// A Map that matches context tuples to the respective [LevelGate] associated
+/// with that tuple
 typedef _ContextualLevelGateMap = Map<ContextLevelTuple, LevelGate>;
 
 /// A mixin for [Skill] that adds a contextual position in the skill tree,
@@ -216,6 +220,8 @@ mixin _ContextualPositionSkill implements Skill {
   int column(int context);
 }
 
+/// A Map that matches context tuples to another tuple, relaying which tuple has
+/// which tuple as an additional requirement
 typedef SkillRequirementMap = Map<ContextLevelTuple, ContextLevelTuple>;
 
 /// A mastery skill from the mastery section of the common training skill tree
