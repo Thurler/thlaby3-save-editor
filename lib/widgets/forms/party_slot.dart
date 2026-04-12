@@ -44,7 +44,7 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
 
   /// Callback for when the portrait is clicked, prompting the user to select a
   /// new character for that slot
-  Future<void> _selectNewCharacter() async {
+  Future<void> selectNewCharacter() async {
     Character? selected = await navigateToCharacterSelect();
     if (selected != null) {
       await _changeCharacter(selected);
@@ -97,15 +97,16 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
             filename: value?.character?.filename ?? '',
             hoverEnabled: enabled,
             hoverUpdateCallback: widget.hoverUpdateCallback,
-            onHoverTap: enabled && !readonly ? _selectNewCharacter : null,
+            onHoverTap: enabled && !readonly ? selectNewCharacter : null,
           )
         else
-          CharacterTrapezHover(
+          CharacterTrapez(
             title: '',
             filename: value?.character?.filename ?? '',
-            hoverEnabled: enabled,
-            hoverUpdateCallback: widget.hoverUpdateCallback,
-            onHoverTap: enabled && !readonly ? _selectNewCharacter : null,
+            //hoverEnabled: enabled,
+            //hoverUpdateCallback: widget.hoverUpdateCallback,
+            //onHoverTap: enabled && !readonly ? selectNewCharacter : null,
+            isHighlighted: false,
           ),
         if (widget.isFrontSlot)
           TButton.iconAndLabel(
@@ -121,7 +122,7 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
             onPressed: enabled && !readonly
               ? _isNotEmpty
                 ? () => _changeCharacter(null)
-                : _selectNewCharacter
+                : selectNewCharacter
               : null,
           )
         else
@@ -138,7 +139,7 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
               onPressed: enabled && !readonly
                 ? _isNotEmpty
                   ? () => _changeCharacter(null)
-                  : _selectNewCharacter
+                  : selectNewCharacter
                 : null,
             ),
           ),

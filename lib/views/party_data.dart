@@ -8,6 +8,7 @@ import 'package:thlaby3_save_editor/save.dart';
 import 'package:thlaby3_save_editor/save/party_slot.dart';
 import 'package:thlaby3_save_editor/widgets/character_trapez.dart';
 import 'package:thlaby3_save_editor/widgets/forms/party_slot.dart';
+import 'package:thlaby3_save_editor/widgets/party_highlight.dart';
 
 /// A view to edit which characters are currently in the party
 class PartyDataWidget extends StatefulWidget {
@@ -144,14 +145,27 @@ class PartyDataState extends State<PartyDataWidget>
               // Constrained height + icon button + paddings
               height: magic.height + kDefaultFontSize * 3.75 + 20,
               child: Stack(
-                children: <int>[4, 5, 6, 7, 8, 9, 10, 11].map(
-                  (int index) => Positioned(
-                    // Solid part of trapez bottom
-                    left: (index - 4) * magic.offset,
-                    width: magic.width,
-                    child: _slotForms[index],
+                children: <Widget>[
+                  // The actual portrait forms
+                  ...<int>[4, 5, 6, 7, 8, 9, 10, 11].map(
+                    (int index) => Positioned(
+                      // Solid part of trapez bottom
+                      left: (index - 4) * magic.offset,
+                      width: magic.width,
+                      child: _slotForms[index],
+                    ),
                   ),
-                ).toList(),
+                  // And the highlight detector on top
+                  Positioned(
+                    bottom: kDefaultFontSize * 3.75,
+                    child: PartyHighlight(
+                      hoverEnabled: true,
+                      hoverUpdateCallback: () => setState(() {}),
+                      tapIndexCallback: (int tapIndex) => _slotFormKeys[
+                          tapIndex + 4].currentState?.selectNewCharacter(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
