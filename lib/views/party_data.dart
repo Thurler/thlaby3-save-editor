@@ -158,11 +158,11 @@ class PartyDataState extends State<PartyDataWidget>
                   // And the highlight detector on top
                   Positioned(
                     bottom: kDefaultFontSize * 3.75,
-                    child: PartyHighlight(
-                      hoverEnabled: true,
-                      hoverUpdateCallback: () => setState(() {}),
-                      tapIndexCallback: (int tapIndex) => _slotFormKeys[
-                          tapIndex + 4].currentState?.selectNewCharacter(),
+                    child: RepaintBoundary(
+                      child: PartyHighlight(
+                        tapIndexCallback: (int tapIndex) => _slotFormKeys[
+                            tapIndex + 4].currentState?.selectNewCharacter(),
+                      ),
                     ),
                   ),
                 ],

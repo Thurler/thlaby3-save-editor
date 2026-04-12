@@ -78,8 +78,8 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
 
   @override
   Widget build(BuildContext context) {
+    // Compute dimensions of resized trapez using magic
     TrapezDimensions magic = CharacterTrapez.makeMagic(context);
-    double padding = magic.offset - (3 * kDefaultFontSize);
     return Column(
       spacing: 10,
       crossAxisAlignment: widget.isFrontSlot
@@ -87,11 +87,13 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
         : CrossAxisAlignment.start,
       children: <Widget>[
         if (_isEmpty)
+          // Add an empty box to make sure an empty slot takes space
           SizedBox(
             width: double.infinity,
             height: widget.isFrontSlot ? null : (magic.height + 20),
           )
         else if (widget.isFrontSlot)
+          // Front slot has its own hover logic
           CharacterBoxHover(
             title: '',
             filename: value?.character?.filename ?? '',
@@ -100,15 +102,15 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
             onHoverTap: enabled && !readonly ? selectNewCharacter : null,
           )
         else
+          // Back slot does not have its own hover logic, since portraits
+          // are expected to overlap
           CharacterTrapez(
             title: '',
             filename: value?.character?.filename ?? '',
-            //hoverEnabled: enabled,
-            //hoverUpdateCallback: widget.hoverUpdateCallback,
-            //onHoverTap: enabled && !readonly ? selectNewCharacter : null,
             isHighlighted: false,
           ),
         if (widget.isFrontSlot)
+          // Front slot has the width to show text next to button
           TButton.iconAndLabel(
             icon: TIcon(
               icon:
@@ -126,8 +128,11 @@ class PartySlotFormState extends TFormState<PartySlot, PartySlotForm>
               : null,
           )
         else
+          // Back slot might not have the width to show text next to button
           Padding(
-            padding: EdgeInsets.only(left: padding / 2),
+            padding: EdgeInsets.only(
+              left: (magic.offset - (3 * kDefaultFontSize)) / 2,
+            ),
             child: TButton.iconOnly(
               text: _isEmpty ? 'Add' : 'Remove',
               icon: TIcon(

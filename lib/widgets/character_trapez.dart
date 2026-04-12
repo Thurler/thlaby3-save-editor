@@ -18,6 +18,9 @@ class CharacterTrapez extends CharacterPortrait {
   static const double offset = 159;
 
   /// Responsive magic for resizing stacking Trapez portraits
+  ///
+  /// Because this is only ever helpful when rendering the back party slots, the
+  /// logic here will hardcode offsets for 8 slots only
   static TrapezDimensions makeMagic(BuildContext context) {
     double magicWidth = min(MediaQuery.of(context).size.width / 8, width);
     return (
