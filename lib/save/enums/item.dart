@@ -12,7 +12,8 @@ const int totalItemCount = SubEquip.totalSlots +
 
 /// An abstract representing the common attributes found among all item types
 sealed class Item {
-  /// The internal ID the game assigns to this item
+  /// The internal ID the game assigns to this item when bound to other
+  /// structures
   int get id;
 
   /// The index this item occupies in the list of its enumeration

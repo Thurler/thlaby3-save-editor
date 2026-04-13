@@ -46,7 +46,7 @@ class CharacterData {
   final ShrineItemData shrineItems;
 
   /// The character's main equipment
-  final List<AwakeningEquip> mainEquips;
+  final List<int> mainEquips;
 
   /// The character's sub equipment
   final List<SubEquip> subEquips;
@@ -95,11 +95,9 @@ class CharacterData {
         bytes.getU32(endianness, offset: 0x87c + (i * 4)),
       ),
     ),
-    mainEquips = List<AwakeningEquip>.generate(
+    mainEquips = List<int>.generate(
       5,
-      (int i) => AwakeningEquip.fromId(
-        bytes.getU32(endianness, offset: 0x894 + (i * 4)),
-      ),
+      (int i) => bytes.getU32(endianness, offset: 0x894 + (i * 4)),
     );
 
   /// Patch the bytes representation of the character data
@@ -119,9 +117,9 @@ class CharacterData {
       int offset = 0x87c + (indexedEquip.$1 * 4);
       bytes.setRange(offset, offset + 4, indexedEquip.$2.toBytes(endianness));
     }
-    for ((int, AwakeningEquip) indexedEquip in mainEquips.indexed) {
+    for ((int, int) indexedEquip in mainEquips.indexed) {
       int offset = 0x894 + (indexedEquip.$1 * 4);
-      bytes.setRange(offset, offset + 4, indexedEquip.$2.toBytes(endianness));
+      bytes.setRange(offset, offset + 4, indexedEquip.$2.toU32(endianness));
     }
   }
 
@@ -136,7 +134,7 @@ $levelBonus
 $shrineItems
 Main equip level: $mainEquipLevel
 Sub equips: ${subEquips.map((SubEquip equip) => equip.prettyName).join(' / ')}
-Awakenings: ${mainEquips.map((AwakeningEquip equip) => equip.prettyName).join(' / ')}
+Awakenings: ${mainEquips.map((int raw) => raw.toString()).join(' / ')}
 $skills
 ''';
 }
