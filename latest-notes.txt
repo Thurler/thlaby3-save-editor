@@ -1,4 +1,5 @@
 Release Notes
 =============
 
-- Initial release with no code, just hopes and dreams
+- Edit which characters have been unlocked
+- Edit which characters are currently in the party
