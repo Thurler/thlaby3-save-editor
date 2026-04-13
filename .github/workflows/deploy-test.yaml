@@ -57,7 +57,7 @@ jobs:
   build-windows-alpha:
     name: Windows Native Alpha Build
     runs-on: windows-latest
-    depends-on: analyze-tests
+    needs: analyze-tests
     timeout-minutes: 15
     steps:
       - name: Code Checkout
@@ -86,7 +86,7 @@ jobs:
   build-linux-alpha:
     name: Linux Native Alpha Build
     runs-on: ubuntu-latest
-    depends-on: analyze-tests
+    needs: analyze-tests
     timeout-minutes: 15
     steps:
       - name: Code Checkout
