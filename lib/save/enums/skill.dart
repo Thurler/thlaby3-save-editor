@@ -1018,11 +1018,7 @@ enum UniqueSkill implements Skill {
   final int cost;
 
   @override
-  final List<Skill> requirements;
+  List<Skill> get requirements => const <Skill>[];
 
-  const UniqueSkill(
-    this.prettyName,
-    this.cost, {
-    this.requirements = const <Skill>[],
-  });
+  const UniqueSkill(this.prettyName, this.cost);
 }
