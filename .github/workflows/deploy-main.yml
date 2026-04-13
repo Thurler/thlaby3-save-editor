@@ -2,8 +2,7 @@ name: Add Tag, Build Windows and Linux
 
 on:
   push:
-    branches:
-      - 'main'
+    branches: [ master, main ]
 
 jobs:
   make-tag:
