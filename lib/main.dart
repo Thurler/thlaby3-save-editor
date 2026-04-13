@@ -40,6 +40,7 @@ void main() {
       title: 'Touhou Labyrinth Tri Save Editor',
       seedColor: Colors.purple,
       home: const MainWidget(),
+      // Handle all uncaught exceptions into an Exception widget
       materialAppBuilder: (BuildContext context, Widget? widget) {
         ErrorWidget.builder = (FlutterErrorDetails details) {
           return ExceptionWidget(details: details);

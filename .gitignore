@@ -1,5 +1,6 @@
 __pycache__/*
 *.dat
+Save*/*
 applicationlog.txt
 settings.json
 .flutter-plugins-dependencies

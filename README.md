@@ -1,9 +1,12 @@
-
 # Touhou Labyrinth Tri Save Editor
 
 This repository provides a save editor for Touhou Labyrinth Tri, capable of editing many of the event flags and character stats in your save file, among other things. Unlike editing a raw hex file, which would require computing the correct offsets and hexadecimal convertions, this program aims to provide an intuitive interface for each piece of data in the save file:
 
-TODO: Insert some pictures here?
+![](./demo/home.png)
+
+![](./demo/unlock.png)
+
+![](./demo/party.png)
 
 ## Supported Platforms
 
@@ -11,36 +14,33 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
 
 ## Features and Roadmap
 
-- Current release (0.0.0 aka none)
-  - Hopes and dreams
-- Version 0.1.0
+- Current release (0.1.0)
   - Edit character unlock flags
+  - Edit which characters are in the party
   - Logging for debugging purposes
   - Automatic update checking
 - Version 0.2.0
-  - Edit which characters are in the party
-- Version 0.3.0
   - Edit some character parameters
     - Level, EXP, BP
     - Library points
     - Level bonuses
     - Shrine item investments
-- Version 0.4.0
+- Version 0.3.0
   - Edit more character parameters
     - Learned skills
-- Version 0.5.0
+- Version 0.4.0
   - Edit inventory unlock flags and amount
   - Edit more character parameters
     - Equipment
+- Version 0.5.0
+  - Edit general data (money amount, play time, difficulty, etc)
 - Version 0.6.0
-  - Edit general data (money amount, play time, enemy kills, etc)
-- Version 0.7.0
   - Edit achievement data
-- Version 0.8.0
+- Version 0.7.0
   - Edit map data
-- Version 0.9.0
+- Version 0.8.0
   - Edit bestiary data
-- Version 0.10.0
+- Version 0.9.0
   - Edit event flags (dungeon events, story events, etc)
 - Version 1.0.0
   - Multi-language support
@@ -48,6 +48,8 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
   - MacOS support
   - Translation to languages not supported in-game
   - Add more in-game validation checks
+    - Warn if locking a character whose recruitment event is already cleared
+    - Warn if party has more elite characters than allowed by inventory
     - Changing library points changes current money
     - Changing shrine items changes current item amounts
     - Changing equipment changes current item amounts
