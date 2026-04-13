@@ -48,6 +48,8 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
   - MacOS support
   - Translation to languages not supported in-game
   - Add more in-game validation checks
+    - Warn if locking a character whose recruitment event is already cleared
+    - Warn if party has more elite characters than allowed by inventory
     - Changing library points changes current money
     - Changing shrine items changes current item amounts
     - Changing equipment changes current item amounts

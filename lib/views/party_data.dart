@@ -71,7 +71,7 @@ class PartyDataState extends State<PartyDataWidget>
     }
     await log(TLogLevel.warning, 'Attempting to empty the entire front row');
     bool proceed = await showSaveWarningDialog(
-      'An empty frontline can crash the game if you go into battle',
+      'An empty frontline makes you automatically exit any dungeon you enter',
     );
     if (proceed) {
       await log(TLogLevel.info, 'User consented to empty frontline');
