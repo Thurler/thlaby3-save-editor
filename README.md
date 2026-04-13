@@ -2,7 +2,11 @@
 
 This repository provides a save editor for Touhou Labyrinth Tri, capable of editing many of the event flags and character stats in your save file, among other things. Unlike editing a raw hex file, which would require computing the correct offsets and hexadecimal convertions, this program aims to provide an intuitive interface for each piece of data in the save file:
 
-TODO: Insert some pictures here?
+![](./demo/home.png)
+
+![](./demo/unlock.png)
+
+![](./demo/party.png)
 
 ## Supported Platforms
 
@@ -10,9 +14,7 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
 
 ## Features and Roadmap
 
-- Current release (0.0.0)
-  - Hopes and dreams
-- Version 0.1.0
+- Current release (0.1.0)
   - Edit character unlock flags
   - Edit which characters are in the party
   - Logging for debugging purposes
@@ -31,7 +33,7 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
   - Edit more character parameters
     - Equipment
 - Version 0.5.0
-  - Edit general data (money amount, play time, enemy kills, etc)
+  - Edit general data (money amount, play time, difficulty, etc)
 - Version 0.6.0
   - Edit achievement data
 - Version 0.7.0
