@@ -21,7 +21,7 @@ class MainUpdateCheck extends TUpdateCheck {
 
 /// The main menu that prompts the user to select a save file directory
 class MainWidget extends StatefulWidget {
-  static const String version = '0.1.0';
+  static const String version = '0.1.1';
 
   const MainWidget({super.key});
 
