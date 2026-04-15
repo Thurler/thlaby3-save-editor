@@ -40,12 +40,9 @@ class ShrineItemData {
   /// How many items were used to boost the number of available skill points
   final int skill;
 
-  /// How many items were used to boost the number of battle points
-  final int bp;
-
   /// Get the data according to the stat index
   int getData(int index) =>
-      <int>[hp, mp, tp, atk, def, mag, mnd, spd, acc, eva, skill, bp][index];
+      <int>[hp, mp, tp, atk, def, mag, mnd, spd, acc, eva, skill][index];
 
   ShrineItemData({
     required this.hp,
@@ -59,7 +56,6 @@ class ShrineItemData {
     required this.acc,
     required this.eva,
     required this.skill,
-    required this.bp,
   });
 
   /// Initialize the shtine item data from the provided [bytes]
@@ -74,12 +70,11 @@ class ShrineItemData {
     spd = bytes.getU32(endianness, offset: offset + 28),
     acc = bytes.getU32(endianness, offset: offset + 32),
     eva = bytes.getU32(endianness, offset: offset + 36),
-    skill = bytes.getU32(endianness, offset: offset + 40),
-    bp = bytes.getU32(endianness, offset: offset + 44);
+    skill = bytes.getU32(endianness, offset: offset + 40);
 
   /// Patches the 4-byte bytes representation of the shrine item data
   void patchBytes(Endian endianness, Uint8List bytes, int offset) {
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 11; i++) {
       int statOffset = offset + (i * 4);
       bytes.setRange(statOffset, statOffset + 4, getData(i).toU32(endianness));
     }
@@ -87,5 +82,5 @@ class ShrineItemData {
 
   @override
   String toString() => 'Shrine items: '
-      '${List<int>.generate(12, (int i) => getData(i)).join(' / ')}';
+      '${List<int>.generate(11, (int i) => getData(i)).join(' / ')}';
 }
