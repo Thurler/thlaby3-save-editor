@@ -123,9 +123,6 @@ class PartyHighlightState extends State<PartyHighlight>
 
 /// A custom [ShapeBorder] that draws a parallelogram border
 class _ParallelogramShape extends ShapeBorder {
-  /// The left padding to account for when drawing the border
-  final double padding;
-
   /// The width to consider when drawing the border - we do not trust
   /// [Rect.right] in the render calls
   final double width;
@@ -139,7 +136,6 @@ class _ParallelogramShape extends ShapeBorder {
   const _ParallelogramShape({
     required this.width,
     required this.shift,
-    this.padding = 0,
     this.side = BorderSide.none,
   });
 
@@ -154,13 +150,13 @@ class _ParallelogramShape extends ShapeBorder {
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
       // Top-left shifted right
-      ..moveTo(padding + rect.left + width - shift, rect.top)
+      ..moveTo(rect.left + width - shift, rect.top)
       // Top-right
-      ..lineTo(padding + rect.left + width, rect.top)
+      ..lineTo(rect.left + width, rect.top)
       // Bottom-right shifted left
-      ..lineTo(padding + rect.left + shift, rect.bottom)
+      ..lineTo(rect.left + shift, rect.bottom)
       // Bottom-left
-      ..lineTo(padding + rect.left, rect.bottom)
+      ..lineTo(rect.left, rect.bottom)
       ..close();
   }
 
