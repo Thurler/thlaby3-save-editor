@@ -1,5 +1,4 @@
 Release Notes
 =============
 
-- Edit which characters have been unlocked
-- Edit which characters are currently in the party
+- Fixed a performance issue when highlighting party slots in the party edit page

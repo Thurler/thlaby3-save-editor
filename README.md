@@ -14,7 +14,7 @@ Windows and Linux binaries are provided in the [Releases page](https://github.co
 
 ## Features and Roadmap
 
-- Current release (0.1.0)
+- Current release (0.1.1)
   - Edit character unlock flags
   - Edit which characters are in the party
   - Logging for debugging purposes

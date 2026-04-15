@@ -43,13 +43,9 @@ class PartyHighlightState extends State<PartyHighlight>
   /// The cached [TrapezDimensions] for magic responsive computations
   late TrapezDimensions _magic;
 
-  /// The cahced [Material] widgets that will be rendered for each index, to
-  /// avoid recomputing them every frame
-  late List<Material> _materials;
-
   /// Updates the cached data if the screen width has changed from the previous
   /// known value
-  void _recomputeMaterials() {
+  void _updateMagic() {
     // If same as previous known width, abort
     double width = MediaQuery.of(context).size.width;
     if (width == _previousWidth) {
@@ -58,26 +54,6 @@ class PartyHighlightState extends State<PartyHighlight>
     // Otherwise, update all cached values
     _previousWidth = width;
     _magic = CharacterTrapez.makeMagic(context);
-    _materials = List<Material>.generate(
-      8,
-      (int i) => Material(
-        color: Colors.transparent,
-        shape: _ParallelogramShape(
-          width: _magic.width,
-          padding: i * _magic.offset,
-          shift: _magic.offset,
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-            width: 4,
-          ),
-        ),
-        child: SizedBox(
-          width: _magic.offset * 7 + _magic.width,
-          height: _magic.height,
-        ),
-      ),
-      growable: false,
-    );
   }
 
   /// Update the currently hovered index based on hover offset position
@@ -117,24 +93,36 @@ class PartyHighlightState extends State<PartyHighlight>
   @override
   Widget buildChild(BuildContext context) {
     // Update our cache values, if necessary
-    _recomputeMaterials();
+    _updateMagic();
     // Update the index position every frame
     _updateIndex(hoverPosition);
-    // If something is highlighted, draw the appropriate material on top
-    return isHighlighted && _index != null
-      ? _materials[_index ?? 0]
-      : SizedBox(
-          width: _magic.offset * 7 + _magic.width,
-          height: _magic.height,
-        );
+    return SizedBox(
+      width: _magic.offset * 7 + _magic.width,
+      height: _magic.height,
+      child: Padding(
+        padding: EdgeInsets.only(left: (_index ?? 0) * _magic.offset),
+        // If something is highlighted, draw the appropriate material on top
+        child: isHighlighted && _index != null
+          ? Material(
+              color: Colors.transparent,
+              shape: _ParallelogramShape(
+                width: _magic.width,
+                shift: _magic.offset,
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 4,
+                ),
+              ),
+              child: SizedBox(width: _magic.width, height: _magic.height),
+            )
+          : SizedBox(width: _magic.width, height: _magic.height),
+      ),
+    );
   }
 }
 
 /// A custom [ShapeBorder] that draws a parallelogram border
 class _ParallelogramShape extends ShapeBorder {
-  /// The left padding to account for when drawing the border
-  final double padding;
-
   /// The width to consider when drawing the border - we do not trust
   /// [Rect.right] in the render calls
   final double width;
@@ -148,7 +136,6 @@ class _ParallelogramShape extends ShapeBorder {
   const _ParallelogramShape({
     required this.width,
     required this.shift,
-    this.padding = 0,
     this.side = BorderSide.none,
   });
 
@@ -163,13 +150,13 @@ class _ParallelogramShape extends ShapeBorder {
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
       // Top-left shifted right
-      ..moveTo(padding + rect.left + width - shift, rect.top)
+      ..moveTo(rect.left + width - shift, rect.top)
       // Top-right
-      ..lineTo(padding + rect.left + width, rect.top)
+      ..lineTo(rect.left + width, rect.top)
       // Bottom-right shifted left
-      ..lineTo(padding + rect.left + shift, rect.bottom)
+      ..lineTo(rect.left + shift, rect.bottom)
       // Bottom-left
-      ..lineTo(padding + rect.left, rect.bottom)
+      ..lineTo(rect.left, rect.bottom)
       ..close();
   }
 
