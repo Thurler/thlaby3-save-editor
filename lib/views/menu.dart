@@ -2,11 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tfields/extensions.dart';
 import 'package:tfields/logging.dart';
 import 'package:tfields/settings.dart';
-import 'package:tfields/theme.dart';
 import 'package:tfields/update_check.dart';
 import 'package:tfields/widgets.dart';
 import 'package:thlaby3_save_editor/mixins/navigate.dart';
@@ -144,7 +142,6 @@ class MenuState extends State<MenuWidget>
       child: TCommonScaffold(
         title: 'Touhou Labyrinth Tri Save Editor - Menu',
         settingsLink: navigateToSettings,
-        themeToggleCallback: Provider.of<TThemeProvider>(context).changeTheme,
         children: <Widget>[
           TGridRow(
             mdFlexLimit: 2,

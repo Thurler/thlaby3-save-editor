@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tfields/logging.dart';
-import 'package:tfields/theme.dart';
 import 'package:tfields/widgets.dart';
 import 'package:thlaby3_save_editor/mixins/breakablechanges.dart';
 import 'package:thlaby3_save_editor/save.dart';
@@ -135,7 +133,6 @@ class PartyDataState extends State<PartyDataWidget>
       onPopInvokedWithResult: onPopInvoked,
       child: TCommonScaffold(
         title: 'Edit which characters are in the party',
-        themeToggleCallback: Provider.of<TThemeProvider>(context).changeTheme,
         floatingActionButton: saveButton,
         children: <Widget>[
           Padding(

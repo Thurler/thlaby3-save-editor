@@ -35,8 +35,8 @@ void main() {
     );
   }
   runApp(
-    TThemedApp(
-      themeBuilder: (Color color, _) => CommonSettingsThemeProvider(color),
+    TThemedApp.withSettings(
+      settingsWriter: CommonSettingsWriter(),
       title: 'Touhou Labyrinth Tri Save Editor',
       seedColor: Colors.purple,
       home: const MainWidget(),
