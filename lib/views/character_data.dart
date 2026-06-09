@@ -35,8 +35,7 @@ class CharacterUnlockState extends State<CharacterDataWidget>
         ),
         CharacterRoster(
           unlockFlags: saveFile.characterUnlockData,
-          onTap: (_) {},
-          //onTap: navigateToCharacterEdit,
+          onTap: navigateToCharacterEdit,
           stateUpdateCallback: () => setState(() {}),
         ),
       ],

@@ -3,6 +3,7 @@ import 'package:tfields/logging.dart';
 import 'package:tfields/settings.dart';
 import 'package:thlaby3_save_editor/save/enums/character.dart';
 import 'package:thlaby3_save_editor/views/character_data.dart';
+import 'package:thlaby3_save_editor/views/character_edit.dart';
 import 'package:thlaby3_save_editor/views/character_select.dart';
 import 'package:thlaby3_save_editor/views/character_unlock.dart';
 import 'package:thlaby3_save_editor/views/menu.dart';
@@ -62,10 +63,10 @@ mixin Navigatable<T extends StatefulWidget> on TLoggable, State<T> {
     return selected;
   }
 
-  //Future<void> navigateToCharacterEdit(Character character) => _navigate(
-  //  CharacterEditWidget(character: character),
-  //  'character data edit',
-  //);
+  Future<void> navigateToCharacterEdit(Character character) => _navigate(
+    CharacterEditWidget(character: character),
+    'character data edit',
+  );
 
   //Future<void> navigateToItemEdit() =>
   //    _navigate(const ItemDataWidget(), 'item data edit');
