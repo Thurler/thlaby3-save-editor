@@ -1,6 +1,7 @@
 import 'package:tfields/extensions.dart';
 import 'package:thlaby3_save_editor/save/enums/character.dart';
-import 'package:thlaby3_save_editor/save/enums/skill.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/training.dart';
 
 /// The level at which a new skill tree row becomes available
 enum LevelGate {

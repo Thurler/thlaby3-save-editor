@@ -1,4 +1,5 @@
-import 'package:thlaby3_save_editor/save/enums/skill.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/training.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/skill_tree.dart';
 
 /// A struct to hold data regarding a character's unique skill data for their
