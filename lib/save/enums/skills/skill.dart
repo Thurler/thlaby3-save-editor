@@ -17,3 +17,25 @@ abstract interface class Skill {
   /// instance, refer to the [SkillNode.requirements] getter
   List<Skill> get requirements;
 }
+
+/// An interface to unify behavior and attributes of a skill's activation
+/// requirements
+abstract interface class EffectRequirement {}
+
+/// A requirement that checks if the current turn count is at least a specific
+/// value
+class TurnCountRequirement implements EffectRequirement {
+  /// The number the turn counter must be at or above
+  final int turnCount;
+
+  const TurnCountRequirement(this.turnCount);
+}
+
+/// A requirement that checks if the current turn count is a multiple of a
+/// specific value
+class TurnMultipleRequirement implements EffectRequirement {
+  /// The number the turn counter must be a multiple of
+  final int multipleOf;
+
+  const TurnMultipleRequirement(this.multipleOf);
+}

@@ -1,7 +1,17 @@
 import 'package:thlaby3_save_editor/save/enums/element.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
-import 'package:thlaby3_save_editor/save/enums/target.dart';
+
+/// The target mode associated with a spell
+enum SpellTargetMode {
+  singleEnemy,
+  rowEnemyDiminished,
+  allEnemies,
+  singleAlly,
+  allAlliesDiminished,
+  allAllies;
+}
 
 /// A mixin to unify spell behavior and properties
 mixin SpellSkill on UniqueSkill {
@@ -11,13 +21,29 @@ mixin SpellSkill on UniqueSkill {
   /// The post-use delay associated with the spell
   int get delay;
 
+  /// The post-use cooldown associated with the spell
+  int get cooldown;
+
   /// The elements associated with the spell
   List<Element> get elements;
 
   /// The target mode used by the spell
-  TargetMode get targetMode;
+  SpellTargetMode get targetMode;
 
-  static List<SpellSkill> get values => const <SpellSkill>[yinYangOrb];
+  /// The requirement that must be met to make the spell selectable
+  EffectRequirement? get castRequirement;
+
+  static List<SpellSkill> get values => const <SpellSkill>[
+    // Reimu spells
+    yinYangOrb,
+    barrierTalisman,
+    recoveryTalisman,
+    persuasionNeedle,
+    greatHakureiBarrier,
+    hakureiTalisman,
+    flashExorcismBarrier,
+    dreamSeal,
+  ];
 }
 
 /// A mixin to unify attributes of spells that cause damage
@@ -57,4 +83,16 @@ mixin OtherFactorSpell on DamageSpell {
 
   /// The speed factor to use on damage calculation
   double get spdFactor;
+}
+
+/// A mixin to unify attributes of spells that drain HP based on damage dealt
+mixin HpDrainSpell on DamageSpell {
+  /// The percentage of damage dealt that becomes HP heal
+  double get hpDrainPercent;
+}
+
+/// A mixin for skills that amplify existing damage dealt buffs
+mixin DamageDealtAmplifier on DamageSpell {
+  /// How much to amplify the damage dealt buff by
+  double get dmgDealtAmplification;
 }
