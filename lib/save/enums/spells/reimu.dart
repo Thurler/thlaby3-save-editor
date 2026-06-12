@@ -71,8 +71,6 @@ const SkillAugmentSkill reimuPrivilegesPerm =
     _ReimuProtagonistPrivilegesPermanent();
 const KoReactioner reimuPrivilegesShare = _ReimuProtagonistPrivilegesShare();
 
-const FocusReactioner focusedRecitation = _FocusedRecitation();
-
 const KoReactioner finalPrayer = _FinalPrayer();
 const SkillAugmentSkill finalPrayer2 = _FinalPrayer2();
 const KoReactioner finalPrayerRange = _FinalPrayerRange();
@@ -1389,25 +1387,6 @@ class _ReimuProtagonistPrivilegesShare
 
   @override
   double get spdBuff => 12;
-}
-
-class _FocusedRecitation implements FocusReactioner, DamageDealtBuffer {
-  const _FocusedRecitation();
-
-  @override
-  String get prettyName => 'Focused Recitation';
-
-  @override
-  int get cost => 3;
-
-  @override
-  List<Skill> get requirements => const <Skill>[];
-
-  @override
-  double get dmgDealtBuff => 50;
-
-  @override
-  double get dmgDealtBuffDuration => 1;
 }
 
 class _FinalPrayer implements KoReactioner, PercentHealer {
