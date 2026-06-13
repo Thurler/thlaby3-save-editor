@@ -839,6 +839,212 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
       efficientPuppeteering,
       mAliceCannonAlice2,
     ],
+  ),
+  // Nitori skills
+  kappaObservations('Observations of a Kappa', 3),
+  kappaWaterfall('''Water Sign "Kappa's Illusionary Waterfall"''', 3),
+  extendingArm('''Kappa "Exteeeending Aaaaarm"''', 3),
+  basicMaintenance('Basic Maintenance', 3),
+  kappaWaterfallDef(
+    "Kappa's Illusionary Waterfall: DEF ↓ Affix",
+    3,
+    requirements: <Skill>[kappaWaterfall],
+  ),
+  kappaWaterfallGadgetCooling(
+    "Kappa's Illusionary Waterfall: Gadget-Cooling Feature",
+    3,
+    requirements: <Skill>[kappaWaterfall],
+  ),
+  portableUtilityDevice('Portable Utility Device', 3),
+  kappaWaterfallHeatPump(
+    "Kappa's Illusionary Waterfall: Heat Pump",
+    3,
+    requirements: <Skill>[kappaWaterfallDef],
+  ),
+  abilityManipulateWater('Ability to Manipulate Water', 3),
+  thrillingQuenchHandling(
+    'Thrilling Quench Handling',
+    3,
+    requirements: <Skill>[kappaWaterfallGadgetCooling],
+  ),
+  piercingExtendingArm(
+    '''Great Kappa "Piercing Exteeeending Aaaaarm"''',
+    3,
+    requirements: <Skill>[extendingArm],
+  ),
+  opticalCamouflage('Optics "Optical Camouflage"', 3),
+  exhaustUtilizationSystem(
+    'Exhaust Utilization System',
+    3,
+    requirements: <Skill>[portableUtilityDevice],
+  ),
+  properMaintenance(
+    'Proper Maintenance',
+    3,
+    requirements: <Skill>[basicMaintenance],
+  ),
+  kappaObservations2(
+    'Observations of a Kappa+',
+    3,
+    requirements: <Skill>[kappaObservations],
+  ),
+  overdrive('Overdrive', 3),
+  kappaWaterfallImprovedCooling(
+    "Kappa's Illusionary Waterfall: Improved Cooling",
+    3,
+    requirements: <Skill>[abilityManipulateWater, kappaWaterfallGadgetCooling],
+  ),
+  accelDrive('Accel Drive', 3, requirements: <Skill>[thrillingQuenchHandling]),
+  dividingEdge(
+    'River Sign "Dividing Edge"',
+    3,
+    requirements: <Skill>[opticalCamouflage],
+  ),
+  exhaustIncinerator('Explosive Flames "Exhaust Incinerator"', 3),
+  portableUtilityDevice2(
+    'Portable Utility Device: Effect ↑',
+    3,
+    requirements: <Skill>[portableUtilityDevice],
+  ),
+  exhaustDefensiveSystem(
+    'Exhaust Defensive System',
+    3,
+    requirements: <Skill>[exhaustUtilizationSystem],
+  ),
+  exhaustPropulsionSystem(
+    'Exhaust Propulsion System',
+    3,
+    requirements: <Skill>[exhaustUtilizationSystem],
+  ),
+  kappaWaterfallAcidicRecycling(
+    "Kappa's Illusionary Waterfall: Acidic Wastewater Recycling",
+    3,
+    requirements: <Skill>[kappaWaterfallHeatPump],
+  ),
+  abilityManipulateWater2(
+    'Ability to Manipulate Water+',
+    3,
+    requirements: <Skill>[abilityManipulateWater],
+  ),
+  superHighHeatQuenchHandling(
+    'Super High-Heat Quench Handling',
+    3,
+    requirements: <Skill>[thrillingQuenchHandling],
+  ),
+  superScope3D(
+    'Super Scope 3D',
+    3,
+    requirements: <Skill>[piercingExtendingArm],
+  ),
+  opticalCamouflageBoostGain(
+    'Optical Camouflage: Boost Gain',
+    3,
+    requirements: <Skill>[opticalCamouflage],
+  ),
+  autoCooling('Auto-Cooling', 3),
+  portableUtilityDeviceScale(
+    'Portable Utility Device: Scale Improvements',
+    3,
+    requirements: <Skill>[portableUtilityDevice2],
+  ),
+  efficientExhaustUtilizationSystem(
+    'Efficient Exhaust Utilization System',
+    3,
+    requirements: <Skill>[exhaustUtilizationSystem],
+  ),
+  adeptMaintenance(
+    'Adept Maintenance',
+    3,
+    requirements: <Skill>[properMaintenance],
+  ),
+  kappaObservationsShieldConversion(
+    'Observations of a Kappa: Shield Conversion',
+    3,
+    requirements: <Skill>[kappaObservations2],
+  ),
+  megadrive(
+    'Megadrive',
+    4,
+    requirements: <Skill>[overdrive, abilityManipulateWater2],
+  ),
+  kappaWaterfallImprovedCooling2(
+    "Kappa's Illusionary Waterfall: Improved Cooling+",
+    3,
+    requirements: <Skill>[
+      abilityManipulateWater2,
+      kappaWaterfallImprovedCooling,
+    ],
+  ),
+  superScope3DImprovedControl(
+    'Super Scope 3D: Improved Firing Control',
+    3,
+    requirements: <Skill>[superScope3D],
+  ),
+  highOpticalCamouflage(
+    'Optics "High-Optical Camouflage"',
+    3,
+    requirements: <Skill>[opticalCamouflageBoostGain],
+  ),
+  exhaustIncineratorRowModification(
+    'Exhaust Incinerator: Row Modification',
+    3,
+    requirements: <Skill>[exhaustIncinerator],
+  ),
+  portableUtilityDevicePortability(
+    'Portable Utility Device: Portability Improvements',
+    3,
+    requirements: <Skill>[portableUtilityDeviceScale],
+  ),
+  efficientExhaustDefensiveSystem(
+    'Efficent Exhaust Defensive System',
+    3,
+    requirements: <Skill>[exhaustUtilizationSystem],
+  ),
+  efficientExhaustPropulsionSystem(
+    'Efficient Exhaust Propulsion System',
+    3,
+    requirements: <Skill>[exhaustUtilizationSystem],
+  ),
+  hiAccelDrive(
+    'Hi-Accel Drive',
+    3,
+    requirements: <Skill>[superHighHeatQuenchHandling, accelDrive],
+  ),
+  improvedAutoCooling(
+    'Improved Auto-Cooling',
+    3,
+    requirements: <Skill>[
+      exhaustIncineratorRowModification,
+      autoCooling,
+      portableUtilityDevicePortability,
+    ],
+  ),
+  lastOne(
+    'Last One',
+    3,
+    requirements: <Skill>[
+      efficientExhaustDefensiveSystem,
+      efficientExhaustUtilizationSystem,
+      efficientExhaustPropulsionSystem,
+    ],
+  ),
+  gigadrive(
+    'Gigadrive',
+    5,
+    requirements: <Skill>[kappaObservationsShieldConversion, megadrive],
+  ),
+  superScope3DImprovedControl2(
+    'Super Scope 3D: Improved Firing Control+',
+    3,
+    requirements: <Skill>[superScope3DImprovedControl],
+  ),
+  superHighHeatIncinerator(
+    'Raging Flames "Super High-Heat Incinerator"',
+    3,
+    requirements: <Skill>[
+      highOpticalCamouflage,
+      exhaustIncineratorRowModification,
+    ],
   );
 
   @override
