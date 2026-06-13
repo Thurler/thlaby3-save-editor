@@ -1662,7 +1662,229 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     requirements: <Skill>[perfectFreezeSpdDownSlay],
   ),
   // Doremy skills
-  a('a', 2);
+  rulerOfDreams('Ruler of Dreams', 3),
+  deepNavyRunawayDream(
+    'Dream Sign "Deep Navy Runaway Dream"',
+    3,
+    requirements: <Skill>[rulerOfDreams],
+  ),
+  scarletNightmare(
+    'Dream Sign "Scarlet Nightmare"',
+    3,
+    requirements: <Skill>[rulerOfDreams],
+  ),
+  rulerOfTheDreamWorld('Ruler of the Dream World', 3),
+  dreamCatcher(
+    'Dream Sign "Dream Catcher"',
+    3,
+    requirements: <Skill>[deepNavyRunawayDream],
+  ),
+  dreamBalloonFlight(
+    'Dream Balloon Flight',
+    3,
+    requirements: <Skill>[rulerOfDreams],
+  ),
+  frighteningDebilitatingDream(
+    'Frigthening Debilitating Dream',
+    3,
+    requirements: <Skill>[rulerOfDreams],
+  ),
+  astonishingDumbfoundingDream(
+    'Astonishing Dumbfounding Dream',
+    3,
+    requirements: <Skill>[rulerOfDreams],
+  ),
+  indigoAnxietyDream(
+    'Dream Sign "Indigo Anxiety Dream"',
+    3,
+    requirements: <Skill>[scarletNightmare],
+  ),
+  nightmareCatcher(
+    'Dream Sign "Nightmare Catcher"',
+    3,
+    requirements: <Skill>[scarletNightmare],
+  ),
+  wryPotency('WRY Potency ↑', 3, requirements: <Skill>[dreamCatcher]),
+  dreamCatcher2(
+    'Dream Catcher: Effect ↑',
+    3,
+    requirements: <Skill>[dreamCatcher],
+  ),
+  pitchBlackCosmicDream(
+    'Dream Sign "Pitch Black Cosmic Dream"',
+    3,
+    requirements: <Skill>[deepNavyRunawayDream],
+  ),
+  deepNavyRunawayDreamDreamSoulGain(
+    'Deep Navy Runaway Dream: Dream Soul Gain',
+    3,
+    requirements: <Skill>[deepNavyRunawayDream],
+  ),
+  dreamSoulsUponEvasion(
+    'Dream Souls Upon Evasion',
+    3,
+    requirements: <Skill>[dreamBalloonFlight, frighteningDebilitatingDream],
+  ),
+  dreamSoulsToDamageTaken(
+    'Dream Souls to Damage Taken',
+    3,
+    requirements: <Skill>[
+      frighteningDebilitatingDream,
+      astonishingDumbfoundingDream,
+    ],
+  ),
+  scarletNightmareEffect(
+    'Scarlet Nightmare: Special Effect ↑',
+    3,
+    requirements: <Skill>[scarletNightmare],
+  ),
+  indigoAnxietyDreamEffect(
+    'Indigo Anxiety Dream: Special Effect ↑',
+    3,
+    requirements: <Skill>[indigoAnxietyDream],
+  ),
+  nightmareCatcherEffect(
+    'Nightmare Catcher: Effect ↑',
+    3,
+    requirements: <Skill>[nightmareCatcher],
+  ),
+  wryChance('WRY Chance ↑', 3, requirements: <Skill>[nightmareCatcher]),
+  rulerOfTheDreamWorld2(
+    'Ruler of the Dream World+',
+    3,
+    requirements: <Skill>[rulerOfTheDreamWorld],
+  ),
+  dreamCatcherDamageDealtAbsorption(
+    'Dream Catcher: Damage Dealt ↑ Absorption',
+    3,
+    requirements: <Skill>[dreamCatcher],
+  ),
+  pitchBlackCosmicDreamElements(
+    'Pitch-Black Cosmic Dream: Dream Souls to Elements',
+    3,
+    requirements: <Skill>[pitchBlackCosmicDream],
+  ),
+  dreamBalloonFlight2(
+    'Dream Balloon Flight+',
+    3,
+    requirements: <Skill>[dreamBalloonFlight],
+  ),
+  frighteningDebilitatingDream2(
+    'Frigthening Debilitating Dream+',
+    3,
+    requirements: <Skill>[frighteningDebilitatingDream],
+  ),
+  astonishingDumbfoundingDream2(
+    'Astonishing Dumbfounding Dream+',
+    3,
+    requirements: <Skill>[astonishingDumbfoundingDream],
+  ),
+  ultramarineLunaticDream(
+    'Moon Sign "Ultramarine Lunatic Dream"',
+    3,
+    requirements: <Skill>[indigoAnxietyDream],
+  ),
+  nightmareCatcherBuffs(
+    'Nightmare Catcher: Buffs to Damage Taken ↓',
+    3,
+    requirements: <Skill>[nightmareCatcher],
+  ),
+  wryPotencyRange(
+    'WRY Potency ↑: Range Expansion',
+    3,
+    requirements: <Skill>[wryPotency],
+  ),
+  dreamCatcher3(
+    'Dream Catcher: Effect ↑+',
+    3,
+    requirements: <Skill>[dreamCatcher2],
+  ),
+  pitchBlackCosmicDream2(
+    'Pitch-Black Cosmic Dream: Dream Souls to POW',
+    3,
+    requirements: <Skill>[pitchBlackCosmicDream],
+  ),
+  deepNavyRunawayDreamWry(
+    'Deep Navy Runaway Dream: Forced WRY Affix',
+    3,
+    requirements: <Skill>[deepNavyRunawayDreamDreamSoulGain],
+  ),
+  buffsUponEvasion(
+    'Buffs Upon Evasion',
+    3,
+    requirements: <Skill>[dreamSoulsUponEvasion],
+  ),
+  dreamSoulsToDamageDealt(
+    'Dream Souls to Damage Dealt',
+    3,
+    requirements: <Skill>[dreamSoulsToDamageTaken],
+  ),
+  scarletNightmareEffect2(
+    'Scarlet Nightmare: Special Effect ↑+',
+    3,
+    requirements: <Skill>[scarletNightmareEffect],
+  ),
+  indigoAnxietyDreamEffect2(
+    'Indigo Anxiety Dream: Special Effect ↑+',
+    3,
+    requirements: <Skill>[indigoAnxietyDreamEffect],
+  ),
+  nightmareCatcherEffect2(
+    'Nightmare Catcher: Effect ↑+',
+    3,
+    requirements: <Skill>[nightmareCatcherEffect],
+  ),
+  wryChance2('WRY Chance ↑+', 3, requirements: <Skill>[wryChance]),
+  rulerOfTheDreamWorldShield(
+    'Ruler of the Dream World: Shield Conversion',
+    3,
+    requirements: <Skill>[rulerOfTheDreamWorld2],
+  ),
+  dreamCatcherSharing(
+    'Dream Catcher: Damage Dealt ↑ Sharing',
+    3,
+    requirements: <Skill>[dreamCatcherDamageDealtAbsorption],
+  ),
+  dreamExpress(
+    'Super-Express "Dream Express"',
+    3,
+    requirements: <Skill>[pitchBlackCosmicDreamElements],
+  ),
+  doremyPopping(
+    'Doremy Popping',
+    3,
+    requirements: <Skill>[dreamBalloonFlight2],
+  ),
+  nightmareCatcherSharing(
+    'Nightmare Catcher: Damage Taken ↓ Sharing',
+    3,
+    requirements: <Skill>[nightmareCatcherBuffs],
+  ),
+  ultramarineLunaticDreamEffect(
+    'Ultramarine Lunatic Dream: Special Effect ↑',
+    3,
+    requirements: <Skill>[ultramarineLunaticDream],
+  ),
+  dreamExpressRainbow(
+    'Dream Express: Rainbow Fright',
+    3,
+    requirements: <Skill>[dreamExpress],
+  ),
+  deepNavyRunawayDreamWry2(
+    'Deep Navy Runaway Dream: Forced WRY Affix+',
+    3,
+    requirements: <Skill>[deepNavyRunawayDreamWry],
+  ),
+  mpUponEvasion('MP Upon Evasion', 3, requirements: <Skill>[buffsUponEvasion]),
+  ultramarineLunaticDreamEffect2(
+    'Ultramarine Lunatic Dream: Special Effect ↑+',
+    3,
+    requirements: <Skill>[
+      astonishingDumbfoundingDream2,
+      scarletNightmareEffect2,
+      ultramarineLunaticDreamEffect,
+    ],
+  );
 
   @override
   final String prettyName;
