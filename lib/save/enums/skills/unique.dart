@@ -1884,6 +1884,247 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
       scarletNightmareEffect2,
       ultramarineLunaticDreamEffect,
     ],
+  ),
+  // Yukari skills
+  meshOfLightAndDarkness('Barrier "Mesh of Light and Darkness"', 3),
+  hyperactiveFlyingObject(
+    'Aerial Bait "Hyperactive High Speed Flying Object"',
+    3,
+  ),
+  meshOfLightAndDarkness2(
+    'Mesh of Light and Darkness: Effect Potency ↑',
+    3,
+    requirements: <Skill>[meshOfLightAndDarkness],
+  ),
+  meshOfLightAndDarknessTurnBuff(
+    'Mesh of Light and Darkness: Designated Turn Buff',
+    3,
+    requirements: <Skill>[meshOfLightAndDarkness],
+  ),
+  hyperactiveFlyingObjectTurnBuff(
+    'Hyperactive High Speed Flying Object: Designated Turn Buff',
+    3,
+    requirements: <Skill>[hyperactiveFlyingObject],
+  ),
+  hyperactiveFlyingObjectFlierSlay(
+    'Hyperactive High Speed Flying Object: Flier Slay',
+    3,
+    requirements: <Skill>[hyperactiveFlyingObject],
+  ),
+  yakumoHousehold('Yakumo Household', 3),
+  boundaryOfWaveAndParticle('Boundary of Wave and Particle', 3),
+  boundaryOfMeleeAndDanmaku(
+    'Boundary of Melee and Danmaku',
+    3,
+    requirements: <Skill>[meshOfLightAndDarkness],
+  ),
+  meshOfLightAndDarknessParSpdDownSlay(
+    'Mesh of Light and Darkness: PAR+SPD ↓ Slay',
+    3,
+    requirements: <Skill>[meshOfLightAndDarkness],
+  ),
+  hyperactiveFlyingObjectRow(
+    'Hyperactive High Speed Flying Object: Row Attack',
+    3,
+    requirements: <Skill>[hyperactiveFlyingObject],
+  ),
+  boundaryOfRecoveryAndInjury(
+    'Boundary of Recovery and Injury',
+    3,
+    requirements: <Skill>[hyperactiveFlyingObject],
+  ),
+  boundaryOfFormAndEmptiness('Boundary of Form and Emptiness', 3),
+  meshOfLightAndDarknessInfliction(
+    'Mesh of Light and Darkness: Infliction Chance ↑',
+    3,
+    requirements: <Skill>[meshOfLightAndDarknessParSpdDownSlay],
+  ),
+  quadrupleImperishableNightBarrier(
+    'Boundary "Quadruple Imperishable Night Barrier"',
+    3,
+  ),
+  yakumoRan('Shikigami "Yakumo Ran+"', 3),
+  hyperactiveFlyingObjectGuardPierce(
+    'Hyperactive High Speed Flying Object: Guard Pierce',
+    3,
+    requirements: <Skill>[
+      hyperactiveFlyingObjectRow,
+      hyperactiveFlyingObjectFlierSlay,
+    ],
+  ),
+  boundaryOfWaveAndParticle2(
+    'Boundary of Wave and Particle+',
+    3,
+    requirements: <Skill>[boundaryOfWaveAndParticle],
+  ),
+  boundaryOfMeleeAndDanmakuShare(
+    'Boundary of Melee and Danmaku: 1/4 Party Share',
+    3,
+    requirements: <Skill>[boundaryOfWaveAndParticle, boundaryOfMeleeAndDanmaku],
+  ),
+  boundaryOfMeleeAndDanmaku2(
+    'Boundary of Melee and Danmaku: Effect ↑',
+    5,
+    requirements: <Skill>[boundaryOfMeleeAndDanmaku],
+  ),
+  quadrupleImperishableNightBarrier2(
+    'Quadruple Imperishable Night Barrier: Effect ↑',
+    3,
+    requirements: <Skill>[quadrupleImperishableNightBarrier],
+  ),
+  yakumoYukarisSpiritingAway(
+    '''Evil Spirits "Yakumo Yukari's Spiriting Away"''',
+    3,
+    requirements: <Skill>[quadrupleImperishableNightBarrier, yakumoRan],
+  ),
+  yakumoRanChensStrength(
+    "Yakumo Ran+: Chen's Strength",
+    3,
+    requirements: <Skill>[yakumoRan],
+  ),
+  boundaryOfRecoveryAndInjury2(
+    'Boundary of Recovery and Injury: Effect ↑',
+    3,
+    requirements: <Skill>[boundaryOfRecoveryAndInjury],
+  ),
+  boundaryOfRecoveryAndInjuryShare(
+    'Boundary of Recovery and Injury: 1/4 Party Share',
+    2,
+    requirements: <Skill>[boundaryOfFormAndEmptiness],
+  ),
+  boundaryOfFormAndEmptiness2(
+    'Boundary of Form and Emptiness+',
+    3,
+    requirements: <Skill>[boundaryOfFormAndEmptiness],
+  ),
+  boundaryOfMeleeAndDanmakuShare2(
+    'Boundary of Melee and Danmaku: 1/3 Party Share',
+    2,
+    requirements: <Skill>[boundaryOfMeleeAndDanmakuShare],
+  ),
+  danmakuBarrier(
+    '''Yukari's Arcanum "Danmaku Barrier"''',
+    3,
+    requirements: <Skill>[
+      boundaryOfMeleeAndDanmakuShare,
+      boundaryOfMeleeAndDanmaku2,
+    ],
+  ),
+  quadrupleImperishableNightBarrierOddTurn(
+    'Quadruple Imperishable Night Barrier: Odd Turn Stats ↑',
+    3,
+    requirements: <Skill>[quadrupleImperishableNightBarrier2],
+  ),
+  quadrupleImperishableNightBarrierEvenTurn(
+    'Quadruple Imperishable Night Barrier: Even Turn Damage Taken ↓',
+    3,
+    requirements: <Skill>[quadrupleImperishableNightBarrier2],
+  ),
+  yakumoYukarisSpiritingAwayDelay(
+    "Yakumo Yukari's Spiriting Away: Delay ↓",
+    2,
+    requirements: <Skill>[yakumoYukarisSpiritingAway],
+  ),
+  yakumoRanRansStrength(
+    "Yakumo Ran+: Ran's Strength",
+    3,
+    requirements: <Skill>[yakumoRanChensStrength],
+  ),
+  objectiveBarrier(
+    'Barrier "Objective Barrier"',
+    3,
+    requirements: <Skill>[
+      boundaryOfRecoveryAndInjury2,
+      boundaryOfRecoveryAndInjuryShare,
+    ],
+  ),
+  boundaryOfRecoveryAndInjuryShare2(
+    'Boundary of Recovery and Injury: 1/3 Party Share',
+    2,
+    requirements: <Skill>[boundaryOfRecoveryAndInjuryShare],
+  ),
+  yakumoHousehold2(
+    'Yakumo Household+',
+    2,
+    requirements: <Skill>[yakumoHousehold],
+  ),
+  boundaryOfWaveAndParticle3(
+    'Boundary of Wave and Particle++',
+    3,
+    requirements: <Skill>[boundaryOfWaveAndParticle2],
+  ),
+  boundaryOfMeleeAndDanmakuShare3(
+    'Boundary of Melee and Danmaku: 1/2 Party Share',
+    2,
+    requirements: <Skill>[
+      boundaryOfWaveAndParticle,
+      boundaryOfMeleeAndDanmakuShare2,
+    ],
+  ),
+  danmakuBarrier2nTurnModulo(
+    'Danmaku Barrier: 2n Turn Modulo',
+    4,
+    requirements: <Skill>[danmakuBarrier],
+  ),
+  quadrupleImperishableNightBarrierOddTurn2(
+    'Quadruple Imperishable Night Barrier: Odd Turn Stats ↑+',
+    3,
+    requirements: <Skill>[quadrupleImperishableNightBarrierOddTurn],
+  ),
+  yakumoYukarisSpiritingAwayTurnsToMpCostDown(
+    "Yakumo Yukari's Spiriting Away: Turns to MP Cost ↓",
+    3,
+    requirements: <Skill>[yakumoYukarisSpiritingAway],
+  ),
+  yakumoYukarisSpiritingAwayDelay2(
+    "Yakumo Yukari's Spiriting Away: Delay ↓+",
+    2,
+    requirements: <Skill>[yakumoYukarisSpiritingAwayDelay],
+  ),
+  yakumoRanYakumoHouseholdsBigBrawl(
+    "Yakumo Ran+: Yakumo Household's Big Brawl",
+    5,
+    requirements: <Skill>[yakumoRanRansStrength],
+  ),
+  objectiveBarrier2nTurnModulo(
+    'Objective Barrier: 2n Turn Modulo',
+    4,
+    requirements: <Skill>[objectiveBarrier],
+  ),
+  boundaryOfRecoveryAndInjuryShare3(
+    'Boundary of Recovery and Injury: 1/2 Party Share',
+    2,
+    requirements: <Skill>[
+      boundaryOfRecoveryAndInjuryShare2,
+      boundaryOfFormAndEmptiness,
+    ],
+  ),
+  boundaryOfFormAndEmptiness3(
+    'Boundary of Form and Emptiness++',
+    3,
+    requirements: <Skill>[boundaryOfFormAndEmptiness2],
+  ),
+  danmakuBarrierMpCostDown(
+    'Danmaku Barrier: MP Cost ↓',
+    3,
+    requirements: <Skill>[danmakuBarrier],
+  ),
+  quadrupleImperishableNightBarrierEvenTurn2(
+    'Quadruple Imperishable Night Barrier: Even Turn Damage Taken ↓+',
+    3,
+    requirements: <Skill>[
+      quadrupleImperishableNightBarrierEvenTurn,
+    ],
+  ),
+  yakumoYukarisSpiritingAwaySelfSpiritingAway(
+    "Yakumo Yukari's Spiriting Away: Self-Spiriting Away",
+    2,
+    requirements: <Skill>[yakumoYukarisSpiritingAwayDelay2],
+  ),
+  objectiveBarrierMpCostDown(
+    'Objective Barrier: MP Cost ↓',
+    3,
+    requirements: <Skill>[objectiveBarrier],
   );
 
   @override
