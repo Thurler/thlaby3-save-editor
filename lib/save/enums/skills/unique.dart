@@ -1661,6 +1661,218 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     2,
     requirements: <Skill>[perfectFreezeSpdDownSlay],
   ),
+  // Keine skills
+  jewelsDivineProtection("Jewel's Divine Protection", 3),
+  oldHistory('''Old History "Untrodden Land's History"''', 3),
+  immovable('Immovable', 3),
+  historiansPointer("Historian's Pointer", 3),
+  swordsDivineProtection(
+    "Sword's Divine Protection",
+    3,
+    requirements: <Skill>[jewelsDivineProtection],
+  ),
+  jewelsDivineProtectionDuration(
+    "Jewel's Divine Protection: Self-Use Duration ↑",
+    3,
+    requirements: <Skill>[jewelsDivineProtection],
+  ),
+  nextHistory('Next History "New History of Fantasy"', 3),
+  organizedFormation(
+    'Organized Formation',
+    2,
+    requirements: <Skill>[immovable],
+  ),
+  swordsDivineProtectionDuration(
+    "Sword's Divine Protection: Self-Use Duration ↑",
+    2,
+    requirements: <Skill>[swordsDivineProtection],
+  ),
+  countrySignJewel(
+    'Country Sign "Three Sacred Treasures - Jewel"',
+    4,
+  ),
+  untroddenLandsHistoryDefMnd(
+    "Untrodden Land's History: DEF/MND ↑ Augment",
+    2,
+    requirements: <Skill>[oldHistory],
+  ),
+  wereHakutakuForewarning('Were-Hakutaku Forewarning', 3),
+  newHistoryOfFantasyAtkMag(
+    'New History of Fantasy: ATK/MAG ↑ Augment',
+    2,
+    requirements: <Skill>[nextHistory],
+  ),
+  immovable2('Immovable+', 3, requirements: <Skill>[immovable]),
+  flawlessLeadership(
+    'Flawless Leadership',
+    4,
+    requirements: <Skill>[organizedFormation],
+  ),
+  historiansPointer2(
+    "Historian's Pointer+",
+    4,
+    requirements: <Skill>[historiansPointer],
+  ),
+  swordsDivineAutoProtection(
+    "Sword's Divine Auto-Protection",
+    3,
+    requirements: <Skill>[swordsDivineProtectionDuration],
+  ),
+  countrySignSword(
+    'Country Sign "Three Sacred Treasures - Sword"',
+    4,
+    requirements: <Skill>[swordsDivineProtection],
+  ),
+  jewelsDivineAutoProtection(
+    "Jewel's Divine Auto-Protection",
+    3,
+    requirements: <Skill>[jewelsDivineProtectionDuration],
+  ),
+  untroddenLandsHistorySelfRecovery(
+    "Untrodden Land's History: Self-Recovery",
+    3,
+    requirements: <Skill>[untroddenLandsHistoryDefMnd],
+  ),
+  organizedFormation2(
+    'Organized Formation+',
+    2,
+    requirements: <Skill>[organizedFormation],
+  ),
+  alongsideMokou('Alongside Mokou', 3),
+  historyAccumulationSword(
+    'History Accumulation - Sword',
+    4,
+    requirements: <Skill>[countrySignSword],
+  ),
+  mirrorsDivineProtection(
+    "Mirror's Divine Protection",
+    3,
+    requirements: <Skill>[countrySignSword, countrySignJewel],
+  ),
+  historyAccumulationJewel(
+    'History Accumulation - Jewel',
+    4,
+    requirements: <Skill>[countrySignJewel],
+  ),
+  untroddenLandsHistory2(
+    "Untrodden Land's History: POW ↑",
+    2,
+    requirements: <Skill>[untroddenLandsHistorySelfRecovery],
+  ),
+  wereHakutakuTransformation(
+    'Were-Hakutaku Transformation',
+    3,
+    requirements: <Skill>[wereHakutakuForewarning],
+  ),
+  newHistoryOfFantasyFrontlineRecovery(
+    'New History of Fantasy: Frontline Recovery',
+    3,
+    requirements: <Skill>[wereHakutakuForewarning, newHistoryOfFantasyAtkMag],
+  ),
+  unrestrainableUrge(
+    'Unrestrainable Urge',
+    3,
+    requirements: <Skill>[wereHakutakuForewarning, immovable2],
+  ),
+  flawlessLeadership2(
+    'Flawless Leadership+',
+    5,
+    requirements: <Skill>[organizedFormation2, flawlessLeadership],
+  ),
+  historiansPointer3(
+    "Historian's Pointer++",
+    5,
+    requirements: <Skill>[historiansPointer2],
+  ),
+  swordsDivineAutoProtection2(
+    "Sword's Divine Auto-Protection+",
+    2,
+    requirements: <Skill>[swordsDivineAutoProtection],
+  ),
+  countrySignMirror(
+    'Country Sign "Three Sacred Treasures - Mirror"',
+    4,
+    requirements: <Skill>[
+      historyAccumulationSword,
+      mirrorsDivineProtection,
+      historyAccumulationJewel,
+    ],
+  ),
+  jewelsDivineAutoProtection2(
+    "Jewel's Divine Auto-Protection+",
+    2,
+    requirements: <Skill>[jewelsDivineAutoProtection],
+  ),
+  legendOfGensokyo(
+    'Nil History "Legend of Gensokyo"',
+    4,
+    requirements: <Skill>[
+      untroddenLandsHistorySelfRecovery,
+      wereHakutakuTransformation,
+    ],
+  ),
+  newHistoryOfFantasy2(
+    'New History of Fantasy: Damage Multiplier ↑',
+    2,
+    requirements: <Skill>[newHistoryOfFantasyFrontlineRecovery],
+  ),
+  perfectFormation(
+    'Perfect Formation',
+    4,
+    requirements: <Skill>[organizedFormation2],
+  ),
+  alongsideMokou2(
+    'Alongside Mokou+',
+    2,
+    requirements: <Skill>[alongsideMokou],
+  ),
+  grandHistorySword(
+    'Grand History - Sword',
+    3,
+    requirements: <Skill>[historyAccumulationSword],
+  ),
+  grandHistoryJewel(
+    'Grand History - Jewel',
+    3,
+    requirements: <Skill>[historyAccumulationJewel],
+  ),
+  mitoNoMitsukuni(
+    'Hollyhock Sign "Mito no Mitsukuni"',
+    4,
+    requirements: <Skill>[
+      wereHakutakuTransformation,
+      newHistoryOfFantasyFrontlineRecovery,
+    ],
+  ),
+  historiansPointer4(
+    "Historian's Pointer+++",
+    6,
+    requirements: <Skill>[historiansPointer3],
+  ),
+  swordsSharedDivineAutoProtection(
+    "Sword's Shared Divine Auto-Protection+",
+    3,
+    requirements: <Skill>[swordsDivineAutoProtection2],
+  ),
+  historyEatingHalfBeast(
+    'History-Eating Half-Beast',
+    4,
+    requirements: <Skill>[
+      grandHistorySword,
+      countrySignMirror,
+      grandHistoryJewel,
+    ],
+  ),
+  jewelsSharedDivineAutoProtection(
+    "Jewel's Shared Divine Auto-Protection+",
+    3,
+    requirements: <Skill>[jewelsDivineAutoProtection2],
+  ),
+  amaterasu(
+    'Light Sign "Amaterasu"',
+    5,
+    requirements: <Skill>[legendOfGensokyo, mitoNoMitsukuni],
+  ),
   // Doremy skills
   rulerOfDreams('Ruler of Dreams', 3),
   deepNavyRunawayDream(
