@@ -1045,7 +1045,171 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
       highOpticalCamouflage,
       exhaustIncineratorRowModification,
     ],
-  );
+  ),
+  // Aya skills
+  gustFan('Gust Fan', 3),
+  tenguWind("Tengu's Wind", 3),
+  teachingsGensokyosFastest("Teaching of Gensokyo's Fastest", 3),
+  agility('Agility', 3),
+  abilityManipulateWind('Ability to Manipulate Wind', 3),
+  windGodGirl('Gust "Wind God Girl"', 3),
+  guidepostDivineGrandsonsAdvent(
+    '''Tornado "Guidepost for the Divine Grandson's Advent"''',
+    3,
+    requirements: <Skill>[tenguWind],
+  ),
+  tenguWind2("Tengu's Wind: Effect ↑", 3, requirements: <Skill>[tenguWind]),
+  sarutahikosGuidance(
+    "Squall 'Sarutahiko's Guidance'",
+    3,
+    requirements: <Skill>[tenguWind],
+  ),
+  extraStep('Extra Step', 3),
+  evasiveAction('Evasive Action', 3),
+  abilityManipulateWind2(
+    'Ability to Manipulate Wind+',
+    3,
+    requirements: <Skill>[abilityManipulateWind],
+  ),
+  galeFan('Gale Fan', 3, requirements: <Skill>[gustFan]),
+  windGodGirlSpd(
+    'Wind God Girl: SPD ↑ Augment',
+    3,
+    requirements: <Skill>[windGodGirl],
+  ),
+  windGodGirlEva(
+    'Wind God Girl: EVA ↑ Augment',
+    3,
+    requirements: <Skill>[windGodGirl],
+  ),
+  dashingGrace('Dashing Grace', 3, requirements: <Skill>[tenguWind]),
+  teachingsGensokyosFastest2(
+    "Teachings of Gensokyo's Fastest+",
+    3,
+    requirements: <Skill>[teachingsGensokyosFastest],
+  ),
+  tenguOfGales(
+    'Tengu of Gales',
+    3,
+    requirements: <Skill>[galeFan, windGodGirlSpd],
+  ),
+  peerlessWindGod('Peerless Wind God', 3, requirements: <Skill>[windGodGirl]),
+  guidepostDivineGrandsonsAdvent2(
+    "Guidepost for the Divine Grandson's Advent: Effect ↑",
+    3,
+    requirements: <Skill>[guidepostDivineGrandsonsAdvent],
+  ),
+  sarutahikosTwinklingEyes(
+    "Sarutahiko's Guidance: Sarutahiko's Twinkling Eyes",
+    3,
+    requirements: <Skill>[sarutahikosGuidance],
+  ),
+  extraStep2('Extra Step+', 3, requirements: <Skill>[extraStep]),
+  evasiveAction2('Evasive Action+', 3, requirements: <Skill>[evasiveAction]),
+  abilityManipulateWindBoost(
+    'Ability to Manipulate Wind: Boost Conversion',
+    3,
+    requirements: <Skill>[abilityManipulateWind2],
+  ),
+  tempestFan(
+    'Tempest Fan',
+    3,
+    requirements: <Skill>[abilityManipulateWind2, galeFan],
+  ),
+  peerlessWindGodSpd(
+    'Peerless Wind God: SPD ↑ Augment',
+    3,
+    requirements: <Skill>[peerlessWindGod],
+  ),
+  peerlessWindGodEva(
+    'Peerless Wind God: EVA ↑ Augment',
+    3,
+    requirements: <Skill>[peerlessWindGod],
+  ),
+  divineGrandsonsAdvent(
+    '''Blockade Sign "Divine Grandson's Advent"''',
+    3,
+    requirements: <Skill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
+  ),
+  gracefulEvasion('Graceful Evasion', 3, requirements: <Skill>[dashingGrace]),
+  nanaatasRedNose(
+    "Sarutahiko's Guidance: Nanaata's Red Nose",
+    3,
+    requirements: <Skill>[sarutahikosTwinklingEyes],
+  ),
+  teachingsGensokyosFastest3(
+    "Teachings of Gensokyo's Fastest++",
+    3,
+    requirements: <Skill>[teachingsGensokyosFastest2],
+  ),
+  agility2('Agility+', 3, requirements: <Skill>[agility]),
+  windGodAvatar('Wind God Avatar', 3, requirements: <Skill>[peerlessWindGod]),
+  dashingGrace2('Dashing Grace+', 3, requirements: <Skill>[dashingGrace]),
+  gracefulWingwork('Graceful Wingwork', 3, requirements: <Skill>[dashingGrace]),
+  extraStep3('Extra Step++', 3, requirements: <Skill>[extraStep2]),
+  evasiveAction3('Evasive Action++', 3, requirements: <Skill>[evasiveAction2]),
+  tenguOfTempests(
+    'Tengu of Tempests',
+    3,
+    requirements: <Skill>[abilityManipulateWindBoost, tempestFan],
+  ),
+  flutteringYoukaiFan(
+    'Fluttering Youkai Fan',
+    3,
+    requirements: <Skill>[abilityManipulateWindBoost, tempestFan],
+  ),
+  clothedInWindstorms(
+    'Clothed in Windstorms',
+    3,
+    requirements: <Skill>[windGodAvatar],
+  ),
+  crossroadsOfHeaven(
+    'Crossroad Sign "Crossroads of Heaven"',
+    3,
+    requirements: <Skill>[windGodAvatar, divineGrandsonsAdvent],
+  ),
+  shiningAdventPath(
+    "Divine Grandson's Advent: Shining Advent Path",
+    3,
+    requirements: <Skill>[divineGrandsonsAdvent],
+  ),
+  gracefulEvasion2(
+    'Graceful Evasion+',
+    3,
+    requirements: <Skill>[gracefulEvasion],
+  ),
+  guidingOnesBack(
+    "Sarutahiko's Guidance: Guiding One's Back",
+    3,
+    requirements: <Skill>[nanaatasRedNose],
+  ),
+  teachingsGensokyosFastest4(
+    "Teachings of Gensokyo's Fastest+++",
+    3,
+    requirements: <Skill>[teachingsGensokyosFastest3],
+  ),
+  crossroadsOfHeavenEyesOfHeaven(
+    'Crossroads of Heaven: Eyes of Heaven',
+    3,
+    requirements: <Skill>[flutteringYoukaiFan, crossroadsOfHeaven],
+  ),
+  crossroadsOfHeavenSoaringEightBoatJump(
+    'Crossroads of Heaven: Soaring Eight-Boat Jump',
+    3,
+    requirements: <Skill>[crossroadsOfHeaven, shiningAdventPath],
+  ),
+  takingFantasyByStorm(
+    'Taking Fantasy by Storm',
+    3,
+    requirements: <Skill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
+  ),
+  gracefulWingwork2(
+    'Graceful Wingwork+',
+    3,
+    requirements: <Skill>[gracefulWingwork],
+  ),
+  // Patchouli skills
+  a('a', 2);
 
   @override
   final String prettyName;
