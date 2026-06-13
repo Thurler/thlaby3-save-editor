@@ -1,6 +1,7 @@
 import 'package:thlaby3_save_editor/save/enums/skills/ailment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/buff.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/element.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/focus_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
@@ -22,6 +23,8 @@ mixin SkillAugmentSkill on UniqueSkill {
   AugmentRange? get augmentRange;
 
   static List<SkillAugmentSkill> get values => const <SkillAugmentSkill>[
+    // Generic skill augments
+    quickCharge2,
     // Reimu skill augments
     armoredYinYangOrb2,
     armoredYinYangOrbBoost,
@@ -198,9 +201,22 @@ mixin KoReactionAugment on SkillAugmentSkill implements KoReactioner {
   KoReactioner get baseSkill;
 }
 
+/// A mixin for augments that change a focus reaction's effect
+mixin FocusReactionAugment on SkillAugmentSkill implements FocusReactioner {
+  @override
+  FocusReactioner get baseSkill;
+}
+
 /// A mixin for augments that change a percent heal skill's potency
 mixin PercentHealAugment on SkillAugmentSkill implements PercentHealer {
   /// How much the heal percent will be increased by
   @override
   double get healPercent;
+}
+
+/// A mixin for augments that change a percent MP heal skill's potency
+mixin PercentMpHealAugment on SkillAugmentSkill implements PercentMpHealer {
+  /// How much the heal percent will be increased by
+  @override
+  double get mpHealPercent;
 }

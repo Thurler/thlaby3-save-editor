@@ -8,6 +8,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
@@ -1213,6 +1214,9 @@ class _ReimuProtagonistPrivileges
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get atkBuff => 12;
 
   @override
@@ -1258,6 +1262,9 @@ class _ReimuProtagonistPrivileges2
 
   @override
   KoTriggerRange get triggerRange => baseSkill.triggerRange;
+
+  @override
+  EffectRequirement? get reactionRequirement => null;
 
   @override
   double get atkBuff => 8;
@@ -1318,6 +1325,9 @@ class _ReimuProtagonistPrivilegesPermanent
   KoTriggerRange get triggerRange => baseSkill.triggerRange;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get atkBuff => 4;
 
   @override
@@ -1374,6 +1384,9 @@ class _ReimuProtagonistPrivilegesShare
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get atkBuff => 12;
 
   @override
@@ -1408,6 +1421,9 @@ class _FinalPrayer implements KoReactioner, PercentHealer {
   KoEffectRange get effectRange => KoEffectRange.frontlineMinusSelf;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get healPercent => 50;
 }
 
@@ -1436,6 +1452,9 @@ class _FinalPrayer2 implements KoReactionAugment, PercentHealAugment {
   KoEffectRange get effectRange => baseSkill.effectRange;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get healPercent => 50;
 }
 
@@ -1458,10 +1477,13 @@ class _FinalPrayerRange implements KoReactioner, PercentHealer {
   KoEffectRange get effectRange => KoEffectRange.backline;
 
   @override
+  EffectRequirement? get reactionRequirement => null;
+
+  @override
   double get healPercent => 33;
 }
 
-class _TrueFinalPrayer implements KoReactioner, PercentHealer {
+class _TrueFinalPrayer implements KoReactioner, PercentHealer, TpConsumer {
   const _TrueFinalPrayer();
 
   @override
@@ -1481,5 +1503,11 @@ class _TrueFinalPrayer implements KoReactioner, PercentHealer {
   KoEffectRange get effectRange => KoEffectRange.self;
 
   @override
+  EffectRequirement? get reactionRequirement => const TpCountRequirement(10);
+
+  @override
   double get healPercent => 100;
+
+  @override
+  int get tpConsumed => 10;
 }

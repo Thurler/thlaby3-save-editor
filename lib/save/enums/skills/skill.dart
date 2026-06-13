@@ -22,6 +22,24 @@ abstract interface class Skill {
 /// requirements
 abstract interface class EffectRequirement {}
 
+/// A requirement that checks if the current MP count is below a percent of the
+/// character's max MP
+class BelowMpPercentRequirement implements EffectRequirement {
+  /// The percent of max MP used to trigger
+  final int mpPercent;
+
+  const BelowMpPercentRequirement(this.mpPercent);
+}
+
+/// A requirement that checks if the character has at least [tpCount] TP
+/// available
+class TpCountRequirement implements EffectRequirement {
+  /// The TP count needed to trigger the effect
+  final int tpCount;
+
+  const TpCountRequirement(this.tpCount);
+}
+
 /// A requirement that checks if the current turn count is at least a specific
 /// value
 class TurnCountRequirement implements EffectRequirement {

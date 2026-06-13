@@ -300,7 +300,8 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     requirements: <Skill>[relativePsychology],
   ),
   abilityUnbridled('Ability Unbridled', 3),
-  quickCharge('Quick Charge', 3),
+  // Copies from focus_reaction.dart
+  //quickCharge('Quick Charge', 3),
   renkosEyes("Renko's Eyes", 3),
   noviceBarrierRecovery2(
     'Novice Handmade Barrier: Recovery ↑',
@@ -365,7 +366,7 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     3,
     requirements: <Skill>[abilityUnbridled],
   ),
-  // Copies from Reimu - defined in focus_reaction.dart
+  // Copies from focus_reaction.dart
   //focusedRecitation(
   //  'Focused Recitation',
   //  3,
@@ -391,7 +392,8 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     3,
     requirements: <Skill>[abilityUnbridledGuardPierce],
   ),
-  quickCharge2('Quick Charge+', 2, requirements: <Skill>[quickCharge]),
+  // Copies from focus_reaction.dart
+  //quickCharge2('Quick Charge+', 2, requirements: <Skill>[quickCharge]),
   noviceBarrierKnowledge(
     "Novice Handmade Barrier: Dr. Latency's Knowledge",
     5,
@@ -653,7 +655,191 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     requirements: <Skill>[masterfulQigongEnvelopment],
   ),
   // Alice skills
-  a('a', 2);
+  manipulatePuppet('Puppeteer Sign "Manipulate Puppet"', 3),
+  artfulSacrifice('Magic Sign "Artful Sacrifice"', 3),
+  shanghaiDolls('Malediction "Magically Luminous Shanghai Dolls"', 3),
+  tripwire('Focus Power "Tripwire"', 3),
+  artfulSacrificeAcc(
+    'Artful Sacrifice: ACC Modifier ↑',
+    3,
+    requirements: <Skill>[artfulSacrifice],
+  ),
+  artfulSacrificeGunpowder(
+    'Artful Sacrifice: Gunpowder-Lobbing Witch',
+    3,
+    requirements: <Skill>[artfulSacrifice],
+  ),
+  shanghaiDollsHvy(
+    'Magically Luminous Shanghai Dolls: HVY Affix',
+    3,
+    requirements: <Skill>[shanghaiDolls],
+  ),
+  inorganicExpert('Inorganic Expert', 3),
+  manipulatePuppet2(
+    'Manipulate Puppet: POW ↑',
+    3,
+    requirements: <Skill>[manipulatePuppet],
+  ),
+  mercilessPursuit(
+    'Merciless Pursuit',
+    3,
+    requirements: <Skill>[manipulatePuppet],
+  ),
+  hangedHouraiDolls(
+    'Malediction "Hanged Hourai Dolls"',
+    3,
+    requirements: <Skill>[shanghaiDolls],
+  ),
+  dollGuard('Doll Guard', 3),
+  inorganicExpert2(
+    'Inorganic Expert+',
+    3,
+    requirements: <Skill>[inorganicExpert],
+  ),
+  // Copies from focus_reaction.dart
+  //quickCharge('Quick Charge', 3),
+  mAliceCannonAlice('MAlice Cannon (Alice)', 3),
+  manipulatePuppetShanghaiOption(
+    'Manipulate Puppet: Shanghai Dolls Option',
+    3,
+    requirements: <Skill>[manipulatePuppet2],
+  ),
+  manipulatePuppetDuration(
+    'Manipulate Puppet: Duration ↑',
+    3,
+    requirements: <Skill>[manipulatePuppet2],
+  ),
+  tripwireWireArt('Tripwire: Wire Art', 3, requirements: <Skill>[tripwire]),
+  tripwire2(
+    'Tripwire: Damage Multiplier ↑',
+    3,
+    requirements: <Skill>[tripwire],
+  ),
+  soldierOfCross(
+    'Sword Sign "Soldier of Cross"',
+    3,
+    requirements: <Skill>[inorganicExpert],
+  ),
+  efficientPuppeteering(
+    'Efficient Puppeteering',
+    3,
+    requirements: <Skill>[quickCharge, mAliceCannonAlice],
+  ),
+  manipulatePuppetHouraiOption(
+    'Manipulate Puppet: Hanged Hourai Dolls Option',
+    3,
+    requirements: <Skill>[manipulatePuppetShanghaiOption],
+  ),
+  mercilessPursuit2(
+    'Merciless Pursuit+',
+    2,
+    requirements: <Skill>[mercilessPursuit],
+  ),
+  littleLegion('War Sign "Little Legion"', 3, requirements: <Skill>[tripwire2]),
+  tripwireAilmentBoost(
+    'Tripwire: Ailment Boost',
+    3,
+    requirements: <Skill>[tripwire2],
+  ),
+  suicideSquad(
+    'Suicide Squad',
+    4,
+    requirements: <Skill>[tripwire, artfulSacrifice, hangedHouraiDolls],
+  ),
+  dollCrusader('Doll Crusader', 3, requirements: <Skill>[dollGuard]),
+  inorganicExpertDamageTaken(
+    'Inorganic Expert: Damage Taken ↓ Augment',
+    3,
+    requirements: <Skill>[inorganicExpert2],
+  ),
+  manipulatePuppetMpCut(
+    'Manipulate Puppet: MP Cut',
+    3,
+    requirements: <Skill>[manipulatePuppetShanghaiOption],
+  ),
+  manipulatePuppetDuration2(
+    'Manipulate Puppet: Duration ↑+',
+    3,
+    requirements: <Skill>[manipulatePuppetDuration],
+  ),
+  tripwireHighWireArt(
+    'Tripwire: Highly-Skilled Wire Art',
+    3,
+    requirements: <Skill>[tripwireWireArt],
+  ),
+  littleLegionDamageRange(
+    'Little Legion: Damage Range ↑',
+    3,
+    requirements: <Skill>[littleLegion],
+  ),
+  suicideSquadSize(
+    'Suicide Squad: Squad Size ↑',
+    3,
+    requirements: <Skill>[suicideSquad],
+  ),
+  returnInanimateness('Magic Puppeteering "Return Inanimateness"', 3),
+  dollGuard2('Doll Guard+', 3, requirements: <Skill>[dollCrusader]),
+  manipulatePuppetTripwireOption(
+    'Manipulate Puppet: Tripwire Option',
+    3,
+    requirements: <Skill>[manipulatePuppetHouraiOption],
+  ),
+  ailmentChance(
+    'Ailment Chance ↑',
+    5,
+    requirements: <Skill>[mercilessPursuit2],
+  ),
+  littleLegionAtkAffix(
+    'Little Legion: ATK ↓ Affix',
+    3,
+    requirements: <Skill>[littleLegion],
+  ),
+  returnInanimatenessBombLobbing(
+    'Return Inanimateness: Bomb-Lobbing Witch',
+    3,
+    requirements: <Skill>[returnInanimateness],
+  ),
+  dollCrusader2('Doll Crusader+', 3, requirements: <Skill>[dollCrusader]),
+  guardianMarionette(
+    'Knight Sign "Guardian Marionette"',
+    3,
+    requirements: <Skill>[soldierOfCross],
+  ),
+  // Copies from focus_reaction.dart
+  //quickCharge2(
+  //  'Quick Charge+',
+  //  2,
+  //  requirements: <Skill>[quickCharge],
+  //),
+  mAliceCannonAlice2(
+    'MAlice Cannon (Alice)+',
+    3,
+    requirements: <Skill>[mAliceCannonAlice],
+  ),
+  manipulatePuppetOptionChance(
+    'Manipulate Puppet: Option Chance ↑',
+    3,
+    requirements: <Skill>[manipulatePuppetMpCut],
+  ),
+  dollsWar(
+    '''War Puppeteering "Dolls' War"''',
+    3,
+    requirements: <Skill>[littleLegionDamageRange, suicideSquadSize],
+  ),
+  suicideSquadSize2(
+    'Suicide Squad: Squad Size ↑+',
+    3,
+    requirements: <Skill>[suicideSquadSize],
+  ),
+  efficientPuppeteering2(
+    'Efficient Puppeteering+',
+    5,
+    requirements: <Skill>[
+      quickCharge2,
+      efficientPuppeteering,
+      mAliceCannonAlice2,
+    ],
+  );
 
   @override
   final String prettyName;
