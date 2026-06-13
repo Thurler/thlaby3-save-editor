@@ -1209,6 +1209,255 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     requirements: <Skill>[gracefulWingwork],
   ),
   // Patchouli skills
+  philosopherStone("Philosopher's Stone", 3),
+  agniShine('Fire Sign "Agni Shine"', 3),
+  gingerGust('Metal Earth Sign "Ginger Gust"', 3),
+  metalFatigue('Metal Sign "Metal Fatigue"', 3),
+  philosopherStoneInitiative(
+    "Philosopher's Stone - Initiative Type",
+    3,
+    requirements: <Skill>[philosopherStone],
+  ),
+  philosopherStoneSustained(
+    "Philosopher's Stone - Sustained Type",
+    3,
+    requirements: <Skill>[philosopherStone],
+  ),
+  fundamentalMagicImprovements(
+    'Fundamental Magic Improvements',
+    3,
+    requirements: <Skill>[philosopherStone],
+  ),
+  agniShine2(
+    'Agni Shine: POW ↑',
+    3,
+    requirements: <Skill>[agniShine],
+  ),
+  princessUndine('Water Sign "Princess Undine"', 3),
+  gingerGust2(
+    'Ginger Gust: POW ↑',
+    3,
+    requirements: <Skill>[gingerGust],
+  ),
+  satelliteHimawari('Moon Wood Sign "Satellite Himawari"', 3),
+  metalFatigue2(
+    'Metal Fatigue: POW ↑',
+    3,
+    requirements: <Skill>[metalFatigue],
+  ),
+  philosopherStoneProtective(
+    "Philosopher's Stone - Protective Type",
+    3,
+    requirements: <Skill>[
+      philosopherStoneInitiative,
+      philosopherStoneSustained,
+    ],
+  ),
+  philosopherStoneHighLevel(
+    "Philosopher's Stone - High-Level Elements",
+    3,
+    requirements: <Skill>[philosopherStone],
+  ),
+  agniShineAtk(
+    'Agni Shine: ATK ↑ Augment',
+    3,
+    requirements: <Skill>[agniShine2],
+  ),
+  phlogisticRain(
+    'Water Fire Sign "Phlogistic Rain"',
+    3,
+    requirements: <Skill>[agniShine2],
+  ),
+  princessUndine2(
+    'Princess Undine: POW ↑',
+    3,
+    requirements: <Skill>[princessUndine],
+  ),
+  gingerGustSpd(
+    'Ginger Gust: SPD ↑ Augment',
+    3,
+    requirements: <Skill>[gingerGust2],
+  ),
+  sylphyHorn(
+    'Wood Sign "Sylphy Horn"',
+    3,
+    requirements: <Skill>[gingerGust],
+  ),
+  satelliteHimawari2(
+    'Satellite Himawari: POW ↑',
+    3,
+    requirements: <Skill>[satelliteHimawari],
+  ),
+  metalFatigueDef(
+    'Metal Fatigue: DEF ↑ Augment',
+    3,
+    requirements: <Skill>[metalFatigue2],
+  ),
+  silverDragon(
+    'Metal Sign "Silver Dragon"',
+    3,
+    requirements: <Skill>[metalFatigue],
+  ),
+  initiativeTypeImproved(
+    'Initiative Type - Improved Quantity',
+    3,
+    requirements: <Skill>[philosopherStoneInitiative],
+  ),
+  sustainedTypeImproved(
+    'Sustained Type - Improved Quantity',
+    3,
+    requirements: <Skill>[philosopherStoneSustained],
+  ),
+  phlogisticRain2(
+    'Phlogistic Rain: POW ↑',
+    3,
+    requirements: <Skill>[phlogisticRain],
+  ),
+  princessUndineMag(
+    'Princess Undine: MAG ↑ Augment',
+    3,
+    requirements: <Skill>[princessUndine2],
+  ),
+  mercuryPoison(
+    'Metal Water Sign "Mercury Poison"',
+    3,
+    requirements: <Skill>[princessUndine],
+  ),
+  sylphyHorn2(
+    'Sylphy Horn: POW ↑',
+    3,
+    requirements: <Skill>[sylphyHorn],
+  ),
+  satelliteHimawariMnd(
+    'Satellite Himawari: MND ↑ Augment',
+    3,
+    requirements: <Skill>[satelliteHimawari2],
+  ),
+  forestBlaze(
+    'Wood Fire Sign "Forest Blaze"',
+    3,
+    requirements: <Skill>[satelliteHimawari],
+  ),
+  silverDragon2(
+    'Silver Dragon: POW ↑',
+    3,
+    requirements: <Skill>[silverDragon],
+  ),
+  philosopherStoneImprovedProtection(
+    "Philosopher's Stone - Improved Protection",
+    3,
+    requirements: <Skill>[philosopherStoneProtective],
+  ),
+  royalFlare(
+    'Sun Sign "Royal Flare"',
+    3,
+    requirements: <Skill>[philosopherStoneHighLevel],
+  ),
+  silentSelene(
+    'Moon Sign "Silent Selene"',
+    3,
+    requirements: <Skill>[philosopherStoneHighLevel],
+  ),
+  mercuryPoison2(
+    'Mercury Poison: POW ↑',
+    3,
+    requirements: <Skill>[princessUndine2, mercuryPoison],
+  ),
+  forestBlaze2(
+    'Forest Blaze: POW ↑',
+    3,
+    requirements: <Skill>[satelliteHimawari2, forestBlaze],
+  ),
+  protectiveTypeLatest(
+    'Protective Type - Latest Revision',
+    3,
+    requirements: <Skill>[
+      initiativeTypeImproved,
+      philosopherStoneImprovedProtection,
+    ],
+  ),
+  protectiveTypeRecovery(
+    'Protective Type - Recovery Response',
+    3,
+    requirements: <Skill>[
+      philosopherStoneImprovedProtection,
+      sustainedTypeImproved,
+    ],
+  ),
+  sunSignRemnantPower(
+    'Sun Sign - Remnant Power',
+    3,
+    requirements: <Skill>[royalFlare],
+  ),
+  moonSignRemnantPower(
+    'Moon Sign - Remnant Power',
+    3,
+    requirements: <Skill>[silentSelene],
+  ),
+  multiElementCasting(
+    'Multi-Element Casting Efficiency',
+    3,
+    requirements: <Skill>[
+      phlogisticRain2,
+      mercuryPoison2,
+    ],
+  ),
+  compoundMagicImprovements(
+    'Compound Magic Improvements',
+    3,
+    requirements: <Skill>[mercuryPoison2, sylphyHorn2],
+  ),
+  multiElementPrinciples(
+    'Multi-Element Principles',
+    3,
+    requirements: <Skill>[sylphyHorn2, forestBlaze2],
+  ),
+  fiveSeasons(
+    'Five Seasons',
+    3,
+    requirements: <Skill>[forestBlaze2, silverDragon2],
+  ),
+  philosopherStoneSacrificial(
+    "Philosopher's Stone - Sacrificial Type",
+    5,
+    requirements: <Skill>[philosopherStoneImprovedProtection],
+  ),
+  royalDiamondRing(
+    'Sun Moon Sign "Royal Diamond Ring"',
+    3,
+    requirements: <Skill>[sunSignRemnantPower, moonSignRemnantPower],
+  ),
+  fiveSeasonsBuffing(
+    'Five Seasons: Buffing Season',
+    3,
+    requirements: <Skill>[fiveSeasons],
+  ),
+  fiveSeasonsDebuffing(
+    'Five Seasons: Debuffing Season',
+    3,
+    requirements: <Skill>[fiveSeasons],
+  ),
+  sunMoonPersistentBuffing(
+    'Sun & Moon Sign - Persistent Buffing Magic',
+    3,
+    requirements: <Skill>[royalDiamondRing],
+  ),
+  sunMoonEfficientMagic(
+    'Sun & Moon Sign - Efficient Magic',
+    3,
+    requirements: <Skill>[royalDiamondRing],
+  ),
+  moonFireWaterWoodMetal(
+    'Moon/Fire/Water/Wood/Metal Improvements',
+    3,
+    requirements: <Skill>[multiElementCasting, compoundMagicImprovements],
+  ),
+  fiveSeasonsWeekday(
+    'Five Seasons: Weekday Magic Season',
+    3,
+    requirements: <Skill>[fiveSeasons],
+  ),
+  // Cirno skills
   a('a', 2);
 
   @override
