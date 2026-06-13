@@ -1458,6 +1458,210 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     requirements: <Skill>[fiveSeasons],
   ),
   // Cirno skills
+  frostKing('Ice King "Frost King"', 3),
+  icicleFall('Ice Sign "Icicle Fall"', 3),
+  inexhaustibleEnergy('Inexhaustible Energy', 2),
+  icicleFallSpdDownAffix(
+    'Icicle Fall: SPD ↓ Affix',
+    3,
+    requirements: <Skill>[icicleFall],
+  ),
+  tomboyishGirlIce('Tomboyish Girl of Ice', 3),
+  diamondBlizzard(
+    'Snow Sign "Diamond Blizzard"',
+    3,
+    requirements: <Skill>[icicleFall],
+  ),
+  tryTryAgain('Try, Try Again!', 4),
+  abilityManipulateCold('Ability to Manipulate Cold', 3),
+  bondsBakaQuartet('Bonds of the Baka Quartet', 3),
+  autoFrostKing(
+    'Auto Frost King',
+    3,
+    requirements: <Skill>[frostKing],
+  ),
+  icicleFall2(
+    'Icicle Fall: POW ↑',
+    2,
+    requirements: <Skill>[icicleFall, tomboyishGirlIce],
+  ),
+  petalScatteringBlizzardGale(
+    'Petal-Scattering Blizzard Gale',
+    5,
+    requirements: <Skill>[diamondBlizzard, tryTryAgain],
+  ),
+  imFineOnMyOwn("I'm Fine On My Own!", 3),
+  icicleFallSpdDownBoost(
+    'Icicle Fall: SPD ↓ Boost',
+    3,
+    requirements: <Skill>[icicleFallSpdDownAffix],
+  ),
+  superTomboyishGirlIce(
+    'Super Tomboyish Girl of Ice',
+    2,
+    requirements: <Skill>[tomboyishGirlIce],
+  ),
+  diamondBlizzardPar(
+    'Diamond Blizzard: PAR chance ↑',
+    3,
+    requirements: <Skill>[diamondBlizzard],
+  ),
+  tryTryAgain2(
+    'Try, Try Again! ...Again!',
+    3,
+    requirements: <Skill>[tryTryAgain],
+  ),
+  perfectFreeze(
+    'Freeze Sign "Perfect Freeze"',
+    4,
+    requirements: <Skill>[abilityManipulateCold],
+  ),
+  abilityManipulateCold2(
+    'Ability to Manipulate Cold+',
+    2,
+    requirements: <Skill>[abilityManipulateCold],
+  ),
+  freezeAtmosphere(
+    'Freeze Sign "Freeze Atmosphere"',
+    3,
+    requirements: <Skill>[abilityManipulateCold],
+  ),
+  bondsBakaQuartet2(
+    'Bonds of the Baka Quartet+',
+    2,
+    requirements: <Skill>[bondsBakaQuartet],
+  ),
+  frostKingUnendingMonarchy(
+    'Frost King: Unending Monarchy',
+    3,
+    requirements: <Skill>[autoFrostKing],
+  ),
+  frostColumns('Frost Sign "Frost Columns"', 3),
+  absoluteZeroFairy(
+    'Absolute Zero Fairy',
+    2,
+    requirements: <Skill>[icicleFall2, superTomboyishGirlIce],
+  ),
+  swordFreezer(
+    'Ice Sign "Sword Freezer"',
+    4,
+    requirements: <Skill>[superTomboyishGirlIce, diamondBlizzardPar],
+  ),
+  redHotIcySpirit(
+    'Red-Hot Icy Spirit',
+    4,
+    requirements: <Skill>[petalScatteringBlizzardGale],
+  ),
+  inexhaustibleEnergy2(
+    'Inexhaustible Energy+',
+    2,
+    requirements: <Skill>[inexhaustibleEnergy],
+  ),
+  abilityManipulateColdBoost(
+    'Ability to Manipulate Cold: Boost Conversion',
+    2,
+    requirements: <Skill>[abilityManipulateCold2],
+  ),
+  imFineOnMyOwn2(
+    "I'm Fine On My Own!+",
+    2,
+    requirements: <Skill>[imFineOnMyOwn],
+  ),
+  icicleFallSpdDownBoost2(
+    'Icicle Fall: SPD ↓ Boost+',
+    3,
+    requirements: <Skill>[icicleFallSpdDownBoost],
+  ),
+  iceFairyFreezingSkills(
+    "Ice Fairy's Freezing Skills",
+    4,
+    requirements: <Skill>[absoluteZeroFairy],
+  ),
+  swordFreezerGuardPierce(
+    'Sword Freezer: Guard Pierce',
+    2,
+    requirements: <Skill>[swordFreezer],
+  ),
+  stubbornTilTheEnd(
+    "Stubborn 'Til the End",
+    6,
+    requirements: <Skill>[tryTryAgain2],
+  ),
+  perfectFreeze2(
+    'Perfect Freeze: POW ↑',
+    2,
+    requirements: <Skill>[perfectFreeze],
+  ),
+  bondsBakaQuartet3(
+    'Bonds of the Baka Quartet++',
+    2,
+    requirements: <Skill>[bondsBakaQuartet2],
+  ),
+  frostColumnsUnmeltingIcicles(
+    'Frost Columns: Unmelting Icicles',
+    3,
+    requirements: <Skill>[
+      frostKingUnendingMonarchy,
+      frostColumns,
+      icicleFallSpdDownBoost2,
+    ],
+  ),
+  iceFairyAcrobaticSkills(
+    "Ice Fairy's Acrobatic Skills",
+    3,
+    requirements: <Skill>[absoluteZeroFairy],
+  ),
+  swordFreezerParSpdDownSlay(
+    'Sword Freezer: PAR+SPD ↓ Slay',
+    3,
+    requirements: <Skill>[swordFreezerGuardPierce],
+  ),
+  persistentSpirit(
+    'Persistent Spirit',
+    3,
+    requirements: <Skill>[redHotIcySpirit],
+  ),
+  perfectFreezeSpdDownChanceUp(
+    'Perfect Freeze: SPD ↓ Chance ↑',
+    3,
+    requirements: <Skill>[perfectFreeze2],
+  ),
+  perfectFreezeSpdDownSlay(
+    'Perfect Freeze: SPD ↓ Slay',
+    2,
+    requirements: <Skill>[perfectFreeze2],
+  ),
+  imFineOnMyOwn3(
+    "I'm Fine On My Own!++",
+    2,
+    requirements: <Skill>[imFineOnMyOwn2],
+  ),
+  proofOfTheStrongest(
+    'Proof of the Strongest',
+    5,
+    requirements: <Skill>[icicleFallSpdDownBoost2],
+  ),
+  absoluteZeroQueen(
+    'Absolute Zero Queen',
+    3,
+    requirements: <Skill>[iceFairyAcrobaticSkills, iceFairyFreezingSkills],
+  ),
+  swordFreezerBlizzardBladedance(
+    'Sword Freezer: Blizzard Bladedance',
+    5,
+    requirements: <Skill>[swordFreezerParSpdDownSlay],
+  ),
+  perfectFreezeAbsoluteStillness(
+    'Perfect Freeze: Absolute Stillness',
+    3,
+    requirements: <Skill>[perfectFreezeSpdDownChanceUp],
+  ),
+  perfectFreezeSpdDownSlay2(
+    'Perfect Freeze: SPD ↓ Slay+',
+    2,
+    requirements: <Skill>[perfectFreezeSpdDownSlay],
+  ),
+  // Doremy skills
   a('a', 2);
 
   @override
