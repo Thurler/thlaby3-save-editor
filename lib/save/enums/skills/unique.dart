@@ -450,7 +450,210 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     3,
     requirements: <Skill>[abilityUnbridledGuardPierce, quickCharge2],
   ),
-  test('TEST: Keep this here', 0);
+  // Meiling skills
+  blossomingLightOrb('Light Sign "Blossoming Light Orb"', 3),
+  combo('Combo', 2),
+  restorativeQigong('Restorative Qigong', 3),
+  focusedGuard('Focused Guard', 3),
+  bondsScarletDevilMansion('Bonds of the Scarlet Devil Mansion', 3),
+  qiCrestBlossomingLightOrb(
+    'Light Qi "Qi Crest Blossoming Light Orb"',
+    3,
+    requirements: <Skill>[blossomingLightOrb],
+  ),
+  combo2('C-C-Combo', 2, requirements: <Skill>[combo]),
+  mountainBreakingCannon('Flower Sign "Mountain-Breaking Cannon"', 3),
+  qigongEnvelopment('Qigong Envelopment', 3),
+  restorativeQigongAilmentRecovery(
+    'Restorative Qigong: Ailment Recovery Augment',
+    2,
+    requirements: <Skill>[restorativeQigong],
+  ),
+  colorfulRain('Colorful Rain', 3, requirements: <Skill>[restorativeQigong]),
+  initialQigongGain('Initial Qigong Gain', 3),
+  gatekeepersDuty("Gatekeeper's Duty", 3),
+  qiCrestBlossomingLightOrbQigongGain(
+    'Qi Crest Blossoming Light Orb: Qigong Gain',
+    2,
+    requirements: <Skill>[qiCrestBlossomingLightOrb],
+  ),
+  directAttackCounter('Direct Attack Counter', 4),
+  mountainBreakingCannonQigongGain(
+    'Mountain-Breaking Cannon: Qigong Gain',
+    3,
+    requirements: <Skill>[mountainBreakingCannon],
+  ),
+  painToQigong('Pain to Qigong', 4, requirements: <Skill>[qigongEnvelopment]),
+  qigongToStats('Qigong to Stats', 4, requirements: <Skill>[qigongEnvelopment]),
+  parSlay('PAR Slay', 3),
+  colorfulRainQigongGain(
+    'Colorful Rain: Qigong Gain',
+    2,
+    requirements: <Skill>[colorfulRain],
+  ),
+  qiCrestBlossomingLightOrbParAffix(
+    'Qi Crest Blossoming Light Orb: PAR Affix',
+    2,
+    requirements: <Skill>[qiCrestBlossomingLightOrb],
+  ),
+  qiCrestStarPulseShot(
+    'Star Qi "Qi Crest Star Pulse Shot"',
+    3,
+    requirements: <Skill>[qiCrestBlossomingLightOrbQigongGain],
+  ),
+  mountainBreakingCannon2(
+    'Mountain-Breaking Cannon: POW ↑',
+    2,
+    requirements: <Skill>[
+      mountainBreakingCannonQigongGain,
+      directAttackCounter,
+    ],
+  ),
+  qiCrestMountainBreakingCannon(
+    'Flower Qi "Qi Crest Mountain-Breaking Cannon"',
+    4,
+    requirements: <Skill>[mountainBreakingCannonQigongGain],
+  ),
+  qigongEnvelopment2(
+    'Qigong Envelopment: Qigong Gain ↑',
+    3,
+    requirements: <Skill>[qigongEnvelopment],
+  ),
+  qigongFromParFoes(
+    'Qigong From PAR-Afflicted Foes',
+    5,
+    requirements: <Skill>[restorativeQigongAilmentRecovery],
+  ),
+  parRemovalDown('PAR Removal Chance ↓', 2, requirements: <Skill>[parSlay]),
+  initialQigongGain2(
+    'Initial Qigong Gain+',
+    2,
+    requirements: <Skill>[colorfulRainQigongGain, initialQigongGain],
+  ),
+  qiCrestBlossomingLightOrb2(
+    'Qi Crest Blossoming Light Orb: POW ↑',
+    3,
+    requirements: <Skill>[qiCrestBlossomingLightOrbQigongGain],
+  ),
+  directAttackCounter2(
+    'Direct Attack Counter+',
+    2,
+    requirements: <Skill>[directAttackCounter],
+  ),
+  mountainBreakingCannonDelay(
+    'Mountain-Breaking Cannon: Delay ↓',
+    2,
+    requirements: <Skill>[mountainBreakingCannonQigongGain],
+  ),
+  painToQigong2('Pain to Qigong+', 3, requirements: <Skill>[painToQigong]),
+  parSlay2('PAR Slay+', 2, requirements: <Skill>[parSlay]),
+  colorfulRainQigongRecoveryUp(
+    'Colorful Rain: Qigong Recovery ↑',
+    2,
+    requirements: <Skill>[colorfulRainQigongGain],
+  ),
+  focusedGuard2('Focused Guard+', 2, requirements: <Skill>[focusedGuard]),
+  bondsScarletDevilMansion2(
+    'Bonds of the Scarlet Devil Mansion+',
+    2,
+    requirements: <Skill>[bondsScarletDevilMansion],
+  ),
+  qiCrestBlossomingLightOrbParBoost(
+    'Qi Crest Blossoming Light Orb: PAR Boost',
+    3,
+    requirements: <Skill>[
+      qiCrestBlossomingLightOrbParAffix,
+      qiCrestBlossomingLightOrb2,
+    ],
+  ),
+  qiCrestStarPulseShotQigongParAffix(
+    'Qi Crest Star Pulse Shot: Qigong PAR Affix',
+    3,
+    requirements: <Skill>[qiCrestStarPulseShot],
+  ),
+  mountainBreakingCannon3(
+    'Mountain-Breaking Cannon: POW ↑+',
+    2,
+    requirements: <Skill>[mountainBreakingCannon2, mountainBreakingCannonDelay],
+  ),
+  masterfulMountainBreakingCannon(
+    'Ultimate Flower "Masterful Mountain-Breaking Cannon"',
+    4,
+    requirements: <Skill>[qiCrestMountainBreakingCannon],
+  ),
+  qigongEnvelopment3(
+    'Qigong Envelopment: Qigong Gain ↑+',
+    3,
+    requirements: <Skill>[qigongEnvelopment2],
+  ),
+  masterfulQigongEnvelopment(
+    'Masterful Qigong Envelopment',
+    5,
+    requirements: <Skill>[qigongEnvelopment2, qigongFromParFoes],
+  ),
+  parRemovalDown2(
+    'PAR Removal Chance ↓+',
+    2,
+    requirements: <Skill>[parRemovalDown],
+  ),
+  initialQigongGain3(
+    'Initial Qigong Gain++',
+    2,
+    requirements: <Skill>[initialQigongGain2],
+  ),
+  gatekeepersDuty2(
+    "Gatekeeper's Duty+",
+    2,
+    requirements: <Skill>[gatekeepersDuty],
+  ),
+  directAttackCounter3(
+    'Direct Attack Counter++',
+    2,
+    requirements: <Skill>[directAttackCounter2],
+  ),
+  mountainBreakingCannonQigongGain2(
+    'Mountain-Breaking Cannon: Qigong Gain+',
+    2,
+    requirements: <Skill>[mountainBreakingCannonDelay],
+  ),
+  painToQigong3('Pain to Qigong++', 3, requirements: <Skill>[painToQigong2]),
+  jiQigongResultsTraining(
+    'Ji Qigong: Results of Training',
+    3,
+    requirements: <Skill>[masterfulQigongEnvelopment],
+  ),
+  jiQigongMuscleSolstice(
+    'Ji Qigong: Muscle Solstice',
+    3,
+    requirements: <Skill>[masterfulQigongEnvelopment, parRemovalDown2],
+  ),
+  bondsScarletDevilMansion3(
+    'Bonds of the Scarlet Devil Mansion++',
+    2,
+    requirements: <Skill>[bondsScarletDevilMansion2],
+  ),
+  masterfulEarthMovingStarPulseShot(
+    'Ultimate Star "Masterful Earth-Moving Star Pulse Shot"',
+    5,
+    requirements: <Skill>[qiCrestStarPulseShotQigongParAffix],
+  ),
+  masterfulMountainBreakingCannonGuardPierce(
+    'Masterful Mountain-Breaking Cannon: Guard Pierce',
+    3,
+    requirements: <Skill>[masterfulMountainBreakingCannon, painToQigong3],
+  ),
+  jiQigongCulminationTraining(
+    'Ji Qigong: Culmination of Training',
+    3,
+    requirements: <Skill>[painToQigong, jiQigongResultsTraining],
+  ),
+  jiQigong2(
+    'Ji Qigong: Duration ↑',
+    2,
+    requirements: <Skill>[masterfulQigongEnvelopment],
+  ),
+  // Alice skills
+  a('a', 2);
 
   @override
   final String prettyName;
