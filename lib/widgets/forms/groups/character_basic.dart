@@ -65,11 +65,13 @@ class CharacterBasicFormGroup
 
   // Callbacks for notifying upper states of value changes that impact other
   // values
+  final void Function(int?) onLevelChange;
   final void Function(int?) onMaxLevelChange;
   final void Function(int?) onBattlePointsChange;
 
   CharacterBasicFormGroup({
     required CharacterBasic initialData,
+    required this.onLevelChange,
     required this.onMaxLevelChange,
     required this.onBattlePointsChange,
     required super.enabled,
@@ -142,7 +144,10 @@ class CharacterBasicFormGroup
   }
 
   /// Trigger max level validation whenever current level changes
-  void _onLevelChange(int? newLevel) => _maxLevelKey.currentState?.validate();
+  void _onLevelChange(int? newLevel) {
+    _maxLevelKey.currentState?.validate();
+    onLevelChange(newLevel);
+  }
 
   @override
   CharacterBasic makeEntity(void additionalData) => CharacterBasic(
@@ -194,6 +199,7 @@ typedef CharacterBasicFormKey
 class CharacterBasicForm
     extends TGroupForm<CharacterBasic, CharacterBasicFormGroup> {
   CharacterBasicForm({
+    required void Function(int?) onLevelChange,
     required void Function(int?) onMaxLevelChange,
     required void Function(int?) onBattlePointsChange,
     required CharacterBasic super.initialValue,
@@ -210,6 +216,7 @@ class CharacterBasicForm
         initialData: initialValue,
         enabled: enabled,
         setState: setState,
+        onLevelChange: onLevelChange,
         onMaxLevelChange: onMaxLevelChange,
         onBattlePointsChange: onBattlePointsChange,
       );

@@ -86,6 +86,9 @@ class CharacterForm extends TFormGroup<CharacterData, void, CharacterFormField>
       form: CharacterBasicForm(
         key: _basicFormKey,
         initialValue: CharacterBasic.fromCharacterData(initialData),
+        // Whenever the current level changes, we must re-validate the learned
+        // unique skills
+        onLevelChange: _onCurrentLevelChange,
         // Whenever the max level changes, we must update how many unique skill
         // points are available to be spent
         onMaxLevelChange: (_) => _onUniqueLevelChange(),
@@ -203,23 +206,29 @@ class CharacterForm extends TFormGroup<CharacterData, void, CharacterFormField>
     //);
   }
 
+  void _onCurrentLevelChange(int? newLevel) {
+    // We must cause a validation error on skill nodes above the current level
+  }
+
   void _onUniqueLevelChange() {
     // Each character starts with 2 points, and then they get:
     // - 1 for each book of guidance
     // - 1 for each level 1-20
     // - 1 for each 2 levels 21-100
-    // - 1 for each 5 levels 101+
+    // - 1 for each 5 levels 101-500
     // - 2 for each 10th level 1-100
+    // - 1 for each 10th level 101-1000
     int level = basicData.maxLevel;
-    int available = 2 + shrineItemData.skill + min(20, level);
+    int available = 2 + shrineItemData.skill + min(level, 20);
     if (level > 20) {
-      available += (level - 20) ~/ 2;
-    }
-    if (level > 100) {
-      available += (level - 100) ~/ 5;
+      available += (min(level, 100) - 20) ~/ 2;
     }
     if (level > 9) {
       available += 2 * (min(level, 100) ~/ 10);
+    }
+    if (level > 100) {
+      available += (min(level, 500) - 100) ~/ 5;
+      available += (min(level, 1000) - 100) ~/ 10;
     }
     // Subtract points for each skill learned based on its data
     for (SkillNode node in initialData.skills.uniqueSkillTree.skills) {
@@ -231,10 +240,10 @@ class CharacterForm extends TFormGroup<CharacterData, void, CharacterFormField>
   }
 
   void _onTrainingLevelChange() {
-    // Available count is based solely on BP: 60, 60, 62, 62, 64, 64, ...
+    // Available count is based solely on BP: 30, 30, 31, 31, 32, 32, ...
     int available = 0;
     int bpCount = basicData.battlePoints;
-    int needed = 60;
+    int needed = 30;
     // Loop until BP runs out
     while (bpCount >= needed) {
       bpCount -= needed;
@@ -243,7 +252,7 @@ class CharacterForm extends TFormGroup<CharacterData, void, CharacterFormField>
         bpCount -= needed;
         available++;
       }
-      needed += 2;
+      needed += 1;
     }
     // Subtract points for each skill learned based on its data
     for (SkillNode node in initialData.skills.trainingSkillTree.skills) {
