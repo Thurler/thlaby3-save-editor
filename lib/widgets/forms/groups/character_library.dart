@@ -61,6 +61,7 @@ class CharacterLibraryFormWidget
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 20,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TIconChip.information(
@@ -68,7 +69,6 @@ class CharacterLibraryFormWidget
           '${LibraryData.libraryCap.commaSeparate()}',
           mainAxisSize: MainAxisSize.max,
         ),
-        const SizedBox(height: 20),
         TGridRow(
           crossAxisAlignment: CrossAxisAlignment.start,
           smFlexLimit: 2,

@@ -39,7 +39,11 @@ class CharacterShrineItemsFormGroup
       addIntegerForm(
         formName: field,
         initialValue: initialData.getData(field.index),
-        title: field.name.toUpperCase(),
+        title: switch (field) {
+          CharacterShrineItemsFormField.skill =>
+            'Book of Guidance (Skill points)',
+          _ => field.name.toUpperCase(),
+        },
         minValue: 0,
         maxValue: ShrineItemData.itemCap,
         onValueChanged: field == CharacterShrineItemsFormField.skill
@@ -77,17 +81,26 @@ class CharacterShrineItemsFormWidget
 
   @override
   Widget build(BuildContext context) {
-    return TGridRow(
-      smFlexLimit: 2,
-      lgFlexLimit: 4,
-      children: CharacterShrineItemsFormField.values.map(
-        (CharacterShrineItemsFormField field) => TGridItem.fixedSize(
-          size: field == CharacterShrineItemsFormField.skill
-            ? const TGridSize.fill()
-            : const TGridSize.zero(),
-          child: form[field],
+    return Column(
+      spacing: 20,
+      children: <Widget>[
+        const TIconChip.information(
+          'Shrine items count cap at ${ShrineItemData.itemCap}',
+          mainAxisSize: MainAxisSize.max,
         ),
-      ).toList(),
+        TGridRow(
+          smFlexLimit: 2,
+          lgFlexLimit: 5,
+          children: CharacterShrineItemsFormField.values.map(
+            (CharacterShrineItemsFormField field) => TGridItem.fixedSize(
+              size: field == CharacterShrineItemsFormField.skill
+                ? const TGridSize.fill()
+                : const TGridSize(1),
+              child: form[field],
+            ),
+          ).toList(),
+        ),
+      ],
     );
   }
 }

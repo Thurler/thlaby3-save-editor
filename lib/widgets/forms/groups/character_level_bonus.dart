@@ -93,12 +93,12 @@ class CharacterLevelBonusFormWidget
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 20,
       children: <Widget>[
         const TIconChip.information(
           'Level bonuses must add up to 100 and be a multiple of 5',
           mainAxisSize: MainAxisSize.max,
         ),
-        const SizedBox(height: 20),
         TGridRow(
           smFlexLimit: 3,
           crossAxisAlignment: CrossAxisAlignment.start,

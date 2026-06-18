@@ -310,7 +310,13 @@ class CharacterForm extends TFormGroup<CharacterData, void, CharacterFormField>
   //);
 
   @override
-  List<CharacterFormField> get subgroups => CharacterFormField.values;
+  List<CharacterFormField> get subgroups => <CharacterFormField>[
+    CharacterFormField.basic,
+    CharacterFormField.library,
+    CharacterFormField.levelBonus,
+    CharacterFormField.skillPoints,
+    CharacterFormField.shrineItems,
+  ];
 }
 
 class CharacterFormWidget
