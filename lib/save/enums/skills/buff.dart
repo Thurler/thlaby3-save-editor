@@ -1,88 +1,150 @@
-import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
-
 /// A mixin for skills that provide an attack buff
-mixin AttackBuffer on UniqueSkill {
+mixin AttackBuffer {
   /// The buff intensity
-  double get atkBuff;
+  int get atkBuff;
 }
 
 /// A mixin for skills that provide a defense buff
-mixin DefenseBuffer on UniqueSkill {
+mixin DefenseBuffer {
   /// The buff intensity
-  double get defBuff;
+  int get defBuff;
 }
 
 /// A mixin for skills that provide a magic buff
-mixin MagicBuffer on UniqueSkill {
+mixin MagicBuffer {
   /// The buff intensity
-  double get magBuff;
+  int get magBuff;
 }
 
 /// A mixin for skills that provide a mind buff
-mixin MindBuffer on UniqueSkill {
+mixin MindBuffer {
   /// The buff intensity
-  double get mndBuff;
+  int get mndBuff;
 }
 
 /// A mixin for skills that provide a speed buff
-mixin SpeedBuffer on UniqueSkill {
+mixin SpeedBuffer {
   /// The buff intensity
-  double get spdBuff;
+  int get spdBuff;
 }
 
-/// A mixin for skills that provide a permanent attack buff
-mixin PermanentAttackBuffer on UniqueSkill {
+/// A mixin for skills that provide an accuracy buff
+mixin AccuracyBuffer {
   /// The buff intensity
-  double get permAtkBuff;
+  int get accBuff;
+}
+
+/// A mixin for skills that provide an evasion buff
+mixin EvasionBuffer {
+  /// The buff intensity
+  int get evaBuff;
+}
+
+/// A mixin for skills that provide a buff for every stat
+mixin AllBuffer
+    implements
+        AttackBuffer,
+        DefenseBuffer,
+        MagicBuffer,
+        MindBuffer,
+        SpeedBuffer,
+        AccuracyBuffer,
+        EvasionBuffer {}
+
+/// A mixin for skills that provide a permanent attack buff
+mixin PermanentAttackBuffer {
+  /// The buff intensity
+  int get permAtkBuff;
 }
 
 /// A mixin for skills that provide a permanent defense buff
-mixin PermanentDefenseBuffer on UniqueSkill {
+mixin PermanentDefenseBuffer {
   /// The buff intensity
-  double get permDefBuff;
+  int get permDefBuff;
 }
 
 /// A mixin for skills that provide a permanent magic buff
-mixin PermanentMagicBuffer on UniqueSkill {
+mixin PermanentMagicBuffer {
   /// The buff intensity
-  double get permMagBuff;
+  int get permMagBuff;
 }
 
 /// A mixin for skills that provide a permanent mind buff
-mixin PermanentMindBuffer on UniqueSkill {
+mixin PermanentMindBuffer {
   /// The buff intensity
-  double get permMndBuff;
+  int get permMndBuff;
 }
 
 /// A mixin for skills that provide a permanent speed buff
-mixin PermanentSpeedBuffer on UniqueSkill {
+mixin PermanentSpeedBuffer {
   /// The buff intensity
-  double get permSpdBuff;
+  int get permSpdBuff;
 }
 
+/// A mixin for skills that provide a permanent accuracy buff
+mixin PermanentAccuracyBuffer {
+  /// The buff intensity
+  int get permAccBuff;
+}
+
+/// A mixin for skills that provide a permanent evasion buff
+mixin PermanentEvasionBuffer {
+  /// The buff intensity
+  int get permEvaBuff;
+}
+
+/// A mixin for skills that provide a permanent buff for every stat
+mixin PermanentAllBuffer
+    implements
+        PermanentAttackBuffer,
+        PermanentDefenseBuffer,
+        PermanentMagicBuffer,
+        PermanentMindBuffer,
+        PermanentSpeedBuffer,
+        PermanentAccuracyBuffer,
+        PermanentEvasionBuffer {}
+
 /// A mixin for skills that provide a HP regen buff
-mixin HpRegenBuffer on UniqueSkill {
+mixin HpRegenBuffer {
   /// The buff intensity
   double get hpRegen;
 
   /// How many turns the buff stays up for
-  double get hpRegenDuration;
+  int get hpRegenDuration;
 }
 
 /// A mixin for skills that provide a damage dealt buff
-mixin DamageDealtBuffer on UniqueSkill {
+mixin DamageDealtBuffer {
   /// The buff intensity
   double get dmgDealtBuff;
 
   /// For how many attacks the buff stays up for
-  double get dmgDealtBuffDuration;
+  int get dmgDealtBuffDuration;
 }
 
 /// A mixin for skills that provide a damage received buff
-mixin DamageReceivedBuffer on UniqueSkill {
+mixin DamageReceivedBuffer {
   /// The buff intensity
   double get dmgReceivedBuff;
 
   /// For how many attacks the buff stays up for
-  double get dmgReceivedBuffDuration;
+  int get dmgReceivedBuffDuration;
+}
+
+/// A mixin for skills that provide a bonus to the ATB bar
+mixin AtbIncreaser {
+  /// The amount ATB is increased by
+  int get atbIncrease;
+}
+
+enum InitiativeRange {
+  self,
+  frontline;
+}
+
+/// A mixin for skills that provide a bonus to the ATB bar at the start of
+/// battle
+mixin AtbInitiativeIncreaser implements AtbIncreaser {
+  /// The range applied to the initiative effect
+  InitiativeRange get initiativeRange;
 }

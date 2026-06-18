@@ -1,28 +1,29 @@
 import 'package:thlaby3_save_editor/save/enums/skills/buff.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
 /// A mixin for skills that trigger upon a character focusing
-mixin FocusReactioner on UniqueSkill {
-  /// The requirements that must be met to make the reaction effect trigger. If
-  /// null, then no requirement is needed
-  List<EffectRequirement>? get reactionRequirements;
+mixin FocusReactioner {}
 
-  static List<FocusReactioner> get values => const <FocusReactioner>[
-    // Generic focus reactions
-    focusedRecitation,
-    quickCharge,
-  ];
+/// A specialization of [FocusReactioner] that conditions the reaction on a set
+/// of requirements being met
+mixin ConditionedFocusReactioner on FocusReactioner {
+  /// The requirements that must be met to make the reaction effect trigger
+  List<EffectRequirement> get reactionRequirements;
 }
 
-const FocusReactioner focusedRecitation = _FocusedRecitation();
-const FocusReactioner quickCharge = _QuickCharge();
-const FocusReactionAugment quickCharge2 = _QuickCharge2();
+/// A mixin that merges [FocusReactioner] functionality to a [UniqueSkill]
+mixin FocusReactionerSkill on UniqueSkill implements FocusReactioner {}
 
-class _FocusedRecitation implements FocusReactioner, DamageDealtBuffer {
+const FocusReactionerSkill focusedRecitation = _FocusedRecitation();
+const FocusReactionerSkill quickCharge = _QuickCharge();
+const SkillAugmentSkill quickCharge2 = _QuickCharge2();
+
+class _FocusedRecitation implements FocusReactionerSkill, DamageDealtBuffer {
   const _FocusedRecitation();
 
   @override
@@ -35,16 +36,18 @@ class _FocusedRecitation implements FocusReactioner, DamageDealtBuffer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<EffectRequirement>? get reactionRequirements => null;
-
-  @override
   double get dmgDealtBuff => 50;
 
   @override
-  double get dmgDealtBuffDuration => 1;
+  int get dmgDealtBuffDuration => 1;
 }
 
-class _QuickCharge implements FocusReactioner, TpConsumer, PercentMpHealer {
+class _QuickCharge
+    implements
+        FocusReactionerSkill,
+        ConditionedFocusReactioner,
+        TpConsumer,
+        PercentMpHealer {
   const _QuickCharge();
 
   @override
@@ -57,8 +60,7 @@ class _QuickCharge implements FocusReactioner, TpConsumer, PercentMpHealer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<EffectRequirement>? get reactionRequirements =>
-      const <EffectRequirement>[
+  List<EffectRequirement> get reactionRequirements => const <EffectRequirement>[
     BelowMpPercentRequirement(33),
     TpCountRequirement(2),
   ];
@@ -71,27 +73,28 @@ class _QuickCharge implements FocusReactioner, TpConsumer, PercentMpHealer {
 }
 
 class _QuickCharge2
-    implements FocusReactionAugment, TpConsumer, PercentMpHealAugment {
+    implements
+        SkillAugmentSkill,
+        FocusReactionAugment,
+        ConditionedFocusReactioner,
+        TpConsumer,
+        PercentMpHealAugment {
   const _QuickCharge2();
 
   @override
-  String get prettyName => 'Quick Charge';
+  String get prettyName => 'Quick Charge+';
 
   @override
-  int get cost => 3;
+  int get cost => 2;
 
   @override
   List<Skill> get requirements => const <Skill>[quickCharge];
 
   @override
-  AugmentRange? get augmentRange => null;
+  FocusReactionerSkill get baseSkill => quickCharge;
 
   @override
-  FocusReactioner get baseSkill => quickCharge;
-
-  @override
-  List<EffectRequirement>? get reactionRequirements =>
-      const <EffectRequirement>[
+  List<EffectRequirement> get reactionRequirements => const <EffectRequirement>[
     BelowMpPercentRequirement(33),
     TpCountRequirement(3),
   ];

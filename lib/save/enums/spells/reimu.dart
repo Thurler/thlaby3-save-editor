@@ -6,6 +6,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/focus_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
@@ -58,24 +59,25 @@ const DamageSpell dreamSeal = _DreamSeal();
 const SpellAugmentSkill dreamSealTurn = _DreamSealTurnConversion();
 const SpellAugmentSkill dreamSealDamageAplifier = _DreamSealDamageAmplifier();
 
-const ElementProtector armoredYinYangOrb = _ArmoredYinYangOrb();
+const ElementProtectorSkill armoredYinYangOrb = _ArmoredYinYangOrb();
 const SkillAugmentSkill armoredYinYangOrb2 = _ArmoredYinYangOrb2();
 const SkillAugmentSkill armoredYinYangOrbBoost = _ArmoredYinYangOrbBoost();
 
-const RaceSlayer youkaiBuster = _YoukaiBuster();
+const RaceSlayerSkill youkaiBuster = _YoukaiBuster();
 const SkillAugmentSkill youkaiBuster2 = _YoukaiBuster2();
 const SkillAugmentSkill youkaiBusterShield = _YoukaiBusterShield();
 
-const KoReactioner reimuPrivileges = _ReimuProtagonistPrivileges();
+const KoReactionerSkill reimuPrivileges = _ReimuProtagonistPrivileges();
 const SkillAugmentSkill reimuPrivileges2 = _ReimuProtagonistPrivileges2();
 const SkillAugmentSkill reimuPrivilegesPerm =
     _ReimuProtagonistPrivilegesPermanent();
-const KoReactioner reimuPrivilegesShare = _ReimuProtagonistPrivilegesShare();
+const KoReactionerSkill reimuPrivilegesShare =
+    _ReimuProtagonistPrivilegesShare();
 
-const KoReactioner finalPrayer = _FinalPrayer();
+const KoReactionerSkill finalPrayer = _FinalPrayer();
 const SkillAugmentSkill finalPrayer2 = _FinalPrayer2();
-const KoReactioner finalPrayerRange = _FinalPrayerRange();
-const KoReactioner trueFinalPrayer = _TrueFinalPrayer();
+const KoReactionerSkill finalPrayerRange = _FinalPrayerRange();
+const KoReactionerSkill trueFinalPrayer = _TrueFinalPrayer();
 
 class _YinYangOrb implements DirectSpell, SilenceInflictor {
   const _YinYangOrb();
@@ -96,16 +98,10 @@ class _YinYangOrb implements DirectSpell, SilenceInflictor {
   int get delay => 6000;
 
   @override
-  int get cooldown => 0;
-
-  @override
   List<Element> get elements => const <Element>[Element.spi];
 
   @override
   SpellTargetMode get targetMode => SpellTargetMode.singleEnemy;
-
-  @override
-  EffectRequirement? get castRequirement => null;
 
   @override
   int get accModifider => 10;
@@ -126,7 +122,7 @@ class _YinYangOrb implements DirectSpell, SilenceInflictor {
   double get silChance => 48;
 
   @override
-  double get silDuration => 8000;
+  int get silDuration => 8000;
 }
 
 class _YinYangOrbParAffix implements SpellAugmentSkill, ParalysisAugment {
@@ -145,19 +141,13 @@ class _YinYangOrbParAffix implements SpellAugmentSkill, ParalysisAugment {
   SpellSkill get baseSkill => yinYangOrb;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get parChance => 60;
 
   @override
-  double get parDuration => 6000;
+  int get parDuration => 6000;
 }
 
-class _YinYangOrbPow implements PowAugment {
+class _YinYangOrbPow implements SpellAugmentSkill, PowAugment {
   const _YinYangOrbPow();
 
   @override
@@ -173,16 +163,10 @@ class _YinYangOrbPow implements PowAugment {
   DamageSpell get baseSkill => yinYangOrb;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get pow => 16;
 }
 
-class _YinYangOrbDelay implements DelayAugment {
+class _YinYangOrbDelay implements SpellAugmentSkill, DelayAugment {
   const _YinYangOrbDelay();
 
   @override
@@ -196,12 +180,6 @@ class _YinYangOrbDelay implements DelayAugment {
 
   @override
   SpellSkill get baseSkill => yinYangOrb;
-
-  @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
 
   @override
   double get delay => 750;
@@ -223,19 +201,13 @@ class _YinYangOrbParBoost implements SpellAugmentChainSkill, ParalysisAugment {
   SpellSkill get baseSkill => yinYangOrb;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   SpellAugmentSkill get baseAugment => yinYangOrbParAffix;
 
   @override
   double get parChance => 70;
 
   @override
-  double get parDuration => 10000;
+  int get parDuration => 10000;
 }
 
 class _YinYangOrbDelay2 implements SpellAugmentChainSkill, DelayAugment {
@@ -254,19 +226,14 @@ class _YinYangOrbDelay2 implements SpellAugmentChainSkill, DelayAugment {
   SpellSkill get baseSkill => yinYangOrb;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   SpellAugmentSkill get baseAugment => yinYangOrbDelay;
 
   @override
   double get delay => 1500;
 }
 
-class _YinYangOrbCooldownPow implements PowAugment, CooldownAugment {
+class _YinYangOrbCooldownPow
+    implements SpellAugmentSkill, PowAugment, CooldownAugment {
   const _YinYangOrbCooldownPow();
 
   @override
@@ -281,12 +248,6 @@ class _YinYangOrbCooldownPow implements PowAugment, CooldownAugment {
 
   @override
   DamageSpell get baseSkill => yinYangOrb;
-
-  @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
 
   @override
   double get pow => 40;
@@ -314,22 +275,16 @@ class _BarrierTalisman implements SpellSkill, DefenseBuffer, MindBuffer {
   int get delay => 6600;
 
   @override
-  int get cooldown => 0;
-
-  @override
   List<Element> get elements => const <Element>[Element.spi];
 
   @override
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  EffectRequirement? get castRequirement => null;
+  int get defBuff => 24;
 
   @override
-  double get defBuff => 24;
-
-  @override
-  double get mndBuff => 24;
+  int get mndBuff => 24;
 }
 
 class _BarrierTalisman2
@@ -349,16 +304,10 @@ class _BarrierTalisman2
   SpellSkill get baseSkill => barrierTalisman;
 
   @override
-  AugmentRange? get augmentRange => null;
+  int get defBuff => 12;
 
   @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
-  double get defBuff => 12;
-
-  @override
-  double get mndBuff => 12;
+  int get mndBuff => 12;
 }
 
 class _RecoveryTalisman implements SpellSkill, HpRegenBuffer {
@@ -380,22 +329,16 @@ class _RecoveryTalisman implements SpellSkill, HpRegenBuffer {
   int get delay => 6000;
 
   @override
-  int get cooldown => 0;
-
-  @override
   List<Element> get elements => const <Element>[Element.spi];
 
   @override
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  EffectRequirement? get castRequirement => null;
-
-  @override
   double get hpRegen => 10;
 
   @override
-  double get hpRegenDuration => 5;
+  int get hpRegenDuration => 5;
 }
 
 class _RecoveryTalisman2 implements SpellAugmentSkill, HpRegenBuffAugment {
@@ -414,19 +357,13 @@ class _RecoveryTalisman2 implements SpellAugmentSkill, HpRegenBuffAugment {
   SpellSkill get baseSkill => recoveryTalisman;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get hpRegen => 2;
 
   @override
-  double get hpRegenDuration => 1;
+  int get hpRegenDuration => 1;
 }
 
-class _PersuasionNeedle implements DirectSpell {
+class _PersuasionNeedle implements DirectSpell, CooldownSpell {
   const _PersuasionNeedle();
 
   @override
@@ -454,9 +391,6 @@ class _PersuasionNeedle implements DirectSpell {
   SpellTargetMode get targetMode => SpellTargetMode.rowEnemyDiminished;
 
   @override
-  EffectRequirement? get castRequirement => null;
-
-  @override
   int get accModifider => -16;
 
   @override
@@ -472,7 +406,8 @@ class _PersuasionNeedle implements DirectSpell {
   double get atkFactor => 136;
 }
 
-class _PersuasionNeedleMultiplier implements MultiplierAugment {
+class _PersuasionNeedleMultiplier
+    implements SpellAugmentSkill, MultiplierAugment {
   const _PersuasionNeedleMultiplier();
 
   @override
@@ -488,16 +423,10 @@ class _PersuasionNeedleMultiplier implements MultiplierAugment {
   DamageSpell get baseSkill => persuasionNeedle;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get multiplier => 30;
 }
 
-class _PersuasionNeedleGuard implements GuardAugment {
+class _PersuasionNeedleGuard implements SpellAugmentSkill, GuardAugment {
   const _PersuasionNeedleGuard();
 
   @override
@@ -513,19 +442,13 @@ class _PersuasionNeedleGuard implements GuardAugment {
   DamageSpell get baseSkill => persuasionNeedle;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get defGuard => -35;
 
   @override
   double get mndGuard => 0;
 }
 
-class _PersuasionNeedleHpDrain implements HpDrainAugment {
+class _PersuasionNeedleHpDrain implements SpellAugmentSkill, HpDrainAugment {
   const _PersuasionNeedleHpDrain();
 
   @override
@@ -541,16 +464,11 @@ class _PersuasionNeedleHpDrain implements HpDrainAugment {
   DamageSpell get baseSkill => persuasionNeedle;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get hpDrainPercent => 8;
 }
 
-class _GreatHakureiBarrier implements SpellSkill, DefenseBuffer, MindBuffer {
+class _GreatHakureiBarrier
+    implements ConditionedSpellSkill, DefenseBuffer, MindBuffer, CooldownSpell {
   const _GreatHakureiBarrier();
 
   @override
@@ -579,13 +497,14 @@ class _GreatHakureiBarrier implements SpellSkill, DefenseBuffer, MindBuffer {
   SpellTargetMode get targetMode => SpellTargetMode.allAllies;
 
   @override
-  EffectRequirement? get castRequirement => const TurnMultipleRequirement(2);
+  List<EffectRequirement> get castRequirements =>
+      const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  double get defBuff => 50;
+  int get defBuff => 50;
 
   @override
-  double get mndBuff => 50;
+  int get mndBuff => 50;
 }
 
 class _GreatHakureiBarrierTurnConversion
@@ -610,23 +529,20 @@ class _GreatHakureiBarrierTurnConversion
   SpellSkill get baseSkill => greatHakureiBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   int? get turnCountCap => null;
 
   @override
-  double get defBuff => 4;
+  int get defBuff => 4;
 
   @override
-  double get mndBuff => 4;
+  int get mndBuff => 4;
 }
 
 class _GreatHakureiBarrierSelfProtect
-    implements SpellAugmentSkill, DamageReceivedBuffAugment {
+    implements
+        SpellAugmentSkill,
+        CustomAugmentRange,
+        DamageReceivedBuffAugment {
   const _GreatHakureiBarrierSelfProtect();
 
   @override
@@ -642,20 +558,17 @@ class _GreatHakureiBarrierSelfProtect
   SpellSkill get baseSkill => greatHakureiBarrier;
 
   @override
-  AugmentRange? get augmentRange => AugmentRange.self;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
+  AugmentRange get augmentRange => AugmentRange.self;
 
   @override
   double get dmgReceivedBuff => 25;
 
   @override
-  double get dmgReceivedBuffDuration => 1;
+  int get dmgReceivedBuffDuration => 1;
 }
 
 class _GreatHakureiBarrierRegen
-    implements SpellAugmentSkill, HpRegenBuffAugment {
+    implements SpellAugmentSkill, ConditionedEffect, HpRegenBuffAugment {
   const _GreatHakureiBarrierRegen();
 
   @override
@@ -672,20 +585,18 @@ class _GreatHakureiBarrierRegen
   SpellSkill get baseSkill => greatHakureiBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => const TurnCountRequirement(4);
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[TurnCountRequirement(4)];
 
   @override
   double get hpRegen => 5;
 
   @override
-  double get hpRegenDuration => 4;
+  int get hpRegenDuration => 4;
 }
 
 class _GreatHakureiBarrierRegen2
-    implements SpellAugmentChainSkill, HpRegenBuffAugment {
+    implements SpellAugmentChainSkill, ConditionedEffect, HpRegenBuffAugment {
   const _GreatHakureiBarrierRegen2();
 
   @override
@@ -702,23 +613,26 @@ class _GreatHakureiBarrierRegen2
   SpellSkill get baseSkill => greatHakureiBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => const TurnCountRequirement(4);
-
-  @override
   SpellAugmentSkill get baseAugment => greatHakureiBarrierRegen;
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[TurnCountRequirement(4)];
 
   @override
   double get hpRegen => 6;
 
   @override
-  double get hpRegenDuration => 5;
+  int get hpRegenDuration => 5;
 }
 
 class _HakureiTalisman
-    implements SpellSkill, DefenseBuffer, MindBuffer, HpRegenBuffer {
+    implements
+        SpellSkill,
+        DefenseBuffer,
+        MindBuffer,
+        HpRegenBuffer,
+        CooldownSpell {
   const _HakureiTalisman();
 
   @override
@@ -747,22 +661,20 @@ class _HakureiTalisman
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  EffectRequirement? get castRequirement => null;
+  int get defBuff => 24;
 
   @override
-  double get defBuff => 24;
-
-  @override
-  double get mndBuff => 24;
+  int get mndBuff => 24;
 
   @override
   double get hpRegen => 10;
 
   @override
-  double get hpRegenDuration => 4;
+  int get hpRegenDuration => 4;
 }
 
-class _FlashExorcismBarrier implements DirectSpell, MagicSpell {
+class _FlashExorcismBarrier
+    implements ConditionedSpellSkill, DirectSpell, MagicSpell, CooldownSpell {
   const _FlashExorcismBarrier();
 
   @override
@@ -790,7 +702,8 @@ class _FlashExorcismBarrier implements DirectSpell, MagicSpell {
   SpellTargetMode get targetMode => SpellTargetMode.allAlliesDiminished;
 
   @override
-  EffectRequirement? get castRequirement => const TurnMultipleRequirement(2);
+  List<EffectRequirement> get castRequirements =>
+      const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
   int get accModifider => 10000;
@@ -811,7 +724,7 @@ class _FlashExorcismBarrier implements DirectSpell, MagicSpell {
   double get magFactor => -30;
 }
 
-class _FlashExorcismBarrierDelay implements DelayAugment {
+class _FlashExorcismBarrierDelay implements SpellAugmentSkill, DelayAugment {
   const _FlashExorcismBarrierDelay();
 
   @override
@@ -827,17 +740,15 @@ class _FlashExorcismBarrierDelay implements DelayAugment {
   SpellSkill get baseSkill => flashExorcismBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get delay => 1200;
 }
 
 class _FlashExorcismBarrierTurnConversion
-    implements MultiplierAugment, TurnCountBasedAugment, TurnCountResetAugment {
+    implements
+        SpellAugmentSkill,
+        MultiplierAugment,
+        TurnCountBasedAugment,
+        TurnCountResetAugment {
   const _FlashExorcismBarrierTurnConversion();
 
   @override
@@ -854,12 +765,6 @@ class _FlashExorcismBarrierTurnConversion
   DamageSpell get baseSkill => flashExorcismBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   int? get turnCountCap => null;
 
   @override
@@ -867,7 +772,7 @@ class _FlashExorcismBarrierTurnConversion
 }
 
 class _FlashExorcismBarrierDamageTaken
-    implements SpellAugmentSkill, DamageReceivedBuffAugment {
+    implements SpellAugmentSkill, ConditionedEffect, DamageReceivedBuffAugment {
   const _FlashExorcismBarrierDamageTaken();
 
   @override
@@ -888,21 +793,20 @@ class _FlashExorcismBarrierDamageTaken
   SpellSkill get baseSkill => flashExorcismBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => const TurnCountRequirement(4);
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[TurnCountRequirement(4)];
 
   @override
   double get dmgReceivedBuff => 12;
 
   @override
-  double get dmgReceivedBuffDuration => 1;
+  int get dmgReceivedBuffDuration => 1;
 }
 
 class _FlashExorcismBarrierDamageTaken2
     implements
         SpellAugmentChainSkill,
+        ConditionedEffect,
         DamageReceivedBuffAugment,
         DamageDealtBuffAugment {
   const _FlashExorcismBarrierDamageTaken2();
@@ -922,10 +826,8 @@ class _FlashExorcismBarrierDamageTaken2
   SpellSkill get baseSkill => flashExorcismBarrier;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => const TurnCountRequirement(4);
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[TurnCountRequirement(4)];
 
   @override
   SpellAugmentSkill get baseAugment => flashExorcismBarrierDamageTaken;
@@ -934,13 +836,13 @@ class _FlashExorcismBarrierDamageTaken2
   double get dmgReceivedBuff => 15;
 
   @override
-  double get dmgReceivedBuffDuration => 1;
+  int get dmgReceivedBuffDuration => 1;
 
   @override
   double get dmgDealtBuff => 15;
 
   @override
-  double get dmgDealtBuffDuration => 1;
+  int get dmgDealtBuffDuration => 1;
 }
 
 class _DreamSeal implements MagicSpell {
@@ -963,16 +865,10 @@ class _DreamSeal implements MagicSpell {
   int get delay => 3000;
 
   @override
-  int get cooldown => 0;
-
-  @override
   List<Element> get elements => const <Element>[Element.spi];
 
   @override
   SpellTargetMode get targetMode => SpellTargetMode.allEnemies;
-
-  @override
-  EffectRequirement? get castRequirement => null;
 
   @override
   int get accModifider => 8;
@@ -992,6 +888,7 @@ class _DreamSeal implements MagicSpell {
 
 class _DreamSealTurnConversion
     implements
+        SpellAugmentSkill,
         MultiplierMultiplyAugment,
         TurnCountBasedAugment,
         TurnCountResetAugment {
@@ -1010,19 +907,14 @@ class _DreamSealTurnConversion
   DamageSpell get baseSkill => dreamSeal;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   int? get turnCountCap => 20;
 
   @override
   double get multiplier => 1.08;
 }
 
-class _DreamSealDamageAmplifier implements MultiplierMultiplyAugment {
+class _DreamSealDamageAmplifier
+    implements SpellAugmentSkill, MultiplierMultiplyAugment {
   const _DreamSealDamageAmplifier();
 
   @override
@@ -1038,16 +930,10 @@ class _DreamSealDamageAmplifier implements MultiplierMultiplyAugment {
   DamageSpell get baseSkill => dreamSeal;
 
   @override
-  AugmentRange? get augmentRange => null;
-
-  @override
-  EffectRequirement? get augmentRequirement => null;
-
-  @override
   double get multiplier => 1.5;
 }
 
-class _ArmoredYinYangOrb implements ElementProtector {
+class _ArmoredYinYangOrb implements ElementProtectorSkill {
   const _ArmoredYinYangOrb();
 
   @override
@@ -1066,7 +952,8 @@ class _ArmoredYinYangOrb implements ElementProtector {
   double get protection => 12;
 }
 
-class _ArmoredYinYangOrb2 implements ElementProtectionAugment {
+class _ArmoredYinYangOrb2
+    implements SkillAugmentSkill, ElementProtectionAugment {
   const _ArmoredYinYangOrb2();
 
   @override
@@ -1080,10 +967,7 @@ class _ArmoredYinYangOrb2 implements ElementProtectionAugment {
       const <Skill>[armoredYinYangOrb, yinYangOrbParAffix];
 
   @override
-  ElementProtector get baseSkill => armoredYinYangOrb;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  ElementProtectorSkill get baseSkill => armoredYinYangOrb;
 
   @override
   List<Element> get elements => baseSkill.elements;
@@ -1106,19 +990,16 @@ class _ArmoredYinYangOrbBoost
   List<Skill> get requirements => const <Skill>[armoredYinYangOrb2];
 
   @override
-  ElementProtector get baseSkill => armoredYinYangOrb;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  ElementProtectorSkill get baseSkill => armoredYinYangOrb;
 
   @override
   double get dmgDealtBuff => 16;
 
   @override
-  double get dmgDealtBuffDuration => 1;
+  int get dmgDealtBuffDuration => 1;
 }
 
-class _YoukaiBuster implements RaceSlayer {
+class _YoukaiBuster implements RaceSlayerSkill {
   const _YoukaiBuster();
 
   @override
@@ -1137,7 +1018,7 @@ class _YoukaiBuster implements RaceSlayer {
   double get slayBonus => 12;
 }
 
-class _YoukaiBuster2 implements RaceSlayAugment {
+class _YoukaiBuster2 implements SkillAugmentSkill, RaceSlayAugment {
   const _YoukaiBuster2();
 
   @override
@@ -1150,10 +1031,7 @@ class _YoukaiBuster2 implements RaceSlayAugment {
   List<Skill> get requirements => const <Skill>[youkaiBuster];
 
   @override
-  RaceSlayer get baseSkill => youkaiBuster;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  RaceSlayerSkill get baseSkill => youkaiBuster;
 
   @override
   List<EnemyRace> get races => baseSkill.races;
@@ -1176,21 +1054,18 @@ class _YoukaiBusterShield
   List<Skill> get requirements => const <Skill>[youkaiBuster2];
 
   @override
-  RaceSlayer get baseSkill => youkaiBuster;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  RaceSlayerSkill get baseSkill => youkaiBuster;
 
   @override
   double get dmgReceivedBuff => 10;
 
   @override
-  double get dmgReceivedBuffDuration => 1;
+  int get dmgReceivedBuffDuration => 1;
 }
 
 class _ReimuProtagonistPrivileges
     implements
-        KoReactioner,
+        KoReactionerSkill,
         AttackBuffer,
         DefenseBuffer,
         MagicBuffer,
@@ -1214,26 +1089,24 @@ class _ReimuProtagonistPrivileges
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
+  int get atkBuff => 12;
 
   @override
-  double get atkBuff => 12;
+  int get defBuff => 12;
 
   @override
-  double get defBuff => 12;
+  int get magBuff => 12;
 
   @override
-  double get magBuff => 12;
+  int get mndBuff => 12;
 
   @override
-  double get mndBuff => 12;
-
-  @override
-  double get spdBuff => 12;
+  int get spdBuff => 12;
 }
 
 class _ReimuProtagonistPrivileges2
     implements
+        SkillAugmentSkill,
         KoReactionAugment,
         AttackBuffAugment,
         DefenseBuffAugment,
@@ -1252,10 +1125,7 @@ class _ReimuProtagonistPrivileges2
   List<Skill> get requirements => const <Skill>[reimuPrivileges];
 
   @override
-  KoReactioner get baseSkill => reimuPrivileges;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  KoReactionerSkill get baseSkill => reimuPrivileges;
 
   @override
   KoEffectRange get effectRange => baseSkill.effectRange;
@@ -1264,22 +1134,19 @@ class _ReimuProtagonistPrivileges2
   KoTriggerRange get triggerRange => baseSkill.triggerRange;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
+  int get atkBuff => 8;
 
   @override
-  double get atkBuff => 8;
+  int get defBuff => 8;
 
   @override
-  double get defBuff => 8;
+  int get magBuff => 8;
 
   @override
-  double get magBuff => 8;
+  int get mndBuff => 8;
 
   @override
-  double get mndBuff => 8;
-
-  @override
-  double get spdBuff => 8;
+  int get spdBuff => 8;
 }
 
 class _ReimuProtagonistPrivilegesPermanent
@@ -1310,13 +1177,10 @@ class _ReimuProtagonistPrivilegesPermanent
       const <Skill>[youkaiBusterShield, reimuPrivileges2];
 
   @override
-  KoReactioner get baseSkill => reimuPrivileges;
+  KoReactionerSkill get baseSkill => reimuPrivileges;
 
   @override
   SkillAugmentSkill get baseAugment => reimuPrivileges2;
-
-  @override
-  AugmentRange? get augmentRange => null;
 
   @override
   KoEffectRange get effectRange => baseSkill.effectRange;
@@ -1325,42 +1189,39 @@ class _ReimuProtagonistPrivilegesPermanent
   KoTriggerRange get triggerRange => baseSkill.triggerRange;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
+  int get atkBuff => 4;
 
   @override
-  double get atkBuff => 4;
+  int get defBuff => 4;
 
   @override
-  double get defBuff => 4;
+  int get magBuff => 4;
 
   @override
-  double get magBuff => 4;
+  int get mndBuff => 4;
 
   @override
-  double get mndBuff => 4;
+  int get spdBuff => 4;
 
   @override
-  double get spdBuff => 4;
+  int get permAtkBuff => 4;
 
   @override
-  double get permAtkBuff => 4;
+  int get permDefBuff => 4;
 
   @override
-  double get permDefBuff => 4;
+  int get permMagBuff => 4;
 
   @override
-  double get permMagBuff => 4;
+  int get permMndBuff => 4;
 
   @override
-  double get permMndBuff => 4;
-
-  @override
-  double get permSpdBuff => 4;
+  int get permSpdBuff => 4;
 }
 
 class _ReimuProtagonistPrivilegesShare
     implements
-        KoReactioner,
+        KoReactionerSkill,
         AttackBuffer,
         DefenseBuffer,
         MagicBuffer,
@@ -1384,25 +1245,22 @@ class _ReimuProtagonistPrivilegesShare
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
+  int get atkBuff => 12;
 
   @override
-  double get atkBuff => 12;
+  int get defBuff => 12;
 
   @override
-  double get defBuff => 12;
+  int get magBuff => 12;
 
   @override
-  double get magBuff => 12;
+  int get mndBuff => 12;
 
   @override
-  double get mndBuff => 12;
-
-  @override
-  double get spdBuff => 12;
+  int get spdBuff => 12;
 }
 
-class _FinalPrayer implements KoReactioner, PercentHealer {
+class _FinalPrayer implements KoReactionerSkill, PercentHealer {
   const _FinalPrayer();
 
   @override
@@ -1421,13 +1279,11 @@ class _FinalPrayer implements KoReactioner, PercentHealer {
   KoEffectRange get effectRange => KoEffectRange.frontlineMinusSelf;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
-
-  @override
   double get healPercent => 50;
 }
 
-class _FinalPrayer2 implements KoReactionAugment, PercentHealAugment {
+class _FinalPrayer2
+    implements SkillAugmentSkill, KoReactionAugment, PercentHealAugment {
   const _FinalPrayer2();
 
   @override
@@ -1440,10 +1296,7 @@ class _FinalPrayer2 implements KoReactionAugment, PercentHealAugment {
   List<Skill> get requirements => const <Skill>[finalPrayer];
 
   @override
-  KoReactioner get baseSkill => finalPrayer;
-
-  @override
-  AugmentRange? get augmentRange => null;
+  KoReactionerSkill get baseSkill => finalPrayer;
 
   @override
   KoTriggerRange get triggerRange => baseSkill.triggerRange;
@@ -1452,13 +1305,10 @@ class _FinalPrayer2 implements KoReactionAugment, PercentHealAugment {
   KoEffectRange get effectRange => baseSkill.effectRange;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
-
-  @override
   double get healPercent => 50;
 }
 
-class _FinalPrayerRange implements KoReactioner, PercentHealer {
+class _FinalPrayerRange implements KoReactionerSkill, PercentHealer {
   const _FinalPrayerRange();
 
   @override
@@ -1477,13 +1327,15 @@ class _FinalPrayerRange implements KoReactioner, PercentHealer {
   KoEffectRange get effectRange => KoEffectRange.backline;
 
   @override
-  EffectRequirement? get reactionRequirement => null;
-
-  @override
   double get healPercent => 33;
 }
 
-class _TrueFinalPrayer implements KoReactioner, PercentHealer, TpConsumer {
+class _TrueFinalPrayer
+    implements
+        KoReactionerSkill,
+        ConditionedKoReactioner,
+        PercentHealer,
+        TpConsumer {
   const _TrueFinalPrayer();
 
   @override
@@ -1503,7 +1355,8 @@ class _TrueFinalPrayer implements KoReactioner, PercentHealer, TpConsumer {
   KoEffectRange get effectRange => KoEffectRange.self;
 
   @override
-  EffectRequirement? get reactionRequirement => const TpCountRequirement(10);
+  List<EffectRequirement> get reactionRequirements =>
+      const <EffectRequirement>[TpCountRequirement(10)];
 
   @override
   double get healPercent => 100;

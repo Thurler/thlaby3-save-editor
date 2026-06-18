@@ -4,22 +4,43 @@ import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
+import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
+import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
+
+// TODO(me): Determine how the following interactions resolve so they are
+// properly mapped with their behavior
+//
+// - (Generic) Does Quick Charge proc instead of Quick Charge+ if the user only
+//             has 2 TP?
+// - (Renko) Does Eager Support roll the cleanses separately?
 
 /// A mixin to unify all character unique skills, be they spells, passives or
 /// augments
 mixin UniqueSkill on Skill {
-  static List<UniqueSkill> get values =>
-      (UncategorizedUniqueSkill.values as List<UniqueSkill>) +
-      PassiveSkill.values +
-      SkillAugmentSkill.values +
-      SpellSkill.values +
-      SpellAugmentSkill.values +
-      ElementProtector.values +
-      RaceSlayer.values +
-      KoReactioner.values +
-      FocusReactioner.values;
+  static const List<UniqueSkill> values = <UniqueSkill>[
+    ...UncategorizedUniqueSkill.values,
+    ...PassiveSkill.values,
+    ...SkillAugmentSkill.values,
+    ...SpellSkill.values,
+    ...SpellAugmentSkill.values,
+    // Generic unique skills
+    focusedRecitation,
+    quickCharge,
+    // Reimu unique skills
+    armoredYinYangOrb,
+    youkaiBuster,
+    reimuPrivileges,
+    reimuPrivilegesShare,
+    finalPrayer,
+    finalPrayerRange,
+    trueFinalPrayer,
+    // Renko unique skills
+    readingStars,
+    knowledgeStrangeThings,
+    maryShield,
+  ];
 }
 
 /// Enumeration of passive skills that don't have effects that are relevant to
@@ -52,6 +73,8 @@ enum PassiveSkill implements UniqueSkill {
     5,
     requirements: <Skill>[turnCounterPreservation],
   ),
+  // Renko passives
+  beaconSpecialist('Beacon Specialist', 3),
   skill('Skill', 3);
 
   @override
@@ -72,26 +95,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  eagerSupport('Eager Support', 3),
-  readingStarsPositions("Reading the Stars' Positions", 3),
-  firstAid('First Aid', 3),
-  warningBeacon('Warning Beacon', 3),
-  beaconSpecialist('Beacon Specialist', 3),
-  signalBeacon('Signal Beacon', 3),
-  knowledgeStrangeThings('Knowledge of Strange Things', 3),
-  swiftBeacon('Swift Beacon', 3, requirements: <Skill>[warningBeacon]),
-  targetBeacon('Target Beacon', 3, requirements: <Skill>[signalBeacon]),
-  eagerSupportMentalCare(
-    'Eager Support: Mental Care Boost',
-    3,
-    requirements: <Skill>[eagerSupport],
-  ),
-  firstAidTraining(
-    'First Aid: First Aid Training',
-    3,
-    requirements: <Skill>[firstAid],
-  ),
-  maryShield("Mary's Shield", 3),
   warningBeacon2(
     'Warning Beacon: Effect ↑',
     3,

@@ -1,3 +1,4 @@
+import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/skill_tree.dart';
 
 /// The class representing the common attributes between skill types
@@ -18,42 +19,9 @@ abstract interface class Skill {
   List<Skill> get requirements;
 }
 
-/// An interface to unify behavior and attributes of a skill's activation
-/// requirements
-abstract interface class EffectRequirement {}
-
-/// A requirement that checks if the current MP count is below a percent of the
-/// character's max MP
-class BelowMpPercentRequirement implements EffectRequirement {
-  /// The percent of max MP used to trigger
-  final int mpPercent;
-
-  const BelowMpPercentRequirement(this.mpPercent);
-}
-
-/// A requirement that checks if the character has at least [tpCount] TP
-/// available
-class TpCountRequirement implements EffectRequirement {
-  /// The TP count needed to trigger the effect
-  final int tpCount;
-
-  const TpCountRequirement(this.tpCount);
-}
-
-/// A requirement that checks if the current turn count is at least a specific
-/// value
-class TurnCountRequirement implements EffectRequirement {
-  /// The number the turn counter must be at or above
-  final int turnCount;
-
-  const TurnCountRequirement(this.turnCount);
-}
-
-/// A requirement that checks if the current turn count is a multiple of a
-/// specific value
-class TurnMultipleRequirement implements EffectRequirement {
-  /// The number the turn counter must be a multiple of
-  final int multipleOf;
-
-  const TurnMultipleRequirement(this.multipleOf);
+/// A mixin for skills that must satisfy requirements to make their effects
+/// trigger
+mixin ConditionedEffect {
+  /// The requirements that must be met to make the skill effect trigger
+  List<EffectRequirement> get effectRequirements;
 }

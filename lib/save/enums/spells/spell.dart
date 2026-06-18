@@ -1,7 +1,8 @@
 import 'package:thlaby3_save_editor/save/enums/element.dart';
-import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
+import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
 
 /// The target mode associated with a spell
 enum SpellTargetMode {
@@ -21,19 +22,13 @@ mixin SpellSkill on UniqueSkill {
   /// The post-use delay associated with the spell
   int get delay;
 
-  /// The post-use cooldown associated with the spell
-  int get cooldown;
-
   /// The elements associated with the spell
   List<Element> get elements;
 
   /// The target mode used by the spell
   SpellTargetMode get targetMode;
 
-  /// The requirement that must be met to make the spell selectable
-  EffectRequirement? get castRequirement;
-
-  static List<SpellSkill> get values => const <SpellSkill>[
+  static const List<SpellSkill> values = <SpellSkill>[
     // Reimu spells
     yinYangOrb,
     barrierTalisman,
@@ -43,7 +38,27 @@ mixin SpellSkill on UniqueSkill {
     hakureiTalisman,
     flashExorcismBarrier,
     dreamSeal,
+    // Renko spells
+    eagerSupport,
+    firstAid,
+    warningBeacon,
+    signalBeacon,
+    swiftBeacon,
+    targetBeacon,
   ];
+}
+
+/// A mixin for spells that have a cooldown associated with it
+mixin CooldownSpell on SpellSkill {
+  /// The post-use cooldown associated with the spell
+  int get cooldown;
+}
+
+/// A mixin for spells that require a set of requirements to be met in order to
+/// be cast
+mixin ConditionedSpellSkill on SpellSkill {
+  /// The requirements that must be met to make the spell selectable
+  List<EffectRequirement> get castRequirements;
 }
 
 /// A mixin to unify attributes of spells that cause damage
