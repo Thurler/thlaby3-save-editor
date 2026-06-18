@@ -24,7 +24,11 @@ class CharacterLevelBonusFormGroup
     required super.enabled,
     required super.setState,
   }) {
-    int leftovers = 100 - _sum; // All keys will be null, defaults to initials
+    int initialSum = List<int>.generate(
+      CharacterLevelBonusFormField.values.length,
+      (int i) => initialData.getData(i),
+    ).fold(0, (int sum, int value) => sum + value);
+    int leftovers = 100 - initialSum;
     for (CharacterLevelBonusFormField field
         in CharacterLevelBonusFormField.values) {
       int initialValue = initialData.getData(field.index);
