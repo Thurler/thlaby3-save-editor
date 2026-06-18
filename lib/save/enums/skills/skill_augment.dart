@@ -8,6 +8,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
+import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
 
 enum AugmentRange {
   self,
@@ -56,6 +57,8 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     reimuPrivileges2,
     reimuPrivilegesPerm,
     finalPrayer2,
+    // Renko skill augments
+    adeptBeaconSpecialist,
   ];
 }
 

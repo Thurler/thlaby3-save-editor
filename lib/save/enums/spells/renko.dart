@@ -21,17 +21,22 @@ const DamageSpell firstAid = _FirstAid();
 const SpellAugmentSkill firstAidTraining = _FirstAidTraining();
 
 const SpellSkill warningBeacon = _WarningBeacon();
+const SpellAugmentSkill warningBeacon2 = _WarningBeacon2();
+
 const SpellSkill signalBeacon = _SignalBeacon();
+const SpellAugmentSkill signalBeacon2 = _SignalBeacon2();
+
 const SpellSkill swiftBeacon = _SwiftBeacon();
 const SpellSkill targetBeacon = _TargetBeacon();
+
+const NaturalAugment _beaconSpecialist = _BeaconSpecialist();
+const SkillAugmentSkill adeptBeaconSpecialist = _AdeptBeaconSpecialist();
 
 const UniqueSkill readingStars = _ReadingStars();
 
 const RaceSlayerSkill knowledgeStrangeThings = _KnowledgeStrangeThings();
 
 const UniqueSkill maryShield = _MaryShield();
-
-const NaturalAugment _beaconSpecialist = _BeaconSpecialist();
 
 class _EagerSupport
     implements
@@ -232,6 +237,34 @@ class _BeaconSpecialist
   int get dmgReceivedBuffDuration => 1;
 }
 
+class _AdeptBeaconSpecialist
+    implements NaturalAugmentChainSkill, DamageReceivedBuffAugment {
+  const _AdeptBeaconSpecialist();
+
+  @override
+  String get prettyName => 'Adept Beacon Specialist';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements =>
+      const <Skill>[swiftBeacon, PassiveSkill.beaconSpecialist, targetBeacon];
+
+  @override
+  UniqueSkill get baseSkill =>
+      throw Exception('Adept Beacon Specialist applies to multiple skills');
+
+  @override
+  NaturalAugment get baseAugment => _beaconSpecialist;
+
+  @override
+  double get dmgReceivedBuff => 25;
+
+  @override
+  int get dmgReceivedBuffDuration => 1;
+}
+
 class _WarningBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, DefenseBuffer, MindBuffer {
   const _WarningBeacon();
@@ -265,6 +298,29 @@ class _WarningBeacon extends _BeaconSpell
   int get mndBuff => 22;
 }
 
+class _WarningBeacon2
+    implements SpellAugmentSkill, DefenseBuffAugment, MindBuffAugment {
+  const _WarningBeacon2();
+
+  @override
+  String get prettyName => 'Warning Beacon: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[warningBeacon];
+
+  @override
+  SpellSkill get baseSkill => warningBeacon;
+
+  @override
+  int get defBuff => 8;
+
+  @override
+  int get mndBuff => 8;
+}
+
 class _SignalBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, AttackBuffer, MagicBuffer {
   const _SignalBeacon();
@@ -296,6 +352,29 @@ class _SignalBeacon extends _BeaconSpell
 
   @override
   int get magBuff => 15;
+}
+
+class _SignalBeacon2
+    implements SpellAugmentSkill, AttackBuffAugment, MagicBuffAugment {
+  const _SignalBeacon2();
+
+  @override
+  String get prettyName => 'Signal Beacon: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[signalBeacon];
+
+  @override
+  SpellSkill get baseSkill => signalBeacon;
+
+  @override
+  int get atkBuff => 7;
+
+  @override
+  int get magBuff => 7;
 }
 
 class _SwiftBeacon extends _BeaconSpell
@@ -377,7 +456,7 @@ class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
   InitiativeRange get initiativeRange => InitiativeRange.frontline;
 }
 
-class _KnowledgeStrangeThings implements RaceSlayerSkill {
+class _KnowledgeStrangeThings implements RaceSlayerSkill, ConditionedEffect {
   const _KnowledgeStrangeThings();
 
   @override
@@ -388,6 +467,10 @@ class _KnowledgeStrangeThings implements RaceSlayerSkill {
 
   @override
   List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[FrontlineSelfRequirement()];
 
   @override
   List<EnemyRace> get races => const <EnemyRace>[EnemyRace.other];
@@ -415,6 +498,7 @@ class _MaryShield
 
   @override
   List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    FrontlineSelfRequirement(),
     FrontlineCharacterRequirement(Character.maribel),
   ];
 

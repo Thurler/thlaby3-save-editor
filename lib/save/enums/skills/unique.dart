@@ -95,16 +95,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  warningBeacon2(
-    'Warning Beacon: Effect ↑',
-    3,
-    requirements: <Skill>[warningBeacon],
-  ),
-  adeptBeaconSpecialist(
-    'Adept Beacon Specialist',
-    3,
-    requirements: <Skill>[swiftBeacon, beaconSpecialist, targetBeacon],
-  ),
   signalBeacon2(
     'Signal Beacon: Effect ↑',
     3,

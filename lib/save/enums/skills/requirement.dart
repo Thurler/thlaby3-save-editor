@@ -59,6 +59,11 @@ class TurnMultipleRequirement implements EffectRequirement {
   const TurnMultipleRequirement(this.multipleOf);
 }
 
+/// A requirement that checks if the skill owner is in the frontline
+class FrontlineSelfRequirement implements EffectRequirement {
+  const FrontlineSelfRequirement();
+}
+
 /// A requirement that checks if the specified character is in the frontline
 class FrontlineCharacterRequirement implements EffectRequirement {
   /// The character that must be in the frontline

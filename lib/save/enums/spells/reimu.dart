@@ -933,7 +933,7 @@ class _DreamSealDamageAmplifier
   double get multiplier => 1.5;
 }
 
-class _ArmoredYinYangOrb implements ElementProtectorSkill {
+class _ArmoredYinYangOrb implements ElementProtectorSkill, ConditionedEffect {
   const _ArmoredYinYangOrb();
 
   @override
@@ -944,6 +944,10 @@ class _ArmoredYinYangOrb implements ElementProtectorSkill {
 
   @override
   List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[FrontlineSelfRequirement()];
 
   @override
   List<Element> get elements => const <Element>[Element.spi];
@@ -999,7 +1003,7 @@ class _ArmoredYinYangOrbBoost
   int get dmgDealtBuffDuration => 1;
 }
 
-class _YoukaiBuster implements RaceSlayerSkill {
+class _YoukaiBuster implements RaceSlayerSkill, ConditionedEffect {
   const _YoukaiBuster();
 
   @override
@@ -1010,6 +1014,10 @@ class _YoukaiBuster implements RaceSlayerSkill {
 
   @override
   List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[FrontlineSelfRequirement()];
 
   @override
   List<EnemyRace> get races => const <EnemyRace>[EnemyRace.youkai];

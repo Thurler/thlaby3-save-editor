@@ -38,6 +38,8 @@ mixin SpellAugmentSkill on SkillAugmentSkill {
     // Renko spell augments
     eagerSupportMentalCare,
     firstAidTraining,
+    warningBeacon2,
+    signalBeacon2,
   ];
 }
 
