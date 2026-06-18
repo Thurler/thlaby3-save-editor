@@ -2,14 +2,6 @@ import 'package:thlaby3_save_editor/save/enums/skills/training.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/skill_tree.dart';
 
-/// A struct to hold data regarding a character's unique skill data for their
-/// skill tree
-typedef UniqueSkillData = ({
-  UniqueSkill skill,
-  LevelGate levelGate,
-  int column,
-});
-
 /// The characters in the game and the static data relating to their in-game
 /// attributes
 enum Character {
@@ -20,7 +12,7 @@ enum Character {
       Personality.freeSpirited,
       Personality.facilitator,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   renko(
     <Mastery>[Mastery.cultural, Mastery.madness, Mastery.engineering],
@@ -29,7 +21,7 @@ enum Character {
       Personality.brainy,
       Personality.altruistic,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   maribel(
     <Mastery>[Mastery.cultural, Mastery.divine, Mastery.arcane],
@@ -38,7 +30,7 @@ enum Character {
       Personality.airheaded,
       Personality.innerFacing,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   meiling(
     <Mastery>[Mastery.vigor, Mastery.botanical, Mastery.heavy],
@@ -47,7 +39,7 @@ enum Character {
       Personality.easygoing,
       Personality.sturdy,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   alice(
     <Mastery>[Mastery.inorganic, Mastery.arcane, Mastery.engineering],
@@ -56,7 +48,7 @@ enum Character {
       Personality.creative,
       Personality.actuallyNice,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   nitori(
     <Mastery>[Mastery.engineering, Mastery.cultural, Mastery.heavy],
@@ -65,7 +57,7 @@ enum Character {
       Personality.diligent,
       Personality.outgoing,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   aya(
     <Mastery>[Mastery.weaponry, Mastery.bestial, Mastery.inorganic],
@@ -74,12 +66,12 @@ enum Character {
       Personality.nihilist,
       Personality.perfectionist,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   patchouli(
     <Mastery>[Mastery.arcane, Mastery.elemental, Mastery.cultural],
     <Personality>[Personality.brainy, Personality.loner, Personality.dense],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   cirno(
     <Mastery>[Mastery.vigor, Mastery.elemental, Mastery.botanical],
@@ -88,7 +80,7 @@ enum Character {
       Personality.lively,
       Personality.courageous,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   keine(
     <Mastery>[Mastery.cultural, Mastery.mythical, Mastery.protective],
@@ -97,7 +89,7 @@ enum Character {
       Personality.altruistic,
       Personality.caretaker,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   doremy(
     <Mastery>[Mastery.madness, Mastery.garment, Mastery.vigor],
@@ -106,7 +98,7 @@ enum Character {
       Personality.mysterious,
       Personality.supportive,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   yukari(
     <Mastery>[Mastery.mythical, Mastery.arcane, Mastery.cultural],
@@ -115,7 +107,7 @@ enum Character {
       Personality.innerFacing,
       Personality.caretaker,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   marisa(
     <Mastery>[Mastery.arcane, Mastery.garment, Mastery.elemental],
@@ -124,7 +116,7 @@ enum Character {
       Personality.heroic,
       Personality.passionate,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   koishi(
     <Mastery>[Mastery.madness, Mastery.inorganic, Mastery.garment],
@@ -133,7 +125,7 @@ enum Character {
       Personality.innerFacing,
       Personality.finisher,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   sumireko(
     <Mastery>[Mastery.divine, Mastery.engineering, Mastery.cultural],
@@ -142,17 +134,17 @@ enum Character {
       Personality.courageous,
       Personality.heroic,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   ran(
     <Mastery>[Mastery.bestial, Mastery.arcane, Mastery.divine],
     <Personality>[Personality.alluring, Personality.earnest, Personality.loyal],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   chen(
     <Mastery>[Mastery.bestial, Mastery.vigor, Mastery.botanical],
     <Personality>[Personality.lively, Personality.clumsy, Personality.speedy],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   sanae(
     <Mastery>[Mastery.garment, Mastery.cultural, Mastery.engineering],
@@ -161,7 +153,7 @@ enum Character {
       Personality.supportive,
       Personality.harmonyWithNature,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   kanako(
     <Mastery>[Mastery.heavy, Mastery.engineering, Mastery.inorganic],
@@ -170,7 +162,7 @@ enum Character {
       Personality.outgoing,
       Personality.overwhelmingPresence,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   suwako(
     <Mastery>[Mastery.botanical, Mastery.mythical, Mastery.garment],
@@ -179,7 +171,7 @@ enum Character {
       Personality.airheaded,
       Personality.divine,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   remilia(
     <Mastery>[Mastery.heavy, Mastery.vigor, Mastery.mythical],
@@ -188,7 +180,7 @@ enum Character {
       Personality.overwhelmingPresence,
       Personality.thorough,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   sakuya(
     <Mastery>[Mastery.weaponry, Mastery.inorganic, Mastery.madness],
@@ -197,7 +189,7 @@ enum Character {
       Personality.secretlyCrazy,
       Personality.coolHeaded,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   junko(
     <Mastery>[Mastery.divine, Mastery.arcane, Mastery.bestial],
@@ -206,7 +198,7 @@ enum Character {
       Personality.mysterious,
       Personality.divine,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   hecatia(
     <Mastery>[Mastery.heavy, Mastery.elemental, Mastery.madness],
@@ -215,7 +207,7 @@ enum Character {
       Personality.divine,
       Personality.selfReliant,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   youmu(
     <Mastery>[Mastery.weaponry, Mastery.protective, Mastery.inorganic],
@@ -224,7 +216,7 @@ enum Character {
       Personality.laborer,
       Personality.dense,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   rumia(
     <Mastery>[Mastery.elemental, Mastery.vigor, Mastery.garment],
@@ -233,7 +225,7 @@ enum Character {
       Personality.dense,
       Personality.airheaded,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   kogasa(
     <Mastery>[Mastery.inorganic, Mastery.botanical, Mastery.protective],
@@ -242,7 +234,7 @@ enum Character {
       Personality.sensitive,
       Personality.loyal,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   reisen(
     <Mastery>[Mastery.madness, Mastery.bestial, Mastery.divine],
@@ -251,7 +243,7 @@ enum Character {
       Personality.hardWorker,
       Personality.facilitator,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   rin(
     <Mastery>[Mastery.bestial, Mastery.weaponry, Mastery.madness],
@@ -260,7 +252,7 @@ enum Character {
       Personality.alluring,
       Personality.nihilist,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   kasen(
     <Mastery>[Mastery.botanical, Mastery.bestial, Mastery.heavy],
@@ -269,7 +261,7 @@ enum Character {
       Personality.goodPerson,
       Personality.harmonyWithNature,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   yuugi(
     <Mastery>[Mastery.heavy, Mastery.protective, Mastery.madness],
@@ -278,7 +270,7 @@ enum Character {
       Personality.challengeSeeker,
       Personality.sturdy,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   suika(
     <Mastery>[Mastery.inorganic, Mastery.heavy, Mastery.weaponry],
@@ -287,7 +279,7 @@ enum Character {
       Personality.freeSpirited,
       Personality.thorough,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   wriggle(
     <Mastery>[Mastery.botanical, Mastery.protective, Mastery.elemental],
@@ -296,7 +288,7 @@ enum Character {
       Personality.clumsy,
       Personality.laborer,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   mystia(
     <Mastery>[Mastery.bestial, Mastery.vigor, Mastery.weaponry],
@@ -305,7 +297,7 @@ enum Character {
       Personality.cheerful,
       Personality.passionate,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   eirin(
     <Mastery>[Mastery.mythical, Mastery.divine, Mastery.weaponry],
@@ -314,7 +306,7 @@ enum Character {
       Personality.brainy,
       Personality.coolHeaded,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   byakuren(
     <Mastery>[Mastery.arcane, Mastery.mythical, Mastery.vigor],
@@ -323,7 +315,7 @@ enum Character {
       Personality.goodPerson,
       Personality.speedy,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   iku(
     <Mastery>[Mastery.garment, Mastery.protective, Mastery.elemental],
@@ -332,17 +324,17 @@ enum Character {
       Personality.harmonyWithNature,
       Personality.easygoing,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   momiji(
     <Mastery>[Mastery.protective, Mastery.weaponry, Mastery.bestial],
     <Personality>[Personality.loyal, Personality.earnest, Personality.diligent],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   tenshi(
     <Mastery>[Mastery.protective, Mastery.botanical, Mastery.heavy],
     <Personality>[Personality.crude, Personality.grandiose, Personality.sturdy],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   yuyuko(
     <Mastery>[Mastery.garment, Mastery.heavy, Mastery.divine],
@@ -351,7 +343,7 @@ enum Character {
       Personality.prankster,
       Personality.alluring,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   mokou(
     <Mastery>[Mastery.elemental, Mastery.vigor, Mastery.mythical],
@@ -360,7 +352,7 @@ enum Character {
       Personality.challengeSeeker,
       Personality.actuallyNice,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   kokoro(
     <Mastery>[Mastery.inorganic, Mastery.weaponry, Mastery.madness],
@@ -369,7 +361,7 @@ enum Character {
       Personality.solitary,
       Personality.clumsy,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   satori(
     <Mastery>[Mastery.garment, Mastery.madness, Mastery.botanical],
@@ -378,7 +370,7 @@ enum Character {
       Personality.loner,
       Personality.sensitive,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   utsuho(
     <Mastery>[Mastery.elemental, Mastery.bestial, Mastery.vigor],
@@ -387,7 +379,7 @@ enum Character {
       Personality.cheerful,
       Personality.nonconformist,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   kaguya(
     <Mastery>[Mastery.elemental, Mastery.mythical, Mastery.cultural],
@@ -396,7 +388,7 @@ enum Character {
       Personality.nihilist,
       Personality.finisher,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   flandre(
     <Mastery>[Mastery.madness, Mastery.heavy, Mastery.arcane],
@@ -405,7 +397,7 @@ enum Character {
       Personality.loner,
       Personality.competitive,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   sagume(
     <Mastery>[Mastery.protective, Mastery.mythical, Mastery.divine],
@@ -414,7 +406,7 @@ enum Character {
       Personality.creative,
       Personality.mysterious,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   ),
   miko(
     <Mastery>[Mastery.mythical, Mastery.weaponry, Mastery.inorganic],
@@ -423,14 +415,14 @@ enum Character {
       Personality.grandiose,
       Personality.nonconformist,
     ],
-    <UniqueSkillData>[],
+    <LevelGate, Map<int, UniqueSkill>>{},
   );
 
   /// The filename to use when reading character portraits
   String get filename => (index + 1).toString().padLeft(3, '0');
 
   /// The unique skills in this character's unique skill tree
-  final List<UniqueSkillData> uniqueSkills;
+  final Map<LevelGate, Map<int, UniqueSkill>> uniqueSkills;
 
   /// The masteries this character has in the training skill tree
   final List<Mastery> masteries;

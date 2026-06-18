@@ -88,14 +88,16 @@ class SkillTree {
   SkillTree.uniqueTree(Character character) {
     // Simply add all unique skills with the character-specific level gates and
     // column data
-    for (UniqueSkillData data in character.uniqueSkills) {
-      _skills.add(
-        SkillNode(
-          skill: data.skill,
-          levelGate: data.levelGate,
-          column: data.column,
-        ),
-      );
+    for (LevelGate levelGate in character.uniqueSkills.keys) {
+      for (int column in character.uniqueSkills[levelGate]!.keys) {
+        _skills.add(
+          SkillNode(
+            skill: character.uniqueSkills[levelGate]![column]!,
+            levelGate: levelGate,
+            column: column,
+          ),
+        );
+      }
     }
   }
 
