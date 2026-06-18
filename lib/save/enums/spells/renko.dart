@@ -3,6 +3,7 @@ import 'package:thlaby3_save_editor/save/enums/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/ailment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/buff.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/debuff.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
@@ -35,8 +36,20 @@ const SkillAugmentSkill adeptBeaconSpecialist = _AdeptBeaconSpecialist();
 const UniqueSkill readingStars = _ReadingStars();
 
 const RaceSlayerSkill knowledgeStrangeStrings = _KnowledgeStrangeStrings();
+const SkillAugmentSkill knowledgeStrangeStrings2 = _KnowledgeStrangeStrings2();
 
 const UniqueSkill maryShield = _MaryShield();
+
+const UniqueSkill abilityReadStars = _AbilityReadStars();
+const NaturalAugment abilityReadStarsFront = _AbilityReadStarsFront();
+
+const UniqueSkill abilityReadMoon = _AbilityReadMoon();
+const NaturalAugment abilityReadMoonFront = _AbilityReadMoonFront();
+
+const UniqueSkill firCldDamage = _FirCldDamage();
+const UniqueSkill wndNtrDamage = _WndNtrDamage();
+const UniqueSkill mysSpiDamage = _MysSpiDamage();
+const UniqueSkill drkPhyDamage = _DrkPhyDamage();
 
 class _EagerSupport
     implements
@@ -479,6 +492,28 @@ class _KnowledgeStrangeStrings implements RaceSlayerSkill, ConditionedEffect {
   double get slayBonus => 12;
 }
 
+class _KnowledgeStrangeStrings2 implements SkillAugmentSkill, RaceSlayAugment {
+  const _KnowledgeStrangeStrings2();
+
+  @override
+  String get prettyName => 'Knowledge of Strange Strings: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[knowledgeStrangeStrings];
+
+  @override
+  RaceSlayerSkill get baseSkill => knowledgeStrangeStrings;
+
+  @override
+  List<EnemyRace> get races => baseSkill.races;
+
+  @override
+  double get slayBonus => 8;
+}
+
 class _MaryShield
     implements
         UniqueSkill,
@@ -525,4 +560,210 @@ class _MaryShield
 
   @override
   double get dmgReducedPercent => 12;
+}
+
+class _AbilityReadStars
+    implements
+        UniqueSkill,
+        NaturallyAugmentedSkill,
+        PoisonResIncreaser,
+        ParalysisResIncreaser,
+        HeavyResIncreaser,
+        ShockResIncreaser {
+  const _AbilityReadStars();
+
+  @override
+  String get prettyName => 'Ability to Read the Stars';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[readingStars];
+
+  @override
+  List<NaturalAugment> get naturalAugments =>
+      const <NaturalAugment>[abilityReadStarsFront];
+
+  @override
+  int get psnIncrease => 10;
+
+  @override
+  int get parIncrease => 10;
+
+  @override
+  int get hvyIncrease => 10;
+
+  @override
+  int get shkIncrease => 10;
+}
+
+class _AbilityReadStarsFront
+    implements
+        NaturalAugment,
+        PoisonResIncreaseAugment,
+        ParalysisResIncreaseAugment,
+        HeavyResIncreaseAugment,
+        ShockResIncreaseAugment {
+  const _AbilityReadStarsFront();
+
+  @override
+  UniqueSkill get baseSkill => abilityReadStars;
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[FrontlineSelfRequirement()];
+
+  @override
+  int get psnIncrease => 10;
+
+  @override
+  int get parIncrease => 10;
+
+  @override
+  int get hvyIncrease => 10;
+
+  @override
+  int get shkIncrease => 10;
+}
+
+class _AbilityReadMoon
+    implements
+        UniqueSkill,
+        NaturallyAugmentedSkill,
+        TerrorResIncreaser,
+        SilenceResIncreaser,
+        DeathResIncreaser,
+        DebuffResIncreaser {
+  const _AbilityReadMoon();
+
+  @override
+  String get prettyName => 'Ability to Read the Moon';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[readingStars];
+
+  @override
+  List<NaturalAugment> get naturalAugments =>
+      const <NaturalAugment>[abilityReadMoonFront];
+
+  @override
+  int get trrIncrease => 10;
+
+  @override
+  int get silIncrease => 10;
+
+  @override
+  int get dthIncrease => 10;
+
+  @override
+  int get dbfIncrease => 10;
+}
+
+class _AbilityReadMoonFront
+    implements
+        NaturalAugment,
+        TerrorResIncreaseAugment,
+        SilenceResIncreaseAugment,
+        DeathResIncreaseAugment,
+        DebuffResIncreaseAugment {
+  const _AbilityReadMoonFront();
+
+  @override
+  UniqueSkill get baseSkill => abilityReadMoon;
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[FrontlineSelfRequirement()];
+
+  @override
+  int get trrIncrease => 10;
+
+  @override
+  int get silIncrease => 10;
+
+  @override
+  int get dthIncrease => 10;
+
+  @override
+  int get dbfIncrease => 10;
+}
+
+class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  const _FirCldDamage();
+
+  @override
+  String get prettyName => 'FIR/CLD Damage ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<Element> get elements => const <Element>[Element.fir, Element.cld];
+
+  @override
+  double get multiplierIncrease => 1.1;
+}
+
+class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  const _WndNtrDamage();
+
+  @override
+  String get prettyName => 'WND/NTR Damage ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<Element> get elements => const <Element>[Element.wnd, Element.ntr];
+
+  @override
+  double get multiplierIncrease => 1.1;
+}
+
+class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  const _MysSpiDamage();
+
+  @override
+  String get prettyName => 'MYS/SPI Damage ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<Element> get elements => const <Element>[Element.mys, Element.spi];
+
+  @override
+  double get multiplierIncrease => 1.1;
+}
+
+class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  const _DrkPhyDamage();
+
+  @override
+  String get prettyName => 'DRK/PHY Damage ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<Element> get elements => const <Element>[Element.drk, Element.phy];
+
+  @override
+  double get multiplierIncrease => 1.1;
 }

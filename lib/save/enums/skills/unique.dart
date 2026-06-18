@@ -1,7 +1,4 @@
-import 'package:thlaby3_save_editor/save/enums/skills/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/focus_reaction.dart';
-import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
-import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
@@ -40,6 +37,12 @@ mixin UniqueSkill on Skill {
     readingStars,
     knowledgeStrangeStrings,
     maryShield,
+    abilityReadStars,
+    abilityReadMoon,
+    firCldDamage,
+    wndNtrDamage,
+    mysSpiDamage,
+    drkPhyDamage,
   ];
 }
 
@@ -75,6 +78,7 @@ enum PassiveSkill implements UniqueSkill {
   ),
   // Renko passives
   beaconSpecialist('Beacon Specialist', 3),
+  learningListExpansion1('Learning List Expansion #1', 4),
   skill('Skill', 3);
 
   @override
@@ -95,26 +99,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  abilityReadStars(
-    'Ability to Read the Stars',
-    3,
-    requirements: <Skill>[readingStarsPositions],
-  ),
-  abilityReadMoon(
-    'Ability to Read the Moon',
-    3,
-    requirements: <Skill>[readingStarsPositions],
-  ),
-  knowledgeStrangeStrings2(
-    'Knowledge of Strange Strings: Effect ↑',
-    3,
-    requirements: <Skill>[knowledgeStrangeStrings],
-  ),
-  learningListExpansion1('Learning List Expansion #1', 4),
-  firCldDamage('FIR/CLD Damage ↑', 3),
-  wndNtrDamage('WND/NTR Damage ↑', 3),
-  mysSpiDamage('MYS/SPI Damage ↑', 3),
-  drkPhyDamage('DRK/PHY Damage ↑', 3),
   swiftBeacon2('Swift Beacon: Effect ↑', 3, requirements: <Skill>[swiftBeacon]),
   targetBeacon2(
     'Target Beacon: Effect ↑',

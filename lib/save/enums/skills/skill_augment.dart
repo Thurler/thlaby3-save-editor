@@ -6,6 +6,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/ko_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/race.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
@@ -59,6 +60,7 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     finalPrayer2,
     // Renko skill augments
     adeptBeaconSpecialist,
+    knowledgeStrangeStrings2,
   ];
 }
 
@@ -266,4 +268,61 @@ mixin PercentMpHealAugment on SkillAugment implements PercentMpHealer {
   /// How much the heal percent will be increased by
   @override
   double get mpHealPercent;
+}
+
+/// A mixin for augents that change a global poison resistance stat increase
+mixin PoisonResIncreaseAugment on SkillAugment implements PoisonResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get psnIncrease;
+}
+
+/// A mixin for augents that change a global paralysis resistance stat increase
+mixin ParalysisResIncreaseAugment on SkillAugment
+    implements ParalysisResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get parIncrease;
+}
+
+/// A mixin for augents that change a global heavy resistance stat increase
+mixin HeavyResIncreaseAugment on SkillAugment implements HeavyResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get hvyIncrease;
+}
+
+/// A mixin for augents that change a global shock resistance stat increase
+mixin ShockResIncreaseAugment on SkillAugment implements ShockResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get shkIncrease;
+}
+
+/// A mixin for augents that change a global terror resistance stat increase
+mixin TerrorResIncreaseAugment on SkillAugment implements TerrorResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get trrIncrease;
+}
+
+/// A mixin for augents that change a global silence resistance stat increase
+mixin SilenceResIncreaseAugment on SkillAugment implements SilenceResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get silIncrease;
+}
+
+/// A mixin for augents that change a global death resistance stat increase
+mixin DeathResIncreaseAugment on SkillAugment implements DeathResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get dthIncrease;
+}
+
+/// A mixin for augents that change a global debuff resistance stat increase
+mixin DebuffResIncreaseAugment on SkillAugment implements DebuffResIncreaser {
+  /// How much the stat increase increases by
+  @override
+  int get dbfIncrease;
 }

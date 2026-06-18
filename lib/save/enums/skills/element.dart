@@ -2,6 +2,15 @@ import 'package:thlaby3_save_editor/save/enums/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
+/// A mixin for skills that offer passive enhancements when using elements
+mixin ElementMultiplierEnhancer {
+  /// The elements that will have damage increased
+  List<Element> get elements;
+
+  /// How much damage multiplier will be multiplied by
+  double get multiplierIncrease;
+}
+
 /// A mixin for skills that offer passive protection against elements
 mixin ElementProtector {
   /// The elements that will have damage reduced
