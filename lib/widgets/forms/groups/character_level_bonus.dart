@@ -100,8 +100,7 @@ class CharacterLevelBonusFormWidget
         ),
         const SizedBox(height: 20),
         TGridRow(
-          smFlexLimit: 2,
-          lgFlexLimit: 3,
+          smFlexLimit: 3,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: CharacterLevelBonusFormField.values.map(
             (CharacterLevelBonusFormField field) =>
