@@ -38,7 +38,7 @@ mixin UniqueSkill on Skill {
     trueFinalPrayer,
     // Renko unique skills
     readingStars,
-    knowledgeStrangeThings,
+    knowledgeStrangeStrings,
     maryShield,
   ];
 }
@@ -95,11 +95,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  signalBeacon2(
-    'Signal Beacon: Effect ↑',
-    3,
-    requirements: <Skill>[signalBeacon],
-  ),
   abilityReadStars(
     'Ability to Read the Stars',
     3,
@@ -110,10 +105,10 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     3,
     requirements: <Skill>[readingStarsPositions],
   ),
-  knowledgeStrangeThings2(
-    'Knowledge of Strange Things: Effect ↑',
+  knowledgeStrangeStrings2(
+    'Knowledge of Strange Strings: Effect ↑',
     3,
-    requirements: <Skill>[knowledgeStrangeThings],
+    requirements: <Skill>[knowledgeStrangeStrings],
   ),
   learningListExpansion1('Learning List Expansion #1', 4),
   firCldDamage('FIR/CLD Damage ↑', 3),
@@ -154,10 +149,10 @@ enum UncategorizedUniqueSkill implements UniqueSkill {
     3,
     requirements: <Skill>[firstAidEmergencySmoke],
   ),
-  knowledgeStrangeThingsShield(
-    'Knowledge of Strange Things: Shield Conversion',
+  knowledgeStrangeStringsShield(
+    'Knowledge of Strange Strings: Shield Conversion',
     3,
-    requirements: <Skill>[knowledgeStrangeThings2],
+    requirements: <Skill>[knowledgeStrangeStrings2],
   ),
   learningListExpansion2(
     'Learning List Expansion #2',

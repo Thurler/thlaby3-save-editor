@@ -34,7 +34,7 @@ const SkillAugmentSkill adeptBeaconSpecialist = _AdeptBeaconSpecialist();
 
 const UniqueSkill readingStars = _ReadingStars();
 
-const RaceSlayerSkill knowledgeStrangeThings = _KnowledgeStrangeThings();
+const RaceSlayerSkill knowledgeStrangeStrings = _KnowledgeStrangeStrings();
 
 const UniqueSkill maryShield = _MaryShield();
 
@@ -456,11 +456,11 @@ class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
   InitiativeRange get initiativeRange => InitiativeRange.frontline;
 }
 
-class _KnowledgeStrangeThings implements RaceSlayerSkill, ConditionedEffect {
-  const _KnowledgeStrangeThings();
+class _KnowledgeStrangeStrings implements RaceSlayerSkill, ConditionedEffect {
+  const _KnowledgeStrangeStrings();
 
   @override
-  String get prettyName => 'Knowledge of Strange Things';
+  String get prettyName => 'Knowledge of Strange Strings';
 
   @override
   int get cost => 3;
