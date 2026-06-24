@@ -63,6 +63,10 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     knowledgeStrangeStrings2,
     knowledgeStrangeStringsShield,
     maryKnight,
+    firCldDamage2,
+    wndNtrDamage2,
+    mysSpiDamage2,
+    drkPhyDamage2,
   ];
 }
 
@@ -231,6 +235,15 @@ mixin ParalysisAugment on SkillAugment, ParalysisInflictor {
   /// How much the ailment chance increases by
   @override
   double get parChance;
+}
+
+/// A mixin for augments that change a element multiplier enhancer's
+/// multiplicand
+mixin ElementMultiplierAugment on SkillAugment
+    implements ElementMultiplierEnhancer {
+  /// How much damage multiplier multiplicand is increased by
+  @override
+  double get multiplierIncrease;
 }
 
 /// A mixin for augments that change an element protector's protection

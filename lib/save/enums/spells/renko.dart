@@ -72,9 +72,17 @@ const UniqueSkill abilityReadMoon = _AbilityReadMoon();
 const NaturalAugment abilityReadMoonFront = _AbilityReadMoonFront();
 
 const UniqueSkill firCldDamage = _FirCldDamage();
+const SkillAugmentSkill firCldDamage2 = _FirCldDamage2();
+
 const UniqueSkill wndNtrDamage = _WndNtrDamage();
+const SkillAugmentSkill wndNtrDamage2 = _WndNtrDamage2();
+
 const UniqueSkill mysSpiDamage = _MysSpiDamage();
+const SkillAugmentSkill mysSpiDamage2 = _MysSpiDamage2();
+
 const UniqueSkill drkPhyDamage = _DrkPhyDamage();
+const SkillAugmentSkill drkPhyDamage2 = _DrkPhyDamage2();
+
 const UniqueSkill directDamage = _DirectDamage();
 const UniqueSkill magicDamage = _MagicDamage();
 
@@ -1188,6 +1196,8 @@ class _AbilityReadMoonFront
 }
 
 class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  static const List<Element> elementList = <Element>[Element.fir, Element.cld];
+
   const _FirCldDamage();
 
   @override
@@ -1200,13 +1210,37 @@ class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<Element> get elements => const <Element>[Element.fir, Element.cld];
+  List<Element> get elements => elementList;
 
   @override
   double get multiplierIncrease => 1.1;
 }
 
+class _FirCldDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+  const _FirCldDamage2();
+
+  @override
+  String get prettyName => 'FIR/CLD Damage ↑+';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[firCldDamage];
+
+  @override
+  UniqueSkill get baseSkill => firCldDamage;
+
+  @override
+  List<Element> get elements => _FirCldDamage.elementList;
+
+  @override
+  double get multiplierIncrease => 0.1;
+}
+
 class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  static const List<Element> elementList = <Element>[Element.wnd, Element.ntr];
+
   const _WndNtrDamage();
 
   @override
@@ -1219,13 +1253,37 @@ class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<Element> get elements => const <Element>[Element.wnd, Element.ntr];
+  List<Element> get elements => elementList;
 
   @override
   double get multiplierIncrease => 1.1;
 }
 
+class _WndNtrDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+  const _WndNtrDamage2();
+
+  @override
+  String get prettyName => 'WND/NTR Damage ↑+';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[wndNtrDamage];
+
+  @override
+  UniqueSkill get baseSkill => wndNtrDamage;
+
+  @override
+  List<Element> get elements => _WndNtrDamage.elementList;
+
+  @override
+  double get multiplierIncrease => 0.1;
+}
+
 class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  static const List<Element> elementList = <Element>[Element.mys, Element.spi];
+
   const _MysSpiDamage();
 
   @override
@@ -1238,13 +1296,37 @@ class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<Element> get elements => const <Element>[Element.mys, Element.spi];
+  List<Element> get elements => elementList;
 
   @override
   double get multiplierIncrease => 1.1;
 }
 
+class _MysSpiDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+  const _MysSpiDamage2();
+
+  @override
+  String get prettyName => 'MYS/SPI Damage ↑+';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[mysSpiDamage];
+
+  @override
+  UniqueSkill get baseSkill => mysSpiDamage;
+
+  @override
+  List<Element> get elements => _MysSpiDamage.elementList;
+
+  @override
+  double get multiplierIncrease => 0.1;
+}
+
 class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
+  static const List<Element> elementList = <Element>[Element.drk, Element.phy];
+
   const _DrkPhyDamage();
 
   @override
@@ -1257,10 +1339,32 @@ class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
   List<Skill> get requirements => const <Skill>[];
 
   @override
-  List<Element> get elements => const <Element>[Element.drk, Element.phy];
+  List<Element> get elements => elementList;
 
   @override
   double get multiplierIncrease => 1.1;
+}
+
+class _DrkPhyDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+  const _DrkPhyDamage2();
+
+  @override
+  String get prettyName => 'DRK/PHY Damage ↑+';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[drkPhyDamage];
+
+  @override
+  UniqueSkill get baseSkill => drkPhyDamage;
+
+  @override
+  List<Element> get elements => _DrkPhyDamage.elementList;
+
+  @override
+  double get multiplierIncrease => 0.1;
 }
 
 class _DirectDamage implements UniqueSkill, DirectPowEnhancer {
