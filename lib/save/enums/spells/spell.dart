@@ -45,6 +45,8 @@ mixin SpellSkill on UniqueSkill {
     signalBeacon,
     swiftBeacon,
     targetBeacon,
+    assaultBeacon,
+    skillfulTreatment,
   ];
 }
 
@@ -86,6 +88,12 @@ mixin DirectSpell on DamageSpell {
 mixin MagicSpell on DamageSpell {
   /// The magic factor to use on damage calculation
   double get magFactor;
+}
+
+/// A mixin to unify attributes of spells that cause fixed hp percent damage
+mixin HpPercentDamageSpell on SpellSkill {
+  /// What percentage of current HP is dealt as damage
+  double get hpPercentDamage;
 }
 
 /// A mixin to unify attributes of spells that use other stats as attack factors

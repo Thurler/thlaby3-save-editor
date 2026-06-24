@@ -17,9 +17,16 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 const DamageSpell eagerSupport = _EagerSupport();
 const NaturalAugment eagerSupportCleanse = _EagerSupportCleanse();
 const SpellAugmentSkill eagerSupportMentalCare = _EagerSupportMentalCare();
+const SpellAugmentSkill eagerSupportSelfCare = _EagerSupportSelfCare();
+const SpellAugmentSkill eagerSupportDevotedHeart = _EagerSupportDevotedHeart();
 
 const DamageSpell firstAid = _FirstAid();
 const SpellAugmentSkill firstAidTraining = _FirstAidTraining();
+const NaturalAugment firstAidCooldown = _FirstAidEmergencyCooldown();
+const NaturalAugment firstAidEmergencyWarning = _FirstAidEmergencyWarning();
+const NaturalAugment firstAidEmergencySignal = _FirstAidEmergencySignal();
+const NaturalAugment firstAidEmergencySwift = _FirstAidEmergencySwift();
+const NaturalAugment firstAidEmergencyTarget = _FirstAidEmergencyTarget();
 
 const SpellSkill warningBeacon = _WarningBeacon();
 const SpellAugmentSkill warningBeacon2 = _WarningBeacon2();
@@ -28,7 +35,22 @@ const SpellSkill signalBeacon = _SignalBeacon();
 const SpellAugmentSkill signalBeacon2 = _SignalBeacon2();
 
 const SpellSkill swiftBeacon = _SwiftBeacon();
+const SpellAugmentSkill swiftBeacon2 = _SwiftBeacon2();
+
 const SpellSkill targetBeacon = _TargetBeacon();
+const SpellAugmentSkill targetBeacon2 = _TargetBeacon2();
+
+const SpellSkill assaultBeacon = _AssaultBeacon();
+
+const SpellSkill skillfulTreatment = _SkillfulTreatment();
+const NaturalAugment skillfulTreatmentEmergencyWarning =
+    _SkillfulTreatmentEmergencyWarning();
+const NaturalAugment skillfulTreatmentEmergencySignal =
+    _SkillfulTreatmentEmergencySignal();
+const NaturalAugment skillfulTreatmentEmergencySwift =
+    _SkillfulTreatmentEmergencySwift();
+const NaturalAugment skillfulTreatmentEmergencyTarget =
+    _SkillfulTreatmentEmergencyTarget();
 
 const NaturalAugment _beaconSpecialist = _BeaconSpecialist();
 const SkillAugmentSkill adeptBeaconSpecialist = _AdeptBeaconSpecialist();
@@ -37,8 +59,11 @@ const UniqueSkill readingStars = _ReadingStars();
 
 const RaceSlayerSkill knowledgeStrangeStrings = _KnowledgeStrangeStrings();
 const SkillAugmentSkill knowledgeStrangeStrings2 = _KnowledgeStrangeStrings2();
+const SkillAugmentSkill knowledgeStrangeStringsShield =
+    _KnowledgeStrangeStringsShield();
 
 const UniqueSkill maryShield = _MaryShield();
+const SkillAugmentSkill maryKnight = _MaryKnight();
 
 const UniqueSkill abilityReadStars = _AbilityReadStars();
 const NaturalAugment abilityReadStarsFront = _AbilityReadStarsFront();
@@ -50,6 +75,8 @@ const UniqueSkill firCldDamage = _FirCldDamage();
 const UniqueSkill wndNtrDamage = _WndNtrDamage();
 const UniqueSkill mysSpiDamage = _MysSpiDamage();
 const UniqueSkill drkPhyDamage = _DrkPhyDamage();
+const UniqueSkill directDamage = _DirectDamage();
+const UniqueSkill magicDamage = _MagicDamage();
 
 class _EagerSupport
     implements
@@ -150,7 +177,64 @@ class _EagerSupportMentalCare
       const <EffectRequirement>[RandomNumberRequirement(80)];
 }
 
-class _FirstAid implements DirectSpell, MagicSpell, CooldownSpell {
+class _EagerSupportSelfCare
+    implements SpellAugmentSkill, DamageReceivedBuffAugment {
+  const _EagerSupportSelfCare();
+
+  @override
+  String get prettyName => 'Eager Support: Self-Care Reminder';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[eagerSupportMentalCare];
+
+  @override
+  UniqueSkill get baseSkill => eagerSupport;
+
+  @override
+  double get dmgReceivedBuff => 20;
+
+  @override
+  int get dmgReceivedBuffDuration => 1;
+}
+
+class _EagerSupportDevotedHeart
+    implements
+        SpellAugmentSkill,
+        DamageDealtBuffAugment,
+        CooldownAugment,
+        AtbIncreaseAugment {
+  const _EagerSupportDevotedHeart();
+
+  @override
+  String get prettyName => 'Eager Support: Devoted Heart';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[eagerSupportSelfCare];
+
+  @override
+  SpellSkill get baseSkill => eagerSupport;
+
+  @override
+  double get dmgDealtBuff => 20;
+
+  @override
+  int get dmgDealtBuffDuration => 1;
+
+  @override
+  int get cooldown => 1;
+
+  @override
+  int get atbIncrease => 600;
+}
+
+class _FirstAid
+    implements DirectSpell, MagicSpell, CooldownSpell, NaturallyAugmentedSkill {
   const _FirstAid();
 
   @override
@@ -161,6 +245,15 @@ class _FirstAid implements DirectSpell, MagicSpell, CooldownSpell {
 
   @override
   List<Skill> get requirements => const <Skill>[];
+
+  @override
+  List<NaturalAugment> get naturalAugments => const <NaturalAugment>[
+    firstAidCooldown,
+    firstAidEmergencyWarning,
+    firstAidEmergencySignal,
+    firstAidEmergencySwift,
+    firstAidEmergencyTarget,
+  ];
 
   @override
   int get mpCost => 6;
@@ -213,6 +306,93 @@ class _FirstAidTraining implements SpellAugmentSkill, MultiplierAugment {
 
   @override
   double get multiplier => 50;
+}
+
+class _FirstAidEmergencyCooldown implements NaturalAugment, CooldownAugment {
+  const _FirstAidEmergencyCooldown();
+
+  @override
+  SpellSkill get baseSkill => firstAid;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+  ];
+
+  @override
+  int get cooldown => 1;
+}
+
+class _FirstAidEmergencyWarning
+    implements NaturalAugment, DefenseBuffAugment, MindBuffAugment {
+  const _FirstAidEmergencyWarning();
+
+  @override
+  SpellSkill get baseSkill => firstAid;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(warningBeacon),
+  ];
+
+  @override
+  int get defBuff => _WarningBeacon.buffAmount;
+
+  @override
+  int get mndBuff => _WarningBeacon.buffAmount;
+}
+
+class _FirstAidEmergencySignal
+    implements NaturalAugment, AttackBuffAugment, MagicBuffAugment {
+  const _FirstAidEmergencySignal();
+
+  @override
+  SpellSkill get baseSkill => firstAid;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(signalBeacon),
+  ];
+
+  @override
+  int get atkBuff => _SignalBeacon.buffAmount;
+
+  @override
+  int get magBuff => _SignalBeacon.buffAmount;
+}
+
+class _FirstAidEmergencySwift implements NaturalAugment, SpeedBuffAugment {
+  const _FirstAidEmergencySwift();
+
+  @override
+  SpellSkill get baseSkill => firstAid;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(swiftBeacon),
+  ];
+
+  @override
+  int get spdBuff => _SwiftBeacon.buffAmount;
+}
+
+class _FirstAidEmergencyTarget implements NaturalAugment, AccuracyBuffAugment {
+  const _FirstAidEmergencyTarget();
+
+  @override
+  SpellSkill get baseSkill => firstAid;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(targetBeacon),
+  ];
+
+  @override
+  int get accBuff => _TargetBeacon.buffAmount;
 }
 
 abstract class _BeaconSpell
@@ -280,6 +460,8 @@ class _AdeptBeaconSpecialist
 
 class _WarningBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, DefenseBuffer, MindBuffer {
+  static const int buffAmount = 22;
+
   const _WarningBeacon();
 
   @override
@@ -305,10 +487,10 @@ class _WarningBeacon extends _BeaconSpell
       const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  int get defBuff => 22;
+  int get defBuff => buffAmount;
 
   @override
-  int get mndBuff => 22;
+  int get mndBuff => buffAmount;
 }
 
 class _WarningBeacon2
@@ -336,6 +518,8 @@ class _WarningBeacon2
 
 class _SignalBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, AttackBuffer, MagicBuffer {
+  static const int buffAmount = 15;
+
   const _SignalBeacon();
 
   @override
@@ -361,10 +545,10 @@ class _SignalBeacon extends _BeaconSpell
       const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  int get atkBuff => 15;
+  int get atkBuff => buffAmount;
 
   @override
-  int get magBuff => 15;
+  int get magBuff => buffAmount;
 }
 
 class _SignalBeacon2
@@ -392,6 +576,8 @@ class _SignalBeacon2
 
 class _SwiftBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, SpeedBuffer {
+  static const int buffAmount = 22;
+
   const _SwiftBeacon();
 
   @override
@@ -417,11 +603,32 @@ class _SwiftBeacon extends _BeaconSpell
       const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  int get spdBuff => 22;
+  int get spdBuff => buffAmount;
+}
+
+class _SwiftBeacon2 implements SpellAugmentSkill, SpeedBuffAugment {
+  const _SwiftBeacon2();
+
+  @override
+  String get prettyName => 'Swift Beacon: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[swiftBeacon];
+
+  @override
+  SpellSkill get baseSkill => swiftBeacon;
+
+  @override
+  int get spdBuff => 8;
 }
 
 class _TargetBeacon extends _BeaconSpell
     implements ConditionedSpellSkill, AccuracyBuffer {
+  static const int buffAmount = 15;
+
   const _TargetBeacon();
 
   @override
@@ -447,7 +654,217 @@ class _TargetBeacon extends _BeaconSpell
       const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  int get accBuff => 15;
+  int get accBuff => buffAmount;
+}
+
+class _TargetBeacon2 implements SpellAugmentSkill, AccuracyBuffAugment {
+  const _TargetBeacon2();
+
+  @override
+  String get prettyName => 'Target Beacon: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[targetBeacon];
+
+  @override
+  SpellSkill get baseSkill => targetBeacon;
+
+  @override
+  int get accBuff => 7;
+}
+
+class _AssaultBeacon extends _BeaconSpell
+    implements
+        ConditionedSpellSkill,
+        HpPercentDamageSpell,
+        AttackBuffer,
+        DefenseBuffer,
+        MagicBuffer,
+        MindBuffer,
+        SpeedBuffer {
+  const _AssaultBeacon();
+
+  @override
+  String get prettyName => 'Assault Beacon';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[swiftBeacon, targetBeacon];
+
+  @override
+  int get mpCost => 24;
+
+  @override
+  int get delay => 3300;
+
+  @override
+  List<Element> get elements => const <Element>[Element.drk];
+
+  @override
+  List<EffectRequirement> get castRequirements =>
+      const <EffectRequirement>[TurnMultipleRequirement(3)];
+
+  @override
+  double get hpPercentDamage => 20;
+
+  @override
+  int get atkBuff => 24;
+
+  @override
+  int get defBuff => 24;
+
+  @override
+  int get magBuff => 24;
+
+  @override
+  int get mndBuff => 24;
+
+  @override
+  int get spdBuff => 24;
+}
+
+class _SkillfulTreatment
+    implements
+        DirectSpell,
+        MagicSpell,
+        ConditionedSpellSkill,
+        CooldownSpell,
+        NaturallyAugmentedSkill {
+  const _SkillfulTreatment();
+
+  @override
+  String get prettyName => 'Skillful Treatment';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements =>
+      const <Skill>[PassiveSkill.firstAidEmergencySmoke];
+
+  @override
+  List<NaturalAugment> get naturalAugments => const <NaturalAugment>[
+    skillfulTreatmentEmergencyWarning,
+    skillfulTreatmentEmergencySignal,
+    skillfulTreatmentEmergencySwift,
+    skillfulTreatmentEmergencyTarget,
+  ];
+
+  @override
+  int get mpCost => 15;
+
+  @override
+  int get delay => 4000;
+
+  @override
+  int get cooldown => 3;
+
+  @override
+  List<Element> get elements => const <Element>[Element.phy];
+
+  @override
+  List<EffectRequirement> get castRequirements =>
+      const <EffectRequirement>[TurnMultipleRequirement(3)];
+
+  @override
+  SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
+
+  @override
+  int get accModifider => 10000;
+
+  @override
+  double get multiplier => 100;
+
+  @override
+  double get defGuard => 0;
+
+  @override
+  double get mndGuard => 0;
+
+  @override
+  double get atkFactor => -50;
+
+  @override
+  double get magFactor => -50;
+}
+
+class _SkillfulTreatmentEmergencyWarning
+    implements NaturalAugment, DefenseBuffAugment, MindBuffAugment {
+  const _SkillfulTreatmentEmergencyWarning();
+
+  @override
+  SpellSkill get baseSkill => skillfulTreatment;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(warningBeacon),
+  ];
+
+  @override
+  int get defBuff => _WarningBeacon.buffAmount;
+
+  @override
+  int get mndBuff => _WarningBeacon.buffAmount;
+}
+
+class _SkillfulTreatmentEmergencySignal
+    implements NaturalAugment, AttackBuffAugment, MagicBuffAugment {
+  const _SkillfulTreatmentEmergencySignal();
+
+  @override
+  SpellSkill get baseSkill => skillfulTreatment;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(signalBeacon),
+  ];
+
+  @override
+  int get atkBuff => _SignalBeacon.buffAmount;
+
+  @override
+  int get magBuff => _SignalBeacon.buffAmount;
+}
+
+class _SkillfulTreatmentEmergencySwift
+    implements NaturalAugment, SpeedBuffAugment {
+  const _SkillfulTreatmentEmergencySwift();
+
+  @override
+  SpellSkill get baseSkill => skillfulTreatment;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(swiftBeacon),
+  ];
+
+  @override
+  int get spdBuff => _SwiftBeacon.buffAmount;
+}
+
+class _SkillfulTreatmentEmergencyTarget
+    implements NaturalAugment, AccuracyBuffAugment {
+  const _SkillfulTreatmentEmergencyTarget();
+
+  @override
+  SpellSkill get baseSkill => skillfulTreatment;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    LearnedSkillRequirement(PassiveSkill.firstAidEmergencySmoke),
+    LearnedSkillRequirement(targetBeacon),
+  ];
+
+  @override
+  int get accBuff => _TargetBeacon.buffAmount;
 }
 
 class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
@@ -514,6 +931,29 @@ class _KnowledgeStrangeStrings2 implements SkillAugmentSkill, RaceSlayAugment {
   double get slayBonus => 8;
 }
 
+class _KnowledgeStrangeStringsShield
+    implements RaceSlayReactioner, DamageReceivedBuffAugment {
+  const _KnowledgeStrangeStringsShield();
+
+  @override
+  String get prettyName => 'Knowledge of Strange Strings: Shield Conversion';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[knowledgeStrangeStrings2];
+
+  @override
+  RaceSlayerSkill get baseSkill => knowledgeStrangeStrings;
+
+  @override
+  double get dmgReceivedBuff => 10;
+
+  @override
+  int get dmgReceivedBuffDuration => 1;
+}
+
 class _MaryShield
     implements
         UniqueSkill,
@@ -562,6 +1002,57 @@ class _MaryShield
   double get dmgReducedPercent => 12;
 }
 
+class _MaryKnight
+    implements
+        SkillAugmentSkill,
+        ConditionedEffect,
+        AllIncreaseAugment,
+        PercentDamageReduceAugment {
+  const _MaryKnight();
+
+  @override
+  String get prettyName => "Mary's Knight";
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[maryShield];
+
+  @override
+  UniqueSkill get baseSkill => maryShield;
+
+  @override
+  List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
+    FrontlineSelfRequirement(),
+    FrontlineCharacterRequirement(Character.maribel),
+  ];
+
+  @override
+  int get atkIncrease => 5;
+
+  @override
+  int get defIncrease => 5;
+
+  @override
+  int get magIncrease => 5;
+
+  @override
+  int get mndIncrease => 5;
+
+  @override
+  int get spdIncrease => 5;
+
+  @override
+  int get accIncrease => 5;
+
+  @override
+  int get evaIncrease => 5;
+
+  @override
+  double get dmgReducedPercent => 8;
+}
+
 class _AbilityReadStars
     implements
         UniqueSkill,
@@ -570,6 +1061,8 @@ class _AbilityReadStars
         ParalysisResIncreaser,
         HeavyResIncreaser,
         ShockResIncreaser {
+  static const int resIncrease = 10;
+
   const _AbilityReadStars();
 
   @override
@@ -586,16 +1079,16 @@ class _AbilityReadStars
       const <NaturalAugment>[abilityReadStarsFront];
 
   @override
-  int get psnIncrease => 10;
+  int get psnIncrease => resIncrease;
 
   @override
-  int get parIncrease => 10;
+  int get parIncrease => resIncrease;
 
   @override
-  int get hvyIncrease => 10;
+  int get hvyIncrease => resIncrease;
 
   @override
-  int get shkIncrease => 10;
+  int get shkIncrease => resIncrease;
 }
 
 class _AbilityReadStarsFront
@@ -615,16 +1108,16 @@ class _AbilityReadStarsFront
       const <EffectRequirement>[FrontlineSelfRequirement()];
 
   @override
-  int get psnIncrease => 10;
+  int get psnIncrease => _AbilityReadStars.resIncrease;
 
   @override
-  int get parIncrease => 10;
+  int get parIncrease => _AbilityReadStars.resIncrease;
 
   @override
-  int get hvyIncrease => 10;
+  int get hvyIncrease => _AbilityReadStars.resIncrease;
 
   @override
-  int get shkIncrease => 10;
+  int get shkIncrease => _AbilityReadStars.resIncrease;
 }
 
 class _AbilityReadMoon
@@ -635,6 +1128,8 @@ class _AbilityReadMoon
         SilenceResIncreaser,
         DeathResIncreaser,
         DebuffResIncreaser {
+  static const int resIncrease = 10;
+
   const _AbilityReadMoon();
 
   @override
@@ -651,16 +1146,16 @@ class _AbilityReadMoon
       const <NaturalAugment>[abilityReadMoonFront];
 
   @override
-  int get trrIncrease => 10;
+  int get trrIncrease => resIncrease;
 
   @override
-  int get silIncrease => 10;
+  int get silIncrease => resIncrease;
 
   @override
-  int get dthIncrease => 10;
+  int get dthIncrease => resIncrease;
 
   @override
-  int get dbfIncrease => 10;
+  int get dbfIncrease => resIncrease;
 }
 
 class _AbilityReadMoonFront
@@ -680,16 +1175,16 @@ class _AbilityReadMoonFront
       const <EffectRequirement>[FrontlineSelfRequirement()];
 
   @override
-  int get trrIncrease => 10;
+  int get trrIncrease => _AbilityReadMoon.resIncrease;
 
   @override
-  int get silIncrease => 10;
+  int get silIncrease => _AbilityReadMoon.resIncrease;
 
   @override
-  int get dthIncrease => 10;
+  int get dthIncrease => _AbilityReadMoon.resIncrease;
 
   @override
-  int get dbfIncrease => 10;
+  int get dbfIncrease => _AbilityReadMoon.resIncrease;
 }
 
 class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
@@ -766,4 +1261,36 @@ class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
 
   @override
   double get multiplierIncrease => 1.1;
+}
+
+class _DirectDamage implements UniqueSkill, DirectPowEnhancer {
+  const _DirectDamage();
+
+  @override
+  String get prettyName => 'Direct Attack Damage ↑';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  double get powIncrease => 1.08;
+}
+
+class _MagicDamage implements UniqueSkill, MagicPowEnhancer {
+  const _MagicDamage();
+
+  @override
+  String get prettyName => 'Magic Attack Damage ↑';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<Skill> get requirements => const <Skill>[];
+
+  @override
+  double get powIncrease => 1.08;
 }

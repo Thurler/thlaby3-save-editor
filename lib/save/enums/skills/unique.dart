@@ -11,7 +11,11 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 //
 // - (Generic) Does Quick Charge proc instead of Quick Charge+ if the user only
 //             has 2 TP?
+// - (Generic) Do the element-based protections stack for multiple elements?
+// - (Generic) Do the race-based damage amplifiers stack for multiple races?
 // - (Renko) Does Eager Support roll the cleanses separately?
+// - (Renko) Do the element damage enhancements stack with themselves?
+// - (Renko) Do the direct/magic enhancements stack with each other?
 
 /// A mixin to unify all character unique skills, be they spells, passives or
 /// augments
@@ -43,6 +47,8 @@ mixin UniqueSkill on Skill {
     wndNtrDamage,
     mysSpiDamage,
     drkPhyDamage,
+    directDamage,
+    magicDamage,
   ];
 }
 
@@ -79,6 +85,16 @@ enum PassiveSkill implements UniqueSkill {
   // Renko passives
   beaconSpecialist('Beacon Specialist', 3),
   learningListExpansion1('Learning List Expansion #1', 4),
+  firstAidEmergencySmoke(
+    'First Aid: Emergency Smoke Treatment',
+    3,
+    requirements: <Skill>[firstAidTraining],
+  ),
+  learningListExpansion2(
+    'Learning List Expansion #2',
+    5,
+    requirements: <Skill>[learningListExpansion1],
+  ),
   skill('Skill', 3);
 
   @override
@@ -99,50 +115,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  swiftBeacon2('Swift Beacon: Effect ↑', 3, requirements: <Skill>[swiftBeacon]),
-  targetBeacon2(
-    'Target Beacon: Effect ↑',
-    3,
-    requirements: <Skill>[targetBeacon],
-  ),
-  eagerSupportSelfCare(
-    'Eager Support: Self-Care Reminder',
-    3,
-    requirements: <Skill>[eagerSupportMentalCare],
-  ),
-  firstAidEmergencySmoke(
-    'First Aid: Emergency Smoke Treatment',
-    3,
-    requirements: <Skill>[firstAidTraining],
-  ),
-  maryKnight("Mary's Knight", 3, requirements: <Skill>[maryShield]),
-  directAttackDamage('Direct Attack Damage ↑', 5),
-  magicAttackDamage('Magic Attack Damage ↑', 5),
-  assaultBeacon(
-    'Assault Beacon',
-    3,
-    requirements: <Skill>[swiftBeacon, targetBeacon],
-  ),
-  eagerSupportDevotedHeart(
-    'Eager Support: Devoted Heart',
-    3,
-    requirements: <Skill>[eagerSupportSelfCare],
-  ),
-  skillfulTreatment(
-    'Skillful Treatment',
-    3,
-    requirements: <Skill>[firstAidEmergencySmoke],
-  ),
-  knowledgeStrangeStringsShield(
-    'Knowledge of Strange Strings: Shield Conversion',
-    3,
-    requirements: <Skill>[knowledgeStrangeStrings2],
-  ),
-  learningListExpansion2(
-    'Learning List Expansion #2',
-    5,
-    requirements: <Skill>[learningListExpansion1],
-  ),
   firCldDamage2('FIR/CLD Damage ↑+', 3, requirements: <Skill>[firCldDamage]),
   wndNtrDamage2('WND/NTR Damage ↑+', 3, requirements: <Skill>[wndNtrDamage]),
   mysSpiDamage2('MYS/SPI Damage ↑+', 3, requirements: <Skill>[mysSpiDamage]),

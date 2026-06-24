@@ -61,6 +61,8 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     // Renko skill augments
     adeptBeaconSpecialist,
     knowledgeStrangeStrings2,
+    knowledgeStrangeStringsShield,
+    maryKnight,
   ];
 }
 
@@ -213,6 +215,13 @@ mixin DamageReceivedBuffAugment on SkillAugment
   int get dmgReceivedBuffDuration;
 }
 
+/// A mixin for augments that change a spell's atb increase buff
+mixin AtbIncreaseAugment on SkillAugment implements AtbIncreaser {
+  /// The amount ATB is further increased by
+  @override
+  int get atbIncrease;
+}
+
 /// A mixin for augments that change a skill's paralysis infliction
 mixin ParalysisAugment on SkillAugment, ParalysisInflictor {
   /// How much the ailment duration increases by
@@ -326,3 +335,71 @@ mixin DebuffResIncreaseAugment on SkillAugment implements DebuffResIncreaser {
   @override
   int get dbfIncrease;
 }
+
+/// A mixin for skills that provide a global percent-based damage reduction
+mixin PercentDamageReduceAugment on SkillAugment
+    implements PercentDamageReducer {
+  /// How much more percent of damage to block
+  @override
+  double get dmgReducedPercent;
+}
+
+/// A mixin for skills that provide a global attack stat increase
+mixin AttackIncreaseAugment on SkillAugment implements AttackIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get atkIncrease;
+}
+
+/// A mixin for skills that provide a global defense stat increase
+mixin DefenseIncreaseAugment on SkillAugment implements DefenseIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get defIncrease;
+}
+
+/// A mixin for skills that provide a global magic stat increase
+mixin MagicIncreaseAugment on SkillAugment implements MagicIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get magIncrease;
+}
+
+/// A mixin for skills that provide a global mind stat increase
+mixin MindIncreaseAugment on SkillAugment implements MindIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get mndIncrease;
+}
+
+/// A mixin for skills that provide a global speed stat increase
+mixin SpeedIncreaseAugment on SkillAugment implements SpeedIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get spdIncrease;
+}
+
+/// A mixin for skills that provide a global accuracy stat increase
+mixin AccuracyIncreaseAugment on SkillAugment implements AccuracyIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get accIncrease;
+}
+
+/// A mixin for skills that provide a global evasion stat increase
+mixin EvasionIncreaseAugment on SkillAugment implements EvasionIncreaser {
+  /// How much the stat increase is increased by
+  @override
+  int get evaIncrease;
+}
+
+/// A mixin for skills that provide a buff for every stat
+mixin AllIncreaseAugment on SkillAugment
+    implements
+        AttackIncreaseAugment,
+        DefenseIncreaseAugment,
+        MagicIncreaseAugment,
+        MindIncreaseAugment,
+        SpeedIncreaseAugment,
+        AccuracyIncreaseAugment,
+        EvasionIncreaseAugment {}

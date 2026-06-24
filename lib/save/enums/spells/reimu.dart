@@ -1079,6 +1079,8 @@ class _ReimuProtagonistPrivileges
         MagicBuffer,
         MindBuffer,
         SpeedBuffer {
+  static const int buffAmount = 12;
+
   const _ReimuProtagonistPrivileges();
 
   @override
@@ -1097,19 +1099,19 @@ class _ReimuProtagonistPrivileges
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
-  int get atkBuff => 12;
+  int get atkBuff => buffAmount;
 
   @override
-  int get defBuff => 12;
+  int get defBuff => buffAmount;
 
   @override
-  int get magBuff => 12;
+  int get magBuff => buffAmount;
 
   @override
-  int get mndBuff => 12;
+  int get mndBuff => buffAmount;
 
   @override
-  int get spdBuff => 12;
+  int get spdBuff => buffAmount;
 }
 
 class _ReimuProtagonistPrivileges2
@@ -1253,19 +1255,19 @@ class _ReimuProtagonistPrivilegesShare
   KoTriggerRange get triggerRange => KoTriggerRange.allAllies;
 
   @override
-  int get atkBuff => 12;
+  int get atkBuff => _ReimuProtagonistPrivileges.buffAmount;
 
   @override
-  int get defBuff => 12;
+  int get defBuff => _ReimuProtagonistPrivileges.buffAmount;
 
   @override
-  int get magBuff => 12;
+  int get magBuff => _ReimuProtagonistPrivileges.buffAmount;
 
   @override
-  int get mndBuff => 12;
+  int get mndBuff => _ReimuProtagonistPrivileges.buffAmount;
 
   @override
-  int get spdBuff => 12;
+  int get spdBuff => _ReimuProtagonistPrivileges.buffAmount;
 }
 
 class _FinalPrayer implements KoReactionerSkill, PercentHealer {

@@ -37,9 +37,13 @@ mixin SpellAugmentSkill on SkillAugmentSkill {
     dreamSealDamageAplifier,
     // Renko spell augments
     eagerSupportMentalCare,
+    eagerSupportSelfCare,
+    eagerSupportDevotedHeart,
     firstAidTraining,
     warningBeacon2,
     signalBeacon2,
+    swiftBeacon2,
+    targetBeacon2,
   ];
 }
 
@@ -77,6 +81,18 @@ mixin PowAugment on SpellAugment {
 
   /// How much pow increases by
   double get pow;
+}
+
+/// A mixin for skills that offer passive enhancements when using direct spells
+mixin DirectPowEnhancer {
+  /// How much pow will be multiplied by
+  double get powIncrease;
+}
+
+/// A mixin for skills that offer passive enhancements when using magic spells
+mixin MagicPowEnhancer {
+  /// How much pow will be multiplied by
+  double get powIncrease;
 }
 
 /// A mixin for augments that change a spell's multiplier
