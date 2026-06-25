@@ -12,10 +12,14 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 // - (Generic) Does Quick Charge proc instead of Quick Charge+ if the user only
 //             has 2 TP?
 // - (Generic) Do the element-based protections stack for multiple elements?
+//             E.g. Does FIR and CLD protection both proc for a FIR+CLD attack
 // - (Generic) Do the race-based damage amplifiers stack for multiple races?
+//             E.g. Does Youkai and Other bonus both proc for a dual race enemy
 // - (Renko) Does Eager Support roll the cleanses separately?
 // - (Renko) Do the element damage enhancements stack with themselves?
 // - (Renko) Do the direct/magic enhancements stack with each other?
+// - (Renko) Is Assault Beacon Turn Conversion max capped at 48% buff, 24+48=72%
+//           or 24+4+48=76%?
 
 /// A mixin to unify all character unique skills, be they spells, passives or
 /// augments
@@ -115,20 +119,6 @@ enum PassiveSkill implements UniqueSkill {
 
 enum UncategorizedUniqueSkill implements UniqueSkill {
   // Renko skills
-  firCldDamage2('FIR/CLD Damage ↑+', 3, requirements: <Skill>[firCldDamage]),
-  wndNtrDamage2('WND/NTR Damage ↑+', 3, requirements: <Skill>[wndNtrDamage]),
-  mysSpiDamage2('MYS/SPI Damage ↑+', 3, requirements: <Skill>[mysSpiDamage]),
-  drkPhyDamage2('DRK/PHY Damage ↑+', 3, requirements: <Skill>[drkPhyDamage]),
-  assaultBeaconTurnGauge(
-    'Assault Beacon: Turn Gauge Increase',
-    3,
-    requirements: <Skill>[swiftBeacon2, assaultBeacon],
-  ),
-  assaultBeaconTurnConversion(
-    'Assault Beacon: Turn Conversion',
-    3,
-    requirements: <Skill>[assaultBeacon, targetBeacon2],
-  ),
   celestialStasis(
     'Celestial Stasis',
     3,

@@ -11,7 +11,7 @@ mixin SpellAugment on SkillAugment {
 }
 
 /// A mixin for skills that augment a spell's functionalities
-mixin SpellAugmentSkill on SkillAugmentSkill {
+mixin SpellAugmentSkill on SkillAugmentSkill implements SpellAugment {
   static const List<SpellAugmentSkill> values = <SpellAugmentSkill>[
     // Reimu spell augments
     yinYangOrbParAffix,
@@ -44,6 +44,8 @@ mixin SpellAugmentSkill on SkillAugmentSkill {
     signalBeacon2,
     swiftBeacon2,
     targetBeacon2,
+    assaultBeaconTurnGauge,
+    assaultBeaconTurnConversion,
   ];
 }
 

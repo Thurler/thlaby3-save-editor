@@ -41,6 +41,9 @@ const SpellSkill targetBeacon = _TargetBeacon();
 const SpellAugmentSkill targetBeacon2 = _TargetBeacon2();
 
 const SpellSkill assaultBeacon = _AssaultBeacon();
+const SpellAugmentSkill assaultBeaconTurnGauge = _AssaultBeaconTurnGauge();
+const SpellAugmentSkill assaultBeaconTurnConversion =
+    _AssaultBeaconTurnConversion();
 
 const SpellSkill skillfulTreatment = _SkillfulTreatment();
 const NaturalAugment skillfulTreatmentEmergencyWarning =
@@ -199,7 +202,7 @@ class _EagerSupportSelfCare
   List<Skill> get requirements => const <Skill>[eagerSupportMentalCare];
 
   @override
-  UniqueSkill get baseSkill => eagerSupport;
+  SpellSkill get baseSkill => eagerSupport;
 
   @override
   double get dmgReceivedBuff => 20;
@@ -734,6 +737,72 @@ class _AssaultBeacon extends _BeaconSpell
 
   @override
   int get spdBuff => 24;
+}
+
+class _AssaultBeaconTurnGauge
+    implements SpellAugmentSkill, CustomAugmentRange, AtbIncreaseAugment {
+  const _AssaultBeaconTurnGauge();
+
+  @override
+  String get prettyName => 'Assault Beacon: Turn Gauge Increase';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[swiftBeacon2, assaultBeacon];
+
+  @override
+  SpellSkill get baseSkill => assaultBeacon;
+
+  @override
+  AugmentRange get augmentRange => AugmentRange.frontlineMinusSelf;
+
+  @override
+  int get atbIncrease => 800;
+}
+
+class _AssaultBeaconTurnConversion
+    implements
+        SpellAugmentSkill,
+        AttackBuffAugment,
+        DefenseBuffAugment,
+        MagicBuffAugment,
+        MindBuffAugment,
+        SpeedBuffAugment,
+        TurnCountBasedAugment,
+        TurnCountResetAugment {
+  const _AssaultBeaconTurnConversion();
+
+  @override
+  String get prettyName => 'Assault Beacon: Turn Conversion';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<Skill> get requirements => const <Skill>[assaultBeacon, targetBeacon2];
+
+  @override
+  SpellSkill get baseSkill => assaultBeacon;
+
+  @override
+  int get atkBuff => 4;
+
+  @override
+  int get defBuff => 4;
+
+  @override
+  int get magBuff => 4;
+
+  @override
+  int get mndBuff => 4;
+
+  @override
+  int get spdBuff => 4;
+
+  @override
+  int? get turnCountCap => 15; // Could be less, check interaction resolution
 }
 
 class _SkillfulTreatment

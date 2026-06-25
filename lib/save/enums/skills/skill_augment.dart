@@ -13,7 +13,8 @@ import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
 
 enum AugmentRange {
   self,
-  frontline;
+  frontline,
+  frontlineMinusSelf;
 }
 
 /// A common interface for entities that augment a skill's effect, be they other
