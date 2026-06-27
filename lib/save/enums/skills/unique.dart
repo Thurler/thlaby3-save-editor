@@ -75,27 +75,27 @@ enum PassiveSkill with UniqueSkill {
   hakureiProtection2(
     "Hakurei's Divine Protection: Effect ↑",
     2,
-    requirements: <Skill>[hakureiProtection],
+    requirements: <UniqueSkill>[hakureiProtection],
   ),
   hakureiProtection3(
     "Hakurei's Divine Protection: Effect ↑+",
     2,
-    requirements: <Skill>[hakureiProtection2],
+    requirements: <UniqueSkill>[hakureiProtection2],
   ),
   hakureiProtectionRange(
     "Hakurei's Divine Protection: Range ↑",
     2,
-    requirements: <Skill>[hakureiProtection3],
+    requirements: <UniqueSkill>[hakureiProtection3],
   ),
   turnCounterPreservation(
     'Turn Counter Preservation',
     5,
-    requirements: <Skill>[hakureiProtectionRange],
+    requirements: <UniqueSkill>[hakureiProtectionRange],
   ),
   turnCounterPreservation2(
     'Turn Counter Preservation+',
     5,
-    requirements: <Skill>[turnCounterPreservation],
+    requirements: <UniqueSkill>[turnCounterPreservation],
   ),
   // Renko passives
   beaconSpecialist('Beacon Specialist', 3),
@@ -103,12 +103,12 @@ enum PassiveSkill with UniqueSkill {
   firstAidEmergencySmoke(
     'First Aid: Emergency Smoke Treatment',
     3,
-    requirements: <Skill>[firstAidTraining],
+    requirements: <UniqueSkill>[firstAidTraining],
   ),
   learningListExpansion2(
     'Learning List Expansion #2',
     5,
-    requirements: <Skill>[learningListExpansion1],
+    requirements: <UniqueSkill>[learningListExpansion1],
   ),
   skill('Skill', 3);
 
@@ -119,12 +119,12 @@ enum PassiveSkill with UniqueSkill {
   final int cost;
 
   @override
-  final List<Skill> requirements;
+  final List<UniqueSkill> requirements;
 
   const PassiveSkill(
     this.prettyName,
     this.cost, {
-    this.requirements = const <Skill>[],
+    this.requirements = const <UniqueSkill>[],
   });
 }
 
@@ -133,62 +133,70 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   celestialStasis(
     'Celestial Stasis',
     3,
-    requirements: <Skill>[abilityReadStars, abilityReadMoon],
+    requirements: <UniqueSkill>[abilityReadStars, abilityReadMoon],
   ),
   ailmentAttackBoost(
     'Ailment Attack Boost',
     5,
-    requirements: <Skill>[firCldDamage2, directAttackDamage, wndNtrDamage2],
+    requirements: <UniqueSkill>[firCldDamage2, directDamage, wndNtrDamage2],
   ),
   buffDebuffBoost(
     'Buff & Debuff Boost',
     5,
-    requirements: <Skill>[mysSpiDamage2, magicAttackDamage, drkPhyDamage2],
+    requirements: <UniqueSkill>[mysSpiDamage2, magicDamage, drkPhyDamage2],
   ),
   assaultBeacon2(
     'Assault Beacon: Effect ↑',
     3,
-    requirements: <Skill>[assaultBeaconTurnGauge],
+    requirements: <UniqueSkill>[assaultBeaconTurnGauge],
   ),
   assaultBeaconHpLoss(
     'Assault Beacon: HP Loss ↓',
     3,
-    requirements: <Skill>[assaultBeaconTurnConversion],
+    requirements: <UniqueSkill>[assaultBeaconTurnConversion],
   ),
   celestialStasisTurnGauge(
     'Celestial Stasis: Turn Gauge Loss ↓',
     3,
-    requirements: <Skill>[eagerSupportDevotedHeart, celestialStasis],
+    requirements: <UniqueSkill>[eagerSupportDevotedHeart, celestialStasis],
   ),
   celestialStasisTurnConversion(
     'Celestial Stasis: Turn Conversion',
     3,
-    requirements: <Skill>[celestialStasis, skillfulTreatment],
+    requirements: <UniqueSkill>[celestialStasis, skillfulTreatment],
   ),
   learningListExpansion3(
     'Learning List Expansion #3',
     6,
-    requirements: <Skill>[learningListExpansion2],
+    requirements: <UniqueSkill>[PassiveSkill.learningListExpansion2],
   ),
   directAttackDamage2(
     'Direct Attack Damage ↑+',
     5,
-    requirements: <Skill>[firCldDamage2, ailmentAttackBoost, buffDebuffBoost],
+    requirements: <UniqueSkill>[
+      firCldDamage2,
+      ailmentAttackBoost,
+      buffDebuffBoost,
+    ],
   ),
   learningCooldown(
     'Learning Cooldown ↓',
     5,
-    requirements: <Skill>[ailmentAttackBoost, mysSpiDamage2],
+    requirements: <UniqueSkill>[ailmentAttackBoost, mysSpiDamage2],
   ),
   learningMpCost(
     'Learning MP Cost ↓',
     5,
-    requirements: <Skill>[wndNtrDamage2, buffDebuffBoost],
+    requirements: <UniqueSkill>[wndNtrDamage2, buffDebuffBoost],
   ),
   magicAttackDamage2(
     'Magic Attack Damage ↑+',
     5,
-    requirements: <Skill>[ailmentAttackBoost, buffDebuffBoost, drkPhyDamage2],
+    requirements: <UniqueSkill>[
+      ailmentAttackBoost,
+      buffDebuffBoost,
+      drkPhyDamage2,
+    ],
   ),
   // Maribel skills
   hazyBarrierDefense('Hazy Barrier Defense', 3),
@@ -197,52 +205,52 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   noviceBarrier(
     'Novice Handmade Barrier',
     3,
-    requirements: <Skill>[hazyBarrierDefense],
+    requirements: <UniqueSkill>[hazyBarrierDefense],
   ),
   disorderlyBarrier(
     'Disorderly Duplex Barrier',
     3,
-    requirements: <Skill>[hazyBarrierAttack],
+    requirements: <UniqueSkill>[hazyBarrierAttack],
   ),
   hazyBarrierAttackLucidification(
     'Hazy Barrier Attack: Barrier Lucidification',
     3,
-    requirements: <Skill>[hazyBarrierAttack],
+    requirements: <UniqueSkill>[hazyBarrierAttack],
   ),
   boundaryManipulation(
     'Boundary Manipulation',
     3,
-    requirements: <Skill>[relativePsychology],
+    requirements: <UniqueSkill>[relativePsychology],
   ),
   noviceBarrierRecovery(
     'Novice Handmade Barrier: Recovery Augment',
     3,
-    requirements: <Skill>[noviceBarrier],
+    requirements: <UniqueSkill>[noviceBarrier],
   ),
   noviceBarrier2(
     'Novice Handmade Barrier: Boost ↑',
     3,
-    requirements: <Skill>[noviceBarrier],
+    requirements: <UniqueSkill>[noviceBarrier],
   ),
   disorderlyBarrierThirdLayer(
     'Disorderly Duplex Barrier: Third Layer',
     3,
-    requirements: <Skill>[disorderlyBarrier],
+    requirements: <UniqueSkill>[disorderlyBarrier],
   ),
   boundaryAnchoring(
     'Boundary Anchoring',
     3,
-    requirements: <Skill>[boundaryManipulation],
+    requirements: <UniqueSkill>[boundaryManipulation],
   ),
   abilitySeeBarriers(
     'Ability to See Barriers',
     3,
-    requirements: <Skill>[relativePsychology],
+    requirements: <UniqueSkill>[relativePsychology],
   ),
   relativePsychologySecrets(
     'Relative Psychology Secrets',
     3,
-    requirements: <Skill>[relativePsychology],
+    requirements: <UniqueSkill>[relativePsychology],
   ),
   abilityUnbridled('Ability Unbridled', 3),
   // Copies from focus_reaction.dart
@@ -251,17 +259,17 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   noviceBarrierRecovery2(
     'Novice Handmade Barrier: Recovery ↑',
     3,
-    requirements: <Skill>[noviceBarrierRecovery],
+    requirements: <UniqueSkill>[noviceBarrierRecovery],
   ),
   noviceBarrier3(
     'Novice Handmade Barrier: Boost ↑+',
     3,
-    requirements: <Skill>[noviceBarrier2],
+    requirements: <UniqueSkill>[noviceBarrier2],
   ),
   hazyBarrierAttackSpi(
     'Hazy Barrier Attack: SPI Augment',
     4,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       disorderlyBarrierThirdLayer,
       hazyBarrierAttackLucidification,
     ],
@@ -269,95 +277,98 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   overflowingAnomalousPower(
     'Overflowing Anomalous Power',
     3,
-    requirements: <Skill>[abilitySeeBarriers],
+    requirements: <UniqueSkill>[abilitySeeBarriers],
   ),
   abilityFiddleBarriers(
     'Ability to Fiddle with Barriers',
     3,
-    requirements: <Skill>[abilitySeeBarriers],
+    requirements: <UniqueSkill>[abilitySeeBarriers],
   ),
   abilityUnbridledGuardPierce(
     'Ability Unbridled: Guard Pierce',
     3,
-    requirements: <Skill>[abilityUnbridled],
+    requirements: <UniqueSkill>[abilityUnbridled],
   ),
   chaosBarrier(
     'Chaos Barrier',
     3,
-    requirements: <Skill>[noviceBarrier3, disorderlyBarrierThirdLayer],
+    requirements: <UniqueSkill>[noviceBarrier3, disorderlyBarrierThirdLayer],
   ),
   disorderlyBarrierFourthLayer(
     'Disorderly Duplex Barrier: Fourth Layer',
     3,
-    requirements: <Skill>[disorderlyBarrierThirdLayer],
+    requirements: <UniqueSkill>[disorderlyBarrierThirdLayer],
   ),
   hazyBuffAbsorption(
     'Hazy Buff Absorption',
     5,
-    requirements: <Skill>[hazyBarrierAttackSpi, overflowingAnomalousPower],
+    requirements: <UniqueSkill>[
+      hazyBarrierAttackSpi,
+      overflowingAnomalousPower,
+    ],
   ),
   abilityUnderstandBoundaries(
     'Ability to Understand Boundaries',
     3,
-    requirements: <Skill>[abilityFiddleBarriers],
+    requirements: <UniqueSkill>[abilityFiddleBarriers],
   ),
   relativePsychologyMastery(
     'Relative Psychology Mastery',
     5,
-    requirements: <Skill>[relativePsychologySecrets],
+    requirements: <UniqueSkill>[relativePsychologySecrets],
   ),
   abilityUnbridledPowerControl(
     'Ability Unbridled: Power Control',
     3,
-    requirements: <Skill>[abilityUnbridled],
+    requirements: <UniqueSkill>[abilityUnbridled],
   ),
   // Copies from focus_reaction.dart
   //focusedRecitation(
   //  'Focused Recitation',
   //  3,
-  //  requirements: <Skill>[quickCharge],
+  //  requirements: <UniqueSkill>[quickCharge],
   //),
   chaosBarrierBoundary(
     'Chaos Barrier: Boundary Between Chaos and Order',
     4,
-    requirements: <Skill>[chaosBarrier],
+    requirements: <UniqueSkill>[chaosBarrier],
   ),
   hazyMoonBarrier(
     'Hazy Moon Barrier',
     3,
-    requirements: <Skill>[hazyBarrierAttackSpi],
+    requirements: <UniqueSkill>[hazyBarrierAttackSpi],
   ),
   overflowingAnomalousPowerAnomaly(
     'Overflowing Anomalous Power: Menacing Anomaly',
     3,
-    requirements: <Skill>[overflowingAnomalousPower],
+    requirements: <UniqueSkill>[overflowingAnomalousPower],
   ),
   abilityUnbridledGuardPierce2(
     'Ability Unbridled: Guard Pierce+',
     3,
-    requirements: <Skill>[abilityUnbridledGuardPierce],
+    requirements: <UniqueSkill>[abilityUnbridledGuardPierce],
   ),
   // Copies from focus_reaction.dart
-  //quickCharge2('Quick Charge+', 2, requirements: <Skill>[quickCharge]),
+  //quickCharge2('Quick Charge+', 2, requirements: <UniqueSkill>[quickCharge]),
   noviceBarrierKnowledge(
     "Novice Handmade Barrier: Dr. Latency's Knowledge",
     5,
-    requirements: <Skill>[noviceBarrierRecovery2, noviceBarrier3],
+    requirements: <UniqueSkill>[noviceBarrierRecovery2, noviceBarrier3],
   ),
   chaosBarrierDoubleBoost(
     'Chaos Barrier: Double Boost',
     4,
-    requirements: <Skill>[chaosBarrier],
+    requirements: <UniqueSkill>[chaosBarrier],
   ),
   disorderlyBarrierExpansion(
     'Disorderly Duplex Barrier: Expansion',
     3,
-    requirements: <Skill>[disorderlyBarrierFourthLayer],
+    requirements: <UniqueSkill>[disorderlyBarrierFourthLayer],
   ),
   boundaryFantasyReality(
     'Boundary Between Fantasy and Reality',
     5,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       abilityUnderstandBoundaries,
       relativePsychologyMastery,
     ],
@@ -365,13 +376,13 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   abilityUnbridledPowerDevelopment(
     'Ability Unbridled: Power Development',
     3,
-    requirements: <Skill>[abilityUnbridledGuardPierce],
+    requirements: <UniqueSkill>[abilityUnbridledGuardPierce],
   ),
-  renkosPartner("Renko's Partner", 3, requirements: <Skill>[renkosEyes]),
+  renkosPartner("Renko's Partner", 3, requirements: <UniqueSkill>[renkosEyes]),
   maryMagician(
     'Mary the Magician',
     6,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       disorderlyBarrierExpansion,
       hazyMoonBarrier,
       hazyBuffAbsorption,
@@ -380,22 +391,22 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   overflowingAnomalousPowerFearsome(
     'Overflowing Anomalous Power: Fearsome Anomalous Avatar',
     3,
-    requirements: <Skill>[overflowingAnomalousPowerAnomaly],
+    requirements: <UniqueSkill>[overflowingAnomalousPowerAnomaly],
   ),
   overflowingAnomalousPowerBudding(
     'Overflowing Anomalous Power: Budding of Latent Power',
     4,
-    requirements: <Skill>[overflowingAnomalousPowerAnomaly],
+    requirements: <UniqueSkill>[overflowingAnomalousPowerAnomaly],
   ),
   abilityUnbridledPowerAwakening(
     'Ability Unbridled: Power Awakening',
     4,
-    requirements: <Skill>[abilityUnbridledPowerDevelopment],
+    requirements: <UniqueSkill>[abilityUnbridledPowerDevelopment],
   ),
   allEncompassingGuardPierce(
     'All-Encompassing Guard Pierce',
     3,
-    requirements: <Skill>[abilityUnbridledGuardPierce, quickCharge2],
+    requirements: <UniqueSkill>[abilityUnbridledGuardPierce, quickCharge2],
   ),
   // Meiling skills
   blossomingLightOrb('Light Sign "Blossoming Light Orb"', 3),
@@ -406,52 +417,64 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   qiCrestBlossomingLightOrb(
     'Light Qi "Qi Crest Blossoming Light Orb"',
     3,
-    requirements: <Skill>[blossomingLightOrb],
+    requirements: <UniqueSkill>[blossomingLightOrb],
   ),
-  combo2('C-C-Combo', 2, requirements: <Skill>[combo]),
+  combo2('C-C-Combo', 2, requirements: <UniqueSkill>[combo]),
   mountainBreakingCannon('Flower Sign "Mountain-Breaking Cannon"', 3),
   qigongEnvelopment('Qigong Envelopment', 3),
   restorativeQigongAilmentRecovery(
     'Restorative Qigong: Ailment Recovery Augment',
     2,
-    requirements: <Skill>[restorativeQigong],
+    requirements: <UniqueSkill>[restorativeQigong],
   ),
-  colorfulRain('Colorful Rain', 3, requirements: <Skill>[restorativeQigong]),
+  colorfulRain(
+    'Colorful Rain',
+    3,
+    requirements: <UniqueSkill>[restorativeQigong],
+  ),
   initialQigongGain('Initial Qigong Gain', 3),
   gatekeepersDuty("Gatekeeper's Duty", 3),
   qiCrestBlossomingLightOrbQigongGain(
     'Qi Crest Blossoming Light Orb: Qigong Gain',
     2,
-    requirements: <Skill>[qiCrestBlossomingLightOrb],
+    requirements: <UniqueSkill>[qiCrestBlossomingLightOrb],
   ),
   directAttackCounter('Direct Attack Counter', 4),
   mountainBreakingCannonQigongGain(
     'Mountain-Breaking Cannon: Qigong Gain',
     3,
-    requirements: <Skill>[mountainBreakingCannon],
+    requirements: <UniqueSkill>[mountainBreakingCannon],
   ),
-  painToQigong('Pain to Qigong', 4, requirements: <Skill>[qigongEnvelopment]),
-  qigongToStats('Qigong to Stats', 4, requirements: <Skill>[qigongEnvelopment]),
+  painToQigong(
+    'Pain to Qigong',
+    4,
+    requirements: <UniqueSkill>[qigongEnvelopment],
+  ),
+  qigongToStats(
+    'Qigong to Stats',
+    4,
+    requirements: <UniqueSkill>[qigongEnvelopment],
+  ),
   parSlay('PAR Slay', 3),
   colorfulRainQigongGain(
     'Colorful Rain: Qigong Gain',
     2,
-    requirements: <Skill>[colorfulRain],
+    requirements: <UniqueSkill>[colorfulRain],
   ),
   qiCrestBlossomingLightOrbParAffix(
     'Qi Crest Blossoming Light Orb: PAR Affix',
     2,
-    requirements: <Skill>[qiCrestBlossomingLightOrb],
+    requirements: <UniqueSkill>[qiCrestBlossomingLightOrb],
   ),
   qiCrestStarPulseShot(
     'Star Qi "Qi Crest Star Pulse Shot"',
     3,
-    requirements: <Skill>[qiCrestBlossomingLightOrbQigongGain],
+    requirements: <UniqueSkill>[qiCrestBlossomingLightOrbQigongGain],
   ),
   mountainBreakingCannon2(
     'Mountain-Breaking Cannon: POW ↑',
     2,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       mountainBreakingCannonQigongGain,
       directAttackCounter,
     ],
@@ -459,56 +482,64 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   qiCrestMountainBreakingCannon(
     'Flower Qi "Qi Crest Mountain-Breaking Cannon"',
     4,
-    requirements: <Skill>[mountainBreakingCannonQigongGain],
+    requirements: <UniqueSkill>[mountainBreakingCannonQigongGain],
   ),
   qigongEnvelopment2(
     'Qigong Envelopment: Qigong Gain ↑',
     3,
-    requirements: <Skill>[qigongEnvelopment],
+    requirements: <UniqueSkill>[qigongEnvelopment],
   ),
   qigongFromParFoes(
     'Qigong From PAR-Afflicted Foes',
     5,
-    requirements: <Skill>[restorativeQigongAilmentRecovery],
+    requirements: <UniqueSkill>[restorativeQigongAilmentRecovery],
   ),
-  parRemovalDown('PAR Removal Chance ↓', 2, requirements: <Skill>[parSlay]),
+  parRemovalDown(
+    'PAR Removal Chance ↓',
+    2,
+    requirements: <UniqueSkill>[parSlay],
+  ),
   initialQigongGain2(
     'Initial Qigong Gain+',
     2,
-    requirements: <Skill>[colorfulRainQigongGain, initialQigongGain],
+    requirements: <UniqueSkill>[colorfulRainQigongGain, initialQigongGain],
   ),
   qiCrestBlossomingLightOrb2(
     'Qi Crest Blossoming Light Orb: POW ↑',
     3,
-    requirements: <Skill>[qiCrestBlossomingLightOrbQigongGain],
+    requirements: <UniqueSkill>[qiCrestBlossomingLightOrbQigongGain],
   ),
   directAttackCounter2(
     'Direct Attack Counter+',
     2,
-    requirements: <Skill>[directAttackCounter],
+    requirements: <UniqueSkill>[directAttackCounter],
   ),
   mountainBreakingCannonDelay(
     'Mountain-Breaking Cannon: Delay ↓',
     2,
-    requirements: <Skill>[mountainBreakingCannonQigongGain],
+    requirements: <UniqueSkill>[mountainBreakingCannonQigongGain],
   ),
-  painToQigong2('Pain to Qigong+', 3, requirements: <Skill>[painToQigong]),
-  parSlay2('PAR Slay+', 2, requirements: <Skill>[parSlay]),
+  painToQigong2(
+    'Pain to Qigong+',
+    3,
+    requirements: <UniqueSkill>[painToQigong],
+  ),
+  parSlay2('PAR Slay+', 2, requirements: <UniqueSkill>[parSlay]),
   colorfulRainQigongRecoveryUp(
     'Colorful Rain: Qigong Recovery ↑',
     2,
-    requirements: <Skill>[colorfulRainQigongGain],
+    requirements: <UniqueSkill>[colorfulRainQigongGain],
   ),
-  focusedGuard2('Focused Guard+', 2, requirements: <Skill>[focusedGuard]),
+  focusedGuard2('Focused Guard+', 2, requirements: <UniqueSkill>[focusedGuard]),
   bondsScarletDevilMansion2(
     'Bonds of the Scarlet Devil Mansion+',
     2,
-    requirements: <Skill>[bondsScarletDevilMansion],
+    requirements: <UniqueSkill>[bondsScarletDevilMansion],
   ),
   qiCrestBlossomingLightOrbParBoost(
     'Qi Crest Blossoming Light Orb: PAR Boost',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       qiCrestBlossomingLightOrbParAffix,
       qiCrestBlossomingLightOrb2,
     ],
@@ -516,88 +547,95 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   qiCrestStarPulseShotQigongParAffix(
     'Qi Crest Star Pulse Shot: Qigong PAR Affix',
     3,
-    requirements: <Skill>[qiCrestStarPulseShot],
+    requirements: <UniqueSkill>[qiCrestStarPulseShot],
   ),
   mountainBreakingCannon3(
     'Mountain-Breaking Cannon: POW ↑+',
     2,
-    requirements: <Skill>[mountainBreakingCannon2, mountainBreakingCannonDelay],
+    requirements: <UniqueSkill>[
+      mountainBreakingCannon2,
+      mountainBreakingCannonDelay,
+    ],
   ),
   masterfulMountainBreakingCannon(
     'Ultimate Flower "Masterful Mountain-Breaking Cannon"',
     4,
-    requirements: <Skill>[qiCrestMountainBreakingCannon],
+    requirements: <UniqueSkill>[qiCrestMountainBreakingCannon],
   ),
   qigongEnvelopment3(
     'Qigong Envelopment: Qigong Gain ↑+',
     3,
-    requirements: <Skill>[qigongEnvelopment2],
+    requirements: <UniqueSkill>[qigongEnvelopment2],
   ),
   masterfulQigongEnvelopment(
     'Masterful Qigong Envelopment',
     5,
-    requirements: <Skill>[qigongEnvelopment2, qigongFromParFoes],
+    requirements: <UniqueSkill>[qigongEnvelopment2, qigongFromParFoes],
   ),
   parRemovalDown2(
     'PAR Removal Chance ↓+',
     2,
-    requirements: <Skill>[parRemovalDown],
+    requirements: <UniqueSkill>[parRemovalDown],
   ),
   initialQigongGain3(
     'Initial Qigong Gain++',
     2,
-    requirements: <Skill>[initialQigongGain2],
+    requirements: <UniqueSkill>[initialQigongGain2],
   ),
   gatekeepersDuty2(
     "Gatekeeper's Duty+",
     2,
-    requirements: <Skill>[gatekeepersDuty],
+    requirements: <UniqueSkill>[gatekeepersDuty],
   ),
   directAttackCounter3(
     'Direct Attack Counter++',
     2,
-    requirements: <Skill>[directAttackCounter2],
+    requirements: <UniqueSkill>[directAttackCounter2],
   ),
   mountainBreakingCannonQigongGain2(
     'Mountain-Breaking Cannon: Qigong Gain+',
     2,
-    requirements: <Skill>[mountainBreakingCannonDelay],
+    requirements: <UniqueSkill>[mountainBreakingCannonDelay],
   ),
-  painToQigong3('Pain to Qigong++', 3, requirements: <Skill>[painToQigong2]),
+  painToQigong3(
+    'Pain to Qigong++',
+    3,
+    requirements: <UniqueSkill>[painToQigong2],
+  ),
   jiQigongResultsTraining(
     'Ji Qigong: Results of Training',
     3,
-    requirements: <Skill>[masterfulQigongEnvelopment],
+    requirements: <UniqueSkill>[masterfulQigongEnvelopment],
   ),
   jiQigongMuscleSolstice(
     'Ji Qigong: Muscle Solstice',
     3,
-    requirements: <Skill>[masterfulQigongEnvelopment, parRemovalDown2],
+    requirements: <UniqueSkill>[masterfulQigongEnvelopment, parRemovalDown2],
   ),
   bondsScarletDevilMansion3(
     'Bonds of the Scarlet Devil Mansion++',
     2,
-    requirements: <Skill>[bondsScarletDevilMansion2],
+    requirements: <UniqueSkill>[bondsScarletDevilMansion2],
   ),
   masterfulEarthMovingStarPulseShot(
     'Ultimate Star "Masterful Earth-Moving Star Pulse Shot"',
     5,
-    requirements: <Skill>[qiCrestStarPulseShotQigongParAffix],
+    requirements: <UniqueSkill>[qiCrestStarPulseShotQigongParAffix],
   ),
   masterfulMountainBreakingCannonGuardPierce(
     'Masterful Mountain-Breaking Cannon: Guard Pierce',
     3,
-    requirements: <Skill>[masterfulMountainBreakingCannon, painToQigong3],
+    requirements: <UniqueSkill>[masterfulMountainBreakingCannon, painToQigong3],
   ),
   jiQigongCulminationTraining(
     'Ji Qigong: Culmination of Training',
     3,
-    requirements: <Skill>[painToQigong, jiQigongResultsTraining],
+    requirements: <UniqueSkill>[painToQigong, jiQigongResultsTraining],
   ),
   jiQigong2(
     'Ji Qigong: Duration ↑',
     2,
-    requirements: <Skill>[masterfulQigongEnvelopment],
+    requirements: <UniqueSkill>[masterfulQigongEnvelopment],
   ),
   // Alice skills
   manipulatePuppet('Puppeteer Sign "Manipulate Puppet"', 3),
@@ -607,39 +645,39 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   artfulSacrificeAcc(
     'Artful Sacrifice: ACC Modifier ↑',
     3,
-    requirements: <Skill>[artfulSacrifice],
+    requirements: <UniqueSkill>[artfulSacrifice],
   ),
   artfulSacrificeGunpowder(
     'Artful Sacrifice: Gunpowder-Lobbing Witch',
     3,
-    requirements: <Skill>[artfulSacrifice],
+    requirements: <UniqueSkill>[artfulSacrifice],
   ),
   shanghaiDollsHvy(
     'Magically Luminous Shanghai Dolls: HVY Affix',
     3,
-    requirements: <Skill>[shanghaiDolls],
+    requirements: <UniqueSkill>[shanghaiDolls],
   ),
   inorganicExpert('Inorganic Expert', 3),
   manipulatePuppet2(
     'Manipulate Puppet: POW ↑',
     3,
-    requirements: <Skill>[manipulatePuppet],
+    requirements: <UniqueSkill>[manipulatePuppet],
   ),
   mercilessPursuit(
     'Merciless Pursuit',
     3,
-    requirements: <Skill>[manipulatePuppet],
+    requirements: <UniqueSkill>[manipulatePuppet],
   ),
   hangedHouraiDolls(
     'Malediction "Hanged Hourai Dolls"',
     3,
-    requirements: <Skill>[shanghaiDolls],
+    requirements: <UniqueSkill>[shanghaiDolls],
   ),
   dollGuard('Doll Guard', 3),
   inorganicExpert2(
     'Inorganic Expert+',
     3,
-    requirements: <Skill>[inorganicExpert],
+    requirements: <UniqueSkill>[inorganicExpert],
   ),
   // Copies from focus_reaction.dart
   //quickCharge('Quick Charge', 3),
@@ -647,139 +685,147 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   manipulatePuppetShanghaiOption(
     'Manipulate Puppet: Shanghai Dolls Option',
     3,
-    requirements: <Skill>[manipulatePuppet2],
+    requirements: <UniqueSkill>[manipulatePuppet2],
   ),
   manipulatePuppetDuration(
     'Manipulate Puppet: Duration ↑',
     3,
-    requirements: <Skill>[manipulatePuppet2],
+    requirements: <UniqueSkill>[manipulatePuppet2],
   ),
-  tripwireWireArt('Tripwire: Wire Art', 3, requirements: <Skill>[tripwire]),
+  tripwireWireArt(
+    'Tripwire: Wire Art',
+    3,
+    requirements: <UniqueSkill>[tripwire],
+  ),
   tripwire2(
     'Tripwire: Damage Multiplier ↑',
     3,
-    requirements: <Skill>[tripwire],
+    requirements: <UniqueSkill>[tripwire],
   ),
   soldierOfCross(
     'Sword Sign "Soldier of Cross"',
     3,
-    requirements: <Skill>[inorganicExpert],
+    requirements: <UniqueSkill>[inorganicExpert],
   ),
   efficientPuppeteering(
     'Efficient Puppeteering',
     3,
-    requirements: <Skill>[quickCharge, mAliceCannonAlice],
+    requirements: <UniqueSkill>[quickCharge, mAliceCannonAlice],
   ),
   manipulatePuppetHouraiOption(
     'Manipulate Puppet: Hanged Hourai Dolls Option',
     3,
-    requirements: <Skill>[manipulatePuppetShanghaiOption],
+    requirements: <UniqueSkill>[manipulatePuppetShanghaiOption],
   ),
   mercilessPursuit2(
     'Merciless Pursuit+',
     2,
-    requirements: <Skill>[mercilessPursuit],
+    requirements: <UniqueSkill>[mercilessPursuit],
   ),
-  littleLegion('War Sign "Little Legion"', 3, requirements: <Skill>[tripwire2]),
+  littleLegion(
+    'War Sign "Little Legion"',
+    3,
+    requirements: <UniqueSkill>[tripwire2],
+  ),
   tripwireAilmentBoost(
     'Tripwire: Ailment Boost',
     3,
-    requirements: <Skill>[tripwire2],
+    requirements: <UniqueSkill>[tripwire2],
   ),
   suicideSquad(
     'Suicide Squad',
     4,
-    requirements: <Skill>[tripwire, artfulSacrifice, hangedHouraiDolls],
+    requirements: <UniqueSkill>[tripwire, artfulSacrifice, hangedHouraiDolls],
   ),
-  dollCrusader('Doll Crusader', 3, requirements: <Skill>[dollGuard]),
+  dollCrusader('Doll Crusader', 3, requirements: <UniqueSkill>[dollGuard]),
   inorganicExpertDamageTaken(
     'Inorganic Expert: Damage Taken ↓ Augment',
     3,
-    requirements: <Skill>[inorganicExpert2],
+    requirements: <UniqueSkill>[inorganicExpert2],
   ),
   manipulatePuppetMpCut(
     'Manipulate Puppet: MP Cut',
     3,
-    requirements: <Skill>[manipulatePuppetShanghaiOption],
+    requirements: <UniqueSkill>[manipulatePuppetShanghaiOption],
   ),
   manipulatePuppetDuration2(
     'Manipulate Puppet: Duration ↑+',
     3,
-    requirements: <Skill>[manipulatePuppetDuration],
+    requirements: <UniqueSkill>[manipulatePuppetDuration],
   ),
   tripwireHighWireArt(
     'Tripwire: Highly-Skilled Wire Art',
     3,
-    requirements: <Skill>[tripwireWireArt],
+    requirements: <UniqueSkill>[tripwireWireArt],
   ),
   littleLegionDamageRange(
     'Little Legion: Damage Range ↑',
     3,
-    requirements: <Skill>[littleLegion],
+    requirements: <UniqueSkill>[littleLegion],
   ),
   suicideSquadSize(
     'Suicide Squad: Squad Size ↑',
     3,
-    requirements: <Skill>[suicideSquad],
+    requirements: <UniqueSkill>[suicideSquad],
   ),
   returnInanimateness('Magic Puppeteering "Return Inanimateness"', 3),
-  dollGuard2('Doll Guard+', 3, requirements: <Skill>[dollCrusader]),
+  dollGuard2('Doll Guard+', 3, requirements: <UniqueSkill>[dollCrusader]),
   manipulatePuppetTripwireOption(
     'Manipulate Puppet: Tripwire Option',
     3,
-    requirements: <Skill>[manipulatePuppetHouraiOption],
+    requirements: <UniqueSkill>[manipulatePuppetHouraiOption],
   ),
   ailmentChance(
     'Ailment Chance ↑',
     5,
-    requirements: <Skill>[mercilessPursuit2],
+    requirements: <UniqueSkill>[mercilessPursuit2],
   ),
   littleLegionAtkAffix(
     'Little Legion: ATK ↓ Affix',
     3,
-    requirements: <Skill>[littleLegion],
+    requirements: <UniqueSkill>[littleLegion],
   ),
   returnInanimatenessBombLobbing(
     'Return Inanimateness: Bomb-Lobbing Witch',
     3,
-    requirements: <Skill>[returnInanimateness],
+    requirements: <UniqueSkill>[returnInanimateness],
   ),
-  dollCrusader2('Doll Crusader+', 3, requirements: <Skill>[dollCrusader]),
+  dollCrusader2('Doll Crusader+', 3, requirements: <UniqueSkill>[dollCrusader]),
   guardianMarionette(
     'Knight Sign "Guardian Marionette"',
     3,
-    requirements: <Skill>[soldierOfCross],
+    requirements: <UniqueSkill>[soldierOfCross],
   ),
   // Copies from focus_reaction.dart
   //quickCharge2(
   //  'Quick Charge+',
   //  2,
-  //  requirements: <Skill>[quickCharge],
+  //  requirements: <UniqueSkill>[quickCharge],
   //),
   mAliceCannonAlice2(
     'MAlice Cannon (Alice)+',
     3,
-    requirements: <Skill>[mAliceCannonAlice],
+    requirements: <UniqueSkill>[mAliceCannonAlice],
   ),
   manipulatePuppetOptionChance(
     'Manipulate Puppet: Option Chance ↑',
     3,
-    requirements: <Skill>[manipulatePuppetMpCut],
+    requirements: <UniqueSkill>[manipulatePuppetMpCut],
   ),
   dollsWar(
     '''War Puppeteering "Dolls' War"''',
     3,
-    requirements: <Skill>[littleLegionDamageRange, suicideSquadSize],
+    requirements: <UniqueSkill>[littleLegionDamageRange, suicideSquadSize],
   ),
   suicideSquadSize2(
     'Suicide Squad: Squad Size ↑+',
     3,
-    requirements: <Skill>[suicideSquadSize],
+    requirements: <UniqueSkill>[suicideSquadSize],
   ),
   efficientPuppeteering2(
     'Efficient Puppeteering+',
     5,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       quickCharge2,
       efficientPuppeteering,
       mAliceCannonAlice2,
@@ -793,129 +839,136 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   kappaWaterfallDef(
     "Kappa's Illusionary Waterfall: DEF ↓ Affix",
     3,
-    requirements: <Skill>[kappaWaterfall],
+    requirements: <UniqueSkill>[kappaWaterfall],
   ),
   kappaWaterfallGadgetCooling(
     "Kappa's Illusionary Waterfall: Gadget-Cooling Feature",
     3,
-    requirements: <Skill>[kappaWaterfall],
+    requirements: <UniqueSkill>[kappaWaterfall],
   ),
   portableUtilityDevice('Portable Utility Device', 3),
   kappaWaterfallHeatPump(
     "Kappa's Illusionary Waterfall: Heat Pump",
     3,
-    requirements: <Skill>[kappaWaterfallDef],
+    requirements: <UniqueSkill>[kappaWaterfallDef],
   ),
   abilityManipulateWater('Ability to Manipulate Water', 3),
   thrillingQuenchHandling(
     'Thrilling Quench Handling',
     3,
-    requirements: <Skill>[kappaWaterfallGadgetCooling],
+    requirements: <UniqueSkill>[kappaWaterfallGadgetCooling],
   ),
   piercingExtendingArm(
     '''Great Kappa "Piercing Exteeeending Aaaaarm"''',
     3,
-    requirements: <Skill>[extendingArm],
+    requirements: <UniqueSkill>[extendingArm],
   ),
   opticalCamouflage('Optics "Optical Camouflage"', 3),
   exhaustUtilizationSystem(
     'Exhaust Utilization System',
     3,
-    requirements: <Skill>[portableUtilityDevice],
+    requirements: <UniqueSkill>[portableUtilityDevice],
   ),
   properMaintenance(
     'Proper Maintenance',
     3,
-    requirements: <Skill>[basicMaintenance],
+    requirements: <UniqueSkill>[basicMaintenance],
   ),
   kappaObservations2(
     'Observations of a Kappa+',
     3,
-    requirements: <Skill>[kappaObservations],
+    requirements: <UniqueSkill>[kappaObservations],
   ),
   overdrive('Overdrive', 3),
   kappaWaterfallImprovedCooling(
     "Kappa's Illusionary Waterfall: Improved Cooling",
     3,
-    requirements: <Skill>[abilityManipulateWater, kappaWaterfallGadgetCooling],
+    requirements: <UniqueSkill>[
+      abilityManipulateWater,
+      kappaWaterfallGadgetCooling,
+    ],
   ),
-  accelDrive('Accel Drive', 3, requirements: <Skill>[thrillingQuenchHandling]),
+  accelDrive(
+    'Accel Drive',
+    3,
+    requirements: <UniqueSkill>[thrillingQuenchHandling],
+  ),
   dividingEdge(
     'River Sign "Dividing Edge"',
     3,
-    requirements: <Skill>[opticalCamouflage],
+    requirements: <UniqueSkill>[opticalCamouflage],
   ),
   exhaustIncinerator('Explosive Flames "Exhaust Incinerator"', 3),
   portableUtilityDevice2(
     'Portable Utility Device: Effect ↑',
     3,
-    requirements: <Skill>[portableUtilityDevice],
+    requirements: <UniqueSkill>[portableUtilityDevice],
   ),
   exhaustDefensiveSystem(
     'Exhaust Defensive System',
     3,
-    requirements: <Skill>[exhaustUtilizationSystem],
+    requirements: <UniqueSkill>[exhaustUtilizationSystem],
   ),
   exhaustPropulsionSystem(
     'Exhaust Propulsion System',
     3,
-    requirements: <Skill>[exhaustUtilizationSystem],
+    requirements: <UniqueSkill>[exhaustUtilizationSystem],
   ),
   kappaWaterfallAcidicRecycling(
     "Kappa's Illusionary Waterfall: Acidic Wastewater Recycling",
     3,
-    requirements: <Skill>[kappaWaterfallHeatPump],
+    requirements: <UniqueSkill>[kappaWaterfallHeatPump],
   ),
   abilityManipulateWater2(
     'Ability to Manipulate Water+',
     3,
-    requirements: <Skill>[abilityManipulateWater],
+    requirements: <UniqueSkill>[abilityManipulateWater],
   ),
   superHighHeatQuenchHandling(
     'Super High-Heat Quench Handling',
     3,
-    requirements: <Skill>[thrillingQuenchHandling],
+    requirements: <UniqueSkill>[thrillingQuenchHandling],
   ),
   superScope3D(
     'Super Scope 3D',
     3,
-    requirements: <Skill>[piercingExtendingArm],
+    requirements: <UniqueSkill>[piercingExtendingArm],
   ),
   opticalCamouflageBoostGain(
     'Optical Camouflage: Boost Gain',
     3,
-    requirements: <Skill>[opticalCamouflage],
+    requirements: <UniqueSkill>[opticalCamouflage],
   ),
   autoCooling('Auto-Cooling', 3),
   portableUtilityDeviceScale(
     'Portable Utility Device: Scale Improvements',
     3,
-    requirements: <Skill>[portableUtilityDevice2],
+    requirements: <UniqueSkill>[portableUtilityDevice2],
   ),
   efficientExhaustUtilizationSystem(
     'Efficient Exhaust Utilization System',
     3,
-    requirements: <Skill>[exhaustUtilizationSystem],
+    requirements: <UniqueSkill>[exhaustUtilizationSystem],
   ),
   adeptMaintenance(
     'Adept Maintenance',
     3,
-    requirements: <Skill>[properMaintenance],
+    requirements: <UniqueSkill>[properMaintenance],
   ),
   kappaObservationsShieldConversion(
     'Observations of a Kappa: Shield Conversion',
     3,
-    requirements: <Skill>[kappaObservations2],
+    requirements: <UniqueSkill>[kappaObservations2],
   ),
   megadrive(
     'Megadrive',
     4,
-    requirements: <Skill>[overdrive, abilityManipulateWater2],
+    requirements: <UniqueSkill>[overdrive, abilityManipulateWater2],
   ),
   kappaWaterfallImprovedCooling2(
     "Kappa's Illusionary Waterfall: Improved Cooling+",
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       abilityManipulateWater2,
       kappaWaterfallImprovedCooling,
     ],
@@ -923,42 +976,42 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   superScope3DImprovedControl(
     'Super Scope 3D: Improved Firing Control',
     3,
-    requirements: <Skill>[superScope3D],
+    requirements: <UniqueSkill>[superScope3D],
   ),
   highOpticalCamouflage(
     'Optics "High-Optical Camouflage"',
     3,
-    requirements: <Skill>[opticalCamouflageBoostGain],
+    requirements: <UniqueSkill>[opticalCamouflageBoostGain],
   ),
   exhaustIncineratorRowModification(
     'Exhaust Incinerator: Row Modification',
     3,
-    requirements: <Skill>[exhaustIncinerator],
+    requirements: <UniqueSkill>[exhaustIncinerator],
   ),
   portableUtilityDevicePortability(
     'Portable Utility Device: Portability Improvements',
     3,
-    requirements: <Skill>[portableUtilityDeviceScale],
+    requirements: <UniqueSkill>[portableUtilityDeviceScale],
   ),
   efficientExhaustDefensiveSystem(
     'Efficent Exhaust Defensive System',
     3,
-    requirements: <Skill>[exhaustUtilizationSystem],
+    requirements: <UniqueSkill>[exhaustUtilizationSystem],
   ),
   efficientExhaustPropulsionSystem(
     'Efficient Exhaust Propulsion System',
     3,
-    requirements: <Skill>[exhaustUtilizationSystem],
+    requirements: <UniqueSkill>[exhaustUtilizationSystem],
   ),
   hiAccelDrive(
     'Hi-Accel Drive',
     3,
-    requirements: <Skill>[superHighHeatQuenchHandling, accelDrive],
+    requirements: <UniqueSkill>[superHighHeatQuenchHandling, accelDrive],
   ),
   improvedAutoCooling(
     'Improved Auto-Cooling',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       exhaustIncineratorRowModification,
       autoCooling,
       portableUtilityDevicePortability,
@@ -967,7 +1020,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   lastOne(
     'Last One',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       efficientExhaustDefensiveSystem,
       efficientExhaustUtilizationSystem,
       efficientExhaustPropulsionSystem,
@@ -976,17 +1029,17 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   gigadrive(
     'Gigadrive',
     5,
-    requirements: <Skill>[kappaObservationsShieldConversion, megadrive],
+    requirements: <UniqueSkill>[kappaObservationsShieldConversion, megadrive],
   ),
   superScope3DImprovedControl2(
     'Super Scope 3D: Improved Firing Control+',
     3,
-    requirements: <Skill>[superScope3DImprovedControl],
+    requirements: <UniqueSkill>[superScope3DImprovedControl],
   ),
   superHighHeatIncinerator(
     'Raging Flames "Super High-Heat Incinerator"',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       highOpticalCamouflage,
       exhaustIncineratorRowModification,
     ],
@@ -1001,157 +1054,185 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   guidepostDivineGrandsonsAdvent(
     '''Tornado "Guidepost for the Divine Grandson's Advent"''',
     3,
-    requirements: <Skill>[tenguWind],
+    requirements: <UniqueSkill>[tenguWind],
   ),
-  tenguWind2("Tengu's Wind: Effect ↑", 3, requirements: <Skill>[tenguWind]),
+  tenguWind2(
+    "Tengu's Wind: Effect ↑",
+    3,
+    requirements: <UniqueSkill>[tenguWind],
+  ),
   sarutahikosGuidance(
     "Squall 'Sarutahiko's Guidance'",
     3,
-    requirements: <Skill>[tenguWind],
+    requirements: <UniqueSkill>[tenguWind],
   ),
   extraStep('Extra Step', 3),
   evasiveAction('Evasive Action', 3),
   abilityManipulateWind2(
     'Ability to Manipulate Wind+',
     3,
-    requirements: <Skill>[abilityManipulateWind],
+    requirements: <UniqueSkill>[abilityManipulateWind],
   ),
-  galeFan('Gale Fan', 3, requirements: <Skill>[gustFan]),
+  galeFan('Gale Fan', 3, requirements: <UniqueSkill>[gustFan]),
   windGodGirlSpd(
     'Wind God Girl: SPD ↑ Augment',
     3,
-    requirements: <Skill>[windGodGirl],
+    requirements: <UniqueSkill>[windGodGirl],
   ),
   windGodGirlEva(
     'Wind God Girl: EVA ↑ Augment',
     3,
-    requirements: <Skill>[windGodGirl],
+    requirements: <UniqueSkill>[windGodGirl],
   ),
-  dashingGrace('Dashing Grace', 3, requirements: <Skill>[tenguWind]),
+  dashingGrace('Dashing Grace', 3, requirements: <UniqueSkill>[tenguWind]),
   teachingsGensokyosFastest2(
     "Teachings of Gensokyo's Fastest+",
     3,
-    requirements: <Skill>[teachingsGensokyosFastest],
+    requirements: <UniqueSkill>[teachingsGensokyosFastest],
   ),
   tenguOfGales(
     'Tengu of Gales',
     3,
-    requirements: <Skill>[galeFan, windGodGirlSpd],
+    requirements: <UniqueSkill>[galeFan, windGodGirlSpd],
   ),
-  peerlessWindGod('Peerless Wind God', 3, requirements: <Skill>[windGodGirl]),
+  peerlessWindGod(
+    'Peerless Wind God',
+    3,
+    requirements: <UniqueSkill>[windGodGirl],
+  ),
   guidepostDivineGrandsonsAdvent2(
     "Guidepost for the Divine Grandson's Advent: Effect ↑",
     3,
-    requirements: <Skill>[guidepostDivineGrandsonsAdvent],
+    requirements: <UniqueSkill>[guidepostDivineGrandsonsAdvent],
   ),
   sarutahikosTwinklingEyes(
     "Sarutahiko's Guidance: Sarutahiko's Twinkling Eyes",
     3,
-    requirements: <Skill>[sarutahikosGuidance],
+    requirements: <UniqueSkill>[sarutahikosGuidance],
   ),
-  extraStep2('Extra Step+', 3, requirements: <Skill>[extraStep]),
-  evasiveAction2('Evasive Action+', 3, requirements: <Skill>[evasiveAction]),
+  extraStep2('Extra Step+', 3, requirements: <UniqueSkill>[extraStep]),
+  evasiveAction2(
+    'Evasive Action+',
+    3,
+    requirements: <UniqueSkill>[evasiveAction],
+  ),
   abilityManipulateWindBoost(
     'Ability to Manipulate Wind: Boost Conversion',
     3,
-    requirements: <Skill>[abilityManipulateWind2],
+    requirements: <UniqueSkill>[abilityManipulateWind2],
   ),
   tempestFan(
     'Tempest Fan',
     3,
-    requirements: <Skill>[abilityManipulateWind2, galeFan],
+    requirements: <UniqueSkill>[abilityManipulateWind2, galeFan],
   ),
   peerlessWindGodSpd(
     'Peerless Wind God: SPD ↑ Augment',
     3,
-    requirements: <Skill>[peerlessWindGod],
+    requirements: <UniqueSkill>[peerlessWindGod],
   ),
   peerlessWindGodEva(
     'Peerless Wind God: EVA ↑ Augment',
     3,
-    requirements: <Skill>[peerlessWindGod],
+    requirements: <UniqueSkill>[peerlessWindGod],
   ),
   divineGrandsonsAdvent(
     '''Blockade Sign "Divine Grandson's Advent"''',
     3,
-    requirements: <Skill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
+    requirements: <UniqueSkill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
   ),
-  gracefulEvasion('Graceful Evasion', 3, requirements: <Skill>[dashingGrace]),
+  gracefulEvasion(
+    'Graceful Evasion',
+    3,
+    requirements: <UniqueSkill>[dashingGrace],
+  ),
   nanaatasRedNose(
     "Sarutahiko's Guidance: Nanaata's Red Nose",
     3,
-    requirements: <Skill>[sarutahikosTwinklingEyes],
+    requirements: <UniqueSkill>[sarutahikosTwinklingEyes],
   ),
   teachingsGensokyosFastest3(
     "Teachings of Gensokyo's Fastest++",
     3,
-    requirements: <Skill>[teachingsGensokyosFastest2],
+    requirements: <UniqueSkill>[teachingsGensokyosFastest2],
   ),
-  agility2('Agility+', 3, requirements: <Skill>[agility]),
-  windGodAvatar('Wind God Avatar', 3, requirements: <Skill>[peerlessWindGod]),
-  dashingGrace2('Dashing Grace+', 3, requirements: <Skill>[dashingGrace]),
-  gracefulWingwork('Graceful Wingwork', 3, requirements: <Skill>[dashingGrace]),
-  extraStep3('Extra Step++', 3, requirements: <Skill>[extraStep2]),
-  evasiveAction3('Evasive Action++', 3, requirements: <Skill>[evasiveAction2]),
+  agility2('Agility+', 3, requirements: <UniqueSkill>[agility]),
+  windGodAvatar(
+    'Wind God Avatar',
+    3,
+    requirements: <UniqueSkill>[peerlessWindGod],
+  ),
+  dashingGrace2('Dashing Grace+', 3, requirements: <UniqueSkill>[dashingGrace]),
+  gracefulWingwork(
+    'Graceful Wingwork',
+    3,
+    requirements: <UniqueSkill>[dashingGrace],
+  ),
+  extraStep3('Extra Step++', 3, requirements: <UniqueSkill>[extraStep2]),
+  evasiveAction3(
+    'Evasive Action++',
+    3,
+    requirements: <UniqueSkill>[evasiveAction2],
+  ),
   tenguOfTempests(
     'Tengu of Tempests',
     3,
-    requirements: <Skill>[abilityManipulateWindBoost, tempestFan],
+    requirements: <UniqueSkill>[abilityManipulateWindBoost, tempestFan],
   ),
   flutteringYoukaiFan(
     'Fluttering Youkai Fan',
     3,
-    requirements: <Skill>[abilityManipulateWindBoost, tempestFan],
+    requirements: <UniqueSkill>[abilityManipulateWindBoost, tempestFan],
   ),
   clothedInWindstorms(
     'Clothed in Windstorms',
     3,
-    requirements: <Skill>[windGodAvatar],
+    requirements: <UniqueSkill>[windGodAvatar],
   ),
   crossroadsOfHeaven(
     'Crossroad Sign "Crossroads of Heaven"',
     3,
-    requirements: <Skill>[windGodAvatar, divineGrandsonsAdvent],
+    requirements: <UniqueSkill>[windGodAvatar, divineGrandsonsAdvent],
   ),
   shiningAdventPath(
     "Divine Grandson's Advent: Shining Advent Path",
     3,
-    requirements: <Skill>[divineGrandsonsAdvent],
+    requirements: <UniqueSkill>[divineGrandsonsAdvent],
   ),
   gracefulEvasion2(
     'Graceful Evasion+',
     3,
-    requirements: <Skill>[gracefulEvasion],
+    requirements: <UniqueSkill>[gracefulEvasion],
   ),
   guidingOnesBack(
     "Sarutahiko's Guidance: Guiding One's Back",
     3,
-    requirements: <Skill>[nanaatasRedNose],
+    requirements: <UniqueSkill>[nanaatasRedNose],
   ),
   teachingsGensokyosFastest4(
     "Teachings of Gensokyo's Fastest+++",
     3,
-    requirements: <Skill>[teachingsGensokyosFastest3],
+    requirements: <UniqueSkill>[teachingsGensokyosFastest3],
   ),
   crossroadsOfHeavenEyesOfHeaven(
     'Crossroads of Heaven: Eyes of Heaven',
     3,
-    requirements: <Skill>[flutteringYoukaiFan, crossroadsOfHeaven],
+    requirements: <UniqueSkill>[flutteringYoukaiFan, crossroadsOfHeaven],
   ),
   crossroadsOfHeavenSoaringEightBoatJump(
     'Crossroads of Heaven: Soaring Eight-Boat Jump',
     3,
-    requirements: <Skill>[crossroadsOfHeaven, shiningAdventPath],
+    requirements: <UniqueSkill>[crossroadsOfHeaven, shiningAdventPath],
   ),
   takingFantasyByStorm(
     'Taking Fantasy by Storm',
     3,
-    requirements: <Skill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
+    requirements: <UniqueSkill>[guidepostDivineGrandsonsAdvent2, dashingGrace],
   ),
   gracefulWingwork2(
     'Graceful Wingwork+',
     3,
-    requirements: <Skill>[gracefulWingwork],
+    requirements: <UniqueSkill>[gracefulWingwork],
   ),
   // Patchouli skills
   philosopherStone("Philosopher's Stone", 3),
@@ -1161,39 +1242,39 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   philosopherStoneInitiative(
     "Philosopher's Stone - Initiative Type",
     3,
-    requirements: <Skill>[philosopherStone],
+    requirements: <UniqueSkill>[philosopherStone],
   ),
   philosopherStoneSustained(
     "Philosopher's Stone - Sustained Type",
     3,
-    requirements: <Skill>[philosopherStone],
+    requirements: <UniqueSkill>[philosopherStone],
   ),
   fundamentalMagicImprovements(
     'Fundamental Magic Improvements',
     3,
-    requirements: <Skill>[philosopherStone],
+    requirements: <UniqueSkill>[philosopherStone],
   ),
   agniShine2(
     'Agni Shine: POW ↑',
     3,
-    requirements: <Skill>[agniShine],
+    requirements: <UniqueSkill>[agniShine],
   ),
   princessUndine('Water Sign "Princess Undine"', 3),
   gingerGust2(
     'Ginger Gust: POW ↑',
     3,
-    requirements: <Skill>[gingerGust],
+    requirements: <UniqueSkill>[gingerGust],
   ),
   satelliteHimawari('Moon Wood Sign "Satellite Himawari"', 3),
   metalFatigue2(
     'Metal Fatigue: POW ↑',
     3,
-    requirements: <Skill>[metalFatigue],
+    requirements: <UniqueSkill>[metalFatigue],
   ),
   philosopherStoneProtective(
     "Philosopher's Stone - Protective Type",
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       philosopherStoneInitiative,
       philosopherStoneSustained,
     ],
@@ -1201,122 +1282,122 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   philosopherStoneHighLevel(
     "Philosopher's Stone - High-Level Elements",
     3,
-    requirements: <Skill>[philosopherStone],
+    requirements: <UniqueSkill>[philosopherStone],
   ),
   agniShineAtk(
     'Agni Shine: ATK ↑ Augment',
     3,
-    requirements: <Skill>[agniShine2],
+    requirements: <UniqueSkill>[agniShine2],
   ),
   phlogisticRain(
     'Water Fire Sign "Phlogistic Rain"',
     3,
-    requirements: <Skill>[agniShine2],
+    requirements: <UniqueSkill>[agniShine2],
   ),
   princessUndine2(
     'Princess Undine: POW ↑',
     3,
-    requirements: <Skill>[princessUndine],
+    requirements: <UniqueSkill>[princessUndine],
   ),
   gingerGustSpd(
     'Ginger Gust: SPD ↑ Augment',
     3,
-    requirements: <Skill>[gingerGust2],
+    requirements: <UniqueSkill>[gingerGust2],
   ),
   sylphyHorn(
     'Wood Sign "Sylphy Horn"',
     3,
-    requirements: <Skill>[gingerGust],
+    requirements: <UniqueSkill>[gingerGust],
   ),
   satelliteHimawari2(
     'Satellite Himawari: POW ↑',
     3,
-    requirements: <Skill>[satelliteHimawari],
+    requirements: <UniqueSkill>[satelliteHimawari],
   ),
   metalFatigueDef(
     'Metal Fatigue: DEF ↑ Augment',
     3,
-    requirements: <Skill>[metalFatigue2],
+    requirements: <UniqueSkill>[metalFatigue2],
   ),
   silverDragon(
     'Metal Sign "Silver Dragon"',
     3,
-    requirements: <Skill>[metalFatigue],
+    requirements: <UniqueSkill>[metalFatigue],
   ),
   initiativeTypeImproved(
     'Initiative Type - Improved Quantity',
     3,
-    requirements: <Skill>[philosopherStoneInitiative],
+    requirements: <UniqueSkill>[philosopherStoneInitiative],
   ),
   sustainedTypeImproved(
     'Sustained Type - Improved Quantity',
     3,
-    requirements: <Skill>[philosopherStoneSustained],
+    requirements: <UniqueSkill>[philosopherStoneSustained],
   ),
   phlogisticRain2(
     'Phlogistic Rain: POW ↑',
     3,
-    requirements: <Skill>[phlogisticRain],
+    requirements: <UniqueSkill>[phlogisticRain],
   ),
   princessUndineMag(
     'Princess Undine: MAG ↑ Augment',
     3,
-    requirements: <Skill>[princessUndine2],
+    requirements: <UniqueSkill>[princessUndine2],
   ),
   mercuryPoison(
     'Metal Water Sign "Mercury Poison"',
     3,
-    requirements: <Skill>[princessUndine],
+    requirements: <UniqueSkill>[princessUndine],
   ),
   sylphyHorn2(
     'Sylphy Horn: POW ↑',
     3,
-    requirements: <Skill>[sylphyHorn],
+    requirements: <UniqueSkill>[sylphyHorn],
   ),
   satelliteHimawariMnd(
     'Satellite Himawari: MND ↑ Augment',
     3,
-    requirements: <Skill>[satelliteHimawari2],
+    requirements: <UniqueSkill>[satelliteHimawari2],
   ),
   forestBlaze(
     'Wood Fire Sign "Forest Blaze"',
     3,
-    requirements: <Skill>[satelliteHimawari],
+    requirements: <UniqueSkill>[satelliteHimawari],
   ),
   silverDragon2(
     'Silver Dragon: POW ↑',
     3,
-    requirements: <Skill>[silverDragon],
+    requirements: <UniqueSkill>[silverDragon],
   ),
   philosopherStoneImprovedProtection(
     "Philosopher's Stone - Improved Protection",
     3,
-    requirements: <Skill>[philosopherStoneProtective],
+    requirements: <UniqueSkill>[philosopherStoneProtective],
   ),
   royalFlare(
     'Sun Sign "Royal Flare"',
     3,
-    requirements: <Skill>[philosopherStoneHighLevel],
+    requirements: <UniqueSkill>[philosopherStoneHighLevel],
   ),
   silentSelene(
     'Moon Sign "Silent Selene"',
     3,
-    requirements: <Skill>[philosopherStoneHighLevel],
+    requirements: <UniqueSkill>[philosopherStoneHighLevel],
   ),
   mercuryPoison2(
     'Mercury Poison: POW ↑',
     3,
-    requirements: <Skill>[princessUndine2, mercuryPoison],
+    requirements: <UniqueSkill>[princessUndine2, mercuryPoison],
   ),
   forestBlaze2(
     'Forest Blaze: POW ↑',
     3,
-    requirements: <Skill>[satelliteHimawari2, forestBlaze],
+    requirements: <UniqueSkill>[satelliteHimawari2, forestBlaze],
   ),
   protectiveTypeLatest(
     'Protective Type - Latest Revision',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       initiativeTypeImproved,
       philosopherStoneImprovedProtection,
     ],
@@ -1324,7 +1405,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   protectiveTypeRecovery(
     'Protective Type - Recovery Response',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       philosopherStoneImprovedProtection,
       sustainedTypeImproved,
     ],
@@ -1332,17 +1413,17 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   sunSignRemnantPower(
     'Sun Sign - Remnant Power',
     3,
-    requirements: <Skill>[royalFlare],
+    requirements: <UniqueSkill>[royalFlare],
   ),
   moonSignRemnantPower(
     'Moon Sign - Remnant Power',
     3,
-    requirements: <Skill>[silentSelene],
+    requirements: <UniqueSkill>[silentSelene],
   ),
   multiElementCasting(
     'Multi-Element Casting Efficiency',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       phlogisticRain2,
       mercuryPoison2,
     ],
@@ -1350,57 +1431,57 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   compoundMagicImprovements(
     'Compound Magic Improvements',
     3,
-    requirements: <Skill>[mercuryPoison2, sylphyHorn2],
+    requirements: <UniqueSkill>[mercuryPoison2, sylphyHorn2],
   ),
   multiElementPrinciples(
     'Multi-Element Principles',
     3,
-    requirements: <Skill>[sylphyHorn2, forestBlaze2],
+    requirements: <UniqueSkill>[sylphyHorn2, forestBlaze2],
   ),
   fiveSeasons(
     'Five Seasons',
     3,
-    requirements: <Skill>[forestBlaze2, silverDragon2],
+    requirements: <UniqueSkill>[forestBlaze2, silverDragon2],
   ),
   philosopherStoneSacrificial(
     "Philosopher's Stone - Sacrificial Type",
     5,
-    requirements: <Skill>[philosopherStoneImprovedProtection],
+    requirements: <UniqueSkill>[philosopherStoneImprovedProtection],
   ),
   royalDiamondRing(
     'Sun Moon Sign "Royal Diamond Ring"',
     3,
-    requirements: <Skill>[sunSignRemnantPower, moonSignRemnantPower],
+    requirements: <UniqueSkill>[sunSignRemnantPower, moonSignRemnantPower],
   ),
   fiveSeasonsBuffing(
     'Five Seasons: Buffing Season',
     3,
-    requirements: <Skill>[fiveSeasons],
+    requirements: <UniqueSkill>[fiveSeasons],
   ),
   fiveSeasonsDebuffing(
     'Five Seasons: Debuffing Season',
     3,
-    requirements: <Skill>[fiveSeasons],
+    requirements: <UniqueSkill>[fiveSeasons],
   ),
   sunMoonPersistentBuffing(
     'Sun & Moon Sign - Persistent Buffing Magic',
     3,
-    requirements: <Skill>[royalDiamondRing],
+    requirements: <UniqueSkill>[royalDiamondRing],
   ),
   sunMoonEfficientMagic(
     'Sun & Moon Sign - Efficient Magic',
     3,
-    requirements: <Skill>[royalDiamondRing],
+    requirements: <UniqueSkill>[royalDiamondRing],
   ),
   moonFireWaterWoodMetal(
     'Moon/Fire/Water/Wood/Metal Improvements',
     3,
-    requirements: <Skill>[multiElementCasting, compoundMagicImprovements],
+    requirements: <UniqueSkill>[multiElementCasting, compoundMagicImprovements],
   ),
   fiveSeasonsWeekday(
     'Five Seasons: Weekday Magic Season',
     3,
-    requirements: <Skill>[fiveSeasons],
+    requirements: <UniqueSkill>[fiveSeasons],
   ),
   // Cirno skills
   frostKing('Ice King "Frost King"', 3),
@@ -1409,13 +1490,13 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   icicleFallSpdDownAffix(
     'Icicle Fall: SPD ↓ Affix',
     3,
-    requirements: <Skill>[icicleFall],
+    requirements: <UniqueSkill>[icicleFall],
   ),
   tomboyishGirlIce('Tomboyish Girl of Ice', 3),
   diamondBlizzard(
     'Snow Sign "Diamond Blizzard"',
     3,
-    requirements: <Skill>[icicleFall],
+    requirements: <UniqueSkill>[icicleFall],
   ),
   tryTryAgain('Try, Try Again!', 4),
   abilityManipulateCold('Ability to Manipulate Cold', 3),
@@ -1423,129 +1504,129 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   autoFrostKing(
     'Auto Frost King',
     3,
-    requirements: <Skill>[frostKing],
+    requirements: <UniqueSkill>[frostKing],
   ),
   icicleFall2(
     'Icicle Fall: POW ↑',
     2,
-    requirements: <Skill>[icicleFall, tomboyishGirlIce],
+    requirements: <UniqueSkill>[icicleFall, tomboyishGirlIce],
   ),
   petalScatteringBlizzardGale(
     'Petal-Scattering Blizzard Gale',
     5,
-    requirements: <Skill>[diamondBlizzard, tryTryAgain],
+    requirements: <UniqueSkill>[diamondBlizzard, tryTryAgain],
   ),
   imFineOnMyOwn("I'm Fine On My Own!", 3),
   icicleFallSpdDownBoost(
     'Icicle Fall: SPD ↓ Boost',
     3,
-    requirements: <Skill>[icicleFallSpdDownAffix],
+    requirements: <UniqueSkill>[icicleFallSpdDownAffix],
   ),
   superTomboyishGirlIce(
     'Super Tomboyish Girl of Ice',
     2,
-    requirements: <Skill>[tomboyishGirlIce],
+    requirements: <UniqueSkill>[tomboyishGirlIce],
   ),
   diamondBlizzardPar(
     'Diamond Blizzard: PAR chance ↑',
     3,
-    requirements: <Skill>[diamondBlizzard],
+    requirements: <UniqueSkill>[diamondBlizzard],
   ),
   tryTryAgain2(
     'Try, Try Again! ...Again!',
     3,
-    requirements: <Skill>[tryTryAgain],
+    requirements: <UniqueSkill>[tryTryAgain],
   ),
   perfectFreeze(
     'Freeze Sign "Perfect Freeze"',
     4,
-    requirements: <Skill>[abilityManipulateCold],
+    requirements: <UniqueSkill>[abilityManipulateCold],
   ),
   abilityManipulateCold2(
     'Ability to Manipulate Cold+',
     2,
-    requirements: <Skill>[abilityManipulateCold],
+    requirements: <UniqueSkill>[abilityManipulateCold],
   ),
   freezeAtmosphere(
     'Freeze Sign "Freeze Atmosphere"',
     3,
-    requirements: <Skill>[abilityManipulateCold],
+    requirements: <UniqueSkill>[abilityManipulateCold],
   ),
   bondsBakaQuartet2(
     'Bonds of the Baka Quartet+',
     2,
-    requirements: <Skill>[bondsBakaQuartet],
+    requirements: <UniqueSkill>[bondsBakaQuartet],
   ),
   frostKingUnendingMonarchy(
     'Frost King: Unending Monarchy',
     3,
-    requirements: <Skill>[autoFrostKing],
+    requirements: <UniqueSkill>[autoFrostKing],
   ),
   frostColumns('Frost Sign "Frost Columns"', 3),
   absoluteZeroFairy(
     'Absolute Zero Fairy',
     2,
-    requirements: <Skill>[icicleFall2, superTomboyishGirlIce],
+    requirements: <UniqueSkill>[icicleFall2, superTomboyishGirlIce],
   ),
   swordFreezer(
     'Ice Sign "Sword Freezer"',
     4,
-    requirements: <Skill>[superTomboyishGirlIce, diamondBlizzardPar],
+    requirements: <UniqueSkill>[superTomboyishGirlIce, diamondBlizzardPar],
   ),
   redHotIcySpirit(
     'Red-Hot Icy Spirit',
     4,
-    requirements: <Skill>[petalScatteringBlizzardGale],
+    requirements: <UniqueSkill>[petalScatteringBlizzardGale],
   ),
   inexhaustibleEnergy2(
     'Inexhaustible Energy+',
     2,
-    requirements: <Skill>[inexhaustibleEnergy],
+    requirements: <UniqueSkill>[inexhaustibleEnergy],
   ),
   abilityManipulateColdBoost(
     'Ability to Manipulate Cold: Boost Conversion',
     2,
-    requirements: <Skill>[abilityManipulateCold2],
+    requirements: <UniqueSkill>[abilityManipulateCold2],
   ),
   imFineOnMyOwn2(
     "I'm Fine On My Own!+",
     2,
-    requirements: <Skill>[imFineOnMyOwn],
+    requirements: <UniqueSkill>[imFineOnMyOwn],
   ),
   icicleFallSpdDownBoost2(
     'Icicle Fall: SPD ↓ Boost+',
     3,
-    requirements: <Skill>[icicleFallSpdDownBoost],
+    requirements: <UniqueSkill>[icicleFallSpdDownBoost],
   ),
   iceFairyFreezingSkills(
     "Ice Fairy's Freezing Skills",
     4,
-    requirements: <Skill>[absoluteZeroFairy],
+    requirements: <UniqueSkill>[absoluteZeroFairy],
   ),
   swordFreezerGuardPierce(
     'Sword Freezer: Guard Pierce',
     2,
-    requirements: <Skill>[swordFreezer],
+    requirements: <UniqueSkill>[swordFreezer],
   ),
   stubbornTilTheEnd(
     "Stubborn 'Til the End",
     6,
-    requirements: <Skill>[tryTryAgain2],
+    requirements: <UniqueSkill>[tryTryAgain2],
   ),
   perfectFreeze2(
     'Perfect Freeze: POW ↑',
     2,
-    requirements: <Skill>[perfectFreeze],
+    requirements: <UniqueSkill>[perfectFreeze],
   ),
   bondsBakaQuartet3(
     'Bonds of the Baka Quartet++',
     2,
-    requirements: <Skill>[bondsBakaQuartet2],
+    requirements: <UniqueSkill>[bondsBakaQuartet2],
   ),
   frostColumnsUnmeltingIcicles(
     'Frost Columns: Unmelting Icicles',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       frostKingUnendingMonarchy,
       frostColumns,
       icicleFallSpdDownBoost2,
@@ -1554,57 +1635,60 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   iceFairyAcrobaticSkills(
     "Ice Fairy's Acrobatic Skills",
     3,
-    requirements: <Skill>[absoluteZeroFairy],
+    requirements: <UniqueSkill>[absoluteZeroFairy],
   ),
   swordFreezerParSpdDownSlay(
     'Sword Freezer: PAR+SPD ↓ Slay',
     3,
-    requirements: <Skill>[swordFreezerGuardPierce],
+    requirements: <UniqueSkill>[swordFreezerGuardPierce],
   ),
   persistentSpirit(
     'Persistent Spirit',
     3,
-    requirements: <Skill>[redHotIcySpirit],
+    requirements: <UniqueSkill>[redHotIcySpirit],
   ),
   perfectFreezeSpdDownChanceUp(
     'Perfect Freeze: SPD ↓ Chance ↑',
     3,
-    requirements: <Skill>[perfectFreeze2],
+    requirements: <UniqueSkill>[perfectFreeze2],
   ),
   perfectFreezeSpdDownSlay(
     'Perfect Freeze: SPD ↓ Slay',
     2,
-    requirements: <Skill>[perfectFreeze2],
+    requirements: <UniqueSkill>[perfectFreeze2],
   ),
   imFineOnMyOwn3(
     "I'm Fine On My Own!++",
     2,
-    requirements: <Skill>[imFineOnMyOwn2],
+    requirements: <UniqueSkill>[imFineOnMyOwn2],
   ),
   proofOfTheStrongest(
     'Proof of the Strongest',
     5,
-    requirements: <Skill>[icicleFallSpdDownBoost2],
+    requirements: <UniqueSkill>[icicleFallSpdDownBoost2],
   ),
   absoluteZeroQueen(
     'Absolute Zero Queen',
     3,
-    requirements: <Skill>[iceFairyAcrobaticSkills, iceFairyFreezingSkills],
+    requirements: <UniqueSkill>[
+      iceFairyAcrobaticSkills,
+      iceFairyFreezingSkills,
+    ],
   ),
   swordFreezerBlizzardBladedance(
     'Sword Freezer: Blizzard Bladedance',
     5,
-    requirements: <Skill>[swordFreezerParSpdDownSlay],
+    requirements: <UniqueSkill>[swordFreezerParSpdDownSlay],
   ),
   perfectFreezeAbsoluteStillness(
     'Perfect Freeze: Absolute Stillness',
     3,
-    requirements: <Skill>[perfectFreezeSpdDownChanceUp],
+    requirements: <UniqueSkill>[perfectFreezeSpdDownChanceUp],
   ),
   perfectFreezeSpdDownSlay2(
     'Perfect Freeze: SPD ↓ Slay+',
     2,
-    requirements: <Skill>[perfectFreezeSpdDownSlay],
+    requirements: <UniqueSkill>[perfectFreezeSpdDownSlay],
   ),
   // Keine skills
   jewelsDivineProtection("Jewel's Divine Protection", 3),
@@ -1614,23 +1698,23 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   swordsDivineProtection(
     "Sword's Divine Protection",
     3,
-    requirements: <Skill>[jewelsDivineProtection],
+    requirements: <UniqueSkill>[jewelsDivineProtection],
   ),
   jewelsDivineProtectionDuration(
     "Jewel's Divine Protection: Self-Use Duration ↑",
     3,
-    requirements: <Skill>[jewelsDivineProtection],
+    requirements: <UniqueSkill>[jewelsDivineProtection],
   ),
   nextHistory('Next History "New History of Fantasy"', 3),
   organizedFormation(
     'Organized Formation',
     2,
-    requirements: <Skill>[immovable],
+    requirements: <UniqueSkill>[immovable],
   ),
   swordsDivineProtectionDuration(
     "Sword's Divine Protection: Self-Use Duration ↑",
     2,
-    requirements: <Skill>[swordsDivineProtection],
+    requirements: <UniqueSkill>[swordsDivineProtection],
   ),
   countrySignJewel(
     'Country Sign "Three Sacred Treasures - Jewel"',
@@ -1639,105 +1723,108 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   untroddenLandsHistoryDefMnd(
     "Untrodden Land's History: DEF/MND ↑ Augment",
     2,
-    requirements: <Skill>[oldHistory],
+    requirements: <UniqueSkill>[oldHistory],
   ),
   wereHakutakuForewarning('Were-Hakutaku Forewarning', 3),
   newHistoryOfFantasyAtkMag(
     'New History of Fantasy: ATK/MAG ↑ Augment',
     2,
-    requirements: <Skill>[nextHistory],
+    requirements: <UniqueSkill>[nextHistory],
   ),
-  immovable2('Immovable+', 3, requirements: <Skill>[immovable]),
+  immovable2('Immovable+', 3, requirements: <UniqueSkill>[immovable]),
   flawlessLeadership(
     'Flawless Leadership',
     4,
-    requirements: <Skill>[organizedFormation],
+    requirements: <UniqueSkill>[organizedFormation],
   ),
   historiansPointer2(
     "Historian's Pointer+",
     4,
-    requirements: <Skill>[historiansPointer],
+    requirements: <UniqueSkill>[historiansPointer],
   ),
   swordsDivineAutoProtection(
     "Sword's Divine Auto-Protection",
     3,
-    requirements: <Skill>[swordsDivineProtectionDuration],
+    requirements: <UniqueSkill>[swordsDivineProtectionDuration],
   ),
   countrySignSword(
     'Country Sign "Three Sacred Treasures - Sword"',
     4,
-    requirements: <Skill>[swordsDivineProtection],
+    requirements: <UniqueSkill>[swordsDivineProtection],
   ),
   jewelsDivineAutoProtection(
     "Jewel's Divine Auto-Protection",
     3,
-    requirements: <Skill>[jewelsDivineProtectionDuration],
+    requirements: <UniqueSkill>[jewelsDivineProtectionDuration],
   ),
   untroddenLandsHistorySelfRecovery(
     "Untrodden Land's History: Self-Recovery",
     3,
-    requirements: <Skill>[untroddenLandsHistoryDefMnd],
+    requirements: <UniqueSkill>[untroddenLandsHistoryDefMnd],
   ),
   organizedFormation2(
     'Organized Formation+',
     2,
-    requirements: <Skill>[organizedFormation],
+    requirements: <UniqueSkill>[organizedFormation],
   ),
   alongsideMokou('Alongside Mokou', 3),
   historyAccumulationSword(
     'History Accumulation - Sword',
     4,
-    requirements: <Skill>[countrySignSword],
+    requirements: <UniqueSkill>[countrySignSword],
   ),
   mirrorsDivineProtection(
     "Mirror's Divine Protection",
     3,
-    requirements: <Skill>[countrySignSword, countrySignJewel],
+    requirements: <UniqueSkill>[countrySignSword, countrySignJewel],
   ),
   historyAccumulationJewel(
     'History Accumulation - Jewel',
     4,
-    requirements: <Skill>[countrySignJewel],
+    requirements: <UniqueSkill>[countrySignJewel],
   ),
   untroddenLandsHistory2(
     "Untrodden Land's History: POW ↑",
     2,
-    requirements: <Skill>[untroddenLandsHistorySelfRecovery],
+    requirements: <UniqueSkill>[untroddenLandsHistorySelfRecovery],
   ),
   wereHakutakuTransformation(
     'Were-Hakutaku Transformation',
     3,
-    requirements: <Skill>[wereHakutakuForewarning],
+    requirements: <UniqueSkill>[wereHakutakuForewarning],
   ),
   newHistoryOfFantasyFrontlineRecovery(
     'New History of Fantasy: Frontline Recovery',
     3,
-    requirements: <Skill>[wereHakutakuForewarning, newHistoryOfFantasyAtkMag],
+    requirements: <UniqueSkill>[
+      wereHakutakuForewarning,
+      newHistoryOfFantasyAtkMag,
+    ],
   ),
   unrestrainableUrge(
     'Unrestrainable Urge',
     3,
-    requirements: <Skill>[wereHakutakuForewarning, immovable2],
+    requirements: <UniqueSkill>[wereHakutakuForewarning, immovable2],
   ),
   flawlessLeadership2(
     'Flawless Leadership+',
     5,
-    requirements: <Skill>[organizedFormation2, flawlessLeadership],
+    requirements: <UniqueSkill>[organizedFormation2, flawlessLeadership],
   ),
   historiansPointer3(
     "Historian's Pointer++",
     5,
-    requirements: <Skill>[historiansPointer2],
+    requirements: <UniqueSkill>[historiansPointer2],
   ),
   swordsDivineAutoProtection2(
     "Sword's Divine Auto-Protection+",
     2,
-    requirements: <Skill>[swordsDivineAutoProtection],
+    requirements: <UniqueSkill>[swordsDivineAutoProtection],
   ),
   countrySignMirror(
     'Country Sign "Three Sacred Treasures - Mirror"',
     4,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       historyAccumulationSword,
       mirrorsDivineProtection,
       historyAccumulationJewel,
@@ -1746,12 +1833,12 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   jewelsDivineAutoProtection2(
     "Jewel's Divine Auto-Protection+",
     2,
-    requirements: <Skill>[jewelsDivineAutoProtection],
+    requirements: <UniqueSkill>[jewelsDivineAutoProtection],
   ),
   legendOfGensokyo(
     'Nil History "Legend of Gensokyo"',
     4,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       untroddenLandsHistorySelfRecovery,
       wereHakutakuTransformation,
     ],
@@ -1759,32 +1846,32 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   newHistoryOfFantasy2(
     'New History of Fantasy: Damage Multiplier ↑',
     2,
-    requirements: <Skill>[newHistoryOfFantasyFrontlineRecovery],
+    requirements: <UniqueSkill>[newHistoryOfFantasyFrontlineRecovery],
   ),
   perfectFormation(
     'Perfect Formation',
     4,
-    requirements: <Skill>[organizedFormation2],
+    requirements: <UniqueSkill>[organizedFormation2],
   ),
   alongsideMokou2(
     'Alongside Mokou+',
     2,
-    requirements: <Skill>[alongsideMokou],
+    requirements: <UniqueSkill>[alongsideMokou],
   ),
   grandHistorySword(
     'Grand History - Sword',
     3,
-    requirements: <Skill>[historyAccumulationSword],
+    requirements: <UniqueSkill>[historyAccumulationSword],
   ),
   grandHistoryJewel(
     'Grand History - Jewel',
     3,
-    requirements: <Skill>[historyAccumulationJewel],
+    requirements: <UniqueSkill>[historyAccumulationJewel],
   ),
   mitoNoMitsukuni(
     'Hollyhock Sign "Mito no Mitsukuni"',
     4,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       wereHakutakuTransformation,
       newHistoryOfFantasyFrontlineRecovery,
     ],
@@ -1792,17 +1879,17 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   historiansPointer4(
     "Historian's Pointer+++",
     6,
-    requirements: <Skill>[historiansPointer3],
+    requirements: <UniqueSkill>[historiansPointer3],
   ),
   swordsSharedDivineAutoProtection(
     "Sword's Shared Divine Auto-Protection+",
     3,
-    requirements: <Skill>[swordsDivineAutoProtection2],
+    requirements: <UniqueSkill>[swordsDivineAutoProtection2],
   ),
   historyEatingHalfBeast(
     'History-Eating Half-Beast',
     4,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       grandHistorySword,
       countrySignMirror,
       grandHistoryJewel,
@@ -1811,81 +1898,84 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   jewelsSharedDivineAutoProtection(
     "Jewel's Shared Divine Auto-Protection+",
     3,
-    requirements: <Skill>[jewelsDivineAutoProtection2],
+    requirements: <UniqueSkill>[jewelsDivineAutoProtection2],
   ),
   amaterasu(
     'Light Sign "Amaterasu"',
     5,
-    requirements: <Skill>[legendOfGensokyo, mitoNoMitsukuni],
+    requirements: <UniqueSkill>[legendOfGensokyo, mitoNoMitsukuni],
   ),
   // Doremy skills
   rulerOfDreams('Ruler of Dreams', 3),
   deepNavyRunawayDream(
     'Dream Sign "Deep Navy Runaway Dream"',
     3,
-    requirements: <Skill>[rulerOfDreams],
+    requirements: <UniqueSkill>[rulerOfDreams],
   ),
   scarletNightmare(
     'Dream Sign "Scarlet Nightmare"',
     3,
-    requirements: <Skill>[rulerOfDreams],
+    requirements: <UniqueSkill>[rulerOfDreams],
   ),
   rulerOfTheDreamWorld('Ruler of the Dream World', 3),
   dreamCatcher(
     'Dream Sign "Dream Catcher"',
     3,
-    requirements: <Skill>[deepNavyRunawayDream],
+    requirements: <UniqueSkill>[deepNavyRunawayDream],
   ),
   dreamBalloonFlight(
     'Dream Balloon Flight',
     3,
-    requirements: <Skill>[rulerOfDreams],
+    requirements: <UniqueSkill>[rulerOfDreams],
   ),
   frighteningDebilitatingDream(
     'Frigthening Debilitating Dream',
     3,
-    requirements: <Skill>[rulerOfDreams],
+    requirements: <UniqueSkill>[rulerOfDreams],
   ),
   astonishingDumbfoundingDream(
     'Astonishing Dumbfounding Dream',
     3,
-    requirements: <Skill>[rulerOfDreams],
+    requirements: <UniqueSkill>[rulerOfDreams],
   ),
   indigoAnxietyDream(
     'Dream Sign "Indigo Anxiety Dream"',
     3,
-    requirements: <Skill>[scarletNightmare],
+    requirements: <UniqueSkill>[scarletNightmare],
   ),
   nightmareCatcher(
     'Dream Sign "Nightmare Catcher"',
     3,
-    requirements: <Skill>[scarletNightmare],
+    requirements: <UniqueSkill>[scarletNightmare],
   ),
-  wryPotency('WRY Potency ↑', 3, requirements: <Skill>[dreamCatcher]),
+  wryPotency('WRY Potency ↑', 3, requirements: <UniqueSkill>[dreamCatcher]),
   dreamCatcher2(
     'Dream Catcher: Effect ↑',
     3,
-    requirements: <Skill>[dreamCatcher],
+    requirements: <UniqueSkill>[dreamCatcher],
   ),
   pitchBlackCosmicDream(
     'Dream Sign "Pitch Black Cosmic Dream"',
     3,
-    requirements: <Skill>[deepNavyRunawayDream],
+    requirements: <UniqueSkill>[deepNavyRunawayDream],
   ),
   deepNavyRunawayDreamDreamSoulGain(
     'Deep Navy Runaway Dream: Dream Soul Gain',
     3,
-    requirements: <Skill>[deepNavyRunawayDream],
+    requirements: <UniqueSkill>[deepNavyRunawayDream],
   ),
   dreamSoulsUponEvasion(
     'Dream Souls Upon Evasion',
     3,
-    requirements: <Skill>[dreamBalloonFlight, frighteningDebilitatingDream],
+    requirements: <UniqueSkill>[
+      dreamBalloonFlight,
+      frighteningDebilitatingDream,
+    ],
   ),
   dreamSoulsToDamageTaken(
     'Dream Souls to Damage Taken',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       frighteningDebilitatingDream,
       astonishingDumbfoundingDream,
     ],
@@ -1893,150 +1983,154 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   scarletNightmareEffect(
     'Scarlet Nightmare: Special Effect ↑',
     3,
-    requirements: <Skill>[scarletNightmare],
+    requirements: <UniqueSkill>[scarletNightmare],
   ),
   indigoAnxietyDreamEffect(
     'Indigo Anxiety Dream: Special Effect ↑',
     3,
-    requirements: <Skill>[indigoAnxietyDream],
+    requirements: <UniqueSkill>[indigoAnxietyDream],
   ),
   nightmareCatcherEffect(
     'Nightmare Catcher: Effect ↑',
     3,
-    requirements: <Skill>[nightmareCatcher],
+    requirements: <UniqueSkill>[nightmareCatcher],
   ),
-  wryChance('WRY Chance ↑', 3, requirements: <Skill>[nightmareCatcher]),
+  wryChance('WRY Chance ↑', 3, requirements: <UniqueSkill>[nightmareCatcher]),
   rulerOfTheDreamWorld2(
     'Ruler of the Dream World+',
     3,
-    requirements: <Skill>[rulerOfTheDreamWorld],
+    requirements: <UniqueSkill>[rulerOfTheDreamWorld],
   ),
   dreamCatcherDamageDealtAbsorption(
     'Dream Catcher: Damage Dealt ↑ Absorption',
     3,
-    requirements: <Skill>[dreamCatcher],
+    requirements: <UniqueSkill>[dreamCatcher],
   ),
   pitchBlackCosmicDreamElements(
     'Pitch-Black Cosmic Dream: Dream Souls to Elements',
     3,
-    requirements: <Skill>[pitchBlackCosmicDream],
+    requirements: <UniqueSkill>[pitchBlackCosmicDream],
   ),
   dreamBalloonFlight2(
     'Dream Balloon Flight+',
     3,
-    requirements: <Skill>[dreamBalloonFlight],
+    requirements: <UniqueSkill>[dreamBalloonFlight],
   ),
   frighteningDebilitatingDream2(
     'Frigthening Debilitating Dream+',
     3,
-    requirements: <Skill>[frighteningDebilitatingDream],
+    requirements: <UniqueSkill>[frighteningDebilitatingDream],
   ),
   astonishingDumbfoundingDream2(
     'Astonishing Dumbfounding Dream+',
     3,
-    requirements: <Skill>[astonishingDumbfoundingDream],
+    requirements: <UniqueSkill>[astonishingDumbfoundingDream],
   ),
   ultramarineLunaticDream(
     'Moon Sign "Ultramarine Lunatic Dream"',
     3,
-    requirements: <Skill>[indigoAnxietyDream],
+    requirements: <UniqueSkill>[indigoAnxietyDream],
   ),
   nightmareCatcherBuffs(
     'Nightmare Catcher: Buffs to Damage Taken ↓',
     3,
-    requirements: <Skill>[nightmareCatcher],
+    requirements: <UniqueSkill>[nightmareCatcher],
   ),
   wryPotencyRange(
     'WRY Potency ↑: Range Expansion',
     3,
-    requirements: <Skill>[wryPotency],
+    requirements: <UniqueSkill>[wryPotency],
   ),
   dreamCatcher3(
     'Dream Catcher: Effect ↑+',
     3,
-    requirements: <Skill>[dreamCatcher2],
+    requirements: <UniqueSkill>[dreamCatcher2],
   ),
   pitchBlackCosmicDream2(
     'Pitch-Black Cosmic Dream: Dream Souls to POW',
     3,
-    requirements: <Skill>[pitchBlackCosmicDream],
+    requirements: <UniqueSkill>[pitchBlackCosmicDream],
   ),
   deepNavyRunawayDreamWry(
     'Deep Navy Runaway Dream: Forced WRY Affix',
     3,
-    requirements: <Skill>[deepNavyRunawayDreamDreamSoulGain],
+    requirements: <UniqueSkill>[deepNavyRunawayDreamDreamSoulGain],
   ),
   buffsUponEvasion(
     'Buffs Upon Evasion',
     3,
-    requirements: <Skill>[dreamSoulsUponEvasion],
+    requirements: <UniqueSkill>[dreamSoulsUponEvasion],
   ),
   dreamSoulsToDamageDealt(
     'Dream Souls to Damage Dealt',
     3,
-    requirements: <Skill>[dreamSoulsToDamageTaken],
+    requirements: <UniqueSkill>[dreamSoulsToDamageTaken],
   ),
   scarletNightmareEffect2(
     'Scarlet Nightmare: Special Effect ↑+',
     3,
-    requirements: <Skill>[scarletNightmareEffect],
+    requirements: <UniqueSkill>[scarletNightmareEffect],
   ),
   indigoAnxietyDreamEffect2(
     'Indigo Anxiety Dream: Special Effect ↑+',
     3,
-    requirements: <Skill>[indigoAnxietyDreamEffect],
+    requirements: <UniqueSkill>[indigoAnxietyDreamEffect],
   ),
   nightmareCatcherEffect2(
     'Nightmare Catcher: Effect ↑+',
     3,
-    requirements: <Skill>[nightmareCatcherEffect],
+    requirements: <UniqueSkill>[nightmareCatcherEffect],
   ),
-  wryChance2('WRY Chance ↑+', 3, requirements: <Skill>[wryChance]),
+  wryChance2('WRY Chance ↑+', 3, requirements: <UniqueSkill>[wryChance]),
   rulerOfTheDreamWorldShield(
     'Ruler of the Dream World: Shield Conversion',
     3,
-    requirements: <Skill>[rulerOfTheDreamWorld2],
+    requirements: <UniqueSkill>[rulerOfTheDreamWorld2],
   ),
   dreamCatcherSharing(
     'Dream Catcher: Damage Dealt ↑ Sharing',
     3,
-    requirements: <Skill>[dreamCatcherDamageDealtAbsorption],
+    requirements: <UniqueSkill>[dreamCatcherDamageDealtAbsorption],
   ),
   dreamExpress(
     'Super-Express "Dream Express"',
     3,
-    requirements: <Skill>[pitchBlackCosmicDreamElements],
+    requirements: <UniqueSkill>[pitchBlackCosmicDreamElements],
   ),
   doremyPopping(
     'Doremy Popping',
     3,
-    requirements: <Skill>[dreamBalloonFlight2],
+    requirements: <UniqueSkill>[dreamBalloonFlight2],
   ),
   nightmareCatcherSharing(
     'Nightmare Catcher: Damage Taken ↓ Sharing',
     3,
-    requirements: <Skill>[nightmareCatcherBuffs],
+    requirements: <UniqueSkill>[nightmareCatcherBuffs],
   ),
   ultramarineLunaticDreamEffect(
     'Ultramarine Lunatic Dream: Special Effect ↑',
     3,
-    requirements: <Skill>[ultramarineLunaticDream],
+    requirements: <UniqueSkill>[ultramarineLunaticDream],
   ),
   dreamExpressRainbow(
     'Dream Express: Rainbow Fright',
     3,
-    requirements: <Skill>[dreamExpress],
+    requirements: <UniqueSkill>[dreamExpress],
   ),
   deepNavyRunawayDreamWry2(
     'Deep Navy Runaway Dream: Forced WRY Affix+',
     3,
-    requirements: <Skill>[deepNavyRunawayDreamWry],
+    requirements: <UniqueSkill>[deepNavyRunawayDreamWry],
   ),
-  mpUponEvasion('MP Upon Evasion', 3, requirements: <Skill>[buffsUponEvasion]),
+  mpUponEvasion(
+    'MP Upon Evasion',
+    3,
+    requirements: <UniqueSkill>[buffsUponEvasion],
+  ),
   ultramarineLunaticDreamEffect2(
     'Ultramarine Lunatic Dream: Special Effect ↑+',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       astonishingDumbfoundingDream2,
       scarletNightmareEffect2,
       ultramarineLunaticDreamEffect,
@@ -2051,50 +2145,50 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   meshOfLightAndDarkness2(
     'Mesh of Light and Darkness: Effect Potency ↑',
     3,
-    requirements: <Skill>[meshOfLightAndDarkness],
+    requirements: <UniqueSkill>[meshOfLightAndDarkness],
   ),
   meshOfLightAndDarknessTurnBuff(
     'Mesh of Light and Darkness: Designated Turn Buff',
     3,
-    requirements: <Skill>[meshOfLightAndDarkness],
+    requirements: <UniqueSkill>[meshOfLightAndDarkness],
   ),
   hyperactiveFlyingObjectTurnBuff(
     'Hyperactive High Speed Flying Object: Designated Turn Buff',
     3,
-    requirements: <Skill>[hyperactiveFlyingObject],
+    requirements: <UniqueSkill>[hyperactiveFlyingObject],
   ),
   hyperactiveFlyingObjectFlierSlay(
     'Hyperactive High Speed Flying Object: Flier Slay',
     3,
-    requirements: <Skill>[hyperactiveFlyingObject],
+    requirements: <UniqueSkill>[hyperactiveFlyingObject],
   ),
   yakumoHousehold('Yakumo Household', 3),
   boundaryOfWaveAndParticle('Boundary of Wave and Particle', 3),
   boundaryOfMeleeAndDanmaku(
     'Boundary of Melee and Danmaku',
     3,
-    requirements: <Skill>[meshOfLightAndDarkness],
+    requirements: <UniqueSkill>[meshOfLightAndDarkness],
   ),
   meshOfLightAndDarknessParSpdDownSlay(
     'Mesh of Light and Darkness: PAR+SPD ↓ Slay',
     3,
-    requirements: <Skill>[meshOfLightAndDarkness],
+    requirements: <UniqueSkill>[meshOfLightAndDarkness],
   ),
   hyperactiveFlyingObjectRow(
     'Hyperactive High Speed Flying Object: Row Attack',
     3,
-    requirements: <Skill>[hyperactiveFlyingObject],
+    requirements: <UniqueSkill>[hyperactiveFlyingObject],
   ),
   boundaryOfRecoveryAndInjury(
     'Boundary of Recovery and Injury',
     3,
-    requirements: <Skill>[hyperactiveFlyingObject],
+    requirements: <UniqueSkill>[hyperactiveFlyingObject],
   ),
   boundaryOfFormAndEmptiness('Boundary of Form and Emptiness', 3),
   meshOfLightAndDarknessInfliction(
     'Mesh of Light and Darkness: Infliction Chance ↑',
     3,
-    requirements: <Skill>[meshOfLightAndDarknessParSpdDownSlay],
+    requirements: <UniqueSkill>[meshOfLightAndDarknessParSpdDownSlay],
   ),
   quadrupleImperishableNightBarrier(
     'Boundary "Quadruple Imperishable Night Barrier"',
@@ -2104,7 +2198,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   hyperactiveFlyingObjectGuardPierce(
     'Hyperactive High Speed Flying Object: Guard Pierce',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       hyperactiveFlyingObjectRow,
       hyperactiveFlyingObjectFlierSlay,
     ],
@@ -2112,57 +2206,60 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   boundaryOfWaveAndParticle2(
     'Boundary of Wave and Particle+',
     3,
-    requirements: <Skill>[boundaryOfWaveAndParticle],
+    requirements: <UniqueSkill>[boundaryOfWaveAndParticle],
   ),
   boundaryOfMeleeAndDanmakuShare(
     'Boundary of Melee and Danmaku: 1/4 Party Share',
     3,
-    requirements: <Skill>[boundaryOfWaveAndParticle, boundaryOfMeleeAndDanmaku],
+    requirements: <UniqueSkill>[
+      boundaryOfWaveAndParticle,
+      boundaryOfMeleeAndDanmaku,
+    ],
   ),
   boundaryOfMeleeAndDanmaku2(
     'Boundary of Melee and Danmaku: Effect ↑',
     5,
-    requirements: <Skill>[boundaryOfMeleeAndDanmaku],
+    requirements: <UniqueSkill>[boundaryOfMeleeAndDanmaku],
   ),
   quadrupleImperishableNightBarrier2(
     'Quadruple Imperishable Night Barrier: Effect ↑',
     3,
-    requirements: <Skill>[quadrupleImperishableNightBarrier],
+    requirements: <UniqueSkill>[quadrupleImperishableNightBarrier],
   ),
   yakumoYukarisSpiritingAway(
     '''Evil Spirits "Yakumo Yukari's Spiriting Away"''',
     3,
-    requirements: <Skill>[quadrupleImperishableNightBarrier, yakumoRan],
+    requirements: <UniqueSkill>[quadrupleImperishableNightBarrier, yakumoRan],
   ),
   yakumoRanChensStrength(
     "Yakumo Ran+: Chen's Strength",
     3,
-    requirements: <Skill>[yakumoRan],
+    requirements: <UniqueSkill>[yakumoRan],
   ),
   boundaryOfRecoveryAndInjury2(
     'Boundary of Recovery and Injury: Effect ↑',
     3,
-    requirements: <Skill>[boundaryOfRecoveryAndInjury],
+    requirements: <UniqueSkill>[boundaryOfRecoveryAndInjury],
   ),
   boundaryOfRecoveryAndInjuryShare(
     'Boundary of Recovery and Injury: 1/4 Party Share',
     2,
-    requirements: <Skill>[boundaryOfFormAndEmptiness],
+    requirements: <UniqueSkill>[boundaryOfFormAndEmptiness],
   ),
   boundaryOfFormAndEmptiness2(
     'Boundary of Form and Emptiness+',
     3,
-    requirements: <Skill>[boundaryOfFormAndEmptiness],
+    requirements: <UniqueSkill>[boundaryOfFormAndEmptiness],
   ),
   boundaryOfMeleeAndDanmakuShare2(
     'Boundary of Melee and Danmaku: 1/3 Party Share',
     2,
-    requirements: <Skill>[boundaryOfMeleeAndDanmakuShare],
+    requirements: <UniqueSkill>[boundaryOfMeleeAndDanmakuShare],
   ),
   danmakuBarrier(
     '''Yukari's Arcanum "Danmaku Barrier"''',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       boundaryOfMeleeAndDanmakuShare,
       boundaryOfMeleeAndDanmaku2,
     ],
@@ -2170,27 +2267,27 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   quadrupleImperishableNightBarrierOddTurn(
     'Quadruple Imperishable Night Barrier: Odd Turn Stats ↑',
     3,
-    requirements: <Skill>[quadrupleImperishableNightBarrier2],
+    requirements: <UniqueSkill>[quadrupleImperishableNightBarrier2],
   ),
   quadrupleImperishableNightBarrierEvenTurn(
     'Quadruple Imperishable Night Barrier: Even Turn Damage Taken ↓',
     3,
-    requirements: <Skill>[quadrupleImperishableNightBarrier2],
+    requirements: <UniqueSkill>[quadrupleImperishableNightBarrier2],
   ),
   yakumoYukarisSpiritingAwayDelay(
     "Yakumo Yukari's Spiriting Away: Delay ↓",
     2,
-    requirements: <Skill>[yakumoYukarisSpiritingAway],
+    requirements: <UniqueSkill>[yakumoYukarisSpiritingAway],
   ),
   yakumoRanRansStrength(
     "Yakumo Ran+: Ran's Strength",
     3,
-    requirements: <Skill>[yakumoRanChensStrength],
+    requirements: <UniqueSkill>[yakumoRanChensStrength],
   ),
   objectiveBarrier(
     'Barrier "Objective Barrier"',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       boundaryOfRecoveryAndInjury2,
       boundaryOfRecoveryAndInjuryShare,
     ],
@@ -2198,22 +2295,22 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   boundaryOfRecoveryAndInjuryShare2(
     'Boundary of Recovery and Injury: 1/3 Party Share',
     2,
-    requirements: <Skill>[boundaryOfRecoveryAndInjuryShare],
+    requirements: <UniqueSkill>[boundaryOfRecoveryAndInjuryShare],
   ),
   yakumoHousehold2(
     'Yakumo Household+',
     2,
-    requirements: <Skill>[yakumoHousehold],
+    requirements: <UniqueSkill>[yakumoHousehold],
   ),
   boundaryOfWaveAndParticle3(
     'Boundary of Wave and Particle++',
     3,
-    requirements: <Skill>[boundaryOfWaveAndParticle2],
+    requirements: <UniqueSkill>[boundaryOfWaveAndParticle2],
   ),
   boundaryOfMeleeAndDanmakuShare3(
     'Boundary of Melee and Danmaku: 1/2 Party Share',
     2,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       boundaryOfWaveAndParticle,
       boundaryOfMeleeAndDanmakuShare2,
     ],
@@ -2221,37 +2318,37 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   danmakuBarrier2nTurnModulo(
     'Danmaku Barrier: 2n Turn Modulo',
     4,
-    requirements: <Skill>[danmakuBarrier],
+    requirements: <UniqueSkill>[danmakuBarrier],
   ),
   quadrupleImperishableNightBarrierOddTurn2(
     'Quadruple Imperishable Night Barrier: Odd Turn Stats ↑+',
     3,
-    requirements: <Skill>[quadrupleImperishableNightBarrierOddTurn],
+    requirements: <UniqueSkill>[quadrupleImperishableNightBarrierOddTurn],
   ),
   yakumoYukarisSpiritingAwayTurnsToMpCostDown(
     "Yakumo Yukari's Spiriting Away: Turns to MP Cost ↓",
     3,
-    requirements: <Skill>[yakumoYukarisSpiritingAway],
+    requirements: <UniqueSkill>[yakumoYukarisSpiritingAway],
   ),
   yakumoYukarisSpiritingAwayDelay2(
     "Yakumo Yukari's Spiriting Away: Delay ↓+",
     2,
-    requirements: <Skill>[yakumoYukarisSpiritingAwayDelay],
+    requirements: <UniqueSkill>[yakumoYukarisSpiritingAwayDelay],
   ),
   yakumoRanYakumoHouseholdsBigBrawl(
     "Yakumo Ran+: Yakumo Household's Big Brawl",
     5,
-    requirements: <Skill>[yakumoRanRansStrength],
+    requirements: <UniqueSkill>[yakumoRanRansStrength],
   ),
   objectiveBarrier2nTurnModulo(
     'Objective Barrier: 2n Turn Modulo',
     4,
-    requirements: <Skill>[objectiveBarrier],
+    requirements: <UniqueSkill>[objectiveBarrier],
   ),
   boundaryOfRecoveryAndInjuryShare3(
     'Boundary of Recovery and Injury: 1/2 Party Share',
     2,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       boundaryOfRecoveryAndInjuryShare2,
       boundaryOfFormAndEmptiness,
     ],
@@ -2259,29 +2356,29 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   boundaryOfFormAndEmptiness3(
     'Boundary of Form and Emptiness++',
     3,
-    requirements: <Skill>[boundaryOfFormAndEmptiness2],
+    requirements: <UniqueSkill>[boundaryOfFormAndEmptiness2],
   ),
   danmakuBarrierMpCostDown(
     'Danmaku Barrier: MP Cost ↓',
     3,
-    requirements: <Skill>[danmakuBarrier],
+    requirements: <UniqueSkill>[danmakuBarrier],
   ),
   quadrupleImperishableNightBarrierEvenTurn2(
     'Quadruple Imperishable Night Barrier: Even Turn Damage Taken ↓+',
     3,
-    requirements: <Skill>[
+    requirements: <UniqueSkill>[
       quadrupleImperishableNightBarrierEvenTurn,
     ],
   ),
   yakumoYukarisSpiritingAwaySelfSpiritingAway(
     "Yakumo Yukari's Spiriting Away: Self-Spiriting Away",
     2,
-    requirements: <Skill>[yakumoYukarisSpiritingAwayDelay2],
+    requirements: <UniqueSkill>[yakumoYukarisSpiritingAwayDelay2],
   ),
   objectiveBarrierMpCostDown(
     'Objective Barrier: MP Cost ↓',
     3,
-    requirements: <Skill>[objectiveBarrier],
+    requirements: <UniqueSkill>[objectiveBarrier],
   );
 
   @override
@@ -2291,11 +2388,11 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   final int cost;
 
   @override
-  final List<Skill> requirements;
+  final List<UniqueSkill> requirements;
 
   const UncategorizedUniqueSkill(
     this.prettyName,
     this.cost, {
-    this.requirements = const <Skill>[],
+    this.requirements = const <UniqueSkill>[],
   });
 }

@@ -10,6 +10,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/turn_count.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
@@ -79,7 +80,7 @@ const SkillAugmentSkill finalPrayer2 = _FinalPrayer2();
 const KoReactionerSkill finalPrayerRange = _FinalPrayerRange();
 const KoReactionerSkill trueFinalPrayer = _TrueFinalPrayer();
 
-class _YinYangOrb implements DirectSpell, SilenceInflictor {
+class _YinYangOrb with UniqueSkill implements DirectSpell, SilenceInflictor {
   const _YinYangOrb();
 
   @override
@@ -89,7 +90,7 @@ class _YinYangOrb implements DirectSpell, SilenceInflictor {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get mpCost => 12;
@@ -104,7 +105,7 @@ class _YinYangOrb implements DirectSpell, SilenceInflictor {
   SpellTargetMode get targetMode => SpellTargetMode.singleEnemy;
 
   @override
-  int get accModifider => 10;
+  int get accModifier => 10;
 
   @override
   double get multiplier => 125;
@@ -125,7 +126,9 @@ class _YinYangOrb implements DirectSpell, SilenceInflictor {
   int get silDuration => 8000;
 }
 
-class _YinYangOrbParAffix implements SpellAugmentSkill, ParalysisAugment {
+class _YinYangOrbParAffix
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, ParalysisAugment {
   const _YinYangOrbParAffix();
 
   @override
@@ -135,7 +138,7 @@ class _YinYangOrbParAffix implements SpellAugmentSkill, ParalysisAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[yinYangOrb];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[yinYangOrb];
 
   @override
   SpellSkill get baseSkill => yinYangOrb;
@@ -147,7 +150,9 @@ class _YinYangOrbParAffix implements SpellAugmentSkill, ParalysisAugment {
   int get parDuration => 6000;
 }
 
-class _YinYangOrbPow implements SpellAugmentSkill, PowAugment {
+class _YinYangOrbPow
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, PowAugment {
   const _YinYangOrbPow();
 
   @override
@@ -157,7 +162,7 @@ class _YinYangOrbPow implements SpellAugmentSkill, PowAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[yinYangOrb];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[yinYangOrb];
 
   @override
   DamageSpell get baseSkill => yinYangOrb;
@@ -166,7 +171,9 @@ class _YinYangOrbPow implements SpellAugmentSkill, PowAugment {
   double get pow => 16;
 }
 
-class _YinYangOrbDelay implements SpellAugmentSkill, DelayAugment {
+class _YinYangOrbDelay
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, DelayAugment {
   const _YinYangOrbDelay();
 
   @override
@@ -176,16 +183,18 @@ class _YinYangOrbDelay implements SpellAugmentSkill, DelayAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[yinYangOrbPow];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[yinYangOrbPow];
 
   @override
   SpellSkill get baseSkill => yinYangOrb;
 
   @override
-  double get delay => 750;
+  int get delay => 750;
 }
 
-class _YinYangOrbParBoost implements SpellAugmentChainSkill, ParalysisAugment {
+class _YinYangOrbParBoost
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentChainSkill, ParalysisAugment {
   const _YinYangOrbParBoost();
 
   @override
@@ -195,7 +204,8 @@ class _YinYangOrbParBoost implements SpellAugmentChainSkill, ParalysisAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[armoredYinYangOrbBoost];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[armoredYinYangOrbBoost];
 
   @override
   SpellSkill get baseSkill => yinYangOrb;
@@ -210,7 +220,9 @@ class _YinYangOrbParBoost implements SpellAugmentChainSkill, ParalysisAugment {
   int get parDuration => 10000;
 }
 
-class _YinYangOrbDelay2 implements SpellAugmentChainSkill, DelayAugment {
+class _YinYangOrbDelay2
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentChainSkill, DelayAugment {
   const _YinYangOrbDelay2();
 
   @override
@@ -220,7 +232,7 @@ class _YinYangOrbDelay2 implements SpellAugmentChainSkill, DelayAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[yinYangOrbDelay];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[yinYangOrbDelay];
 
   @override
   SpellSkill get baseSkill => yinYangOrb;
@@ -229,10 +241,11 @@ class _YinYangOrbDelay2 implements SpellAugmentChainSkill, DelayAugment {
   SpellAugmentSkill get baseAugment => yinYangOrbDelay;
 
   @override
-  double get delay => 1500;
+  int get delay => 1500;
 }
 
 class _YinYangOrbCooldownPow
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, PowAugment, CooldownAugment {
   const _YinYangOrbCooldownPow();
 
@@ -243,8 +256,8 @@ class _YinYangOrbCooldownPow
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[yinYangOrbDelay, PassiveSkill.hakureiProtection3];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[yinYangOrbDelay, PassiveSkill.hakureiProtection3];
 
   @override
   DamageSpell get baseSkill => yinYangOrb;
@@ -256,7 +269,9 @@ class _YinYangOrbCooldownPow
   int get cooldown => 2;
 }
 
-class _BarrierTalisman implements SpellSkill, DefenseBuffer, MindBuffer {
+class _BarrierTalisman
+    with UniqueSkill
+    implements SpellSkill, DefenseBuffer, MindBuffer {
   const _BarrierTalisman();
 
   @override
@@ -266,7 +281,7 @@ class _BarrierTalisman implements SpellSkill, DefenseBuffer, MindBuffer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get mpCost => 8;
@@ -288,6 +303,7 @@ class _BarrierTalisman implements SpellSkill, DefenseBuffer, MindBuffer {
 }
 
 class _BarrierTalisman2
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, DefenseBuffAugment, MindBuffAugment {
   const _BarrierTalisman2();
 
@@ -298,7 +314,7 @@ class _BarrierTalisman2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[barrierTalisman];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[barrierTalisman];
 
   @override
   SpellSkill get baseSkill => barrierTalisman;
@@ -310,7 +326,7 @@ class _BarrierTalisman2
   int get mndBuff => 12;
 }
 
-class _RecoveryTalisman implements SpellSkill, HpRegenBuffer {
+class _RecoveryTalisman with UniqueSkill implements SpellSkill, HpRegenBuffer {
   const _RecoveryTalisman();
 
   @override
@@ -320,7 +336,7 @@ class _RecoveryTalisman implements SpellSkill, HpRegenBuffer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get mpCost => 10;
@@ -341,7 +357,9 @@ class _RecoveryTalisman implements SpellSkill, HpRegenBuffer {
   int get hpRegenDuration => 5;
 }
 
-class _RecoveryTalisman2 implements SpellAugmentSkill, HpRegenBuffAugment {
+class _RecoveryTalisman2
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, HpRegenBuffAugment {
   const _RecoveryTalisman2();
 
   @override
@@ -351,7 +369,7 @@ class _RecoveryTalisman2 implements SpellAugmentSkill, HpRegenBuffAugment {
   int get cost => 5;
 
   @override
-  List<Skill> get requirements => const <Skill>[recoveryTalisman];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[recoveryTalisman];
 
   @override
   SpellSkill get baseSkill => recoveryTalisman;
@@ -363,7 +381,7 @@ class _RecoveryTalisman2 implements SpellAugmentSkill, HpRegenBuffAugment {
   int get hpRegenDuration => 1;
 }
 
-class _PersuasionNeedle implements DirectSpell, CooldownSpell {
+class _PersuasionNeedle with UniqueSkill implements DirectSpell, CooldownSpell {
   const _PersuasionNeedle();
 
   @override
@@ -373,7 +391,7 @@ class _PersuasionNeedle implements DirectSpell, CooldownSpell {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[recoveryTalisman];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[recoveryTalisman];
 
   @override
   int get mpCost => 20;
@@ -391,7 +409,7 @@ class _PersuasionNeedle implements DirectSpell, CooldownSpell {
   SpellTargetMode get targetMode => SpellTargetMode.rowEnemyDiminished;
 
   @override
-  int get accModifider => -16;
+  int get accModifier => -16;
 
   @override
   double get multiplier => 166;
@@ -407,6 +425,7 @@ class _PersuasionNeedle implements DirectSpell, CooldownSpell {
 }
 
 class _PersuasionNeedleMultiplier
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, MultiplierAugment {
   const _PersuasionNeedleMultiplier();
 
@@ -417,7 +436,7 @@ class _PersuasionNeedleMultiplier
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[persuasionNeedle];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[persuasionNeedle];
 
   @override
   DamageSpell get baseSkill => persuasionNeedle;
@@ -426,7 +445,9 @@ class _PersuasionNeedleMultiplier
   double get multiplier => 30;
 }
 
-class _PersuasionNeedleGuard implements SpellAugmentSkill, GuardAugment {
+class _PersuasionNeedleGuard
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, GuardAugment {
   const _PersuasionNeedleGuard();
 
   @override
@@ -436,7 +457,8 @@ class _PersuasionNeedleGuard implements SpellAugmentSkill, GuardAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[persuasionNeedleMultiplier];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[persuasionNeedleMultiplier];
 
   @override
   DamageSpell get baseSkill => persuasionNeedle;
@@ -448,7 +470,9 @@ class _PersuasionNeedleGuard implements SpellAugmentSkill, GuardAugment {
   double get mndGuard => 0;
 }
 
-class _PersuasionNeedleHpDrain implements SpellAugmentSkill, HpDrainAugment {
+class _PersuasionNeedleHpDrain
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, HpDrainAugment {
   const _PersuasionNeedleHpDrain();
 
   @override
@@ -458,7 +482,8 @@ class _PersuasionNeedleHpDrain implements SpellAugmentSkill, HpDrainAugment {
   int get cost => 4;
 
   @override
-  List<Skill> get requirements => const <Skill>[persuasionNeedleMultiplier];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[persuasionNeedleMultiplier];
 
   @override
   DamageSpell get baseSkill => persuasionNeedle;
@@ -468,6 +493,7 @@ class _PersuasionNeedleHpDrain implements SpellAugmentSkill, HpDrainAugment {
 }
 
 class _GreatHakureiBarrier
+    with UniqueSkill
     implements ConditionedSpellSkill, DefenseBuffer, MindBuffer, CooldownSpell {
   const _GreatHakureiBarrier();
 
@@ -478,8 +504,8 @@ class _GreatHakureiBarrier
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[reimuPrivileges, barrierTalisman];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[reimuPrivileges, barrierTalisman];
 
   @override
   int get mpCost => 28;
@@ -508,6 +534,11 @@ class _GreatHakureiBarrier
 }
 
 class _GreatHakureiBarrierTurnConversion
+    with
+        UniqueSkill,
+        SkillAugmentSkill,
+        DefenseBuffPerTurnAugment,
+        MindBuffPerTurnAugment
     implements
         SpellAugmentSkill,
         TurnCountBasedAugment,
@@ -523,7 +554,8 @@ class _GreatHakureiBarrierTurnConversion
   int get cost => 5;
 
   @override
-  List<Skill> get requirements => const <Skill>[greatHakureiBarrier];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[greatHakureiBarrier];
 
   @override
   SpellSkill get baseSkill => greatHakureiBarrier;
@@ -539,6 +571,7 @@ class _GreatHakureiBarrierTurnConversion
 }
 
 class _GreatHakureiBarrierSelfProtect
+    with UniqueSkill, SkillAugmentSkill
     implements
         SpellAugmentSkill,
         CustomAugmentRange,
@@ -552,7 +585,7 @@ class _GreatHakureiBarrierSelfProtect
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[reimuPrivileges2];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[reimuPrivileges2];
 
   @override
   SpellSkill get baseSkill => greatHakureiBarrier;
@@ -568,6 +601,7 @@ class _GreatHakureiBarrierSelfProtect
 }
 
 class _GreatHakureiBarrierRegen
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, ConditionedEffect, HpRegenBuffAugment {
   const _GreatHakureiBarrierRegen();
 
@@ -578,8 +612,8 @@ class _GreatHakureiBarrierRegen
   int get cost => 5;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[greatHakureiBarrierTurn, flashExorcismBarrier];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[greatHakureiBarrierTurn, flashExorcismBarrier];
 
   @override
   SpellSkill get baseSkill => greatHakureiBarrier;
@@ -596,6 +630,7 @@ class _GreatHakureiBarrierRegen
 }
 
 class _GreatHakureiBarrierRegen2
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentChainSkill, ConditionedEffect, HpRegenBuffAugment {
   const _GreatHakureiBarrierRegen2();
 
@@ -606,8 +641,8 @@ class _GreatHakureiBarrierRegen2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[flashExorcismBarrierTurn, persuasionNeedleHpDrain];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[flashExorcismBarrierTurn, persuasionNeedleHpDrain];
 
   @override
   SpellSkill get baseSkill => greatHakureiBarrier;
@@ -627,6 +662,7 @@ class _GreatHakureiBarrierRegen2
 }
 
 class _HakureiTalisman
+    with UniqueSkill
     implements
         SpellSkill,
         DefenseBuffer,
@@ -642,8 +678,8 @@ class _HakureiTalisman
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[barrierTalisman2, recoveryTalisman2];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[barrierTalisman2, recoveryTalisman2];
 
   @override
   int get mpCost => 14;
@@ -674,6 +710,7 @@ class _HakureiTalisman
 }
 
 class _FlashExorcismBarrier
+    with UniqueSkill
     implements ConditionedSpellSkill, DirectSpell, MagicSpell, CooldownSpell {
   const _FlashExorcismBarrier();
 
@@ -684,7 +721,7 @@ class _FlashExorcismBarrier
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[recoveryTalisman];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[recoveryTalisman];
 
   @override
   int get mpCost => 32;
@@ -706,7 +743,7 @@ class _FlashExorcismBarrier
       const <EffectRequirement>[TurnMultipleRequirement(2)];
 
   @override
-  int get accModifider => 10000;
+  int get accModifier => 10000;
 
   @override
   double get multiplier => 100;
@@ -724,7 +761,9 @@ class _FlashExorcismBarrier
   double get magFactor => -30;
 }
 
-class _FlashExorcismBarrierDelay implements SpellAugmentSkill, DelayAugment {
+class _FlashExorcismBarrierDelay
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, DelayAugment {
   const _FlashExorcismBarrierDelay();
 
   @override
@@ -734,19 +773,21 @@ class _FlashExorcismBarrierDelay implements SpellAugmentSkill, DelayAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[flashExorcismBarrier];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[flashExorcismBarrier];
 
   @override
   SpellSkill get baseSkill => flashExorcismBarrier;
 
   @override
-  double get delay => 1200;
+  int get delay => 1200;
 }
 
 class _FlashExorcismBarrierTurnConversion
+    with UniqueSkill, SkillAugmentSkill, MultiplierMultiplyPerTurnAugment
     implements
         SpellAugmentSkill,
-        MultiplierAugment,
+        MultiplierMultiplyAugment,
         TurnCountBasedAugment,
         TurnCountResetAugment {
   const _FlashExorcismBarrierTurnConversion();
@@ -758,8 +799,8 @@ class _FlashExorcismBarrierTurnConversion
   int get cost => 5;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[greatHakureiBarrierRegen, flashExorcismBarrierDelay];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[greatHakureiBarrierRegen, flashExorcismBarrierDelay];
 
   @override
   DamageSpell get baseSkill => flashExorcismBarrier;
@@ -768,10 +809,11 @@ class _FlashExorcismBarrierTurnConversion
   int? get turnCountCap => null;
 
   @override
-  double get multiplier => 10;
+  double get multiplier => 0.1;
 }
 
 class _FlashExorcismBarrierDamageTaken
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, ConditionedEffect, DamageReceivedBuffAugment {
   const _FlashExorcismBarrierDamageTaken();
 
@@ -783,7 +825,7 @@ class _FlashExorcismBarrierDamageTaken
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[
+  List<UniqueSkill> get requirements => const <UniqueSkill>[
     greatHakureiBarrierSelfProtect,
     greatHakureiBarrierRegen,
     flashExorcismBarrierTurn,
@@ -804,6 +846,7 @@ class _FlashExorcismBarrierDamageTaken
 }
 
 class _FlashExorcismBarrierDamageTaken2
+    with UniqueSkill, SkillAugmentSkill
     implements
         SpellAugmentChainSkill,
         ConditionedEffect,
@@ -819,8 +862,10 @@ class _FlashExorcismBarrierDamageTaken2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[reimuPrivilegesShare, flashExorcismBarrierDamageTaken];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[
+    reimuPrivilegesShare,
+    flashExorcismBarrierDamageTaken,
+  ];
 
   @override
   SpellSkill get baseSkill => flashExorcismBarrier;
@@ -845,7 +890,7 @@ class _FlashExorcismBarrierDamageTaken2
   int get dmgDealtBuffDuration => 1;
 }
 
-class _DreamSeal implements MagicSpell {
+class _DreamSeal with UniqueSkill implements MagicSpell {
   const _DreamSeal();
 
   @override
@@ -855,8 +900,8 @@ class _DreamSeal implements MagicSpell {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[persuasionNeedle, focusedRecitation];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[persuasionNeedle, focusedRecitation];
 
   @override
   int get mpCost => 24;
@@ -871,7 +916,7 @@ class _DreamSeal implements MagicSpell {
   SpellTargetMode get targetMode => SpellTargetMode.allEnemies;
 
   @override
-  int get accModifider => 8;
+  int get accModifier => 8;
 
   @override
   double get multiplier => 166;
@@ -887,6 +932,7 @@ class _DreamSeal implements MagicSpell {
 }
 
 class _DreamSealTurnConversion
+    with UniqueSkill, SkillAugmentSkill, MultiplierMultiplyPerTurnAugment
     implements
         SpellAugmentSkill,
         MultiplierMultiplyAugment,
@@ -901,7 +947,7 @@ class _DreamSealTurnConversion
   int get cost => 5;
 
   @override
-  List<Skill> get requirements => const <Skill>[dreamSeal];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[dreamSeal];
 
   @override
   DamageSpell get baseSkill => dreamSeal;
@@ -910,11 +956,12 @@ class _DreamSealTurnConversion
   int? get turnCountCap => 20;
 
   @override
-  double get multiplier => 1.08;
+  double get multiplier => 0.08;
 }
 
 class _DreamSealDamageAmplifier
-    implements SpellAugmentSkill, MultiplierMultiplyAugment {
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, DamageDealtAmplifyAugment {
   const _DreamSealDamageAmplifier();
 
   @override
@@ -924,16 +971,18 @@ class _DreamSealDamageAmplifier
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[dreamSeal];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[dreamSeal];
 
   @override
   DamageSpell get baseSkill => dreamSeal;
 
   @override
-  double get multiplier => 1.5;
+  double get dmgDealtAmplification => 1.5;
 }
 
-class _ArmoredYinYangOrb implements ElementProtectorSkill, ConditionedEffect {
+class _ArmoredYinYangOrb
+    with UniqueSkill
+    implements ElementProtectorSkill, ConditionedEffect {
   const _ArmoredYinYangOrb();
 
   @override
@@ -943,7 +992,7 @@ class _ArmoredYinYangOrb implements ElementProtectorSkill, ConditionedEffect {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<EffectRequirement> get effectRequirements =>
@@ -957,7 +1006,8 @@ class _ArmoredYinYangOrb implements ElementProtectorSkill, ConditionedEffect {
 }
 
 class _ArmoredYinYangOrb2
-    implements SkillAugmentSkill, ElementProtectionAugment {
+    with UniqueSkill, SkillAugmentSkill
+    implements ElementProtectionAugment {
   const _ArmoredYinYangOrb2();
 
   @override
@@ -967,8 +1017,8 @@ class _ArmoredYinYangOrb2
   int get cost => 2;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[armoredYinYangOrb, yinYangOrbParAffix];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[armoredYinYangOrb, yinYangOrbParAffix];
 
   @override
   ElementProtectorSkill get baseSkill => armoredYinYangOrb;
@@ -981,6 +1031,7 @@ class _ArmoredYinYangOrb2
 }
 
 class _ArmoredYinYangOrbBoost
+    with UniqueSkill, SkillAugmentSkill
     implements ElementProtectionReactioner, DamageDealtBuffAugment {
   const _ArmoredYinYangOrbBoost();
 
@@ -991,7 +1042,7 @@ class _ArmoredYinYangOrbBoost
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[armoredYinYangOrb2];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[armoredYinYangOrb2];
 
   @override
   ElementProtectorSkill get baseSkill => armoredYinYangOrb;
@@ -1003,7 +1054,9 @@ class _ArmoredYinYangOrbBoost
   int get dmgDealtBuffDuration => 1;
 }
 
-class _YoukaiBuster implements RaceSlayerSkill, ConditionedEffect {
+class _YoukaiBuster
+    with UniqueSkill
+    implements RaceSlayerSkill, ConditionedEffect {
   const _YoukaiBuster();
 
   @override
@@ -1013,7 +1066,7 @@ class _YoukaiBuster implements RaceSlayerSkill, ConditionedEffect {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<EffectRequirement> get effectRequirements =>
@@ -1026,7 +1079,9 @@ class _YoukaiBuster implements RaceSlayerSkill, ConditionedEffect {
   double get slayBonus => 12;
 }
 
-class _YoukaiBuster2 implements SkillAugmentSkill, RaceSlayAugment {
+class _YoukaiBuster2
+    with UniqueSkill, SkillAugmentSkill
+    implements RaceSlayAugment {
   const _YoukaiBuster2();
 
   @override
@@ -1036,7 +1091,7 @@ class _YoukaiBuster2 implements SkillAugmentSkill, RaceSlayAugment {
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[youkaiBuster];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[youkaiBuster];
 
   @override
   RaceSlayerSkill get baseSkill => youkaiBuster;
@@ -1049,6 +1104,7 @@ class _YoukaiBuster2 implements SkillAugmentSkill, RaceSlayAugment {
 }
 
 class _YoukaiBusterShield
+    with UniqueSkill, SkillAugmentSkill
     implements RaceSlayReactioner, DamageReceivedBuffAugment {
   const _YoukaiBusterShield();
 
@@ -1059,7 +1115,7 @@ class _YoukaiBusterShield
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[youkaiBuster2];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[youkaiBuster2];
 
   @override
   RaceSlayerSkill get baseSkill => youkaiBuster;
@@ -1072,8 +1128,8 @@ class _YoukaiBusterShield
 }
 
 class _ReimuProtagonistPrivileges
+    with UniqueSkill, KoReactionerSkill
     implements
-        KoReactionerSkill,
         AttackBuffer,
         DefenseBuffer,
         MagicBuffer,
@@ -1090,7 +1146,7 @@ class _ReimuProtagonistPrivileges
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   KoEffectRange get effectRange => KoEffectRange.self;
@@ -1115,8 +1171,8 @@ class _ReimuProtagonistPrivileges
 }
 
 class _ReimuProtagonistPrivileges2
+    with UniqueSkill, SkillAugmentSkill
     implements
-        SkillAugmentSkill,
         KoReactionAugment,
         AttackBuffAugment,
         DefenseBuffAugment,
@@ -1132,7 +1188,7 @@ class _ReimuProtagonistPrivileges2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[reimuPrivileges];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[reimuPrivileges];
 
   @override
   KoReactionerSkill get baseSkill => reimuPrivileges;
@@ -1160,9 +1216,10 @@ class _ReimuProtagonistPrivileges2
 }
 
 class _ReimuProtagonistPrivilegesPermanent
+    with UniqueSkill, SkillAugmentSkill
     implements
-        KoReactionAugment,
         SkillAugmentChainSkill,
+        KoReactionAugment,
         AttackBuffAugment,
         DefenseBuffAugment,
         MagicBuffAugment,
@@ -1183,8 +1240,8 @@ class _ReimuProtagonistPrivilegesPermanent
   int get cost => 4;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[youkaiBusterShield, reimuPrivileges2];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[youkaiBusterShield, reimuPrivileges2];
 
   @override
   KoReactionerSkill get baseSkill => reimuPrivileges;
@@ -1230,8 +1287,8 @@ class _ReimuProtagonistPrivilegesPermanent
 }
 
 class _ReimuProtagonistPrivilegesShare
+    with UniqueSkill, KoReactionerSkill
     implements
-        KoReactionerSkill,
         AttackBuffer,
         DefenseBuffer,
         MagicBuffer,
@@ -1246,7 +1303,7 @@ class _ReimuProtagonistPrivilegesShare
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[reimuPrivileges2];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[reimuPrivileges2];
 
   @override
   KoEffectRange get effectRange => KoEffectRange.frontlineMinusSelf;
@@ -1270,7 +1327,9 @@ class _ReimuProtagonistPrivilegesShare
   int get spdBuff => _ReimuProtagonistPrivileges.buffAmount;
 }
 
-class _FinalPrayer implements KoReactionerSkill, PercentHealer {
+class _FinalPrayer
+    with UniqueSkill, KoReactionerSkill
+    implements PercentHealer {
   const _FinalPrayer();
 
   @override
@@ -1280,7 +1339,7 @@ class _FinalPrayer implements KoReactionerSkill, PercentHealer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[focusedRecitation];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[focusedRecitation];
 
   @override
   KoTriggerRange get triggerRange => KoTriggerRange.self;
@@ -1293,7 +1352,8 @@ class _FinalPrayer implements KoReactionerSkill, PercentHealer {
 }
 
 class _FinalPrayer2
-    implements SkillAugmentSkill, KoReactionAugment, PercentHealAugment {
+    with UniqueSkill, SkillAugmentSkill
+    implements KoReactionAugment, PercentHealAugment {
   const _FinalPrayer2();
 
   @override
@@ -1303,7 +1363,7 @@ class _FinalPrayer2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[finalPrayer];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[finalPrayer];
 
   @override
   KoReactionerSkill get baseSkill => finalPrayer;
@@ -1318,7 +1378,9 @@ class _FinalPrayer2
   double get healPercent => 50;
 }
 
-class _FinalPrayerRange implements KoReactionerSkill, PercentHealer {
+class _FinalPrayerRange
+    with UniqueSkill, KoReactionerSkill
+    implements PercentHealer {
   const _FinalPrayerRange();
 
   @override
@@ -1328,7 +1390,7 @@ class _FinalPrayerRange implements KoReactionerSkill, PercentHealer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[finalPrayer];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[finalPrayer];
 
   @override
   KoTriggerRange get triggerRange => KoTriggerRange.self;
@@ -1341,11 +1403,8 @@ class _FinalPrayerRange implements KoReactionerSkill, PercentHealer {
 }
 
 class _TrueFinalPrayer
-    implements
-        KoReactionerSkill,
-        ConditionedKoReactioner,
-        PercentHealer,
-        TpConsumer {
+    with UniqueSkill, KoReactionerSkill
+    implements ConditionedKoReactioner, PercentHealer, TpConsumer {
   const _TrueFinalPrayer();
 
   @override
@@ -1355,8 +1414,8 @@ class _TrueFinalPrayer
   int get cost => 6;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[dreamSealDamageAplifier, finalPrayerRange];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[dreamSealDamageAmplifier, finalPrayerRange];
 
   @override
   KoTriggerRange get triggerRange => KoTriggerRange.self;

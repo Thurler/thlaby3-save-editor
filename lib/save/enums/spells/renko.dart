@@ -10,6 +10,7 @@ import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/turn_count.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
@@ -90,6 +91,7 @@ const UniqueSkill directDamage = _DirectDamage();
 const UniqueSkill magicDamage = _MagicDamage();
 
 class _EagerSupport
+    with UniqueSkill
     implements
         MagicSpell,
         NaturallyAugmentedSkill,
@@ -105,7 +107,7 @@ class _EagerSupport
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<NaturalAugment> get naturalAugments =>
@@ -127,7 +129,7 @@ class _EagerSupport
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  int get accModifider => 10000;
+  int get accModifier => 10000;
 
   @override
   double get multiplier => 50;
@@ -162,9 +164,13 @@ class _EagerSupportCleanse
   @override
   List<EffectRequirement> get effectRequirements =>
       const <EffectRequirement>[RandomNumberRequirement(50)];
+
+  @override
+  String get description => 'Cleanse Effect';
 }
 
 class _EagerSupportMentalCare
+    with UniqueSkill, SkillAugmentSkill
     implements SpellNaturalAugmentChainSkill, ConditionedEffect {
   const _EagerSupportMentalCare();
 
@@ -175,7 +181,7 @@ class _EagerSupportMentalCare
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[eagerSupport];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[eagerSupport];
 
   @override
   SpellSkill get baseSkill => eagerSupport;
@@ -189,6 +195,7 @@ class _EagerSupportMentalCare
 }
 
 class _EagerSupportSelfCare
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, DamageReceivedBuffAugment {
   const _EagerSupportSelfCare();
 
@@ -199,7 +206,8 @@ class _EagerSupportSelfCare
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[eagerSupportMentalCare];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[eagerSupportMentalCare];
 
   @override
   SpellSkill get baseSkill => eagerSupport;
@@ -212,6 +220,7 @@ class _EagerSupportSelfCare
 }
 
 class _EagerSupportDevotedHeart
+    with UniqueSkill, SkillAugmentSkill
     implements
         SpellAugmentSkill,
         DamageDealtBuffAugment,
@@ -226,7 +235,8 @@ class _EagerSupportDevotedHeart
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[eagerSupportSelfCare];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[eagerSupportSelfCare];
 
   @override
   SpellSkill get baseSkill => eagerSupport;
@@ -245,6 +255,7 @@ class _EagerSupportDevotedHeart
 }
 
 class _FirstAid
+    with UniqueSkill
     implements DirectSpell, MagicSpell, CooldownSpell, NaturallyAugmentedSkill {
   const _FirstAid();
 
@@ -255,7 +266,7 @@ class _FirstAid
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<NaturalAugment> get naturalAugments => const <NaturalAugment>[
@@ -282,7 +293,7 @@ class _FirstAid
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  int get accModifider => 10000;
+  int get accModifier => 10000;
 
   @override
   double get multiplier => 150;
@@ -300,7 +311,9 @@ class _FirstAid
   double get magFactor => -12;
 }
 
-class _FirstAidTraining implements SpellAugmentSkill, MultiplierAugment {
+class _FirstAidTraining
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, MultiplierAugment {
   const _FirstAidTraining();
 
   @override
@@ -310,7 +323,7 @@ class _FirstAidTraining implements SpellAugmentSkill, MultiplierAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[firstAid];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[firstAid];
 
   @override
   DamageSpell get baseSkill => firstAid;
@@ -332,6 +345,9 @@ class _FirstAidEmergencyCooldown implements NaturalAugment, CooldownAugment {
 
   @override
   int get cooldown => 1;
+
+  @override
+  String get description => PassiveSkill.firstAidEmergencySmoke.prettyName;
 }
 
 class _FirstAidEmergencyWarning
@@ -352,6 +368,10 @@ class _FirstAidEmergencyWarning
 
   @override
   int get mndBuff => _WarningBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Warning)';
 }
 
 class _FirstAidEmergencySignal
@@ -372,6 +392,10 @@ class _FirstAidEmergencySignal
 
   @override
   int get magBuff => _SignalBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Signal)';
 }
 
 class _FirstAidEmergencySwift implements NaturalAugment, SpeedBuffAugment {
@@ -388,6 +412,10 @@ class _FirstAidEmergencySwift implements NaturalAugment, SpeedBuffAugment {
 
   @override
   int get spdBuff => _SwiftBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Swift)';
 }
 
 class _FirstAidEmergencyTarget implements NaturalAugment, AccuracyBuffAugment {
@@ -404,9 +432,14 @@ class _FirstAidEmergencyTarget implements NaturalAugment, AccuracyBuffAugment {
 
   @override
   int get accBuff => _TargetBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Target)';
 }
 
 abstract class _BeaconSpell
+    with UniqueSkill
     implements ConditionedSpellSkill, NaturallyAugmentedSkill {
   const _BeaconSpell();
 
@@ -439,9 +472,13 @@ class _BeaconSpecialist
 
   @override
   int get dmgReceivedBuffDuration => 1;
+
+  @override
+  String get description => PassiveSkill.beaconSpecialist.prettyName;
 }
 
 class _AdeptBeaconSpecialist
+    with UniqueSkill, SkillAugmentSkill
     implements NaturalAugmentChainSkill, DamageReceivedBuffAugment {
   const _AdeptBeaconSpecialist();
 
@@ -452,8 +489,11 @@ class _AdeptBeaconSpecialist
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[swiftBeacon, PassiveSkill.beaconSpecialist, targetBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[
+    swiftBeacon,
+    PassiveSkill.beaconSpecialist,
+    targetBeacon,
+  ];
 
   @override
   UniqueSkill get baseSkill =>
@@ -482,7 +522,7 @@ class _WarningBeacon extends _BeaconSpell
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get mpCost => 10;
@@ -505,6 +545,7 @@ class _WarningBeacon extends _BeaconSpell
 }
 
 class _WarningBeacon2
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, DefenseBuffAugment, MindBuffAugment {
   const _WarningBeacon2();
 
@@ -515,7 +556,7 @@ class _WarningBeacon2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[warningBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[warningBeacon];
 
   @override
   SpellSkill get baseSkill => warningBeacon;
@@ -540,7 +581,7 @@ class _SignalBeacon extends _BeaconSpell
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get mpCost => 10;
@@ -563,6 +604,7 @@ class _SignalBeacon extends _BeaconSpell
 }
 
 class _SignalBeacon2
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, AttackBuffAugment, MagicBuffAugment {
   const _SignalBeacon2();
 
@@ -573,7 +615,7 @@ class _SignalBeacon2
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[signalBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[signalBeacon];
 
   @override
   SpellSkill get baseSkill => signalBeacon;
@@ -598,7 +640,7 @@ class _SwiftBeacon extends _BeaconSpell
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[warningBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[warningBeacon];
 
   @override
   int get mpCost => 12;
@@ -617,7 +659,9 @@ class _SwiftBeacon extends _BeaconSpell
   int get spdBuff => buffAmount;
 }
 
-class _SwiftBeacon2 implements SpellAugmentSkill, SpeedBuffAugment {
+class _SwiftBeacon2
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, SpeedBuffAugment {
   const _SwiftBeacon2();
 
   @override
@@ -627,7 +671,7 @@ class _SwiftBeacon2 implements SpellAugmentSkill, SpeedBuffAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[swiftBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[swiftBeacon];
 
   @override
   SpellSkill get baseSkill => swiftBeacon;
@@ -649,7 +693,7 @@ class _TargetBeacon extends _BeaconSpell
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[signalBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[signalBeacon];
 
   @override
   int get mpCost => 12;
@@ -668,7 +712,9 @@ class _TargetBeacon extends _BeaconSpell
   int get accBuff => buffAmount;
 }
 
-class _TargetBeacon2 implements SpellAugmentSkill, AccuracyBuffAugment {
+class _TargetBeacon2
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, AccuracyBuffAugment {
   const _TargetBeacon2();
 
   @override
@@ -678,7 +724,7 @@ class _TargetBeacon2 implements SpellAugmentSkill, AccuracyBuffAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[targetBeacon];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[targetBeacon];
 
   @override
   SpellSkill get baseSkill => targetBeacon;
@@ -705,7 +751,8 @@ class _AssaultBeacon extends _BeaconSpell
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[swiftBeacon, targetBeacon];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[swiftBeacon, targetBeacon];
 
   @override
   int get mpCost => 24;
@@ -740,6 +787,7 @@ class _AssaultBeacon extends _BeaconSpell
 }
 
 class _AssaultBeaconTurnGauge
+    with UniqueSkill, SkillAugmentSkill
     implements SpellAugmentSkill, CustomAugmentRange, AtbIncreaseAugment {
   const _AssaultBeaconTurnGauge();
 
@@ -750,7 +798,8 @@ class _AssaultBeaconTurnGauge
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[swiftBeacon2, assaultBeacon];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[swiftBeacon2, assaultBeacon];
 
   @override
   SpellSkill get baseSkill => assaultBeacon;
@@ -763,6 +812,7 @@ class _AssaultBeaconTurnGauge
 }
 
 class _AssaultBeaconTurnConversion
+    with UniqueSkill, SkillAugmentSkill
     implements
         SpellAugmentSkill,
         AttackBuffAugment,
@@ -781,7 +831,8 @@ class _AssaultBeaconTurnConversion
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[assaultBeacon, targetBeacon2];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[assaultBeacon, targetBeacon2];
 
   @override
   SpellSkill get baseSkill => assaultBeacon;
@@ -806,6 +857,7 @@ class _AssaultBeaconTurnConversion
 }
 
 class _SkillfulTreatment
+    with UniqueSkill
     implements
         DirectSpell,
         MagicSpell,
@@ -821,8 +873,8 @@ class _SkillfulTreatment
   int get cost => 3;
 
   @override
-  List<Skill> get requirements =>
-      const <Skill>[PassiveSkill.firstAidEmergencySmoke];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[PassiveSkill.firstAidEmergencySmoke];
 
   @override
   List<NaturalAugment> get naturalAugments => const <NaturalAugment>[
@@ -852,7 +904,7 @@ class _SkillfulTreatment
   SpellTargetMode get targetMode => SpellTargetMode.singleAlly;
 
   @override
-  int get accModifider => 10000;
+  int get accModifier => 10000;
 
   @override
   double get multiplier => 100;
@@ -888,6 +940,10 @@ class _SkillfulTreatmentEmergencyWarning
 
   @override
   int get mndBuff => _WarningBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Warning)';
 }
 
 class _SkillfulTreatmentEmergencySignal
@@ -908,6 +964,10 @@ class _SkillfulTreatmentEmergencySignal
 
   @override
   int get magBuff => _SignalBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Signal)';
 }
 
 class _SkillfulTreatmentEmergencySwift
@@ -925,6 +985,10 @@ class _SkillfulTreatmentEmergencySwift
 
   @override
   int get spdBuff => _SwiftBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Swift)';
 }
 
 class _SkillfulTreatmentEmergencyTarget
@@ -942,9 +1006,13 @@ class _SkillfulTreatmentEmergencyTarget
 
   @override
   int get accBuff => _TargetBeacon.buffAmount;
+
+  @override
+  String get description =>
+      '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Target)';
 }
 
-class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
+class _ReadingStars with UniqueSkill implements AtbInitiativeIncreaser {
   const _ReadingStars();
 
   @override
@@ -954,7 +1022,7 @@ class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   int get atbIncrease => 800;
@@ -963,7 +1031,9 @@ class _ReadingStars implements UniqueSkill, AtbInitiativeIncreaser {
   InitiativeRange get initiativeRange => InitiativeRange.frontline;
 }
 
-class _KnowledgeStrangeStrings implements RaceSlayerSkill, ConditionedEffect {
+class _KnowledgeStrangeStrings
+    with UniqueSkill
+    implements RaceSlayerSkill, ConditionedEffect {
   const _KnowledgeStrangeStrings();
 
   @override
@@ -973,7 +1043,7 @@ class _KnowledgeStrangeStrings implements RaceSlayerSkill, ConditionedEffect {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<EffectRequirement> get effectRequirements =>
@@ -986,7 +1056,9 @@ class _KnowledgeStrangeStrings implements RaceSlayerSkill, ConditionedEffect {
   double get slayBonus => 12;
 }
 
-class _KnowledgeStrangeStrings2 implements SkillAugmentSkill, RaceSlayAugment {
+class _KnowledgeStrangeStrings2
+    with UniqueSkill, SkillAugmentSkill
+    implements RaceSlayAugment {
   const _KnowledgeStrangeStrings2();
 
   @override
@@ -996,7 +1068,8 @@ class _KnowledgeStrangeStrings2 implements SkillAugmentSkill, RaceSlayAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[knowledgeStrangeStrings];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[knowledgeStrangeStrings];
 
   @override
   RaceSlayerSkill get baseSkill => knowledgeStrangeStrings;
@@ -1009,6 +1082,7 @@ class _KnowledgeStrangeStrings2 implements SkillAugmentSkill, RaceSlayAugment {
 }
 
 class _KnowledgeStrangeStringsShield
+    with UniqueSkill, SkillAugmentSkill
     implements RaceSlayReactioner, DamageReceivedBuffAugment {
   const _KnowledgeStrangeStringsShield();
 
@@ -1019,7 +1093,8 @@ class _KnowledgeStrangeStringsShield
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[knowledgeStrangeStrings2];
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[knowledgeStrangeStrings2];
 
   @override
   RaceSlayerSkill get baseSkill => knowledgeStrangeStrings;
@@ -1032,11 +1107,8 @@ class _KnowledgeStrangeStringsShield
 }
 
 class _MaryShield
-    implements
-        UniqueSkill,
-        ConditionedEffect,
-        AllIncreaser,
-        PercentDamageReducer {
+    with UniqueSkill
+    implements ConditionedEffect, AllIncreaser, PercentDamageReducer {
   const _MaryShield();
 
   @override
@@ -1046,7 +1118,7 @@ class _MaryShield
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<EffectRequirement> get effectRequirements => const <EffectRequirement>[
@@ -1080,8 +1152,8 @@ class _MaryShield
 }
 
 class _MaryKnight
+    with UniqueSkill, SkillAugmentSkill
     implements
-        SkillAugmentSkill,
         ConditionedEffect,
         AllIncreaseAugment,
         PercentDamageReduceAugment {
@@ -1094,7 +1166,7 @@ class _MaryKnight
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[maryShield];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[maryShield];
 
   @override
   UniqueSkill get baseSkill => maryShield;
@@ -1131,8 +1203,8 @@ class _MaryKnight
 }
 
 class _AbilityReadStars
+    with UniqueSkill
     implements
-        UniqueSkill,
         NaturallyAugmentedSkill,
         PoisonResIncreaser,
         ParalysisResIncreaser,
@@ -1149,7 +1221,7 @@ class _AbilityReadStars
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[readingStars];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[readingStars];
 
   @override
   List<NaturalAugment> get naturalAugments =>
@@ -1195,11 +1267,14 @@ class _AbilityReadStarsFront
 
   @override
   int get shkIncrease => _AbilityReadStars.resIncrease;
+
+  @override
+  String get description => 'Backrow halving';
 }
 
 class _AbilityReadMoon
+    with UniqueSkill
     implements
-        UniqueSkill,
         NaturallyAugmentedSkill,
         TerrorResIncreaser,
         SilenceResIncreaser,
@@ -1216,7 +1291,7 @@ class _AbilityReadMoon
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[readingStars];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[readingStars];
 
   @override
   List<NaturalAugment> get naturalAugments =>
@@ -1262,9 +1337,12 @@ class _AbilityReadMoonFront
 
   @override
   int get dbfIncrease => _AbilityReadMoon.resIncrease;
+
+  @override
+  String get description => 'Backrow halving';
 }
 
-class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
+class _FirCldDamage with UniqueSkill implements ElementMultiplierEnhancer {
   static const List<Element> elementList = <Element>[Element.fir, Element.cld];
 
   const _FirCldDamage();
@@ -1276,7 +1354,7 @@ class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<Element> get elements => elementList;
@@ -1285,7 +1363,9 @@ class _FirCldDamage implements UniqueSkill, ElementMultiplierEnhancer {
   double get multiplierIncrease => 1.1;
 }
 
-class _FirCldDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+class _FirCldDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements ElementMultiplierAugment {
   const _FirCldDamage2();
 
   @override
@@ -1295,7 +1375,7 @@ class _FirCldDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[firCldDamage];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[firCldDamage];
 
   @override
   UniqueSkill get baseSkill => firCldDamage;
@@ -1307,7 +1387,7 @@ class _FirCldDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   double get multiplierIncrease => 0.1;
 }
 
-class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
+class _WndNtrDamage with UniqueSkill implements ElementMultiplierEnhancer {
   static const List<Element> elementList = <Element>[Element.wnd, Element.ntr];
 
   const _WndNtrDamage();
@@ -1319,7 +1399,7 @@ class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<Element> get elements => elementList;
@@ -1328,7 +1408,9 @@ class _WndNtrDamage implements UniqueSkill, ElementMultiplierEnhancer {
   double get multiplierIncrease => 1.1;
 }
 
-class _WndNtrDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+class _WndNtrDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements ElementMultiplierAugment {
   const _WndNtrDamage2();
 
   @override
@@ -1338,7 +1420,7 @@ class _WndNtrDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[wndNtrDamage];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[wndNtrDamage];
 
   @override
   UniqueSkill get baseSkill => wndNtrDamage;
@@ -1350,7 +1432,7 @@ class _WndNtrDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   double get multiplierIncrease => 0.1;
 }
 
-class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
+class _MysSpiDamage with UniqueSkill implements ElementMultiplierEnhancer {
   static const List<Element> elementList = <Element>[Element.mys, Element.spi];
 
   const _MysSpiDamage();
@@ -1362,7 +1444,7 @@ class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<Element> get elements => elementList;
@@ -1371,7 +1453,9 @@ class _MysSpiDamage implements UniqueSkill, ElementMultiplierEnhancer {
   double get multiplierIncrease => 1.1;
 }
 
-class _MysSpiDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+class _MysSpiDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements ElementMultiplierAugment {
   const _MysSpiDamage2();
 
   @override
@@ -1381,7 +1465,7 @@ class _MysSpiDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[mysSpiDamage];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[mysSpiDamage];
 
   @override
   UniqueSkill get baseSkill => mysSpiDamage;
@@ -1393,7 +1477,7 @@ class _MysSpiDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   double get multiplierIncrease => 0.1;
 }
 
-class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
+class _DrkPhyDamage with UniqueSkill implements ElementMultiplierEnhancer {
   static const List<Element> elementList = <Element>[Element.drk, Element.phy];
 
   const _DrkPhyDamage();
@@ -1405,7 +1489,7 @@ class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<Element> get elements => elementList;
@@ -1414,7 +1498,9 @@ class _DrkPhyDamage implements UniqueSkill, ElementMultiplierEnhancer {
   double get multiplierIncrease => 1.1;
 }
 
-class _DrkPhyDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
+class _DrkPhyDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements ElementMultiplierAugment {
   const _DrkPhyDamage2();
 
   @override
@@ -1424,7 +1510,7 @@ class _DrkPhyDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[drkPhyDamage];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[drkPhyDamage];
 
   @override
   UniqueSkill get baseSkill => drkPhyDamage;
@@ -1436,7 +1522,7 @@ class _DrkPhyDamage2 implements SkillAugmentSkill, ElementMultiplierAugment {
   double get multiplierIncrease => 0.1;
 }
 
-class _DirectDamage implements UniqueSkill, DirectPowEnhancer {
+class _DirectDamage with UniqueSkill implements DirectPowEnhancer {
   const _DirectDamage();
 
   @override
@@ -1446,13 +1532,13 @@ class _DirectDamage implements UniqueSkill, DirectPowEnhancer {
   int get cost => 5;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   double get powIncrease => 1.08;
 }
 
-class _MagicDamage implements UniqueSkill, MagicPowEnhancer {
+class _MagicDamage with UniqueSkill implements MagicPowEnhancer {
   const _MagicDamage();
 
   @override
@@ -1462,7 +1548,7 @@ class _MagicDamage implements UniqueSkill, MagicPowEnhancer {
   int get cost => 5;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   double get powIncrease => 1.08;

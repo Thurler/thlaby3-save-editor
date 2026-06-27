@@ -22,7 +22,9 @@ const FocusReactionerSkill focusedRecitation = _FocusedRecitation();
 const FocusReactionerSkill quickCharge = _QuickCharge();
 const SkillAugmentSkill quickCharge2 = _QuickCharge2();
 
-class _FocusedRecitation implements FocusReactionerSkill, DamageDealtBuffer {
+class _FocusedRecitation
+    with UniqueSkill
+    implements FocusReactionerSkill, DamageDealtBuffer {
   const _FocusedRecitation();
 
   @override
@@ -32,7 +34,7 @@ class _FocusedRecitation implements FocusReactionerSkill, DamageDealtBuffer {
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   double get dmgDealtBuff => 50;
@@ -42,6 +44,7 @@ class _FocusedRecitation implements FocusReactionerSkill, DamageDealtBuffer {
 }
 
 class _QuickCharge
+    with UniqueSkill
     implements
         FocusReactionerSkill,
         ConditionedFocusReactioner,
@@ -56,7 +59,7 @@ class _QuickCharge
   int get cost => 3;
 
   @override
-  List<Skill> get requirements => const <Skill>[];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[];
 
   @override
   List<EffectRequirement> get reactionRequirements => const <EffectRequirement>[
@@ -72,8 +75,8 @@ class _QuickCharge
 }
 
 class _QuickCharge2
+    with UniqueSkill, SkillAugmentSkill
     implements
-        SkillAugmentSkill,
         FocusReactionAugment,
         ConditionedFocusReactioner,
         TpConsumer,
@@ -87,7 +90,7 @@ class _QuickCharge2
   int get cost => 2;
 
   @override
-  List<Skill> get requirements => const <Skill>[quickCharge];
+  List<UniqueSkill> get requirements => const <UniqueSkill>[quickCharge];
 
   @override
   FocusReactionerSkill get baseSkill => quickCharge;
