@@ -63,7 +63,7 @@ const UniqueSkill readingStars = _ReadingStars();
 
 const RaceSlayerSkill knowledgeStrangeStrings = _KnowledgeStrangeStrings();
 const SkillAugmentSkill knowledgeStrangeStrings2 = _KnowledgeStrangeStrings2();
-const SkillAugmentSkill knowledgeStrangeStringsShield =
+const RaceSlayReactioner knowledgeStrangeStringsShield =
     _KnowledgeStrangeStringsShield();
 
 const UniqueSkill maryShield = _MaryShield();
@@ -1082,8 +1082,8 @@ class _KnowledgeStrangeStrings2
 }
 
 class _KnowledgeStrangeStringsShield
-    with UniqueSkill, SkillAugmentSkill
-    implements RaceSlayReactioner, DamageReceivedBuffAugment {
+    with UniqueSkill
+    implements RaceSlayReactioner, DamageReceivedBuffer {
   const _KnowledgeStrangeStringsShield();
 
   @override

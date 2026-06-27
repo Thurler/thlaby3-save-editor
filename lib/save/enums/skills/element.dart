@@ -1,5 +1,4 @@
 import 'package:thlaby3_save_editor/save/enums/element.dart';
-import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
 /// An interface for skills that offer passive enhancements when using elements
@@ -25,7 +24,7 @@ mixin ElementProtectorSkill on UniqueSkill implements ElementProtector {}
 
 /// A mixin for skills that augment an [ElementProtector] skill with a reaction
 /// effect
-mixin ElementProtectionReactioner on SkillAugmentSkill {
-  @override
+mixin ElementProtectionReactioner on UniqueSkill {
+  /// The skill that must proc in order to activate the reaction effect
   ElementProtectorSkill get baseSkill;
 }

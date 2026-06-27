@@ -62,11 +62,12 @@ const SpellAugmentSkill dreamSealDamageAmplifier = _DreamSealDamageAmplifier();
 
 const ElementProtectorSkill armoredYinYangOrb = _ArmoredYinYangOrb();
 const SkillAugmentSkill armoredYinYangOrb2 = _ArmoredYinYangOrb2();
-const SkillAugmentSkill armoredYinYangOrbBoost = _ArmoredYinYangOrbBoost();
+const ElementProtectionReactioner armoredYinYangOrbBoost =
+    _ArmoredYinYangOrbBoost();
 
 const RaceSlayerSkill youkaiBuster = _YoukaiBuster();
 const SkillAugmentSkill youkaiBuster2 = _YoukaiBuster2();
-const SkillAugmentSkill youkaiBusterShield = _YoukaiBusterShield();
+const RaceSlayReactioner youkaiBusterShield = _YoukaiBusterShield();
 
 const KoReactionerSkill reimuPrivileges = _ReimuProtagonistPrivileges();
 const SkillAugmentSkill reimuPrivileges2 = _ReimuProtagonistPrivileges2();
@@ -1031,8 +1032,8 @@ class _ArmoredYinYangOrb2
 }
 
 class _ArmoredYinYangOrbBoost
-    with UniqueSkill, SkillAugmentSkill
-    implements ElementProtectionReactioner, DamageDealtBuffAugment {
+    with UniqueSkill
+    implements ElementProtectionReactioner, DamageDealtBuffer {
   const _ArmoredYinYangOrbBoost();
 
   @override
@@ -1104,8 +1105,8 @@ class _YoukaiBuster2
 }
 
 class _YoukaiBusterShield
-    with UniqueSkill, SkillAugmentSkill
-    implements RaceSlayReactioner, DamageReceivedBuffAugment {
+    with UniqueSkill
+    implements RaceSlayReactioner, DamageReceivedBuffer {
   const _YoukaiBusterShield();
 
   @override

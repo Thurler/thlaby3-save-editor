@@ -35,7 +35,9 @@ mixin UniqueSkill implements Skill {
     quickCharge,
     // Reimu unique skills
     armoredYinYangOrb,
+    armoredYinYangOrbBoost,
     youkaiBuster,
+    youkaiBusterShield,
     reimuPrivileges,
     reimuPrivilegesShare,
     finalPrayer,
@@ -44,6 +46,7 @@ mixin UniqueSkill implements Skill {
     // Renko unique skills
     readingStars,
     knowledgeStrangeStrings,
+    knowledgeStrangeStringsShield,
     maryShield,
     abilityReadStars,
     abilityReadMoon,

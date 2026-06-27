@@ -56,16 +56,13 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     quickCharge2,
     // Reimu skill augments
     armoredYinYangOrb2,
-    armoredYinYangOrbBoost,
     youkaiBuster2,
-    youkaiBusterShield,
     reimuPrivileges2,
     reimuPrivilegesPerm,
     finalPrayer2,
     // Renko skill augments
     adeptBeaconSpecialist,
     knowledgeStrangeStrings2,
-    knowledgeStrangeStringsShield,
     maryKnight,
     firCldDamage2,
     wndNtrDamage2,
