@@ -1,26 +1,34 @@
-/// A mixin for skills that completely cleanse attack debuffs from the target
-mixin AttackDebuffCleanser {}
+/// An interface for skills that completely cleanse attack debuffs from the
+/// target
+abstract interface class AttackDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse defense debuffs from the target
-mixin DefenseDebuffCleanser {}
+/// An interface for skills that completely cleanse defense debuffs from the
+/// target
+abstract interface class DefenseDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse magic debuffs from the target
-mixin MagicDebuffCleanser {}
+/// An interface for skills that completely cleanse magic debuffs from the
+/// target
+abstract interface class MagicDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse mind debuffs from the target
-mixin MindDebuffCleanser {}
+/// An interface for skills that completely cleanse mind debuffs from the
+/// target
+abstract interface class MindDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse speed debuffs from the target
-mixin SpeedDebuffCleanser {}
+/// An interface for skills that completely cleanse speed debuffs from the
+/// target
+abstract interface class SpeedDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse accuracy debuffs from the target
-mixin AccuracyDebuffCleanser {}
+/// An interface for skills that completely cleanse accuracy debuffs from the
+/// target
+abstract interface class AccuracyDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse evasion debuffs from the target
-mixin EvasionDebuffCleanser {}
+/// An interface for skills that completely cleanse evasion debuffs from the
+/// target
+abstract interface class EvasionDebuffCleanser {}
 
-/// A mixin for skills that completely cleanse all stat debuffs from the target
-mixin AllDebuffCleanser
+/// An interface for skills that completely cleanse all stat debuffs from the
+/// target
+abstract interface class AllDebuffCleanser
     implements
         AttackDebuffCleanser,
         DefenseDebuffCleanser,

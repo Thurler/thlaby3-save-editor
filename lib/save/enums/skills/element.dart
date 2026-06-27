@@ -2,8 +2,8 @@ import 'package:thlaby3_save_editor/save/enums/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
-/// A mixin for skills that offer passive enhancements when using elements
-mixin ElementMultiplierEnhancer {
+/// An interface for skills that offer passive enhancements when using elements
+abstract interface class ElementMultiplierEnhancer {
   /// The elements that will have damage increased
   List<Element> get elements;
 
@@ -11,8 +11,8 @@ mixin ElementMultiplierEnhancer {
   double get multiplierIncrease;
 }
 
-/// A mixin for skills that offer passive protection against elements
-mixin ElementProtector {
+/// An interface for skills that offer passive protection against elements
+abstract interface class ElementProtector {
   /// The elements that will have damage reduced
   List<Element> get elements;
 
@@ -21,7 +21,7 @@ mixin ElementProtector {
 }
 
 /// A mixin that merges [ElementProtector] functionality to a [UniqueSkill]
-mixin ElementProtectorSkill on UniqueSkill, ElementProtector {}
+mixin ElementProtectorSkill on UniqueSkill implements ElementProtector {}
 
 /// A mixin for skills that augment an [ElementProtector] skill with a reaction
 /// effect

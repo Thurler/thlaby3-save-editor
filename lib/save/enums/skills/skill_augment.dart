@@ -22,6 +22,9 @@ enum AugmentRange {
 abstract interface class SkillAugment {
   /// The skill the augment acts on
   UniqueSkill get baseSkill;
+
+  /// The description of the augment
+  String get description;
 }
 
 /// A mixin for augments that are inherent to a given skill, meaning they are
@@ -69,6 +72,16 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     mysSpiDamage2,
     drkPhyDamage2,
   ];
+
+  /// The augments that must be already applied when this augment is applied,
+  /// usually from skill requirements
+  Iterable<SkillAugmentSkill> get requiredAugments =>
+      allRequirements.whereType<SkillAugmentSkill>().where(
+    (SkillAugmentSkill augment) => augment.baseSkill == baseSkill,
+  );
+
+  @override
+  String get description => prettyName;
 }
 
 /// A mixin for skills that augment another natural augment, effectively
@@ -84,18 +97,6 @@ mixin SkillAugmentChainSkill on SkillAugmentSkill {
   /// The augment the augment acts on
   SkillAugmentSkill get baseAugment;
 }
-
-/// A mixin that signals that an augment's effect is somehow conditioned on the
-/// character's turn count
-mixin TurnCountBasedAugment on SkillAugment {
-  /// Cap the effects of the turn count to the specified amount of the turn
-  /// counter exceeds it. If null, no cap is applied
-  int? get turnCountCap;
-}
-
-/// A mixin that signals that an augment's effect includes resetting the
-/// character's turn count to zero
-mixin TurnCountResetAugment on SkillAugment {}
 
 /// A mixin for augments that change a spell's attack buff
 mixin AttackBuffAugment on SkillAugment implements AttackBuffer {
@@ -137,6 +138,13 @@ mixin AccuracyBuffAugment on SkillAugment implements AccuracyBuffer {
   /// How much the buff intensity increases by
   @override
   int get accBuff;
+}
+
+/// A mixin for augments that change a spell's accuracy buff
+mixin EvasionBuffAugment on SkillAugment implements EvasionBuffer {
+  /// How much the buff intensity increases by
+  @override
+  int get evaBuff;
 }
 
 /// A mixin for augments that change a spell's permanent attack buff
@@ -186,6 +194,14 @@ mixin PermanentAccuracyBuffAugment on SkillAugment
   int get permAccBuff;
 }
 
+/// A mixin for augments that change a spell's permanent accuracy buff
+mixin PermanentEvasionBuffAugment on SkillAugment
+    implements PermanentEvasionBuffer {
+  /// How much the buff intensity increases by
+  @override
+  int get permEvaBuff;
+}
+
 /// A mixin for augments that change a spell's HP regen buff
 mixin HpRegenBuffAugment on SkillAugment implements HpRegenBuffer {
   /// How much the buff intensity increases by
@@ -228,7 +244,7 @@ mixin AtbIncreaseAugment on SkillAugment implements AtbIncreaser {
 }
 
 /// A mixin for augments that change a skill's paralysis infliction
-mixin ParalysisAugment on SkillAugment, ParalysisInflictor {
+mixin ParalysisAugment on SkillAugment implements ParalysisInflictor {
   /// How much the ailment duration increases by
   @override
   int get parDuration;

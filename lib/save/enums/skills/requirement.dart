@@ -1,3 +1,4 @@
+import 'package:tfields/extensions.dart';
 import 'package:thlaby3_save_editor/save/enums/character.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
@@ -11,6 +12,9 @@ class RandomNumberRequirement implements EffectRequirement {
   final double chance;
 
   const RandomNumberRequirement(this.chance);
+
+  @override
+  String toString() => '${chance.toStringAsFixed(1)}% chance';
 }
 
 /// A requirement that checks if an unrelated skill is learned to determine if
@@ -21,6 +25,9 @@ class LearnedSkillRequirement implements EffectRequirement {
   final UniqueSkill skill;
 
   const LearnedSkillRequirement(this.skill);
+
+  @override
+  String toString() => skill.prettyName;
 }
 
 /// A requirement that checks if the current MP count is below a percent of the
@@ -30,6 +37,9 @@ class BelowMpPercentRequirement implements EffectRequirement {
   final int mpPercent;
 
   const BelowMpPercentRequirement(this.mpPercent);
+
+  @override
+  String toString() => 'Below $mpPercent% MP';
 }
 
 /// A requirement that checks if the character has at least [tpCount] TP
@@ -39,6 +49,9 @@ class TpCountRequirement implements EffectRequirement {
   final int tpCount;
 
   const TpCountRequirement(this.tpCount);
+
+  @override
+  String toString() => 'Needs $tpCount TP';
 }
 
 /// A requirement that checks if the current turn count is at least a specific
@@ -48,6 +61,9 @@ class TurnCountRequirement implements EffectRequirement {
   final int turnCount;
 
   const TurnCountRequirement(this.turnCount);
+
+  @override
+  String toString() => 'Turn at $turnCount or above';
 }
 
 /// A requirement that checks if the current turn count is a multiple of a
@@ -57,11 +73,17 @@ class TurnMultipleRequirement implements EffectRequirement {
   final int multipleOf;
 
   const TurnMultipleRequirement(this.multipleOf);
+
+  @override
+  String toString() => 'Turn multiple of $multipleOf';
 }
 
 /// A requirement that checks if the skill owner is in the frontline
 class FrontlineSelfRequirement implements EffectRequirement {
   const FrontlineSelfRequirement();
+
+  @override
+  String toString() => 'Self in front';
 }
 
 /// A requirement that checks if the specified character is in the frontline
@@ -70,4 +92,7 @@ class FrontlineCharacterRequirement implements EffectRequirement {
   final Character character;
 
   const FrontlineCharacterRequirement(this.character);
+
+  @override
+  String toString() => '${character.name.upperCaseFirstChar()} in front';
 }

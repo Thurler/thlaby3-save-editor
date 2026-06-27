@@ -1,47 +1,47 @@
-/// A mixin for skills that provide an attack buff
-mixin AttackBuffer {
+/// An interface for skills that provide an attack buff
+abstract interface class AttackBuffer {
   /// The buff intensity
   int get atkBuff;
 }
 
-/// A mixin for skills that provide a defense buff
-mixin DefenseBuffer {
+/// An interface for skills that provide a defense buff
+abstract interface class DefenseBuffer {
   /// The buff intensity
   int get defBuff;
 }
 
-/// A mixin for skills that provide a magic buff
-mixin MagicBuffer {
+/// An interface for skills that provide a magic buff
+abstract interface class MagicBuffer {
   /// The buff intensity
   int get magBuff;
 }
 
-/// A mixin for skills that provide a mind buff
-mixin MindBuffer {
+/// An interface for skills that provide a mind buff
+abstract interface class MindBuffer {
   /// The buff intensity
   int get mndBuff;
 }
 
-/// A mixin for skills that provide a speed buff
-mixin SpeedBuffer {
+/// An interface for skills that provide a speed buff
+abstract interface class SpeedBuffer {
   /// The buff intensity
   int get spdBuff;
 }
 
-/// A mixin for skills that provide an accuracy buff
-mixin AccuracyBuffer {
+/// An interface for skills that provide an accuracy buff
+abstract interface class AccuracyBuffer {
   /// The buff intensity
   int get accBuff;
 }
 
-/// A mixin for skills that provide an evasion buff
-mixin EvasionBuffer {
+/// An interface for skills that provide an evasion buff
+abstract interface class EvasionBuffer {
   /// The buff intensity
   int get evaBuff;
 }
 
-/// A mixin for skills that provide a buff for every stat
-mixin AllBuffer
+/// An interface for skills that provide a buff for every stat
+abstract interface class AllBuffer
     implements
         AttackBuffer,
         DefenseBuffer,
@@ -51,50 +51,50 @@ mixin AllBuffer
         AccuracyBuffer,
         EvasionBuffer {}
 
-/// A mixin for skills that provide a permanent attack buff
-mixin PermanentAttackBuffer {
+/// An interface for skills that provide a permanent attack buff
+abstract interface class PermanentAttackBuffer {
   /// The buff intensity
   int get permAtkBuff;
 }
 
-/// A mixin for skills that provide a permanent defense buff
-mixin PermanentDefenseBuffer {
+/// An interface for skills that provide a permanent defense buff
+abstract interface class PermanentDefenseBuffer {
   /// The buff intensity
   int get permDefBuff;
 }
 
-/// A mixin for skills that provide a permanent magic buff
-mixin PermanentMagicBuffer {
+/// An interface for skills that provide a permanent magic buff
+abstract interface class PermanentMagicBuffer {
   /// The buff intensity
   int get permMagBuff;
 }
 
-/// A mixin for skills that provide a permanent mind buff
-mixin PermanentMindBuffer {
+/// An interface for skills that provide a permanent mind buff
+abstract interface class PermanentMindBuffer {
   /// The buff intensity
   int get permMndBuff;
 }
 
-/// A mixin for skills that provide a permanent speed buff
-mixin PermanentSpeedBuffer {
+/// An interface for skills that provide a permanent speed buff
+abstract interface class PermanentSpeedBuffer {
   /// The buff intensity
   int get permSpdBuff;
 }
 
-/// A mixin for skills that provide a permanent accuracy buff
-mixin PermanentAccuracyBuffer {
+/// An interface for skills that provide a permanent accuracy buff
+abstract interface class PermanentAccuracyBuffer {
   /// The buff intensity
   int get permAccBuff;
 }
 
-/// A mixin for skills that provide a permanent evasion buff
-mixin PermanentEvasionBuffer {
+/// An interface for skills that provide a permanent evasion buff
+abstract interface class PermanentEvasionBuffer {
   /// The buff intensity
   int get permEvaBuff;
 }
 
-/// A mixin for skills that provide a permanent buff for every stat
-mixin PermanentAllBuffer
+/// An interface for skills that provide a permanent buff for every stat
+abstract interface class PermanentAllBuffer
     implements
         PermanentAttackBuffer,
         PermanentDefenseBuffer,
@@ -104,8 +104,8 @@ mixin PermanentAllBuffer
         PermanentAccuracyBuffer,
         PermanentEvasionBuffer {}
 
-/// A mixin for skills that provide a HP regen buff
-mixin HpRegenBuffer {
+/// An interface for skills that provide a HP regen buff
+abstract interface class HpRegenBuffer {
   /// The buff intensity
   double get hpRegen;
 
@@ -113,8 +113,8 @@ mixin HpRegenBuffer {
   int get hpRegenDuration;
 }
 
-/// A mixin for skills that provide a damage dealt buff
-mixin DamageDealtBuffer {
+/// An interface for skills that provide a damage dealt buff
+abstract interface class DamageDealtBuffer {
   /// The buff intensity
   double get dmgDealtBuff;
 
@@ -122,8 +122,8 @@ mixin DamageDealtBuffer {
   int get dmgDealtBuffDuration;
 }
 
-/// A mixin for skills that provide a damage received buff
-mixin DamageReceivedBuffer {
+/// An interface for skills that provide a damage received buff
+abstract interface class DamageReceivedBuffer {
   /// The buff intensity
   double get dmgReceivedBuff;
 
@@ -131,8 +131,8 @@ mixin DamageReceivedBuffer {
   int get dmgReceivedBuffDuration;
 }
 
-/// A mixin for skills that provide a bonus to the ATB bar
-mixin AtbIncreaser {
+/// An interface for skills that provide a bonus to the ATB bar
+abstract interface class AtbIncreaser {
   /// The amount ATB is increased by
   int get atbIncrease;
 }
@@ -142,9 +142,9 @@ enum InitiativeRange {
   frontline;
 }
 
-/// A mixin for skills that provide a bonus to the ATB bar at the start of
+/// An interface for skills that provide a bonus to the ATB bar at the start of
 /// battle
-mixin AtbInitiativeIncreaser implements AtbIncreaser {
+abstract interface class AtbInitiativeIncreaser implements AtbIncreaser {
   /// The range applied to the initiative effect
   InitiativeRange get initiativeRange;
 }

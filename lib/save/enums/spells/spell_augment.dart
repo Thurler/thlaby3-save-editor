@@ -34,7 +34,7 @@ mixin SpellAugmentSkill on SkillAugmentSkill implements SpellAugment {
     flashExorcismBarrierDamageTaken,
     flashExorcismBarrierDamageTaken2,
     dreamSealTurn,
-    dreamSealDamageAplifier,
+    dreamSealDamageAmplifier,
     // Renko spell augments
     eagerSupportMentalCare,
     eagerSupportSelfCare,
@@ -67,7 +67,7 @@ mixin SpellAugmentChainSkill on SkillAugmentChainSkill, SpellAugmentSkill {
 /// A mixin for augments that change a spell's delay
 mixin DelayAugment on SpellAugment {
   /// How much post-use delay increases by
-  double get delay;
+  int get delay;
 }
 
 /// A mixin for augments that change a spell's cooldown

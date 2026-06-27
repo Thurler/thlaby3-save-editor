@@ -66,7 +66,7 @@ mixin ConditionedSpellSkill on SpellSkill {
 /// A mixin to unify attributes of spells that cause damage
 mixin DamageSpell on SpellSkill {
   /// The accuracy modifier to be applied on evasion check
-  int get accModifider;
+  int get accModifier;
 
   /// The damage multiplier to use on damage calculation
   double get multiplier;

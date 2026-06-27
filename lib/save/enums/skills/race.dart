@@ -6,8 +6,8 @@ enum EnemyRace {
   other;
 }
 
-/// A mixin for skills that offer passive protection against elements
-mixin RaceSlayer {
+/// An interface for skills that offer passive protection against elements
+abstract interface class RaceSlayer {
   /// The races that will take extra damage
   List<EnemyRace> get races;
 

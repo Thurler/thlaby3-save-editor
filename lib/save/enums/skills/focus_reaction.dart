@@ -1,17 +1,16 @@
 import 'package:thlaby3_save_editor/save/enums/skills/buff.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/requirement.dart';
-import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/stat.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/unique.dart';
 
-/// A mixin for skills that trigger upon a character focusing
-mixin FocusReactioner {}
+/// An interface for skills that trigger upon a character focusing
+abstract interface class FocusReactioner {}
 
 /// A specialization of [FocusReactioner] that conditions the reaction on a set
 /// of requirements being met
-mixin ConditionedFocusReactioner on FocusReactioner {
+abstract interface class ConditionedFocusReactioner implements FocusReactioner {
   /// The requirements that must be met to make the reaction effect trigger
   List<EffectRequirement> get reactionRequirements;
 }

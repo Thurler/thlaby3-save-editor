@@ -1,59 +1,59 @@
-/// A mixin for skills that consume TP upon being activated
-mixin TpConsumer {
+/// An interface for skills that consume TP upon being activated
+abstract interface class TpConsumer {
   /// How much TP is consumed
   int get tpConsumed;
 }
 
-/// A mixin for skills that provide a global percent-based damage reduction
-mixin PercentDamageReducer {
+/// An interface for skills that provide a global percent-based damage reduction
+abstract interface class PercentDamageReducer {
   /// How much percent of damage to block
   double get dmgReducedPercent;
 }
 
-/// A mixin for skills that provide a global attack stat increase
-mixin AttackIncreaser {
+/// An interface for skills that provide a global attack stat increase
+abstract interface class AttackIncreaser {
   /// How much the stat is increased by, in percentage
   int get atkIncrease;
 }
 
-/// A mixin for skills that provide a global defense stat increase
-mixin DefenseIncreaser {
+/// An interface for skills that provide a global defense stat increase
+abstract interface class DefenseIncreaser {
   /// How much the stat is increased by, in percentage
   int get defIncrease;
 }
 
-/// A mixin for skills that provide a global magic stat increase
-mixin MagicIncreaser {
+/// An interface for skills that provide a global magic stat increase
+abstract interface class MagicIncreaser {
   /// How much the stat is increased by, in percentage
   int get magIncrease;
 }
 
-/// A mixin for skills that provide a global mind stat increase
-mixin MindIncreaser {
+/// An interface for skills that provide a global mind stat increase
+abstract interface class MindIncreaser {
   /// How much the stat is increased by, in percentage
   int get mndIncrease;
 }
 
-/// A mixin for skills that provide a global speed stat increase
-mixin SpeedIncreaser {
+/// An interface for skills that provide a global speed stat increase
+abstract interface class SpeedIncreaser {
   /// How much the stat is increased by, in percentage
   int get spdIncrease;
 }
 
-/// A mixin for skills that provide a global accuracy stat increase
-mixin AccuracyIncreaser {
+/// An interface for skills that provide a global accuracy stat increase
+abstract interface class AccuracyIncreaser {
   /// How much the stat is increased by, in percentage
   int get accIncrease;
 }
 
-/// A mixin for skills that provide a global evasion stat increase
-mixin EvasionIncreaser {
+/// An interface for skills that provide a global evasion stat increase
+abstract interface class EvasionIncreaser {
   /// How much the stat is increased by, in percentage
   int get evaIncrease;
 }
 
-/// A mixin for skills that provide a buff for every stat
-mixin AllIncreaser
+/// An interface for skills that provide a buff for every stat
+abstract interface class AllIncreaser
     implements
         AttackIncreaser,
         DefenseIncreaser,
@@ -63,50 +63,55 @@ mixin AllIncreaser
         AccuracyIncreaser,
         EvasionIncreaser {}
 
-/// A mixin for skills that provide a global poison resistance stat increase
-mixin PoisonResIncreaser {
+/// An interface for skills that provide a global poison resistance stat
+/// increase
+abstract interface class PoisonResIncreaser {
   /// How much the stat is increased by, in percentage
   int get psnIncrease;
 }
 
-/// A mixin for skills that provide a global paralysis resistance stat increase
-mixin ParalysisResIncreaser {
+/// An interface for skills that provide a global paralysis resistance stat
+/// increase
+abstract interface class ParalysisResIncreaser {
   /// How much the stat is increased by, in percentage
   int get parIncrease;
 }
 
-/// A mixin for skills that provide a global heavy resistance stat increase
-mixin HeavyResIncreaser {
+/// An interface for skills that provide a global heavy resistance stat increase
+abstract interface class HeavyResIncreaser {
   /// How much the stat is increased by, in percentage
   int get hvyIncrease;
 }
 
-/// A mixin for skills that provide a global shock resistance stat increase
-mixin ShockResIncreaser {
+/// An interface for skills that provide a global shock resistance stat increase
+abstract interface class ShockResIncreaser {
   /// How much the stat is increased by, in percentage
   int get shkIncrease;
 }
 
-/// A mixin for skills that provide a global terror resistance stat increase
-mixin TerrorResIncreaser {
+/// An interface for skills that provide a global terror resistance stat
+/// increase
+abstract interface class TerrorResIncreaser {
   /// How much the stat is increased by, in percentage
   int get trrIncrease;
 }
 
-/// A mixin for skills that provide a global silence resistance stat increase
-mixin SilenceResIncreaser {
+/// An interface for skills that provide a global silence resistance stat
+/// increase
+abstract interface class SilenceResIncreaser {
   /// How much the stat is increased by, in percentage
   int get silIncrease;
 }
 
-/// A mixin for skills that provide a global death resistance stat increase
-mixin DeathResIncreaser {
+/// An interface for skills that provide a global death resistance stat increase
+abstract interface class DeathResIncreaser {
   /// How much the stat is increased by, in percentage
   int get dthIncrease;
 }
 
-/// A mixin for skills that provide a global debuff resistance stat increase
-mixin DebuffResIncreaser {
+/// An interface for skills that provide a global debuff resistance stat
+/// increase
+abstract interface class DebuffResIncreaser {
   /// How much the stat is increased by, in percentage
   int get dbfIncrease;
 }

@@ -19,9 +19,9 @@ abstract interface class Skill {
   List<Skill> get requirements;
 }
 
-/// A mixin for skills that must satisfy requirements to make their effects
+/// An interface for skills that must satisfy requirements to make their effects
 /// trigger
-mixin ConditionedEffect {
+abstract interface class ConditionedEffect {
   /// The requirements that must be met to make the skill effect trigger
   List<EffectRequirement> get effectRequirements;
 }

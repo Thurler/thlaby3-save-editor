@@ -23,7 +23,7 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 
 /// A mixin to unify all character unique skills, be they spells, passives or
 /// augments
-mixin UniqueSkill on Skill {
+mixin UniqueSkill implements Skill {
   static const List<UniqueSkill> values = <UniqueSkill>[
     ...UncategorizedUniqueSkill.values,
     ...PassiveSkill.values,
@@ -54,11 +54,22 @@ mixin UniqueSkill on Skill {
     directDamage,
     magicDamage,
   ];
+
+  @override
+  List<UniqueSkill> get requirements;
+
+  List<UniqueSkill> get allRequirements {
+    List<UniqueSkill> result = requirements.toList();
+    for (UniqueSkill requirement in requirements) {
+      result.addAll(requirement.allRequirements);
+    }
+    return result;
+  }
 }
 
 /// Enumeration of passive skills that don't have effects that are relevant to
 /// the other classes
-enum PassiveSkill implements UniqueSkill {
+enum PassiveSkill with UniqueSkill {
   // Reimu passives
   hakureiProtection("Hakurei's Divine Protection", 3),
   hakureiProtection2(
@@ -117,7 +128,7 @@ enum PassiveSkill implements UniqueSkill {
   });
 }
 
-enum UncategorizedUniqueSkill implements UniqueSkill {
+enum UncategorizedUniqueSkill with UniqueSkill {
   // Renko skills
   celestialStasis(
     'Celestial Stasis',

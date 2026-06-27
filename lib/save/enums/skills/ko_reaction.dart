@@ -13,8 +13,8 @@ enum KoEffectRange {
   backline;
 }
 
-/// A mixin for skills that trigger upon a ko happening in the field
-mixin KoReactioner {
+/// An interface for skills that trigger upon a ko happening in the field
+abstract interface class KoReactioner {
   /// The range associated with KO detection
   KoTriggerRange get triggerRange;
 
@@ -23,11 +23,16 @@ mixin KoReactioner {
 }
 
 /// A mixin that merges [KoReactioner] functionality to a [UniqueSkill]
-mixin KoReactionerSkill on UniqueSkill, KoReactioner {}
+mixin KoReactionerSkill on UniqueSkill implements KoReactioner {
+  String get koReactionTriggerString => switch (triggerRange) {
+    KoTriggerRange.self => "Self KO'd",
+    KoTriggerRange.allAllies => "Any ally KO'd",
+  };
+}
 
 /// A specialization of [KoReactioner] that conditions the reaction on a set
 /// of requirements being met
-mixin ConditionedKoReactioner on KoReactioner {
+abstract interface class ConditionedKoReactioner implements KoReactioner {
   /// The requirements that must be met to make the reaction effect trigger
   List<EffectRequirement> get reactionRequirements;
 }
