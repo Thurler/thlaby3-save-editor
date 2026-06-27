@@ -57,7 +57,7 @@ const SpellAugmentSkill flashExorcismBarrierDamageTaken2 =
 
 const DamageSpell dreamSeal = _DreamSeal();
 const SpellAugmentSkill dreamSealTurn = _DreamSealTurnConversion();
-const SpellAugmentSkill dreamSealDamageAplifier = _DreamSealDamageAmplifier();
+const SpellAugmentSkill dreamSealDamageAmplifier = _DreamSealDamageAmplifier();
 
 const ElementProtectorSkill armoredYinYangOrb = _ArmoredYinYangOrb();
 const SkillAugmentSkill armoredYinYangOrb2 = _ArmoredYinYangOrb2();

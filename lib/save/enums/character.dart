@@ -67,7 +67,7 @@ enum Character {
         7: flashExorcismBarrierTurn,
         8: persuasionNeedleHpDrain,
         9: dreamSealTurn,
-        10: dreamSealDamageAplifier,
+        10: dreamSealDamageAmplifier,
         11: finalPrayerRange,
       },
       LevelGate.seventh: <int, UniqueSkill>{
