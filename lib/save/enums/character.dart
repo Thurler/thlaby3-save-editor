@@ -917,6 +917,11 @@ enum Character {
   /// The unique skills in this character's unique skill tree
   final Map<LevelGate, Map<int, UniqueSkill>> uniqueSkills;
 
+  /// A flattened version of [uniqueSkills]
+  Iterable<UniqueSkill> get flattenedUniqueSkills => uniqueSkills.values.expand(
+    (Map<int, UniqueSkill> skillMap) => skillMap.values,
+  );
+
   final Map<UniqueSkill, List<Skill>> additionalSkillRequirements;
 
   /// The masteries this character has in the training skill tree
