@@ -2769,6 +2769,232 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     requirements: <UniqueSkill>[unconsciousDoubleHelix],
   ),
   // Sumireko skills
+  zenerCardShuriken('Paper Sign "Zener Card Shuriken"', 3),
+  occultSignPyramids('Occult Sign - Pyramids', 3),
+  occultSignNazcaLines('Occult Sign - Nazca Lines', 3),
+  occultPower('Occult Power', 3),
+  occultSignStonehenge(
+    'Occult Sign - Stonehenge',
+    3,
+    requirements: <UniqueSkill>[occultSignPyramids],
+  ),
+  surprisingOccult('Surprising Occult', 3),
+  saddeningOccult('Saddening Occult', 3),
+  occultSignYomotsuHirasaka(
+    'Occult Sign - Yomotsu Hirasaka',
+    3,
+    requirements: <UniqueSkill>[occultSignNazcaLines],
+  ),
+  retaliatingOccult('Retaliating Occult', 3),
+  safeguardingOccult('Safeguarding Occult', 3),
+  zenerCardShurikenOccultBoost(
+    'Zener Card Shuriken: Occult Boost',
+    3,
+    requirements: <UniqueSkill>[occultPower, zenerCardShuriken],
+  ),
+  occulticCards(
+    'Occultic Cards',
+    3,
+    requirements: <UniqueSkill>[zenerCardShuriken],
+  ),
+  occultDissemination('Occult Dissemination', 3),
+  occultSignTowerOfBabel(
+    'Occult Sign - Tower of Babel',
+    3,
+    requirements: <UniqueSkill>[occultSignStonehenge],
+  ),
+  occultSignJigokudani(
+    'Occult Sign - Jigokudani',
+    3,
+    requirements: <UniqueSkill>[occultSignYomotsuHirasaka],
+  ),
+  occultSignNazcaLines2(
+    'Occult Sign - Nazca Lines: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignNazcaLines],
+  ),
+  lingeringSigns(
+    'Lingering Signs',
+    3,
+    requirements: <UniqueSkill>[occultPower],
+  ),
+  occultPower2(
+    'Occult Power+',
+    3,
+    requirements: <UniqueSkill>[occultPower],
+  ),
+  barrierEnclosedZenerCardShuriken(
+    'Paper Sign "Barrier-Enclosed Zener Card Shuriken"',
+    3,
+    requirements: <UniqueSkill>[
+      zenerCardShurikenOccultBoost,
+      occulticCards,
+    ],
+  ),
+  occultSignStonehenge2(
+    'Occult Sign - Stonehenge: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignStonehenge],
+  ),
+  terrifyingOccult(
+    'Terrifying Occult',
+    3,
+    requirements: <UniqueSkill>[surprisingOccult],
+  ),
+  depressingOccult(
+    'Depressing Occult',
+    3,
+    requirements: <UniqueSkill>[saddeningOccult],
+  ),
+  occultSignYomotsuHirasaka2(
+    'Occult Sign - Yomotsu Hirasaka: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignYomotsuHirasaka],
+  ),
+  retaliatingOccult2(
+    'Retaliating Occult+',
+    3,
+    requirements: <UniqueSkill>[retaliatingOccult],
+  ),
+  safeguardingOccult2(
+    'Safeguarding Occult+',
+    3,
+    requirements: <UniqueSkill>[safeguardingOccult],
+  ),
+  bulletCancel(
+    'Bullet Cancel',
+    3,
+    requirements: <UniqueSkill>[occultPower2, zenerCardShurikenOccultBoost],
+  ),
+  occulticCards2(
+    'Occultic Cards+',
+    3,
+    requirements: <UniqueSkill>[occulticCards],
+  ),
+  occultDissemination4nTurnModulo(
+    'Occult Dissemination: 4n Turn Modulo',
+    3,
+    requirements: <UniqueSkill>[occultDissemination],
+  ),
+  occultSignPyramids2(
+    'Occult Sign - Pyramids: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignPyramids],
+  ),
+  occultSignTowerOfBabel2(
+    'Occult Sign - Tower of Babel: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignTowerOfBabel],
+  ),
+  occultSignLunarCapital(
+    'Occult Sign - Lunar Capital',
+    3,
+    requirements: <UniqueSkill>[terrifyingOccult, depressingOccult],
+  ),
+  occultSignJigokudani2(
+    'Occult Sign - Jigokudani: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignJigokudani],
+  ),
+  deepeningOccult(
+    'Deepening Occult',
+    3,
+    requirements: <UniqueSkill>[occultSignNazcaLines2],
+  ),
+  investigatorOfTheOccult(
+    'Investigator of the Occult',
+    3,
+    requirements: <UniqueSkill>[retaliatingOccult2, safeguardingOccult2],
+  ),
+  lastingSigns(
+    'Lasting Signs',
+    3,
+    requirements: <UniqueSkill>[lingeringSigns],
+  ),
+  occultPower3(
+    'Occult Power++',
+    3,
+    requirements: <UniqueSkill>[occultPower2],
+  ),
+  psychexplosion(
+    'Psychokinesis "Psychexplosion"',
+    3,
+    requirements: <UniqueSkill>[barrierEnclosedZenerCardShuriken],
+  ),
+  aweInspiringOccult(
+    'Awe-Inspiring Occult',
+    3,
+    requirements: <UniqueSkill>[terrifyingOccult],
+  ),
+  tragicOccult(
+    'Tragic Occult',
+    3,
+    requirements: <UniqueSkill>[depressingOccult],
+  ),
+  retaliatingOccult3(
+    'Retaliating Occult++',
+    3,
+    requirements: <UniqueSkill>[retaliatingOccult2],
+  ),
+  safeguardingOccult3(
+    'Safeguarding Occult++',
+    3,
+    requirements: <UniqueSkill>[safeguardingOccult2],
+  ),
+  deathCancel(
+    'Death Cancel',
+    3,
+    requirements: <UniqueSkill>[bulletCancel],
+  ),
+  speedyCardTechniques(
+    'Speedy Card Techniques',
+    3,
+    requirements: <UniqueSkill>[occulticCards2],
+  ),
+  occultDissemination3nTurnModulo(
+    'Occult Dissemination: 3n Turn Modulo',
+    3,
+    requirements: <UniqueSkill>[
+      occultDissemination4nTurnModulo,
+      occultSignPyramids2,
+      occultSignStonehenge2,
+    ],
+  ),
+  secretEsotericSeven(
+    '*Secret Esoteric Seven*',
+    3,
+    requirements: <UniqueSkill>[aweInspiringOccult],
+  ),
+  occultSignLunarCapital2(
+    'Occult Sign - Lunar Capital: Effect ↑',
+    3,
+    requirements: <UniqueSkill>[occultSignLunarCapital],
+  ),
+  abyssOfTheOccult(
+    'Abyss of the Occult',
+    3,
+    requirements: <UniqueSkill>[
+      tragicOccult,
+      occultSignJigokudani2,
+      deepeningOccult,
+    ],
+  ),
+  pursuerOfTheOccult(
+    'Pursuer of the Occult',
+    3,
+    requirements: <UniqueSkill>[investigatorOfTheOccult],
+  ),
+  eternalSigns(
+    'Eternal Signs',
+    3,
+    requirements: <UniqueSkill>[lastingSigns],
+  ),
+  highDeathCancel(
+    'High Death Cancel',
+    3,
+    requirements: <UniqueSkill>[deathCancel],
+  ),
+  // Ran skills
   a('a', 3);
 
   @override
