@@ -75,6 +75,13 @@ mixin UniqueSkill implements Skill {
 /// Enumeration of passive skills that don't have effects that are relevant to
 /// the other classes
 enum PassiveSkill with UniqueSkill {
+  // Generic passives
+  inexhaustibleEnergy('Inexhaustible Energy', 2),
+  inexhaustibleEnergy2(
+    'Inexhaustible Energy+',
+    2,
+    requirements: <UniqueSkill>[inexhaustibleEnergy],
+  ),
   // Reimu passives
   hakureiProtection("Hakurei's Divine Protection", 3),
   hakureiProtection2(
@@ -1437,7 +1444,6 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   // Cirno skills
   frostKing('Ice King "Frost King"', 3),
   icicleFall('Ice Sign "Icicle Fall"', 3),
-  inexhaustibleEnergy('Inexhaustible Energy', 2),
   icicleFallSpdDownAffix(
     'Icicle Fall: SPD ↓ Affix',
     3,
@@ -1528,11 +1534,6 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     'Red-Hot Icy Spirit',
     4,
     requirements: <UniqueSkill>[petalScatteringBlizzardGale],
-  ),
-  inexhaustibleEnergy2(
-    'Inexhaustible Energy+',
-    2,
-    requirements: <UniqueSkill>[inexhaustibleEnergy],
   ),
   abilityManipulateColdBoost(
     'Ability to Manipulate Cold: Boost Conversion',
@@ -2330,6 +2331,200 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     'Objective Barrier: MP Cost ↓',
     3,
     requirements: <UniqueSkill>[objectiveBarrier],
+  ),
+  // Marisa skills
+  magicMissile('Magic Missile', 3),
+  magicAccumulation('Magic Accumulation', 3),
+  moody('Moody', 2),
+  magicDrainingMissile(
+    'Magic-Draining Missile',
+    4,
+    requirements: <UniqueSkill>[magicMissile],
+  ),
+  magicMissileManaBurst(
+    'Magic Missile: Mana Burst',
+    3,
+    requirements: <UniqueSkill>[magicMissile],
+  ),
+  earthlightRay(
+    'Light Sign "Earthlight Ray"',
+    3,
+    requirements: <UniqueSkill>[magicMissile],
+  ),
+  manaAmplification(
+    'Mana Amplification',
+    2,
+    requirements: <UniqueSkill>[magicAccumulation],
+  ),
+  manaVessel(
+    'Mana Vessel',
+    3,
+    requirements: <UniqueSkill>[magicAccumulation, moody],
+  ),
+  magicMissileTrackingLight(
+    'Magic Missile: Magic Tracking Light',
+    3,
+    requirements: <UniqueSkill>[magicMissileManaBurst],
+  ),
+  manaFountain(
+    'Mana Fountain',
+    3,
+    requirements: <UniqueSkill>[magicAccumulation],
+  ),
+  magicTraining(
+    'Magic Training',
+    3,
+    requirements: <UniqueSkill>[magicAccumulation],
+  ),
+  concentration(
+    'Concentration',
+    3,
+    requirements: <UniqueSkill>[moody, PassiveSkill.inexhaustibleEnergy],
+  ),
+  mAliceCannonMarisa('MAlice Cannon (Marisa)', 3),
+  earthlightRayFollowUpFlash(
+    'Earthlight Ray: Follow-Up Flash',
+    3,
+    requirements: <UniqueSkill>[earthlightRay],
+  ),
+  asteroidBelt(
+    'Magic Space "Asteroid Belt"',
+    3,
+    requirements: <UniqueSkill>[earthlightRay],
+  ),
+  justHitHarder(
+    'Just Hit Harder',
+    4,
+    requirements: <UniqueSkill>[manaFountain, magicTraining],
+  ),
+  manaRepository(
+    'Mana Repository',
+    3,
+    requirements: <UniqueSkill>[manaVessel],
+  ),
+  shootTheMoon(
+    'Light Blast "Shoot the Moon"',
+    4,
+    requirements: <UniqueSkill>[earthlightRayFollowUpFlash],
+  ),
+  asteroidBeltCrushing(
+    'Asteroid Belt: Crushing Asteroid',
+    3,
+    requirements: <UniqueSkill>[asteroidBelt],
+  ),
+  masterSpark(
+    'Love Sign "Master Spark"',
+    5,
+    requirements: <UniqueSkill>[manaFountain],
+  ),
+  manaSpring(
+    'Mana Spring',
+    3,
+    requirements: <UniqueSkill>[manaFountain],
+  ),
+  moody2('Moody+', 3, requirements: <UniqueSkill>[moody]),
+  hakkeroBooster(
+    'Hakkero Booster',
+    3,
+    requirements: <UniqueSkill>[PassiveSkill.inexhaustibleEnergy],
+  ),
+  earthlightRayFollowUpFantasia(
+    'Earthlight Ray: Follow-Up Fantasia',
+    3,
+    requirements: <UniqueSkill>[asteroidBeltCrushing],
+  ),
+  meteonicShower(
+    'Star Sign "Meteonic Shower"',
+    4,
+    requirements: <UniqueSkill>[asteroidBelt],
+  ),
+  asteroidBeltNightmare(
+    'Star Sign "Asteroid Belt Nightmare"',
+    4,
+    requirements: <UniqueSkill>[asteroidBelt],
+  ),
+  masterSparkForcedHakkeroCooling(
+    'Master Spark: Forced Hakkero Cooling Mechanism',
+    2,
+    requirements: <UniqueSkill>[masterSpark],
+  ),
+  justHitHarder2(
+    'Just Hit Harder+',
+    5,
+    requirements: <UniqueSkill>[justHitHarder],
+  ),
+  manaAmplification2(
+    'Mana Amplification+',
+    2,
+    requirements: <UniqueSkill>[manaAmplification],
+  ),
+  greatMagiciansDream(
+    '''Nightmare "Great Magician's Dream"''',
+    3,
+    requirements: <UniqueSkill>[manaRepository],
+  ),
+  concentrationDeeperFocus(
+    'Concentration: Deeper Focus',
+    3,
+    requirements: <UniqueSkill>[
+      concentration,
+      PassiveSkill.inexhaustibleEnergy2,
+    ],
+  ),
+  dragonMeteor(
+    'Star Sign "Dragon Meteor"',
+    5,
+    requirements: <UniqueSkill>[meteonicShower],
+  ),
+  manaSpring2('Mana Spring+', 3, requirements: <UniqueSkill>[manaSpring]),
+  magicTraining2(
+    'Magic Training+',
+    3,
+    requirements: <UniqueSkill>[magicTraining],
+  ),
+  dreamsOfGreatnessSorceress(
+    'Dreams of Greatness: Sorceress of Dreams',
+    3,
+    requirements: <UniqueSkill>[greatMagiciansDream],
+  ),
+  unbalancedGreatMagician(
+    'Unbalanced Great Magician',
+    3,
+    requirements: <UniqueSkill>[
+      greatMagiciansDream,
+      moody2,
+      concentrationDeeperFocus,
+    ],
+  ),
+  hakkeroBooster2(
+    'Hakkero Booster+',
+    5,
+    requirements: <UniqueSkill>[hakkeroBooster, mAliceCannonMarisa],
+  ),
+  mAliceCannonMarisa2(
+    'MAlice Cannon (Marisa)+',
+    3,
+    requirements: <UniqueSkill>[mAliceCannonMarisa],
+  ),
+  meteonicShowerShiningStars(
+    'Meteonic Shower: Shining Stars',
+    3,
+    requirements: <UniqueSkill>[dragonMeteor],
+  ),
+  finalMasterSpark(
+    'Magicannon "Final Master Spark"',
+    6,
+    requirements: <UniqueSkill>[masterSpark],
+  ),
+  dreamsOfGreatnessUnendingMana(
+    'Dreams of Greatness: Unending Mana of Dreams',
+    3,
+    requirements: <UniqueSkill>[dreamsOfGreatnessSorceress],
+  ),
+  dreamsOfGreatnessEternalFantasy(
+    'Dreams of Greatness: Eternal Fantasy Sanctuary',
+    3,
+    requirements: <UniqueSkill>[unbalancedGreatMagician],
   );
 
   @override
