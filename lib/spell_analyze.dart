@@ -237,7 +237,6 @@ class SkillReport {
   int delay;
   List<Element> elements;
   ReportEffectRange effectRange;
-  ReportEffectRange? customRangeDmgReduction;
   int cooldown;
   int accModifier;
   int? turnCount;
@@ -289,10 +288,12 @@ class SkillReport {
   double shk;
   double dth;
 
-  // Damage reduction
+  // Damage increase
+  ReportEffectRange? customRangeDmgIncrease;
   PercentDuration damageIncreasedBuff;
 
   // Damage reduction
+  ReportEffectRange? customRangeDmgReduction;
   PercentDuration damageReceivedBuff;
 
   SkillReport({
@@ -342,6 +343,7 @@ class SkillReport {
     required this.damageIncreasedBuff,
     required this.damageReceivedBuff,
     required this.multiplierAmplify,
+    this.customRangeDmgIncrease,
     this.customRangeDmgReduction,
     this.turnCount,
   });
@@ -472,6 +474,7 @@ class SkillReport {
     delay: delay,
     elements: elements,
     effectRange: effectRange,
+    customRangeDmgIncrease: customRangeDmgIncrease,
     customRangeDmgReduction: customRangeDmgReduction,
     cooldown: cooldown,
     accModifier: accModifier,
@@ -705,9 +708,13 @@ class SkillReport {
         );
       }
       if (augment is CustomAugmentRange) {
+        ReportEffectRange newRange =
+            ReportEffectRange.fromAugmentRange(augment.augmentRange);
+        if (augment is DamageDealtBuffAugment) {
+          newReport.customRangeDmgIncrease = newRange;
+        }
         if (augment is DamageReceivedBuffAugment) {
-          newReport.customRangeDmgReduction =
-              ReportEffectRange.fromAugmentRange(augment.augmentRange);
+          newReport.customRangeDmgReduction = newRange;
         }
       }
     }
@@ -848,7 +855,7 @@ class SkillReport {
       '${_commonReport(null)}';
 
   String toDamageIncreaseReport() => 'Dmg Increase: $damageIncreasedBuff | '
-      '${_commonReport(null)}';
+      '${_commonReport(customRangeDmgIncrease)}';
 
   String toDamageReductionReport() => 'Dmg Reduction: $damageReceivedBuff | '
       '${_commonReport(customRangeDmgReduction)}';
