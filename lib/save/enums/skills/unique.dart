@@ -2525,7 +2525,251 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     'Dreams of Greatness: Eternal Fantasy Sanctuary',
     3,
     requirements: <UniqueSkill>[unbalancedGreatMagician],
-  );
+  ),
+  // Koishi skills
+  unmindfulAcrobat('Unmindful Acrobat', 3),
+  embersOfLove('Rekindled "Embers of Love"', 3),
+  geneticsOfTheUnconscious('Genetics of the Unconscious', 3),
+  acrobaticMind(
+    'Acrobatic Mind',
+    3,
+    requirements: <UniqueSkill>[unmindfulAcrobat],
+  ),
+  selflessLove(
+    'Heart Sign "Selfless Love"',
+    3,
+    requirements: <UniqueSkill>[unmindfulAcrobat],
+  ),
+  superReflex('Super Reflex', 3, requirements: <UniqueSkill>[unmindfulAcrobat]),
+  allAncestorsStandingBesideYourBed(
+    'Mental Image "All Ancestors Standing Beside Your Bed"',
+    3,
+    requirements: <UniqueSkill>[geneticsOfTheUnconscious],
+  ),
+  unmindfulFollowUp(
+    'Unmindful Follow-Up',
+    3,
+    requirements: <UniqueSkill>[unmindfulAcrobat],
+  ),
+  selflessLoveRecovery(
+    'Selfless Love: Recovery ↑',
+    3,
+    requirements: <UniqueSkill>[selflessLove],
+  ),
+  unconsciousAcrobatStar(
+    'Unconscious Acrobat Star',
+    3,
+    requirements: <UniqueSkill>[selflessLove],
+  ),
+  superReflexTransmission(
+    'Super Reflex Transmission',
+    3,
+    requirements: <UniqueSkill>[superReflex],
+  ),
+  embersOfLoveAcrobaticBoost(
+    'Embers of Love: Acrobatic Boost',
+    3,
+    requirements: <UniqueSkill>[superReflex, embersOfLove],
+  ),
+  embersOfLoveGeneticsBoost(
+    'Embers of Love: Genetics Boost',
+    3,
+    requirements: <UniqueSkill>[
+      embersOfLove,
+      geneticsOfTheUnconscious,
+    ],
+  ),
+  unconsciousTransmission(
+    'Unconscious Transmission',
+    3,
+    requirements: <UniqueSkill>[geneticsOfTheUnconscious],
+  ),
+  unconsciousForm(
+    'Unconscious Form',
+    3,
+    requirements: <UniqueSkill>[geneticsOfTheUnconscious],
+  ),
+  bondsPalaceEarthSpirits('Bonds of the Palace of the Earth Spirits', 3),
+  acrobaticMind2(
+    'Acrobatic Mind+',
+    3,
+    requirements: <UniqueSkill>[acrobaticMind],
+  ),
+  selflessLoveBuffPreservation(
+    'Selfless Love: Buff Preservation',
+    3,
+    requirements: <UniqueSkill>[selflessLoveRecovery],
+  ),
+  suppressionSuperego(
+    'Suppression "Superego"',
+    3,
+    requirements: <UniqueSkill>[selflessLove],
+  ),
+  selfAwareAcrobat(
+    'Self-Aware Acrobat',
+    3,
+    requirements: <UniqueSkill>[unconsciousAcrobatStar],
+  ),
+  superReflex2('Super Reflex+', 3, requirements: <UniqueSkill>[superReflex]),
+  allAncestorsGeneticsGain(
+    'All Ancestors Standing Beside Your Bed: Genetics Gain',
+    3,
+    requirements: <UniqueSkill>[allAncestorsStandingBesideYourBed],
+  ),
+  unconsciousTransmission2(
+    'Unconscious Transmission+',
+    3,
+    requirements: <UniqueSkill>[unconsciousTransmission, unconsciousForm],
+  ),
+  unmindfulFollowUpBuffCost(
+    'Unmindful Follow-Up: Buff Cost ↓',
+    3,
+    requirements: <UniqueSkill>[unmindfulFollowUp],
+  ),
+  superEgoRandomElementAugment(
+    'Super Ego: Random Element Augment',
+    3,
+    requirements: <UniqueSkill>[suppressionSuperego],
+  ),
+  instinctReleaseOfTheId(
+    'Instinct "Release of the Id"',
+    3,
+    requirements: <UniqueSkill>[suppressionSuperego],
+  ),
+  unconsciousAcrobatStar2(
+    'Unconscious Acrobat Star+',
+    3,
+    requirements: <UniqueSkill>[unconsciousAcrobatStar],
+  ),
+  embersOfLoveAcrobaticBoost2(
+    'Embers of Love: Acrobatic Boost+',
+    3,
+    requirements: <UniqueSkill>[embersOfLoveAcrobaticBoost],
+  ),
+  embersOfLoveGeneticsBoost2(
+    'Embers of Love: Genetics Boost+',
+    3,
+    requirements: <UniqueSkill>[embersOfLoveGeneticsBoost],
+  ),
+  allAncestorsGeneticsSlay(
+    'All Ancestors Standing Beside Your Bed: Genetics Slay',
+    3,
+    requirements: <UniqueSkill>[allAncestorsStandingBesideYourBed],
+  ),
+  perfectSelflessness(
+    'Perfect Selflessness',
+    3,
+    requirements: <UniqueSkill>[unconsciousForm],
+  ),
+  geneticsOfTheUnconscious2(
+    'Genetics of the Unconscious+',
+    3,
+    requirements: <UniqueSkill>[unconsciousForm],
+  ),
+  acrobaticMind3(
+    'Acrobatic Mind++',
+    3,
+    requirements: <UniqueSkill>[acrobaticMind2],
+  ),
+  superEgoRandomElementAugment2(
+    'Super Ego: Random Element Augment+',
+    3,
+    requirements: <UniqueSkill>[superEgoRandomElementAugment],
+  ),
+  superReflex3('Super Reflex++', 3, requirements: <UniqueSkill>[superReflex2]),
+  bramblyRoseGarden(
+    'Brambly Rose Garden',
+    3,
+    requirements: <UniqueSkill>[
+      embersOfLoveAcrobaticBoost2,
+      embersOfLoveGeneticsBoost2,
+    ],
+  ),
+  allAncestorsGeneticsGain2(
+    'All Ancestors Standing Beside Your Bed: Genetics Gain+',
+    3,
+    requirements: <UniqueSkill>[allAncestorsGeneticsGain],
+  ),
+  unconsciousTransmission3(
+    'Unconscious Transmission++',
+    3,
+    requirements: <UniqueSkill>[unconsciousTransmission, perfectSelflessness],
+  ),
+  unconsciousDoubleHelix(
+    'Unconscious Double Helix',
+    3,
+    requirements: <UniqueSkill>[geneticsOfTheUnconscious2],
+  ),
+  unconsciousPassivity(
+    'Unconscious Passivity',
+    3,
+    requirements: <UniqueSkill>[geneticsOfTheUnconscious2],
+  ),
+  unmindfulFollowUpBuffCost2(
+    'Unmindful Follow-Up: Buff Cost ↓+',
+    3,
+    requirements: <UniqueSkill>[unmindfulFollowUpBuffCost],
+  ),
+  releaseOfTheIdBody(
+    'Release of the Id: Body',
+    3,
+    requirements: <UniqueSkill>[instinctReleaseOfTheId],
+  ),
+  releaseOfTheIdMind(
+    'Release of the Id: Mind',
+    3,
+    requirements: <UniqueSkill>[instinctReleaseOfTheId],
+  ),
+  releaseOfTheIdShackles(
+    'Release of the Id: Shackles',
+    3,
+    requirements: <UniqueSkill>[instinctReleaseOfTheId],
+  ),
+  allAncestorsGeneticsDuration(
+    'All Ancestors Standing Beside Your Bed: Genetics Duration ↑',
+    3,
+    requirements: <UniqueSkill>[allAncestorsGeneticsSlay],
+  ),
+  unconsciousPassivity2(
+    'Unconscious Passivity+',
+    3,
+    requirements: <UniqueSkill>[unconsciousPassivity],
+  ),
+  bondsPalaceEarthSpirits2(
+    'Bonds of the Palace of the Earth Spirits+',
+    2,
+    requirements: <UniqueSkill>[bondsPalaceEarthSpirits],
+  ),
+  acrobaticMind4(
+    'Acrobatic Mind+++',
+    3,
+    requirements: <UniqueSkill>[acrobaticMind3],
+  ),
+  superEgoReleaseOfTheEgo(
+    'Super Ego: Release of the Ego',
+    3,
+    requirements: <UniqueSkill>[superEgoRandomElementAugment2],
+  ),
+  unconsciousAcrobatStar3(
+    'Unconscious Acrobat Star++',
+    3,
+    requirements: <UniqueSkill>[unconsciousAcrobatStar2, superReflex3],
+  ),
+  callYouNowAnswerPhone(
+    "*I'm Going to Call You Now, So Answer the Phone!*",
+    3,
+    requirements: <UniqueSkill>[
+      allAncestorsGeneticsGain2,
+      allAncestorsGeneticsDuration,
+    ],
+  ),
+  dnasFlaw(
+    "DNA's Flaw",
+    3,
+    requirements: <UniqueSkill>[unconsciousDoubleHelix],
+  ),
+  // Sumireko skills
+  a('a', 3);
 
   @override
   final String prettyName;
