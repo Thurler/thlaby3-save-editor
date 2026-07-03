@@ -815,7 +815,11 @@ class _FlashExorcismBarrierTurnConversion
 
 class _FlashExorcismBarrierDamageTaken
     with UniqueSkill, SkillAugmentSkill
-    implements SpellAugmentSkill, ConditionedEffect, DamageReceivedBuffAugment {
+    implements
+        SpellAugmentSkill,
+        ConditionedEffect,
+        CustomAugmentRange,
+        DamageReceivedBuffAugment {
   const _FlashExorcismBarrierDamageTaken();
 
   @override
@@ -840,6 +844,9 @@ class _FlashExorcismBarrierDamageTaken
       const <EffectRequirement>[TurnCountRequirement(4)];
 
   @override
+  AugmentRange get augmentRange => AugmentRange.frontline;
+
+  @override
   double get dmgReceivedBuff => 12;
 
   @override
@@ -851,6 +858,7 @@ class _FlashExorcismBarrierDamageTaken2
     implements
         SpellAugmentChainSkill,
         ConditionedEffect,
+        CustomAugmentRange,
         DamageReceivedBuffAugment,
         DamageDealtBuffAugment {
   const _FlashExorcismBarrierDamageTaken2();
@@ -877,6 +885,9 @@ class _FlashExorcismBarrierDamageTaken2
 
   @override
   SpellAugmentSkill get baseAugment => flashExorcismBarrierDamageTaken;
+
+  @override
+  AugmentRange get augmentRange => AugmentRange.frontline;
 
   @override
   double get dmgReceivedBuff => 15;
