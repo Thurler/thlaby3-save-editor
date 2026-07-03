@@ -46,6 +46,10 @@ mixin SpellAugmentSkill on SkillAugmentSkill implements SpellAugment {
     targetBeacon2,
     assaultBeaconTurnGauge,
     assaultBeaconTurnConversion,
+    assaultBeacon2,
+    assaultBeaconHpLoss,
+    celestialStasisTurnGauge,
+    celestialStasisTurnConversion,
   ];
 }
 
@@ -91,9 +95,23 @@ mixin DirectPowEnhancer {
   double get powIncrease;
 }
 
+/// A mixin for skills that boost passive enhancements when using direct spells
+mixin DirectPowEnhanceAugment on SkillAugment implements DirectPowEnhancer {
+  /// How much pow multiplicand will be increased by
+  @override
+  double get powIncrease;
+}
+
 /// A mixin for skills that offer passive enhancements when using magic spells
 mixin MagicPowEnhancer {
   /// How much pow will be multiplied by
+  double get powIncrease;
+}
+
+/// A mixin for skills that boost passive enhancements when using magic spells
+mixin MagicPowEnhanceAugment on SkillAugment implements MagicPowEnhancer {
+  /// How much pow multiplicand will be increased by
+  @override
   double get powIncrease;
 }
 
@@ -125,6 +143,12 @@ mixin GuardAugment on SpellAugment {
 
   /// How much the mind guard factor increases by
   double get mndGuard;
+}
+
+/// A mixin for augments that change a fixed hp percent damage
+mixin HpPercentDamageAugment on SpellAugment {
+  /// How much more percentage of current HP is dealt as damage
+  double get hpPercentDamage;
 }
 
 /// A mixin for augments that change a spell's hp drain percent

@@ -148,3 +148,9 @@ abstract interface class AtbInitiativeIncreaser implements AtbIncreaser {
   /// The range applied to the initiative effect
   InitiativeRange get initiativeRange;
 }
+
+/// An interface for skills that offer passive enhancements when applying buffs
+abstract interface class BuffMultiplierEnhancer {
+  /// How much buff duration will be multiplied by
+  double get buffDurationIncrease;
+}

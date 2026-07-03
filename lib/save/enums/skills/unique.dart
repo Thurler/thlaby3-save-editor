@@ -56,6 +56,8 @@ mixin UniqueSkill implements Skill {
     drkPhyDamage,
     directDamage,
     magicDamage,
+    ailmentBoost,
+    buffDebuffBoost,
   ];
 
   @override
@@ -113,6 +115,21 @@ enum PassiveSkill with UniqueSkill {
     5,
     requirements: <UniqueSkill>[learningListExpansion1],
   ),
+  learningListExpansion3(
+    'Learning List Expansion #3',
+    6,
+    requirements: <UniqueSkill>[PassiveSkill.learningListExpansion2],
+  ),
+  learningCooldown(
+    'Learning Cooldown ↓',
+    5,
+    requirements: <UniqueSkill>[ailmentBoost, mysSpiDamage2],
+  ),
+  learningMpCost(
+    'Learning MP Cost ↓',
+    5,
+    requirements: <UniqueSkill>[wndNtrDamage2, buffDebuffBoost],
+  ),
   skill('Skill', 3);
 
   @override
@@ -132,75 +149,6 @@ enum PassiveSkill with UniqueSkill {
 }
 
 enum UncategorizedUniqueSkill with UniqueSkill {
-  // Renko skills
-  celestialStasis(
-    'Celestial Stasis',
-    3,
-    requirements: <UniqueSkill>[abilityReadStars, abilityReadMoon],
-  ),
-  ailmentAttackBoost(
-    'Ailment Attack Boost',
-    5,
-    requirements: <UniqueSkill>[firCldDamage2, directDamage, wndNtrDamage2],
-  ),
-  buffDebuffBoost(
-    'Buff & Debuff Boost',
-    5,
-    requirements: <UniqueSkill>[mysSpiDamage2, magicDamage, drkPhyDamage2],
-  ),
-  assaultBeacon2(
-    'Assault Beacon: Effect ↑',
-    3,
-    requirements: <UniqueSkill>[assaultBeaconTurnGauge],
-  ),
-  assaultBeaconHpLoss(
-    'Assault Beacon: HP Loss ↓',
-    3,
-    requirements: <UniqueSkill>[assaultBeaconTurnConversion],
-  ),
-  celestialStasisTurnGauge(
-    'Celestial Stasis: Turn Gauge Loss ↓',
-    3,
-    requirements: <UniqueSkill>[eagerSupportDevotedHeart, celestialStasis],
-  ),
-  celestialStasisTurnConversion(
-    'Celestial Stasis: Turn Conversion',
-    3,
-    requirements: <UniqueSkill>[celestialStasis, skillfulTreatment],
-  ),
-  learningListExpansion3(
-    'Learning List Expansion #3',
-    6,
-    requirements: <UniqueSkill>[PassiveSkill.learningListExpansion2],
-  ),
-  directAttackDamage2(
-    'Direct Attack Damage ↑+',
-    5,
-    requirements: <UniqueSkill>[
-      firCldDamage2,
-      ailmentAttackBoost,
-      buffDebuffBoost,
-    ],
-  ),
-  learningCooldown(
-    'Learning Cooldown ↓',
-    5,
-    requirements: <UniqueSkill>[ailmentAttackBoost, mysSpiDamage2],
-  ),
-  learningMpCost(
-    'Learning MP Cost ↓',
-    5,
-    requirements: <UniqueSkill>[wndNtrDamage2, buffDebuffBoost],
-  ),
-  magicAttackDamage2(
-    'Magic Attack Damage ↑+',
-    5,
-    requirements: <UniqueSkill>[
-      ailmentAttackBoost,
-      buffDebuffBoost,
-      drkPhyDamage2,
-    ],
-  ),
   // Maribel skills
   hazyBarrierDefense('Hazy Barrier Defense', 3),
   hazyBarrierAttack('Hazy Barrier Attack', 3),

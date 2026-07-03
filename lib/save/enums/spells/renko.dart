@@ -45,6 +45,8 @@ const SpellSkill assaultBeacon = _AssaultBeacon();
 const SpellAugmentSkill assaultBeaconTurnGauge = _AssaultBeaconTurnGauge();
 const SpellAugmentSkill assaultBeaconTurnConversion =
     _AssaultBeaconTurnConversion();
+const SpellAugmentSkill assaultBeacon2 = _AssaultBeacon2();
+const SpellAugmentSkill assaultBeaconHpLoss = _AssaultBeaconHpLoss();
 
 const SpellSkill skillfulTreatment = _SkillfulTreatment();
 const NaturalAugment skillfulTreatmentEmergencyWarning =
@@ -55,6 +57,13 @@ const NaturalAugment skillfulTreatmentEmergencySwift =
     _SkillfulTreatmentEmergencySwift();
 const NaturalAugment skillfulTreatmentEmergencyTarget =
     _SkillfulTreatmentEmergencyTarget();
+
+const SpellSkill celestialStasis = _CelestialStasis();
+const NaturalAugment celestialStasisPartyAtbCost =
+    _CelestialStasisPartyAtbCost();
+const SpellAugmentSkill celestialStasisTurnGauge = _CelestialStasisTurnGauge();
+const SpellAugmentSkill celestialStasisTurnConversion =
+    _CelestialStasisTurnConverion();
 
 const NaturalAugment _beaconSpecialist = _BeaconSpecialist();
 const SkillAugmentSkill adeptBeaconSpecialist = _AdeptBeaconSpecialist();
@@ -88,7 +97,13 @@ const UniqueSkill drkPhyDamage = _DrkPhyDamage();
 const SkillAugmentSkill drkPhyDamage2 = _DrkPhyDamage2();
 
 const UniqueSkill directDamage = _DirectDamage();
+const SkillAugmentSkill directDamage2 = _DirectDamage2();
+
 const UniqueSkill magicDamage = _MagicDamage();
+const SkillAugmentSkill magicDamage2 = _MagicDamage2();
+
+const UniqueSkill ailmentBoost = _AilmentBoost();
+const UniqueSkill buffDebuffBoost = _BuffDebuffBoost();
 
 class _EagerSupport
     with UniqueSkill
@@ -856,6 +871,68 @@ class _AssaultBeaconTurnConversion
   int? get turnCountCap => 15; // Could be less, check interaction resolution
 }
 
+class _AssaultBeacon2
+    with UniqueSkill, SkillAugmentSkill
+    implements
+        SpellAugmentSkill,
+        AttackBuffAugment,
+        DefenseBuffAugment,
+        MagicBuffAugment,
+        MindBuffAugment,
+        SpeedBuffAugment {
+  const _AssaultBeacon2();
+
+  @override
+  String get prettyName => 'Assault Beacon: Effect ↑';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[assaultBeaconTurnGauge];
+
+  @override
+  SpellSkill get baseSkill => assaultBeacon;
+
+  @override
+  int get atkBuff => 8;
+
+  @override
+  int get defBuff => 8;
+
+  @override
+  int get magBuff => 8;
+
+  @override
+  int get mndBuff => 8;
+
+  @override
+  int get spdBuff => 8;
+}
+
+class _AssaultBeaconHpLoss
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellAugmentSkill, HpPercentDamageAugment {
+  const _AssaultBeaconHpLoss();
+
+  @override
+  String get prettyName => 'Assault Beacon: HP Loss ↓';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[assaultBeaconTurnConversion];
+
+  @override
+  SpellSkill get baseSkill => assaultBeacon;
+
+  @override
+  double get hpPercentDamage => -10;
+}
+
 class _SkillfulTreatment
     with UniqueSkill
     implements
@@ -1010,6 +1087,185 @@ class _SkillfulTreatmentEmergencyTarget
   @override
   String get description =>
       '${PassiveSkill.firstAidEmergencySmoke.prettyName} (Target)';
+}
+
+class _CelestialStasis
+    with UniqueSkill
+    implements
+        MagicSpell,
+        ConditionedSpellSkill,
+        NaturallyAugmentedSkill,
+        ParalysisInflictor,
+        SilenceInflictor,
+        ShockInflictor {
+  const _CelestialStasis();
+
+  @override
+  String get prettyName => 'Celestial Stasis';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[abilityReadStars, abilityReadMoon];
+
+  @override
+  int get mpCost => 20;
+
+  @override
+  int get delay => 3300;
+
+  @override
+  List<EffectRequirement> get castRequirements =>
+      const <EffectRequirement>[TurnMultipleRequirement(3)];
+
+  @override
+  List<NaturalAugment> get naturalAugments =>
+      const <NaturalAugment>[celestialStasisPartyAtbCost];
+
+  @override
+  List<Element> get elements => const <Element>[Element.mys];
+
+  @override
+  SpellTargetMode get targetMode => SpellTargetMode.allEnemies;
+
+  @override
+  int get accModifier => 50;
+
+  @override
+  double get multiplier => 100;
+
+  @override
+  double get defGuard => 0;
+
+  @override
+  double get mndGuard => 50;
+
+  @override
+  double get magFactor => 66;
+
+  @override
+  int get parDuration => 12000;
+
+  @override
+  double get parChance => 90;
+
+  @override
+  int get silDuration => 12000;
+
+  @override
+  double get silChance => 90;
+
+  @override
+  double get shkChance => 90;
+}
+
+class _CelestialStasisPartyAtbCost
+    implements NaturalAugment, CustomAugmentRange, PercentAtbDecreaseAugment {
+  const _CelestialStasisPartyAtbCost();
+
+  @override
+  UniqueSkill get baseSkill => celestialStasis;
+
+  @override
+  String get description => 'Party ATB Reduction';
+
+  @override
+  List<EffectRequirement> get effectRequirements =>
+      const <EffectRequirement>[RandomNumberRequirement.always()];
+
+  @override
+  double get atbDecreaseFactor => -0.2;
+
+  @override
+  AugmentRange get augmentRange => AugmentRange.frontline;
+}
+
+class _CelestialStasisTurnGauge
+    with UniqueSkill, SkillAugmentSkill
+    implements SpellNaturalAugmentChainSkill, PercentAtbDecreaseAugment {
+  const _CelestialStasisTurnGauge();
+
+  @override
+  String get prettyName => 'Celestial Stasis: Turn Gauge Loss ↓';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[eagerSupportDevotedHeart, celestialStasis];
+
+  @override
+  SpellSkill get baseSkill => celestialStasis;
+
+  @override
+  NaturalAugment get baseAugment => celestialStasisPartyAtbCost;
+
+  @override
+  double get atbDecreaseFactor => 0.1;
+}
+
+class _CelestialStasisTurnConverion
+    with UniqueSkill, SkillAugmentSkill
+    implements
+        SpellAugmentSkill,
+        ParalysisAugment,
+        ParalysisMultiplierAugment,
+        SilenceAugment,
+        SilenceMultiplierAugment,
+        ShockAugment,
+        ShockMultiplierAugment,
+        TurnCountBasedAugment,
+        TurnCountResetAugment {
+  const _CelestialStasisTurnConverion();
+
+  @override
+  String get prettyName => 'Celestial Stasis: Turn Conversion';
+
+  @override
+  int get cost => 3;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[celestialStasis, skillfulTreatment];
+
+  @override
+  SpellSkill get baseSkill => celestialStasis;
+
+  @override
+  int? get turnCountCap => 10;
+
+  @override
+  double get parDurationMult => 0.05;
+
+  @override
+  double get silDurationMult => 0.05;
+
+  @override
+  double get parChance => 2;
+
+  @override
+  double get silChance => 2;
+
+  @override
+  double get shkChance => 2;
+
+  @override
+  double get parChanceMult => 1;
+
+  @override
+  double get silChanceMult => 1;
+
+  @override
+  double get shkChanceMult => 1;
+
+  @override
+  int get parDuration => 0;
+
+  @override
+  int get silDuration => 0;
 }
 
 class _ReadingStars with UniqueSkill implements AtbInitiativeIncreaser {
@@ -1538,6 +1794,28 @@ class _DirectDamage with UniqueSkill implements DirectPowEnhancer {
   double get powIncrease => 1.08;
 }
 
+class _DirectDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements DirectPowEnhanceAugment {
+  const _DirectDamage2();
+
+  @override
+  String get prettyName => 'Direct Attack Damage ↑+';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[firCldDamage2, ailmentBoost, buffDebuffBoost];
+
+  @override
+  UniqueSkill get baseSkill => directDamage;
+
+  @override
+  double get powIncrease => 0.08;
+}
+
 class _MagicDamage with UniqueSkill implements MagicPowEnhancer {
   const _MagicDamage();
 
@@ -1552,4 +1830,71 @@ class _MagicDamage with UniqueSkill implements MagicPowEnhancer {
 
   @override
   double get powIncrease => 1.08;
+}
+
+class _MagicDamage2
+    with UniqueSkill, SkillAugmentSkill
+    implements MagicPowEnhanceAugment {
+  const _MagicDamage2();
+
+  @override
+  String get prettyName => 'Magic Attack Damage ↑+';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[ailmentBoost, buffDebuffBoost, drkPhyDamage2];
+
+  @override
+  UniqueSkill get baseSkill => magicDamage;
+
+  @override
+  double get powIncrease => 0.08;
+}
+
+class _AilmentBoost with UniqueSkill implements AilmentMultiplierEnhancer {
+  const _AilmentBoost();
+
+  @override
+  String get prettyName => 'Ailment Attack Boost';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[firCldDamage2, directDamage, wndNtrDamage2];
+
+  @override
+  double get chanceIncrease => 1.08;
+
+  @override
+  double get durationIncrease => 1.12;
+}
+
+class _BuffDebuffBoost
+    with UniqueSkill
+    implements BuffMultiplierEnhancer, DebuffMultiplierEnhancer {
+  const _BuffDebuffBoost();
+
+  @override
+  String get prettyName => 'Buff & Debuff Boost';
+
+  @override
+  int get cost => 5;
+
+  @override
+  List<UniqueSkill> get requirements =>
+      const <UniqueSkill>[mysSpiDamage2, magicDamage, drkPhyDamage2];
+
+  @override
+  double get debuffChanceIncrease => 1.08;
+
+  @override
+  double get debuffDurationIncrease => 1.12;
+
+  @override
+  double get buffDurationIncrease => 1.12;
 }

@@ -47,6 +47,7 @@ mixin SpellSkill on UniqueSkill {
     targetBeacon,
     assaultBeacon,
     skillfulTreatment,
+    celestialStasis,
   ];
 }
 

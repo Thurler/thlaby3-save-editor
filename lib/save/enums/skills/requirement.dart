@@ -13,6 +13,8 @@ class RandomNumberRequirement implements EffectRequirement {
 
   const RandomNumberRequirement(this.chance);
 
+  const RandomNumberRequirement.always() : chance = 100;
+
   @override
   String toString() => '${chance.toStringAsFixed(1)}% chance';
 }

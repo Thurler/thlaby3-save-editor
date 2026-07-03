@@ -37,3 +37,19 @@ abstract interface class AllDebuffCleanser
         SpeedDebuffCleanser,
         AccuracyDebuffCleanser,
         EvasionDebuffCleanser {}
+
+/// An interface for skills that provide a percent reduction to the ATB bar
+abstract interface class PercentAtbDecreaser {
+  /// The amount ATB is multiplied by (defaults to 1)
+  double get atbDecreaseFactor;
+}
+
+/// An interface for skills that offer passive enhancements when applying
+/// debuffs
+abstract interface class DebuffMultiplierEnhancer {
+  /// How much debuff duration will be multiplied by
+  double get debuffDurationIncrease;
+
+  /// How much debuff chance will be multiplied by
+  double get debuffChanceIncrease;
+}

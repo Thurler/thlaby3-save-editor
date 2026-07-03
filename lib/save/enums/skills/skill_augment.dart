@@ -1,5 +1,6 @@
 import 'package:thlaby3_save_editor/save/enums/skills/ailment.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/buff.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/debuff.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/element.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/focus_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/heal.dart';
@@ -68,6 +69,8 @@ mixin SkillAugmentSkill on UniqueSkill implements SkillAugment {
     wndNtrDamage2,
     mysSpiDamage2,
     drkPhyDamage2,
+    directDamage2,
+    magicDamage2,
   ];
 
   /// The augments that must be already applied when this augment is applied,
@@ -240,6 +243,13 @@ mixin AtbIncreaseAugment on SkillAugment implements AtbIncreaser {
   int get atbIncrease;
 }
 
+/// A mixin for augments that change a spell's atb percent decrease effect
+mixin PercentAtbDecreaseAugment on SkillAugment implements PercentAtbDecreaser {
+  /// The amount ATB multilicand is increased by (base multiplicand is 1)
+  @override
+  double get atbDecreaseFactor;
+}
+
 /// A mixin for augments that change a skill's paralysis infliction
 mixin ParalysisAugment on SkillAugment implements ParalysisInflictor {
   /// How much the ailment duration increases by
@@ -249,6 +259,51 @@ mixin ParalysisAugment on SkillAugment implements ParalysisInflictor {
   /// How much the ailment chance increases by
   @override
   double get parChance;
+}
+
+/// A mixin for augments that change a skill's silence infliction
+mixin SilenceAugment on SkillAugment implements SilenceInflictor {
+  /// How much the ailment duration increases by
+  @override
+  int get silDuration;
+
+  /// How much the ailment chance increases by
+  @override
+  double get silChance;
+}
+
+/// A mixin for augments that change a skill's shock infliction
+mixin ShockAugment on SkillAugment implements ShockInflictor {
+  /// How much the ailment chance increases by
+  @override
+  double get shkChance;
+}
+
+/// A mixin for augments that change a skill's paralysis infliction
+/// multiplicatively
+mixin ParalysisMultiplierAugment on SkillAugment {
+  /// How much the ailment duration is multiplied by
+  double get parDurationMult;
+
+  /// How much the ailment chance is multiplied by
+  double get parChanceMult;
+}
+
+/// A mixin for augments that change a skill's silence infliction
+/// multiplicatively
+mixin SilenceMultiplierAugment on SkillAugment {
+  /// How much the ailment duration is multiplied by
+  double get silDurationMult;
+
+  /// How much the ailment chance is multiplied by
+  double get silChanceMult;
+}
+
+/// A mixin for augments that change a skill's shock infliction
+/// multiplicatively
+mixin ShockMultiplierAugment on SkillAugment {
+  /// How much the ailment chance is multiplied by
+  double get shkChanceMult;
 }
 
 /// A mixin for augments that change a element multiplier enhancer's
