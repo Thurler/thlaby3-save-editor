@@ -2995,7 +2995,257 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     requirements: <UniqueSkill>[deathCancel],
   ),
   // Ran skills
-  a('a', 3);
+  summonShikigami('Summon Shikigami', 3),
+  princessTenko('Shiki Brilliance "Princess Tenko"', 3),
+  shikigamiPower(
+    'Shikigami Power',
+    3,
+    requirements: <UniqueSkill>[summonShikigami],
+  ),
+  protectiveShikigami(
+    'Protective Shikigami',
+    3,
+    requirements: <UniqueSkill>[summonShikigami],
+  ),
+  banquetGeneralGods('Shikigami "Banquet of the Twelve General Gods"', 3),
+  gomaBoards('Ascetic Sign "Eighty Million Goma Boards"', 3),
+  conflictYakumoHousehold('Yakumo Household', 3),
+  shikigamiPowerCombatConversion(
+    'Shikigami Power: Combat Conversion',
+    3,
+    requirements: <UniqueSkill>[shikigamiPower],
+  ),
+  greatShikigamiBarrier(
+    'Great Shikigami Barrier',
+    3,
+    requirements: <UniqueSkill>[summonShikigami],
+  ),
+  princessTenkoDamageMultiplier(
+    'Princess Tenko: Damage Multiplier ↑',
+    3,
+    requirements: <UniqueSkill>[princessTenko],
+  ),
+  offensiveShikigamiField(
+    'Offensive Shikigami Field',
+    3,
+    requirements: <UniqueSkill>[banquetGeneralGods],
+  ),
+  defensiveShikigamiField(
+    'Defensive Shikigami Field',
+    3,
+    requirements: <UniqueSkill>[gomaBoards],
+  ),
+  kitsuneTanukiYoukaiLaser('Shiki Brilliance "Kitsune-Tanuki Youkai Laser"', 3),
+  summonShikigamiBonusSummon(
+    'Summon Shikigami: Bonus Summon',
+    3,
+    requirements: <UniqueSkill>[shikigamiPower],
+  ),
+  enduringShikigami(
+    'Enduring Shikigami',
+    3,
+    requirements: <UniqueSkill>[protectiveShikigami],
+  ),
+  restorativeShikigami(
+    'Restorative Shikigami',
+    3,
+    requirements: <UniqueSkill>[protectiveShikigami, greatShikigamiBarrier],
+  ),
+  shikigamiRetrieval(
+    'Shikigami Retrieval',
+    3,
+    requirements: <UniqueSkill>[
+      greatShikigamiBarrier,
+      princessTenkoDamageMultiplier,
+    ],
+  ),
+  princessTenkoInvitingIllusion(
+    'Princess Tenko: Inviting Illusion',
+    3,
+    requirements: <UniqueSkill>[princessTenkoDamageMultiplier],
+  ),
+  banquetGeneralGodsShikigamiBoost(
+    'Banquet of the Twelve General Gods: Shikigami Boost',
+    2,
+    requirements: <UniqueSkill>[offensiveShikigamiField, banquetGeneralGods],
+  ),
+  gomaBoardsShikigamiBoost(
+    'Eighty Million Goma Boards: Shikigami Boost',
+    2,
+    requirements: <UniqueSkill>[gomaBoards, defensiveShikigamiField],
+  ),
+  kitsuneTanukiYoukaiLaserDelay(
+    'Kitsune-Tanuki Youkai Laser: Delay ↓',
+    3,
+    requirements: <UniqueSkill>[kitsuneTanukiYoukaiLaser],
+  ),
+  soaringEnNoOzunu(
+    'Superhuman "Soaring En no Ozunu"',
+    3,
+    requirements: <UniqueSkill>[kitsuneTanukiYoukaiLaser],
+  ),
+  abilityToUseShikigami(
+    'Ability to Use Shikigami',
+    3,
+    requirements: <UniqueSkill>[conflictYakumoHousehold],
+  ),
+  shikigamiPowerDharmicExpansion(
+    'Shikigami Power: Dharmic Expansion',
+    3,
+    requirements: <UniqueSkill>[shikigamiPowerCombatConversion],
+  ),
+  everChangingShikigamiField(
+    'Ever-Changing Shikigami Field',
+    3,
+    requirements: <UniqueSkill>[greatShikigamiBarrier],
+  ),
+  princessTenkoSpiritingAwayMagic(
+    'Princess Tenko: Spiriting Away Magic',
+    3,
+    requirements: <UniqueSkill>[princessTenkoDamageMultiplier],
+  ),
+  offensiveShikigamiFieldOffense(
+    'Offensive Shikigami Field: Offense ↑',
+    2,
+    requirements: <UniqueSkill>[
+      princessTenkoInvitingIllusion,
+      offensiveShikigamiField,
+    ],
+  ),
+  defensiveShikigamiFieldDefense(
+    'Defensive Shikigami Field: Defense ↑',
+    2,
+    requirements: <UniqueSkill>[
+      defensiveShikigamiField,
+      kitsuneTanukiYoukaiLaserDelay,
+    ],
+  ),
+  kitsuneTanukiYoukaiLaserPow(
+    'Kitsune-Tanuki Youkai Laser: POW ↑',
+    3,
+    requirements: <UniqueSkill>[kitsuneTanukiYoukaiLaser],
+  ),
+  soaringEnNoOzunuGuardPierce(
+    'Soaring En no Ozunu: Guard Pierce',
+    3,
+    requirements: <UniqueSkill>[soaringEnNoOzunu],
+  ),
+  summonShikigamiPair('Summon Shikigami Pair', 3),
+  superEnduringShikigami(
+    'Super-Enduring Shikigami',
+    3,
+    requirements: <UniqueSkill>[protectiveShikigami],
+  ),
+  princessTenkoSpiritingAwayDamage(
+    'Princess Tenko: Spiriting Away Damage ↓ Augment',
+    2,
+    requirements: <UniqueSkill>[princessTenkoSpiritingAwayMagic],
+  ),
+  princessTenkoTrueInvitingIllusion(
+    'Princess Tenko: True Inviting Illusion',
+    4,
+    requirements: <UniqueSkill>[princessTenkoInvitingIllusion],
+  ),
+  wideFormationBanquet(
+    'Shikigami "Wide Formation - Banquet of the Twelve General Gods"',
+    3,
+    requirements: <UniqueSkill>[
+      offensiveShikigamiFieldOffense,
+      banquetGeneralGodsShikigamiBoost,
+    ],
+  ),
+  wideFormationGomaBoards(
+    'Shikigami "Wide Formation - Eighty Million Goma Boards"',
+    3,
+    requirements: <UniqueSkill>[
+      gomaBoardsShikigamiBoost,
+      defensiveShikigamiFieldDefense,
+    ],
+  ),
+  kitsuneTanukiYoukaiLaserHvy(
+    'Kitsune-Tanuki Youkai Laser: HVY Affix',
+    3,
+    requirements: <UniqueSkill>[kitsuneTanukiYoukaiLaserDelay],
+  ),
+  soaringEnNoOzunuPow(
+    'Soaring En no Ozunu: POW ↑',
+    3,
+    requirements: <UniqueSkill>[soaringEnNoOzunu],
+  ),
+  chensPower(
+    "Chen's Power",
+    3,
+    requirements: <UniqueSkill>[abilityToUseShikigami],
+  ),
+  conflictYakumoHousehold2(
+    'Yakumo Household+',
+    2,
+    requirements: <UniqueSkill>[conflictYakumoHousehold],
+  ),
+  shikigamiPowerDharmicAwakening(
+    'Shikigami Power: Dharmic Awakening',
+    3,
+    requirements: <UniqueSkill>[shikigamiPowerDharmicExpansion],
+  ),
+  everChangingShikigamiField2(
+    'Ever-Changing Shikigami Field+',
+    3,
+    requirements: <UniqueSkill>[everChangingShikigamiField],
+  ),
+  princessTenkoTrueSpiritingAwayMagic(
+    'Princess Tenko: True Spiriting Away Magic',
+    3,
+    requirements: <UniqueSkill>[princessTenkoSpiritingAwayMagic],
+  ),
+  offensiveShikigamiFieldOffense2(
+    'Offensive Shikigami Field: Offense ↑+',
+    2,
+    requirements: <UniqueSkill>[offensiveShikigamiFieldOffense],
+  ),
+  defensiveShikigamiFieldDefense2(
+    'Defensive Shikigami Field: Defense ↑+',
+    2,
+    requirements: <UniqueSkill>[defensiveShikigamiFieldDefense],
+  ),
+  descentOfIzunaGongen(
+    'Illusion God "Descent of Izuna Gongen"',
+    3,
+    requirements: <UniqueSkill>[
+      kitsuneTanukiYoukaiLaserPow,
+      soaringEnNoOzunuPow,
+    ],
+  ),
+  nineTailedFox(
+    'Nine-Tailed Fox',
+    3,
+    requirements: <UniqueSkill>[shikigamiPowerDharmicAwakening],
+  ),
+  empowerShikigami('Empower Shikigami', 3),
+  princessTenkoSpiritingAwayDamageExpansion(
+    'Princess Tenko: Spiriting Away Damage ↓ Expansion',
+    2,
+    requirements: <UniqueSkill>[princessTenkoSpiritingAwayDamage],
+  ),
+  wideFormationBanquetRearEffect(
+    'Wide Formation - Banquet of the Twelve General Gods: Rear Effect ↑',
+    3,
+    requirements: <UniqueSkill>[wideFormationBanquet],
+  ),
+  wideFormationGomaBoardsRearEffect(
+    'Wide Formation - Eighty Million Goma Boards: Rear Effect ↑',
+    3,
+    requirements: <UniqueSkill>[wideFormationGomaBoards],
+  ),
+  descentOfIzunaGongenPreservation(
+    'Descent of Izuna Gongen: Shikigami Power Preservation',
+    3,
+    requirements: <UniqueSkill>[descentOfIzunaGongen],
+  ),
+  shikigamiChen(
+    'Shikigami "Chen"',
+    3,
+    requirements: <UniqueSkill>[chensPower],
+  );
 
   @override
   final String prettyName;
