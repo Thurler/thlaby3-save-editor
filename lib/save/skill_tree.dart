@@ -90,11 +90,16 @@ class SkillTree {
     // column data
     for (LevelGate levelGate in character.uniqueSkills.keys) {
       for (int column in character.uniqueSkills[levelGate]!.keys) {
+        Skill skill = character.uniqueSkills[levelGate]![column]!;
         _skills.add(
           SkillNode(
-            skill: character.uniqueSkills[levelGate]![column]!,
+            skill: skill,
             levelGate: levelGate,
             column: column,
+            // Add the additional requirements based on the character's
+            // additional requirements map
+            additionalRequirements:
+                character.additionalSkillRequirements[skill] ?? const <Skill>[],
           ),
         );
       }
