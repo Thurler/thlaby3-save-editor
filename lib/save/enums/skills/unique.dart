@@ -1,6 +1,7 @@
 import 'package:thlaby3_save_editor/save/enums/skills/focus_reaction.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill.dart';
 import 'package:thlaby3_save_editor/save/enums/skills/skill_augment.dart';
+import 'package:thlaby3_save_editor/save/enums/skills/synergy.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/reimu.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/renko.dart';
 import 'package:thlaby3_save_editor/save/enums/spells/spell.dart';
@@ -35,6 +36,8 @@ mixin UniqueSkill implements Skill {
     // Generic unique skills
     focusedRecitation,
     quickCharge,
+    yakumoHousehold,
+    yakumoHousehold2,
     // Reimu unique skills
     armoredYinYangOrb,
     armoredYinYangOrbBoost,
@@ -2106,7 +2109,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     3,
     requirements: <UniqueSkill>[hyperactiveFlyingObject],
   ),
-  yakumoHousehold('Yakumo Household', 3),
+  // yakumoHousehold('Yakumo Household', 3),
   boundaryOfWaveAndParticle('Boundary of Wave and Particle', 3),
   boundaryOfMeleeAndDanmaku(
     'Boundary of Melee and Danmaku',
@@ -2241,11 +2244,11 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     2,
     requirements: <UniqueSkill>[boundaryOfRecoveryAndInjuryShare],
   ),
-  yakumoHousehold2(
-    'Yakumo Household+',
-    2,
-    requirements: <UniqueSkill>[yakumoHousehold],
-  ),
+  // yakumoHousehold2(
+  //   'Yakumo Household+',
+  //   2,
+  //   requirements: <UniqueSkill>[yakumoHousehold],
+  // ),
   boundaryOfWaveAndParticle3(
     'Boundary of Wave and Particle++',
     3,
@@ -3001,7 +3004,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   ),
   banquetGeneralGods('Shikigami "Banquet of the Twelve General Gods"', 3),
   gomaBoards('Ascetic Sign "Eighty Million Goma Boards"', 3),
-  conflictYakumoHousehold('Yakumo Household', 3),
+  // yakumoHousehold('Yakumo Household', 3),
   shikigamiPowerCombatConversion(
     'Shikigami Power: Combat Conversion',
     3,
@@ -3079,7 +3082,7 @@ enum UncategorizedUniqueSkill with UniqueSkill {
   abilityToUseShikigami(
     'Ability to Use Shikigami',
     3,
-    requirements: <UniqueSkill>[conflictYakumoHousehold],
+    requirements: <UniqueSkill>[yakumoHousehold],
   ),
   shikigamiPowerDharmicExpansion(
     'Shikigami Power: Dharmic Expansion',
@@ -3169,11 +3172,11 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     3,
     requirements: <UniqueSkill>[abilityToUseShikigami],
   ),
-  conflictYakumoHousehold2(
-    'Yakumo Household+',
-    2,
-    requirements: <UniqueSkill>[conflictYakumoHousehold],
-  ),
+  // yakumoHousehold2(
+  //   'Yakumo Household+',
+  //   2,
+  //   requirements: <UniqueSkill>[yakumoHousehold],
+  // ),
   shikigamiPowerDharmicAwakening(
     'Shikigami Power: Dharmic Awakening',
     3,
