@@ -9,8 +9,6 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 // TODO(me): Determine how the following interactions resolve so they are
 // properly mapped with their behavior
 //
-// - (Generic) Does Quick Charge proc instead of Quick Charge+ if the user only
-//             has 2 TP?
 // - (Generic) Do the element-based protections stack for multiple elements?
 //             E.g. Does FIR and CLD protection both proc for a FIR+CLD attack
 // - (Generic) Do the race-based damage amplifiers stack for multiple races?
@@ -18,8 +16,12 @@ import 'package:thlaby3_save_editor/save/enums/spells/spell_augment.dart';
 // - (Renko) Does Eager Support roll the cleanses separately?
 // - (Renko) Do the element damage enhancements stack with themselves?
 // - (Renko) Do the direct/magic enhancements stack with each other?
+//
+// DONE: These have been answered already
+// - (Generic) Does Quick Charge proc instead of Quick Charge+ if the user only
+//             has 2 TP? YES
 // - (Renko) Is Assault Beacon Turn Conversion max capped at 48% buff, 24+48=72%
-//           or 24+4+48=76%?
+//           or 24+8+48=80%? 80%
 
 /// A mixin to unify all character unique skills, be they spells, passives or
 /// augments
@@ -211,8 +213,6 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     requirements: <UniqueSkill>[relativePsychology],
   ),
   abilityUnbridled('Ability Unbridled', 3),
-  // Copies from focus_reaction.dart
-  //quickCharge('Quick Charge', 3),
   renkosEyes("Renko's Eyes", 3),
   noviceBarrierRecovery2(
     'Novice Handmade Barrier: Recovery ↑',
@@ -280,12 +280,6 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     3,
     requirements: <UniqueSkill>[abilityUnbridled],
   ),
-  // Copies from focus_reaction.dart
-  //focusedRecitation(
-  //  'Focused Recitation',
-  //  3,
-  //  requirements: <UniqueSkill>[quickCharge],
-  //),
   chaosBarrierBoundary(
     'Chaos Barrier: Boundary Between Chaos and Order',
     4,
@@ -306,8 +300,6 @@ enum UncategorizedUniqueSkill with UniqueSkill {
     3,
     requirements: <UniqueSkill>[abilityUnbridledGuardPierce],
   ),
-  // Copies from focus_reaction.dart
-  //quickCharge2('Quick Charge+', 2, requirements: <UniqueSkill>[quickCharge]),
   noviceBarrierKnowledge(
     "Novice Handmade Barrier: Dr. Latency's Knowledge",
     5,
