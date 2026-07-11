@@ -922,6 +922,9 @@ enum Character {
     (Map<int, UniqueSkill> skillMap) => skillMap.values,
   );
 
+  /// A map for additional requirements to be applied alongside the skill's
+  /// requirements. Usually used by generic skills that occupy different
+  /// positions in different characters's trees
   final Map<UniqueSkill, List<Skill>> additionalSkillRequirements;
 
   /// The masteries this character has in the training skill tree
